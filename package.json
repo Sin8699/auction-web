@@ -1,8 +1,8 @@
 {
-  "name": "soft-ui-dashboard-material-ui",
+  "name": "Auction web",
   "version": "1.0.0",
   "private": true,
-  "author": "Creative Tim",
+  "author": "Auction web",
   "license": "See license in https://www.creative-tim.com/license",
   "description": "Material UI version of Soft UI Dashboard by Creative Tim",
   "homepage": "https://demos.creative-tim.com/soft-ui-dashboard-material-ui/#/dashboard",
