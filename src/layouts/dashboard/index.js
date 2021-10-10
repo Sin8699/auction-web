@@ -20,6 +20,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useState } from "react";
 import SuiPagination from "../../components/SuiPagination/index";
+import SuiInput from "../../components/SuiInput/index";
 
 function Dashboard() {
   const [openMenu, setOpenMenu] = useState(null);
@@ -31,41 +32,42 @@ function Dashboard() {
     <DashboardLayout>
       <SuiBox mb={3}>
         <Card>
-          <SuiBox pt={2} px={2}>
+          <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
             <SuiBox mb={0.5}>
               <SuiTypography variant="h6" fontWeight="medium">
                 Product
               </SuiTypography>
             </SuiBox>
-            <SuiBox mb={1}>
-              <SuiTypography
-                variant="button"
-                fontWeight="regular"
-                textColor="text"
-              >
-                <>
-                  <SuiButton
-                    variant="gradient"
-                    buttonColor="secondary"
-                    onClick={handleOpenMenu}
-                  >
-                    Category
-                    <Icon className="material-icons-round font-bold">
-                      keyboard_arrow_down
-                    </Icon>
-                  </SuiButton>
-                  <Menu
-                    anchorEl={openMenu}
-                    getContentAnchorEl={null}
-                    open={Boolean(openMenu)}
-                    onClose={handleCloseMenu}
-                  >
-                    <MenuItem onClick={handleCloseMenu}>Electronics</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>Cloting</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>Shoes</MenuItem>
-                  </Menu>
-                </>
-              </SuiTypography>
+            <SuiBox display="flex" mb={1}>
+              <SuiBox mr={1}>
+                <SuiInput
+                  withIcon={{ icon: "search", direction: "right" }}
+                  placeholder="Search"
+                />
+              </SuiBox>
+              <>
+                <SuiButton
+                  variant="gradient"
+                  buttonColor="secondary"
+                  onClick={handleOpenMenu}
+                >
+                  Category
+                  <Icon className="material-icons-round font-bold">
+                    keyboard_arrow_down
+                  </Icon>
+                </SuiButton>
+                <Menu
+                  transformOrigin={{ vertical: "top", horizontal: "left" }}
+                  anchorEl={openMenu}
+                  getContentAnchorEl={null}
+                  open={Boolean(openMenu)}
+                  onClose={handleCloseMenu}
+                >
+                  <MenuItem onClick={handleCloseMenu}>Electronics</MenuItem>
+                  <MenuItem onClick={handleCloseMenu}>Cloting</MenuItem>
+                  <MenuItem onClick={handleCloseMenu}>Shoes</MenuItem>
+                </Menu>
+              </>
             </SuiBox>
           </SuiBox>
           <SuiBox p={2}>
@@ -83,13 +85,7 @@ function Dashboard() {
                     label: "Buy Now",
                   }}
                   authors={[{ image: team1, name: "Elena Morison" }]}
-                  info={
-                    <SuiButton
-                      buttonColor="error"
-                    >
-                      Bid
-                    </SuiButton>
-                  }
+                  info={<SuiButton buttonColor="error">Bid</SuiButton>}
                   countDown={"00:21:00"}
                 />
               </Grid>

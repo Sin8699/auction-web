@@ -48,12 +48,13 @@ import SignUp from "layouts/authentication/sign-up";
 // Soft UI Dashboard Material-UI icons
 import Shop from "component-pages/Icons/Shop";
 import Office from "component-pages/Icons/Office";
-import Settings from "component-pages/Icons/Settings";
+import Basket from "component-pages/Icons/Basket";
 import Document from "component-pages/Icons/Document";
 import SpaceShip from "component-pages/Icons/SpaceShip";
 import CustomerSupport from "component-pages/Icons/CustomerSupport";
 import CreditCard from "component-pages/Icons/CreditCard";
 import Cube from "component-pages/Icons/Cube";
+import ProductDetail from './layouts/product-detail/index';
 
 const routes = [
   {
@@ -63,6 +64,15 @@ const routes = [
     route: "/dashboard",
     icon: <Shop size="12px" />,
     component: Dashboard,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "ProductDetail",
+    key: "product-detail",
+    route: "/product-detail",
+    icon: <Basket size="12px" />,
+    component: ProductDetail,
     noCollapse: true,
   },
   {
@@ -90,15 +100,6 @@ const routes = [
     route: "/virtual-reality",
     icon: <Cube size="12px" />,
     component: VirtualReality,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    route: "/rtl",
-    icon: <Settings size="12px" />,
-    component: RTL,
     noCollapse: true,
   },
   { type: "title", title: "Account Pages", key: "account-pages" },
