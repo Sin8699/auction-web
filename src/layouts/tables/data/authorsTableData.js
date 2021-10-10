@@ -40,7 +40,7 @@ function Function({ job, org }) {
     </SuiBox>
   );
 }
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   columns: [
     { name: "author", align: "left" },

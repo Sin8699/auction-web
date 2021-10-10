@@ -66,7 +66,7 @@ function BaseLayout({ children }) {
   useEffect(() => {
     dispatch({ type: "LAYOUT", value: "vr" });
     dispatch({ type: "TRANSPARENT_SIDENAV", value: false });
-  }, [pathname]);
+  }, [dispatch, pathname]);
 
   return (
     <SuiBox customClass={classes.baseLayout}>

@@ -29,11 +29,15 @@ function Completion({ value, color }) {
 }
 
 const action = (
-  <Icon className="material-icons-round font-bold text-secondary cursor-pointer" fontSize="small">
+  <Icon
+    className="material-icons-round font-bold text-secondary cursor-pointer"
+    fontSize="small"
+  >
     more_vert
   </Icon>
 );
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   columns: [
     { name: "project", align: "left" },
@@ -42,7 +46,6 @@ export default {
     { name: "completion", align: "center" },
     { name: "action", align: "center" },
   ],
-
   rows: [
     {
       project: [logoSpotify, "Spotift"],
