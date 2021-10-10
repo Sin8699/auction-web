@@ -31,7 +31,7 @@ import SuiButton from "components/SuiButton";
 import SuiAvatar from "components/SuiAvatar";
 
 // Custom styles for the DefaultProjectCard
-import styles from "examples/Cards/ProjectCards/DefaultProjectCard/styles";
+import styles from "component-pages/Cards/ProjectCards/DefaultProjectCard/styles";
 
 function DefaultProjectCard({ image, label, title, description, action, authors }) {
   const classes = styles();

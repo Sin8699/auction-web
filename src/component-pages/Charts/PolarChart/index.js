@@ -29,7 +29,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // PolarChart configurations
-import configs from "examples/Charts/PolarChart/configs";
+import configs from "component-pages/Charts/PolarChart/configs";
 
 function PolarChart({ title, description, chart }) {
   const { data, options } = configs(chart.labels, chart.datasets, chart.cutout);

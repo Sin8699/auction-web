@@ -25,7 +25,7 @@ import PropTypes from "prop-types";
 import SuiBox from "components/SuiBox";
 
 // Custom styles for the LayoutContainer
-import styles from "examples/LayoutContainers/DashboardLayout/styles";
+import styles from "component-pages/LayoutContainers/DashboardLayout/styles";
 
 // Soft UI Dashboard Material-UI context
 import { useSoftUIController } from "context";

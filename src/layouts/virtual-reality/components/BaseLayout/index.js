@@ -25,10 +25,10 @@ import PropTypes from "prop-types";
 import SuiBox from "components/SuiBox";
 
 // Soft UI Dashboard Material-UI example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import Sidenav from "examples/Sidenav";
+import DashboardLayout from "component-pages/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "component-pages/Navbars/DashboardNavbar";
+import Footer from "component-pages/Footer";
+import Sidenav from "component-pages/Sidenav";
 
 // Soft UI Dashboard Material-UI context
 import { useSoftUIController } from "context";

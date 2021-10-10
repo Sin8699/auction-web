@@ -30,7 +30,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Custom styles for the TransparentBlogCard
-import styles from "examples/Cards/BlogCards/TransparentBlogCard/styles";
+import styles from "component-pages/Cards/BlogCards/TransparentBlogCard/styles";
 
 function TransparentBlogCard({ image, title, description, action }) {
   const classes = styles();

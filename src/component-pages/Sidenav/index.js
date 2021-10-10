@@ -37,11 +37,11 @@ import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 // Soft UI Dashboard Material-UI example components
-import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
-import SidenavCard from "examples/Sidenav/SidenavCard";
+import SidenavCollapse from "component-pages/Sidenav/SidenavCollapse";
+import SidenavCard from "component-pages/Sidenav/SidenavCard";
 
 // Custom styles for the Sidenav
-import styles from "examples/Sidenav/styles/sidenav";
+import styles from "component-pages/Sidenav/styles/sidenav";
 
 // Images
 import SoftUILogo from "assets/images/logo-ct.png";

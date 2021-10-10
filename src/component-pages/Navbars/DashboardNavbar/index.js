@@ -34,11 +34,11 @@ import SuiTypography from "components/SuiTypography";
 import SuiInput from "components/SuiInput";
 
 // Soft UI Dashboard Material-UI example components
-import Breadcrumbs from "examples/Breadcrumbs";
-import NotificationItem from "examples/NotificationItem";
+import Breadcrumbs from "component-pages/Breadcrumbs";
+import NotificationItem from "component-pages/NotificationItem";
 
 // Custom styles for DashboardNavbar
-import styles from "examples/Navbars/DashboardNavbar/styles";
+import styles from "component-pages/Navbars/DashboardNavbar/styles";
 
 // Soft UI Dashboard Material-UI context
 import { useSoftUIController } from "context";

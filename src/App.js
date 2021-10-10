@@ -33,8 +33,8 @@ import Icon from "@material-ui/core/Icon";
 import SuiBox from "components/SuiBox";
 
 // Soft UI Dashboard Material-UI example components
-import Sidenav from "examples/Sidenav";
-import Configurator from "examples/Configurator";
+import Sidenav from "component-pages/Sidenav";
+import Configurator from "component-pages/Configurator";
 
 // Soft UI Dashboard Material-UI themes
 import theme from "assets/theme";

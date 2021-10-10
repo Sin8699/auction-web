@@ -31,14 +31,14 @@ import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 // Soft UI Dashboard Material-UI example components
-import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
-import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
+import DefaultNavbarLink from "component-pages/Navbars/DefaultNavbar/DefaultNavbarLink";
+import DefaultNavbarMobile from "component-pages/Navbars/DefaultNavbar/DefaultNavbarMobile";
 
 // Soft UI Dashboard Material-UI base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
 // Custom styles for DashboardNavbar
-import styles from "examples/Navbars/DefaultNavbar/styles/defaultNavbar";
+import styles from "component-pages/Navbars/DefaultNavbar/styles/defaultNavbar";
 
 function DefaultNavbar({ transparent, light, action }) {
   const classes = styles({ transparent, light });

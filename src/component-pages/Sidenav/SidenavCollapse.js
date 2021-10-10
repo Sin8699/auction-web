@@ -27,7 +27,7 @@ import Icon from "@material-ui/core/Icon";
 import SuiBox from "components/SuiBox";
 
 // Custom styles for the SidenavCollapse
-import styles from "examples/Sidenav/styles/sidenavCollapse";
+import styles from "component-pages/Sidenav/styles/sidenavCollapse";
 
 // Soft UI Dashboard Material-UI context
 import { useSoftUIController } from "context";

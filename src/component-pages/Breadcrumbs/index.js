@@ -28,7 +28,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Custom styles for Breadcrumbs
-import styles from "examples/Breadcrumbs/styles";
+import styles from "component-pages/Breadcrumbs/styles";
 
 function Breadcrumbs({ icon, title, route, light }) {
   const classes = styles({ light });

@@ -26,7 +26,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Soft UI Dashboard Materail-UI example components
-import Table from "examples/Table";
+import Table from "component-pages/Table";
 
 // Custom styles for the Projects
 import styles from "layouts/dashboard/components/Projects/styles";

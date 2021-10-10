@@ -22,7 +22,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Soft UI Dashboard PRO Material-UI example components
-import TimelineItem from "examples/Timeline/TimelineItem";
+import TimelineItem from "component-pages/Timeline/TimelineItem";
 
 function OrdersOverview() {
   return (

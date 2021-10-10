@@ -29,7 +29,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // DefaultDoughnutChart configurations
-import configs from "examples/Charts/DoughnutCharts/DefaultDoughnutChart/configs";
+import configs from "component-pages/Charts/DoughnutCharts/DefaultDoughnutChart/configs";
 
 function DefaultDoughnutChart({ title, description, height, chart }) {
   const { data, options } = configs(chart.labels, chart.datasets, chart.cutout);

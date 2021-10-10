@@ -28,7 +28,7 @@ import SuiTypography from "components/SuiTypography";
 import typography from "assets/theme/base/typography";
 
 // Custom styles for the Footer
-import styles from "examples/Footer/styles";
+import styles from "component-pages/Footer/styles";
 
 function Footer({ company, links }) {
   const { href, name } = company;

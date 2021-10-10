@@ -25,7 +25,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Custom styles for the MasterCard
-import styles from "examples/Cards/MasterCard/styles";
+import styles from "component-pages/Cards/MasterCard/styles";
 
 // Images
 import masterCardLogo from "assets/images/logos/mastercard.png";

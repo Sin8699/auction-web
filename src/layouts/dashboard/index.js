@@ -5,11 +5,11 @@ import Grid from "@material-ui/core/Grid";
 import SuiBox from "components/SuiBox";
 
 // Soft UI Dashboard Material-UI example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardLayout from "component-pages/LayoutContainers/DashboardLayout";
 
 // Data
 import SuiTypography from "components/SuiTypography";
-import ProductCard from "examples/Cards/ProjectCards/ProductCard";
+import ProductCard from "component-pages/Cards/ProjectCards/ProductCard";
 // Images
 import homeDecor1 from "assets/images/home-decor-1.jpg";
 import team1 from "assets/images/team-1.jpg";

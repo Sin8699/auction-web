@@ -29,7 +29,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // PieChart configurations
-import configs from "examples/Charts/PieChart/configs";
+import configs from "component-pages/Charts/PieChart/configs";
 
 function PieChart({ title, description, height, chart }) {
   const { data, options } = configs(chart.labels, chart.datasets);

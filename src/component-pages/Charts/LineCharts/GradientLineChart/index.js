@@ -32,7 +32,7 @@ import SuiTypography from "components/SuiTypography";
 import gradientChartLine from "assets/theme/functions/gradientChartLine";
 
 // GradientLineChart configurations
-import configs from "examples/Charts/LineCharts/GradientLineChart/configs";
+import configs from "component-pages/Charts/LineCharts/GradientLineChart/configs";
 
 // Soft UI Dashboard Material-UI base styles
 import colors from "assets/theme/base/colors";

@@ -27,12 +27,12 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Soft UI Dashboard Material-UI example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import ProfilesList from "examples/ProfilesList";
-import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
-import PlaceholderCard from "examples/Cards/PlaceholderCard";
+import DashboardLayout from "component-pages/LayoutContainers/DashboardLayout";
+import Footer from "component-pages/Footer";
+import ProfileInfoCard from "component-pages/Cards/InfoCards/ProfileInfoCard";
+import ProfilesList from "component-pages/ProfilesList";
+import DefaultProjectCard from "component-pages/Cards/ProjectCards/DefaultProjectCard";
+import PlaceholderCard from "component-pages/Cards/PlaceholderCard";
 
 // Overview page components
 import Header from "layouts/profile/components/Header";

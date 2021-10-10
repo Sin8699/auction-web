@@ -25,7 +25,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Custom styles for the SidenavCard
-import styles from "examples/Sidenav/styles/sidenavCard";
+import styles from "component-pages/Sidenav/styles/sidenavCard";
 
 // Soft UI Dashboard PRO Material-UI context
 import { useSoftUIController } from "context";

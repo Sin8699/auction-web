@@ -28,12 +28,12 @@ import SuiTypography from "components/SuiTypography";
 import SuiAvatar from "components/SuiAvatar";
 
 // Soft UI Dashboard Material-UI example components
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import DashboardNavbar from "component-pages/Navbars/DashboardNavbar";
 
 // Soft UI Dashboard Material-UI icons
-import Cube from "examples/Icons/Cube";
-import Document from "examples/Icons/Document";
-import Settings from "examples/Icons/Settings";
+import Cube from "component-pages/Icons/Cube";
+import Document from "component-pages/Icons/Document";
+import Settings from "component-pages/Icons/Settings";
 
 // Soft UI Dashboard Material-UI base styles
 import breakpoints from "assets/theme/base/breakpoints";

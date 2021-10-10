@@ -46,14 +46,14 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
 // Soft UI Dashboard Material-UI icons
-import Shop from "examples/Icons/Shop";
-import Office from "examples/Icons/Office";
-import Settings from "examples/Icons/Settings";
-import Document from "examples/Icons/Document";
-import SpaceShip from "examples/Icons/SpaceShip";
-import CustomerSupport from "examples/Icons/CustomerSupport";
-import CreditCard from "examples/Icons/CreditCard";
-import Cube from "examples/Icons/Cube";
+import Shop from "component-pages/Icons/Shop";
+import Office from "component-pages/Icons/Office";
+import Settings from "component-pages/Icons/Settings";
+import Document from "component-pages/Icons/Document";
+import SpaceShip from "component-pages/Icons/SpaceShip";
+import CustomerSupport from "component-pages/Icons/CustomerSupport";
+import CreditCard from "component-pages/Icons/CreditCard";
+import Cube from "component-pages/Icons/Cube";
 
 const routes = [
   {

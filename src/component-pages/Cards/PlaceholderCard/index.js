@@ -28,7 +28,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Custom styles for PlaceholderCard
-import styles from "examples/Cards/PlaceholderCard/styles";
+import styles from "component-pages/Cards/PlaceholderCard/styles";
 
 function PlaceholderCard({ icon, title, hasBorder, outlined }) {
   const classes = styles({ hasBorder });

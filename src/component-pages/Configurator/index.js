@@ -39,7 +39,7 @@ import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 // Custom styles for the Configurator
-import styles from "examples/Configurator/styles";
+import styles from "component-pages/Configurator/styles";
 
 // Soft UI Dashboard Material-UI context
 import { useSoftUIController } from "context";

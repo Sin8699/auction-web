@@ -29,7 +29,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // HorizontalBarChart configurations
-import configs from "examples/Charts/BarCharts/HorizontalBarChart/configs";
+import configs from "component-pages/Charts/BarCharts/HorizontalBarChart/configs";
 
 // Soft UI Dashboard Material-UI base styles
 import colors from "assets/theme/base/colors";

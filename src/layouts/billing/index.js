@@ -20,12 +20,12 @@ import Grid from "@material-ui/core/Grid";
 import SuiBox from "components/SuiBox";
 
 // Soft UI Dashboard Material-UI components
-import MasterCard from "examples/Cards/MasterCard";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
+import MasterCard from "component-pages/Cards/MasterCard";
+import DefaultInfoCard from "component-pages/Cards/InfoCards/DefaultInfoCard";
 
 // Soft UI Dashboard Material-UI example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import DashboardLayout from "component-pages/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "component-pages/Navbars/DashboardNavbar";
 
 // Billing page components
 import PaymentMethod from "layouts/billing/components/PaymentMethod";

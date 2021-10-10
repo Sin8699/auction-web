@@ -25,9 +25,9 @@ import SuiTypography from "components/SuiTypography";
 import SuiBadge from "components/SuiBadge";
 
 // Custom styles for the TimelineItem
-import styles from "examples/Timeline/TimelineItem/styles";
+import styles from "component-pages/Timeline/TimelineItem/styles";
 
-import { useTimeline } from "examples/Timeline/context";
+import { useTimeline } from "component-pages/Timeline/context";
 
 function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem }) {
   const isDark = useTimeline();

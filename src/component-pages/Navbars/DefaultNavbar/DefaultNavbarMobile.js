@@ -24,7 +24,7 @@ import Menu from "@material-ui/core/Menu";
 import SuiBox from "components/SuiBox";
 
 // Soft UI Dashboard Material-UI example components
-import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
+import DefaultNavbarLink from "component-pages/Navbars/DefaultNavbar/DefaultNavbarLink";
 
 function DefaultNavbarMobile({ open, close }) {
   const { width } = open && open.getBoundingClientRect();

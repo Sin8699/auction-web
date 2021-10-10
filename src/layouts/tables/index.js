@@ -21,10 +21,10 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Soft UI Dashboard Material-UI example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import Table from "examples/Table";
+import DashboardLayout from "component-pages/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "component-pages/Navbars/DashboardNavbar";
+import Footer from "component-pages/Footer";
+import Table from "component-pages/Table";
 
 // Custom styles for the Tables
 import styles from "layouts/tables/styles";

@@ -29,7 +29,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // BubbleChart configurations
-import configs from "examples/Charts/BubbleChart/configs";
+import configs from "component-pages/Charts/BubbleChart/configs";
 
 // Soft UI Dashboard Material-UI base styles
 import colors from "assets/theme/base/colors";

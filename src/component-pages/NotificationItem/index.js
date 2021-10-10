@@ -27,7 +27,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Custom styles for the NotificationItem
-import styles from "examples/NotificationItem/styles";
+import styles from "component-pages/NotificationItem/styles";
 
 const NotificationItem = forwardRef(({ color, image, title, date, ...rest }, ref) => {
   const classes = styles({ color });

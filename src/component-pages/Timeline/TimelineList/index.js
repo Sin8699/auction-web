@@ -24,7 +24,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Timeline context
-import { TimelineProvider } from "examples/Timeline/context";
+import { TimelineProvider } from "component-pages/Timeline/context";
 
 function TimelineList({ title, dark, children }) {
   return (

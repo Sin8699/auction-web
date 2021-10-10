@@ -24,12 +24,12 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Soft UI Dashboard Material-UI example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
-import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
+import DashboardLayout from "component-pages/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "component-pages/Navbars/DashboardNavbar";
+import Footer from "component-pages/Footer";
+import MiniStatisticsCard from "component-pages/Cards/StatisticsCards/MiniStatisticsCard";
+import ReportsBarChart from "component-pages/Charts/BarCharts/ReportsBarChart";
+import GradientLineChart from "component-pages/Charts/LineCharts/GradientLineChart";
 
 // Soft UI Dashboard Material-UI base styles
 import typography from "assets/theme/base/typography";
