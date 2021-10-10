@@ -9,15 +9,10 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 
 // Data
 import SuiTypography from "components/SuiTypography";
-import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
+import ProductCard from "examples/Cards/ProjectCards/ProductCard";
 // Images
 import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
 import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
 import Card from "@material-ui/core/Card";
 import SuiButton from "components/SuiButton";
 import Icon from "@material-ui/core/Icon";
@@ -51,7 +46,7 @@ function Dashboard() {
                 <>
                   <SuiButton
                     variant="gradient"
-                    buttonColor="error"
+                    buttonColor="secondary"
                     onClick={handleOpenMenu}
                   >
                     Category
@@ -65,9 +60,9 @@ function Dashboard() {
                     open={Boolean(openMenu)}
                     onClose={handleCloseMenu}
                   >
-                    <MenuItem onClick={handleCloseMenu}>C1</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>C2</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>C3</MenuItem>
+                    <MenuItem onClick={handleCloseMenu}>Electronics</MenuItem>
+                    <MenuItem onClick={handleCloseMenu}>Cloting</MenuItem>
+                    <MenuItem onClick={handleCloseMenu}>Shoes</MenuItem>
                   </Menu>
                 </>
               </SuiTypography>
@@ -76,63 +71,26 @@ function Dashboard() {
           <SuiBox p={2}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
+                <ProductCard
                   image={homeDecor1}
-                  label="project #2"
-                  title="modern"
+                  label="Phone"
+                  title="Iphone 13"
                   description="As Uber works through a huge amount of internal management turmoil."
                   action={{
                     type: "internal",
                     route: "/pages/profile/profile-overview",
                     color: "info",
-                    label: "view project",
+                    label: "Buy Now",
                   }}
-                  authors={[
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor2}
-                  label="project #1"
-                  title="scandinavian"
-                  description="Music is something that every person has his or her own specific opinion about."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor3}
-                  label="project #3"
-                  title="minimalist"
-                  description="Different people have different taste, and various types of music."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team4, name: "Peterson" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team1, name: "Elena Morison" },
-                  ]}
+                  authors={[{ image: team1, name: "Elena Morison" }]}
+                  info={
+                    <SuiButton
+                      buttonColor="error"
+                    >
+                      Bid
+                    </SuiButton>
+                  }
+                  countDown={"00:21:00"}
                 />
               </Grid>
             </Grid>
@@ -143,7 +101,9 @@ function Dashboard() {
                   chevron_left
                 </Icon>
               </SuiPagination>
-              <SuiPagination active item>1</SuiPagination>
+              <SuiPagination active item>
+                1
+              </SuiPagination>
               <SuiPagination item>2</SuiPagination>
               <SuiPagination item>3</SuiPagination>
               <SuiPagination item>
