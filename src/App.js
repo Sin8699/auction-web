@@ -21,9 +21,6 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 // jss components
 import { create } from "jss";
 
-// jss-rtl components
-import rtl from "jss-rtl";
-
 // @material-ui core components
 import { ThemeProvider, StylesProvider, jssPreset } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -38,7 +35,6 @@ import Configurator from "component-pages/Configurator";
 
 // Soft UI Dashboard Material-UI themes
 import theme from "assets/theme";
-import themeRTL from "assets/theme/theme-rtl";
 
 // Soft UI Dashboard Material-UI routes
 import routes from "routes";
@@ -48,12 +44,12 @@ import { useSoftUIController } from "context";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
-  const { miniSidenav, direction, layout, openConfigurator } = controller;
+  const { miniSidenav, layout, openConfigurator } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const { pathname } = useLocation();
 
   // JSS presets for the rtl
-  const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+  const jss = create({ plugins: [...jssPreset().plugins] });
 
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
@@ -75,11 +71,6 @@ export default function App() {
   const handleConfiguratorOpen = () => {
     dispatch({ type: "OPEN_CONFIGURATOR", value: !openConfigurator });
   };
-
-  // Setting the dir attribute for the body element
-  useEffect(() => {
-    document.body.setAttribute("dir", direction);
-  }, [direction]);
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
@@ -123,9 +114,9 @@ export default function App() {
     </SuiBox>
   );
 
-  return direction === "rtl" ? (
+  return (
     <StylesProvider jss={jss}>
-      <ThemeProvider theme={themeRTL}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         {layout === "dashboard" && (
           <>
@@ -145,25 +136,5 @@ export default function App() {
         </Switch>
       </ThemeProvider>
     </StylesProvider>
-  ) : (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-          <Configurator />
-          {configsButton}
-        </>
-      )}
-      {layout === "vr" && <Configurator />}
-      <Switch>
-        {getRoutes(routes)}
-        <Redirect from="*" to="/dashboard" />
-      </Switch>
-    </ThemeProvider>
   );
 }
