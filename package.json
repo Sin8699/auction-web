@@ -5,14 +5,6 @@
   "author": "Auction web",
   "license": "See license in https://www.creative-tim.com/license",
   "description": "Material UI version of Soft UI Dashboard by Creative Tim",
-  "homepage": "https://demos.creative-tim.com/soft-ui-dashboard-material-ui/#/dashboard",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/soft-ui-dashboard-material-ui/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/soft-ui-dashboard-material-ui.git"
-  },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",

@@ -1,0 +1,18 @@
+{
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.singleQuote": true,
+    "prettier.printWidth": 100,
+    "prettier.semi": false,
+    "prettier.bracketSpacing": false,
+    "prettier.trailingComma": "none",
+    "prettier.endOfLine": "auto",
+    "eslint.alwaysShowStatus": true,
+    // "eslint.run": "onSave",
+    // "eslint.runtime": "",
+    "eslint.format.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}
