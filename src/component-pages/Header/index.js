@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -9,23 +11,27 @@ import Menu from '@material-ui/core/Menu'
 import Icon from '@material-ui/core/Icon'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Typography from '@material-ui/core/Typography'
+
 import PersonIcon from '@material-ui/icons/Person'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+
 import SuiBox from 'components/SuiBox'
+
 import Breadcrumbs from 'component-pages/Breadcrumbs'
 import styles from 'component-pages/Header/styles'
+
 import { useSoftUIController } from 'context'
 
 const ItemIconList = withStyles((theme) => ({
   root: { minWidth: 0, marginRight: 10 }
 }))(ListItemIcon)
 
-const Header = () => {
+const Header = ({ absolute, light }) => {
   const [navbarType, setNavbarType] = useState()
   const [openMenu, setOpenMenu] = useState(false)
   const [controller, dispatch] = useSoftUIController()
   const { miniSidenav, transparentNavbar, fixedNavbar } = controller
-  const classes = styles({ transparentNavbar })
+  const classes = styles({ transparentNavbar, absolute, light })
   const route = useLocation().pathname.split('/').slice(1)
   useEffect(() => {
     if (fixedNavbar) setNavbarType('sticky')
@@ -73,15 +79,18 @@ const Header = () => {
   )
 
   return (
-    <AppBar position={navbarType} color="inherit" className={classes.navbar}>
+    <AppBar
+      position={absolute ? 'absolute' : navbarType}
+      color="inherit"
+      className={classes.navbar}
+    >
       <Toolbar className={classes.navbar_container}>
         <SuiBox customClass={classes.navbar_row} color="inherit" mb={{ xs: 1, md: 0 }}>
-          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={false} />
+          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
         </SuiBox>
         <SuiBox customClass={classes.navbar_row}>
-          <SuiBox customClass={classes.navbar_row}>
+          <SuiBox color={light ? 'white' : 'inherit'} customClass={classes.navbar_row}>
             <IconButton
-              // size="medium"
               color="inherit"
               className={classes.navbar_mobile_menu}
               onClick={handleMiniSidenav}
@@ -91,7 +100,9 @@ const Header = () => {
           </SuiBox>
           <SuiBox color="white" customClass={classes.navbar_section_desktop}>
             <IconButton className={classes.navbar_icon_button} onClick={handleOpenMenu}>
-              <Icon className={`material-icons-round text-dark`}>account_circle</Icon>
+              <Icon className={`material-icons-round ${light ? 'text-white' : 'text-dark'}`}>
+                account_circle
+              </Icon>
             </IconButton>
             {renderMenu()}
           </SuiBox>
@@ -99,6 +110,16 @@ const Header = () => {
       </Toolbar>
     </AppBar>
   )
+}
+
+Header.defaultProps = {
+  absolute: false,
+  light: false
+}
+
+Header.propTypes = {
+  absolute: PropTypes.bool,
+  light: PropTypes.bool
 }
 
 export default Header
