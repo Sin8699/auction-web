@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 /** 
   All of the routes for the Soft UI Dashboard Material-UI are added here,
   You can add a new route, customize the routes and delete the routes here.
@@ -36,99 +21,88 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard Material-UI layouts
-import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import VirtualReality from "layouts/virtual-reality";
-import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
+import Dashboard from 'layouts/dashboard'
+import Tables from 'layouts/tables'
+import Billing from 'layouts/billing'
+import Profile from 'layouts/profile'
+import SignIn from 'layouts/authentication/sign-in'
+import SignUp from 'layouts/authentication/sign-up'
 
 // Soft UI Dashboard Material-UI icons
-import Shop from "component-pages/Icons/Shop";
-import Office from "component-pages/Icons/Office";
-import Basket from "component-pages/Icons/Basket";
-import Document from "component-pages/Icons/Document";
-import SpaceShip from "component-pages/Icons/SpaceShip";
-import CustomerSupport from "component-pages/Icons/CustomerSupport";
-import CreditCard from "component-pages/Icons/CreditCard";
-import Cube from "component-pages/Icons/Cube";
-import ProductDetail from './layouts/product-detail/index';
+import Shop from 'component-pages/Icons/Shop'
+import Office from 'component-pages/Icons/Office'
+import Basket from 'component-pages/Icons/Basket'
+import Document from 'component-pages/Icons/Document'
+import SpaceShip from 'component-pages/Icons/SpaceShip'
+import CustomerSupport from 'component-pages/Icons/CustomerSupport'
+import CreditCard from 'component-pages/Icons/CreditCard'
+import ProductDetail from './layouts/product-detail/index'
 
 const routes = [
   {
-    type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
-    route: "/dashboard",
+    type: 'collapse',
+    name: 'Dashboard',
+    key: 'dashboard',
+    route: '/dashboard',
     icon: <Shop size="12px" />,
     component: Dashboard,
-    noCollapse: true,
+    noCollapse: true
   },
   {
-    type: "collapse",
-    name: "ProductDetail",
-    key: "product-detail",
-    route: "/product-detail/:id",
+    type: 'collapse',
+    name: 'ProductDetail',
+    key: 'product-detail',
+    route: '/product-detail/:id',
     icon: <Basket size="12px" />,
     component: ProductDetail,
-    noCollapse: true,
+    noCollapse: true
   },
   {
-    type: "collapse",
-    name: "Tables",
-    key: "tables",
-    route: "/tables",
+    type: 'collapse',
+    name: 'Tables',
+    key: 'tables',
+    route: '/tables',
     icon: <Office size="12px" />,
     component: Tables,
-    noCollapse: true,
+    noCollapse: true
   },
   {
-    type: "collapse",
-    name: "Billing",
-    key: "billing",
-    route: "/billing",
+    type: 'collapse',
+    name: 'Billing',
+    key: 'billing',
+    route: '/billing',
     icon: <CreditCard size="12px" />,
     component: Billing,
-    noCollapse: true,
+    noCollapse: true
   },
+  { type: 'title', title: 'Account Pages', key: 'account-pages' },
   {
-    type: "collapse",
-    name: "Virtual Reality",
-    key: "virtual-reality",
-    route: "/virtual-reality",
-    icon: <Cube size="12px" />,
-    component: VirtualReality,
-    noCollapse: true,
-  },
-  { type: "title", title: "Account Pages", key: "account-pages" },
-  {
-    type: "collapse",
-    name: "Profile",
-    key: "profile",
-    route: "/profile",
+    type: 'collapse',
+    name: 'Profile',
+    key: 'profile',
+    route: '/profile',
     icon: <CustomerSupport size="12px" />,
     component: Profile,
-    noCollapse: true,
+    noCollapse: true
   },
   {
-    type: "collapse",
-    name: "Sign In",
-    key: "sign-in",
-    route: "/authentication/sign-in",
+    type: 'collapse',
+    name: 'Sign In',
+    key: 'sign-in',
+    route: '/authentication/sign-in',
     icon: <Document size="12px" />,
     component: SignIn,
-    noCollapse: true,
+    noCollapse: true
   },
   {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    route: "/authentication/sign-up",
+    type: 'collapse',
+    name: 'Sign Up',
+    key: 'sign-up',
+    route: '/authentication/sign-up',
     icon: <SpaceShip size="12px" />,
     component: SignUp,
-    noCollapse: true,
-  },
-];
+    noCollapse: true
+  }
+]
 
-export default routes;
+export default routes

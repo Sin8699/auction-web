@@ -1,41 +1,24 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import colors from 'assets/theme/base/colors'
+import borders from 'assets/theme/base/borders'
+import boxShadows from 'assets/theme/base/boxShadows'
+import rgba from 'assets/theme/functions/rgba'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+const { black, white } = colors
+const { borderWidth, borderRadius } = borders
+const { xxl } = boxShadows
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI Base Styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
-import boxShadows from "assets/theme/base/boxShadows";
-
-// Soft UI Dashboard Material-UI Helper Function
-import rgba from "assets/theme/functions/rgba";
-
-const { black, white } = colors;
-const { borderWidth, borderRadius } = borders;
-const { xxl } = boxShadows;
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   root: {
-    display: "flex",
-    flexDirection: "column",
-    position: "relative",
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
     minWidth: 0,
-    wordWrap: "break-word",
+    wordWrap: 'break-word',
     backgroundColor: white.main,
-    backgroundClip: "border-box",
+    backgroundClip: 'border-box',
     border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
     borderRadius: borderRadius.xl,
-    boxShadow: xxl,
-  },
-};
+    boxShadow: xxl
+  }
+}

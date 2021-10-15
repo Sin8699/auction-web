@@ -1,33 +1,16 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import borders from 'assets/theme/base/borders'
+import pxToRem from 'assets/theme/functions/pxToRem'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+const { borderRadius } = borders
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI Base Styles
-import borders from "assets/theme/base/borders";
-
-// Soft UI Dashboard Material-UI Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
-
-const { borderRadius } = borders;
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   root: {
     borderRadius: borderRadius.xl,
-    margin: `${pxToRem(16)} ${pxToRem(16)} 0`,
+    margin: `${pxToRem(16)} ${pxToRem(16)} 0`
   },
 
   media: {
-    width: "auto",
-  },
-};
+    width: 'auto'
+  }
+}

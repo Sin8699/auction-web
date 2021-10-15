@@ -1,39 +1,16 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useEffect } from "react";
-
-// react-router-dom components
-import { useLocation } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-
-// Soft UI Dashboard Material-UI context
-import { useSoftUIController } from "context";
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import SuiBox from 'components/SuiBox'
+import { useSoftUIController } from 'context'
 
 function PageLayout({ background, children }) {
-  const [, dispatch] = useSoftUIController();
-  const { pathname } = useLocation();
+  const [, dispatch] = useSoftUIController()
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    dispatch({ type: "LAYOUT", value: "page" });
-  }, [pathname]);
+    dispatch({ type: 'LAYOUT', value: 'page' })
+  }, [dispatch, pathname])
 
   return (
     <SuiBox
@@ -45,18 +22,18 @@ function PageLayout({ background, children }) {
     >
       {children}
     </SuiBox>
-  );
+  )
 }
 
 // Setting default values for the props for PageLayout
 PageLayout.defaultProps = {
-  background: "default",
-};
+  background: 'default'
+}
 
 // Typechecking props for the PageLayout
 PageLayout.propTypes = {
-  background: PropTypes.oneOf(["white", "light", "default"]),
-  children: PropTypes.node.isRequired,
-};
+  background: PropTypes.oneOf(['white', 'light', 'default']),
+  children: PropTypes.node.isRequired
+}
 
-export default PageLayout;
+export default PageLayout

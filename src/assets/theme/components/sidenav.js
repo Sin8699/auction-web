@@ -1,34 +1,17 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import colors from 'assets/theme/base/colors'
+import borders from 'assets/theme/base/borders'
+import rgba from 'assets/theme/functions/rgba'
+import pxToRem from 'assets/theme/functions/pxToRem'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+const { white } = colors
+const { borderRadius } = borders
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI base styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
-
-// Soft UI Dashboard Material-UI helper functions
-import rgba from "assets/theme/functions/rgba";
-import pxToRem from "assets/theme/functions/pxToRem";
-
-const { white } = colors;
-const { borderRadius } = borders;
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   root: {
     width: pxToRem(250),
-    whiteSpace: "nowrap",
-    border: "none",
+    whiteSpace: 'nowrap',
+    border: 'none'
   },
 
   paper: {
@@ -38,10 +21,10 @@ export default {
     height: `calc(100vh - ${pxToRem(32)})`,
     margin: pxToRem(16),
     borderRadius: borderRadius.xl,
-    border: "none",
+    border: 'none'
   },
 
   paperAnchorDockedLeft: {
-    borderRight: "none",
-  },
-};
+    borderRight: 'none'
+  }
+}

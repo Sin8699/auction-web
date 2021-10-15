@@ -1,30 +1,13 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import colors from 'assets/theme/base/colors'
+import typography from 'assets/theme/base/typography'
+import boxShadows from 'assets/theme/base/boxShadows'
+import pxToRem from 'assets/theme/functions/pxToRem'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+const { transparent, light, info, secondary } = colors
+const { size } = typography
+const { buttonBoxShadow } = boxShadows
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI Base Styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
-import boxShadows from "assets/theme/base/boxShadows";
-
-// Soft UI Dashboard Material-UI Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
-
-const { transparent, light, info, secondary } = colors;
-const { size } = typography;
-const { buttonBoxShadow } = boxShadows;
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   base: {
     minHeight: pxToRem(42),
@@ -32,14 +15,14 @@ export default {
     borderColor: light.main,
     padding: `${pxToRem(12)} ${pxToRem(24)}`,
 
-    "&:hover": {
+    '&:hover': {
       opacity: 0.75,
-      backgroundColor: transparent.main,
+      backgroundColor: transparent.main
     },
 
-    "&:focus:not(:hover)": {
-      boxShadow: buttonBoxShadow.stateOfNotHover,
-    },
+    '&:focus:not(:hover)': {
+      boxShadow: buttonBoxShadow.stateOfNotHover
+    }
   },
 
   small: {
@@ -47,9 +30,9 @@ export default {
     padding: `${pxToRem(8)} ${pxToRem(32)}`,
     fontSize: size.xs,
 
-    "& .material-icons": {
-      fontSize: pxToRem(12),
-    },
+    '& .material-icons': {
+      fontSize: pxToRem(12)
+    }
   },
 
   large: {
@@ -57,34 +40,34 @@ export default {
     padding: `${pxToRem(14)} ${pxToRem(64)}`,
     fontSize: size.sm,
 
-    "& .material-icons": {
-      fontSize: pxToRem(22),
-    },
+    '& .material-icons': {
+      fontSize: pxToRem(22)
+    }
   },
 
   primary: {
     backgroundColor: transparent.main,
     borderColor: info.main,
 
-    "&:hover": {
-      backgroundColor: transparent.main,
+    '&:hover': {
+      backgroundColor: transparent.main
     },
 
-    "&:focus:not(:hover)": {
-      boxShadow: buttonBoxShadow.stateOfNotHover,
-    },
+    '&:focus:not(:hover)': {
+      boxShadow: buttonBoxShadow.stateOfNotHover
+    }
   },
 
   secondary: {
     backgroundColor: transparent.main,
     borderColor: secondary.main,
 
-    "&:hover": {
-      backgroundColor: transparent.main,
+    '&:hover': {
+      backgroundColor: transparent.main
     },
 
-    "&:focus:not(:hover)": {
-      boxShadow: buttonBoxShadow.stateOfNotHover,
-    },
-  },
-};
+    '&:focus:not(:hover)': {
+      boxShadow: buttonBoxShadow.stateOfNotHover
+    }
+  }
+}

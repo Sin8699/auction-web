@@ -14,32 +14,32 @@ Coded by www.creative-tim.com
 */
 
 // @material-ui core components
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Icon from "@material-ui/core/Icon";
-import Link from "@material-ui/core/Link";
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Icon from '@material-ui/core/Icon'
+import Link from '@material-ui/core/Link'
 
 // Soft UI Dashboard PRO Material-UI components
-import SuiButton from "components/SuiButton";
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiButton from 'components/SuiButton'
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
 // Custom styles for the SidenavCard
-import styles from "component-pages/Sidenav/styles/sidenavCard";
+import styles from 'component-pages/Sidenav/styles/sidenavCard'
 
 // Soft UI Dashboard PRO Material-UI context
-import { useSoftUIController } from "context";
+import { useSoftUIController } from 'context'
 
 function SidenavCard() {
-  const [controller] = useSoftUIController();
-  const { miniSidenav, sidenavColor } = controller;
-  const classes = styles({ miniSidenav, sidenavColor });
+  const [controller] = useSoftUIController()
+  const { miniSidenav, sidenavColor } = controller
+  const classes = styles({ miniSidenav, sidenavColor })
 
   return (
     <Card className={classes.card}>
       <CardContent className={classes.card_content}>
         <SuiBox customClass={classes.card_iconBox}>
-          <Icon className={`material-icons-round ${classes.card_icon}`} fontSize="default">
+          <Icon className={`material-icons-round ${classes.card_icon}`} fontSize="medium">
             star
           </Icon>
         </SuiBox>
@@ -66,7 +66,7 @@ function SidenavCard() {
         </SuiBox>
       </CardContent>
     </Card>
-  );
+  )
 }
 
-export default SidenavCard;
+export default SidenavCard

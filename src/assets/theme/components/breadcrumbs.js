@@ -1,32 +1,17 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import colors from 'assets/theme/base/colors'
+import typography from 'assets/theme/base/typography'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+const { grey } = colors
+const { size } = typography
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
-
-const { grey } = colors;
-const { size } = typography;
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   li: {
-    lineHeight: 0,
+    lineHeight: 0
   },
 
   separator: {
     fontSize: size.sm,
-    color: grey[600],
-  },
-};
+    color: grey[600]
+  }
+}

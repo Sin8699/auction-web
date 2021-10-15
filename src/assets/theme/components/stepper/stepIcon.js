@@ -1,29 +1,14 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI base styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
+import colors from 'assets/theme/base/colors'
+import borders from 'assets/theme/base/borders'
 
 // Soft UI Dashboard Material-UI helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
-import boxShadow from "assets/theme/functions/boxShadow";
+import pxToRem from 'assets/theme/functions/pxToRem'
+import boxShadow from 'assets/theme/functions/boxShadow'
 
-const { dark, white } = colors;
-const { borderWidth, borderColor } = borders;
+const { dark, white } = colors
+const { borderWidth, borderColor } = borders
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   root: {
     background: white.main,
@@ -33,9 +18,9 @@ export default {
     width: pxToRem(13),
     height: pxToRem(13),
     border: `${borderWidth[2]} solid ${borderColor}`,
-    borderRadius: "50%",
+    borderRadius: '50%',
     zIndex: 99,
-    transition: "all 200ms linear",
+    transition: 'all 200ms linear'
   },
 
   active: {
@@ -43,7 +28,7 @@ export default {
     fill: dark.main,
     stroke: dark.main,
     borderColor: dark.main,
-    boxShadow: boxShadow([0, 0], [0, 2], dark.main, 1),
+    boxShadow: boxShadow([0, 0], [0, 2], dark.main, 1)
   },
 
   completed: {
@@ -51,6 +36,6 @@ export default {
     fill: dark.main,
     stroke: dark.main,
     borderColor: dark.main,
-    boxShadow: boxShadow([0, 0], [0, 2], dark.main, 1),
-  },
-};
+    boxShadow: boxShadow([0, 0], [0, 2], dark.main, 1)
+  }
+}

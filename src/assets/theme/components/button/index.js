@@ -1,24 +1,9 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import root from 'assets/theme/components/button/root'
+import contained from 'assets/theme/components/button/contained'
+import outlined from 'assets/theme/components/button/outlined'
+import text from 'assets/theme/components/button/text'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI Button Styles
-import root from "assets/theme/components/button/root";
-import contained from "assets/theme/components/button/contained";
-import outlined from "assets/theme/components/button/outlined";
-import text from "assets/theme/components/button/text";
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   root: { ...root },
   contained: { ...contained.base },
@@ -35,5 +20,5 @@ export default {
   textSizeSmall: { ...text.small },
   textSizeLarge: { ...text.large },
   textPrimary: { ...text.primary },
-  textSecondary: { ...text.secondary },
-};
+  textSecondary: { ...text.secondary }
+}

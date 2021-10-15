@@ -1,90 +1,68 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useEffect } from "react";
-
-// react-router-dom components
-import { useLocation, NavLink } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
-
-// clsx is a utility for constructing className strings conditionally
-import clsx from "clsx";
+import { useEffect } from 'react'
+import { useLocation, NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
 
 // @material-ui core components
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import Icon from "@material-ui/core/Icon";
-import Link from "@material-ui/core/Link";
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import Divider from '@material-ui/core/Divider'
+import Icon from '@material-ui/core/Icon'
+import Link from '@material-ui/core/Link'
 
 // Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiButton from 'components/SuiButton'
 
 // Soft UI Dashboard Material-UI example components
-import SidenavCollapse from "component-pages/Sidenav/SidenavCollapse";
-import SidenavCard from "component-pages/Sidenav/SidenavCard";
+import SidenavCollapse from 'component-pages/Sidenav/SidenavCollapse'
+import SidenavCard from 'component-pages/Sidenav/SidenavCard'
 
 // Custom styles for the Sidenav
-import styles from "component-pages/Sidenav/styles/sidenav";
+import styles from 'component-pages/Sidenav/styles/sidenav'
 
 // Images
-import SoftUILogo from "assets/images/logo-ct.png";
+import SoftUILogo from 'assets/images/logo-ct.png'
 
-// Soft UI Dashboard Material-UI context
-import { useSoftUIController } from "context";
+import { useSoftUIController } from 'context'
 
 function Sidenav({ routes, ...rest }) {
-  const [controller, dispatch] = useSoftUIController();
-  const { miniSidenav, transparentSidenav } = controller;
-  const classes = styles({ miniSidenav, transparentSidenav });
-  const location = useLocation();
-  const { pathname } = location;
-  const collapseName = pathname.split("/").slice(1)[0];
+  const [controller, dispatch] = useSoftUIController()
+  const { miniSidenav, transparentSidenav } = controller
+  const classes = styles({ miniSidenav, transparentSidenav })
+  const location = useLocation()
+  const { pathname } = location
+  const collapseName = pathname.split('/').slice(1)[0]
 
-  const closeSizenav = () => dispatch({ type: "MINI_SIDENAV", value: true });
+  const closeSizenav = () => dispatch({ type: 'MINI_SIDENAV', value: true })
 
   useEffect(() => {
     // A function that sets the mini state of the sidenav.
     function handleMiniSidenav() {
       dispatch({
-        type: "MINI_SIDENAV",
-        value: window.innerWidth < 1200,
-      });
+        type: 'MINI_SIDENAV',
+        value: window.innerWidth < 1200
+      })
     }
 
     /** 
      The event listener that's calling the handleMiniSidenav function when resizing the window.
     */
-    window.addEventListener("resize", handleMiniSidenav);
+    window.addEventListener('resize', handleMiniSidenav)
 
     // Call the handleMiniSidenav function to set the state with the initial value.
-    handleMiniSidenav();
+    handleMiniSidenav()
 
     // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleMiniSidenav);
-  }, [dispatch, location]);
+    return () => window.removeEventListener('resize', handleMiniSidenav)
+  }, [dispatch, location])
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
   const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
-    let returnValue;
+    let returnValue
 
-    if (type === "collapse") {
+    if (type === 'collapse') {
       returnValue = href ? (
         <Link
           href={href}
@@ -109,8 +87,8 @@ function Sidenav({ routes, ...rest }) {
             noCollapse={noCollapse}
           />
         </NavLink>
-      );
-    } else if (type === "title") {
+      )
+    } else if (type === 'title') {
       returnValue = (
         <SuiTypography
           key={key}
@@ -121,13 +99,13 @@ function Sidenav({ routes, ...rest }) {
         >
           {title}
         </SuiTypography>
-      );
-    } else if (type === "divider") {
-      returnValue = <Divider key={key} />;
+      )
+    } else if (type === 'divider') {
+      returnValue = <Divider key={key} />
     }
 
-    return returnValue;
-  });
+    return returnValue
+  })
 
   return (
     <Drawer
@@ -136,13 +114,13 @@ function Sidenav({ routes, ...rest }) {
       classes={{
         paper: clsx(classes.sidenav, {
           [classes.sidenav_open]: !miniSidenav,
-          [classes.sidenav_close]: miniSidenav,
-        }),
+          [classes.sidenav_close]: miniSidenav
+        })
       }}
     >
       <SuiBox customClass={classes.sidenav_header}>
         <SuiBox
-          display={{ xs: "block", xl: "none" }}
+          display={{ xs: 'block', xl: 'none' }}
           position="absolute"
           top={0}
           right={0}
@@ -187,12 +165,12 @@ function Sidenav({ routes, ...rest }) {
         </SuiBox>
       </SuiBox>
     </Drawer>
-  );
+  )
 }
 
 // Typechecking props for the Sidenav
 Sidenav.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+  routes: PropTypes.arrayOf(PropTypes.object).isRequired
+}
 
-export default Sidenav;
+export default Sidenav

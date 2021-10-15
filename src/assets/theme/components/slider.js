@@ -1,57 +1,40 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import colors from 'assets/theme/base/colors'
+import borders from 'assets/theme/base/borders'
+import boxShadows from 'assets/theme/base/boxShadows'
+import linearGradient from 'assets/theme/functions/linearGradient'
+import pxToRem from 'assets/theme/functions/pxToRem'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+const { light, white, sliderColors, black, gradients } = colors
+const { borderRadius, borderWidth } = borders
+const { sliderBoxShadow } = boxShadows
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI base styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
-import boxShadows from "assets/theme/base/boxShadows";
-
-// Soft UI Dashboard Material-UI helper functions
-import linearGradient from "assets/theme/functions/linearGradient";
-import pxToRem from "assets/theme/functions/pxToRem";
-
-const { light, white, sliderColors, black, gradients } = colors;
-const { borderRadius, borderWidth } = borders;
-const { sliderBoxShadow } = boxShadows;
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   root: {
-    width: "100%",
+    width: '100%',
 
-    "& .MuiSlider-active, & .Mui-focusVisible": {
-      boxShadow: "none !important",
+    '& .MuiSlider-active, & .Mui-focusVisible': {
+      boxShadow: 'none !important'
     },
 
-    "& .MuiSlider-valueLabel": {
-      color: black.main,
-    },
+    '& .MuiSlider-valueLabel': {
+      color: black.main
+    }
   },
 
   rail: {
     height: pxToRem(3),
     backgroundColor: light.main,
-    borderRadius: borderRadius.sm,
+    borderRadius: borderRadius.sm
   },
 
   track: {
     backgroundImage: linearGradient(gradients.info.main, gradients.info.state),
     height: pxToRem(6),
-    position: "relative",
+    position: 'relative',
     top: pxToRem(-1.625),
     borderRadius: borderRadius.lg,
-    zIndex: 1,
+    zIndex: 1
   },
 
   thumb: {
@@ -63,8 +46,8 @@ export default {
     boxShadow: sliderBoxShadow.thumb,
     border: `${borderWidth[1]} solid ${sliderColors.thumb.borderColor}`,
 
-    "&:hover": {
-      boxShadow: "none",
-    },
-  },
-};
+    '&:hover': {
+      boxShadow: 'none'
+    }
+  }
+}

@@ -1,19 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles(
@@ -22,7 +6,6 @@ export default makeStyles(
     const { navbarBoxShadow } = boxShadows
     const { rgba, pxToRem } = functions
     const { borderRadius } = borders
-    const { size } = typography
 
     return {
       navbar: {
@@ -111,7 +94,7 @@ export default makeStyles(
         padding: `0 ${pxToRem(6)}`,
 
         '& .material-icons': {
-          fontSize: size.regular
+          fontSize: '1.5rem'
         },
 
         '& .MuiTypography-root': {
@@ -130,12 +113,6 @@ export default makeStyles(
 
         [breakpoints.up('xl')]: {
           display: 'none'
-        }
-      },
-
-      navbar_input: {
-        '& .material-icons': {
-          color: text.main
         }
       }
     }
