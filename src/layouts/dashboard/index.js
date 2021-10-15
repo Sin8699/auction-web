@@ -7,6 +7,7 @@ import SuiBox from 'components/SuiBox'
 // Soft UI Dashboard Material-UI example components
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
+import Footer from 'component-pages/Footer'
 
 // Data
 import SuiTypography from 'components/SuiTypography'
@@ -100,6 +101,7 @@ function Dashboard() {
           </SuiBox>
         </Card>
       </SuiBox>
+      <Footer />
     </DashboardLayout>
   )
 }
