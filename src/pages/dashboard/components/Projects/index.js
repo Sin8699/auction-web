@@ -1,46 +1,31 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState } from "react";
+import { useState } from 'react'
 
 // @material-ui core components
-import Card from "@material-ui/core/Card";
-import Icon from "@material-ui/core/Icon";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import Card from '@material-ui/core/Card'
+import Icon from '@material-ui/core/Icon'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
 // Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
 // Soft UI Dashboard Materail-UI example components
-import Table from "component-pages/Table";
+import Table from 'component-pages/Table'
 
 // Custom styles for the Projects
-import styles from "layouts/dashboard/components/Projects/styles";
+import styles from './styles'
 
 // Data
-import data from "layouts/dashboard/components/Projects/data";
+import data from './data'
 
 function Projects() {
-  const { columns, rows } = data();
-  const [menu, setMenu] = useState(null);
-  const classes = styles();
+  const { columns, rows } = data()
+  const [menu, setMenu] = useState(null)
+  const classes = styles()
 
-  const openMenu = ({ currentTarget }) => setMenu(currentTarget);
-  const closeMenu = () => setMenu(null);
+  const openMenu = ({ currentTarget }) => setMenu(currentTarget)
+  const closeMenu = () => setMenu(null)
 
   const renderMenu = (
     <Menu
@@ -48,8 +33,8 @@ function Projects() {
       anchorEl={menu}
       getContentAnchorEl={null}
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right'
       }}
       open={Boolean(menu)}
       onClose={closeMenu}
@@ -58,7 +43,7 @@ function Projects() {
       <MenuItem onClick={closeMenu}>Another action</MenuItem>
       <MenuItem onClick={closeMenu}>Something else</MenuItem>
     </Menu>
-  );
+  )
 
   return (
     <Card>
@@ -89,7 +74,7 @@ function Projects() {
         <Table columns={columns} rows={rows} />
       </SuiBox>
     </Card>
-  );
+  )
 }
 
-export default Projects;
+export default Projects

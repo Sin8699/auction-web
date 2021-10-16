@@ -1,36 +1,20 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-import Icon from "@material-ui/core/Icon";
+import Card from '@material-ui/core/Card'
+import Grid from '@material-ui/core/Grid'
+import Icon from '@material-ui/core/Icon'
 
 // Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
 // Custom styles for the BuildByDevelopers
-import styles from "layouts/dashboard/components/BuildByDevelopers/styles";
+import styles from './styles'
 
 // Images
-import wavesWhite from "assets/images/shapes/waves-white.svg";
-import rocketWhite from "assets/images/illustrations/rocket-white.png";
+import wavesWhite from 'assets/images/shapes/waves-white.svg'
+import rocketWhite from 'assets/images/illustrations/rocket-white.png'
 
 function BuildByDevelopers() {
-  const classes = styles();
+  const classes = styles()
 
   return (
     <Card>
@@ -91,7 +75,7 @@ function BuildByDevelopers() {
         </Grid>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
-export default BuildByDevelopers;
+export default BuildByDevelopers

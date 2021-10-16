@@ -1,28 +1,12 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Icon from "@material-ui/core/Icon";
+import Card from '@material-ui/core/Card'
+import Icon from '@material-ui/core/Icon'
 
 // Soft UI Dashboard PRO Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
 // Soft UI Dashboard PRO Material-UI example components
-import TimelineItem from "component-pages/Timeline/TimelineItem";
+import TimelineItem from 'component-pages/Timeline/TimelineItem'
 
 function OrdersOverview() {
   return (
@@ -39,7 +23,7 @@ function OrdersOverview() {
             &nbsp;
             <SuiTypography variant="button" textColor="text" fontWeight="medium">
               24%
-            </SuiTypography>{" "}
+            </SuiTypography>{' '}
             this month
           </SuiTypography>
         </SuiBox>
@@ -78,7 +62,7 @@ function OrdersOverview() {
         <TimelineItem color="dark" icon="paid" title="New order #9583120" dateTime="17 DEC" />
       </SuiBox>
     </Card>
-  );
+  )
 }
 
-export default OrdersOverview;
+export default OrdersOverview

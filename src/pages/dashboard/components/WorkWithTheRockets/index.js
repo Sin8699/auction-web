@@ -1,31 +1,15 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Icon from "@material-ui/core/Icon";
+import Card from '@material-ui/core/Card'
+import Icon from '@material-ui/core/Icon'
 
 // Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
 // Custom styles for the WorkWithTheRockets
-import styles from "layouts/dashboard/components/WorkWithTheRockets/styles";
+import styles from './styles'
 
 function WorkWithTheRockets() {
-  const classes = styles();
+  const classes = styles()
 
   return (
     <Card className="h-100">
@@ -56,7 +40,7 @@ function WorkWithTheRockets() {
         </SuiBox>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
-export default WorkWithTheRockets;
+export default WorkWithTheRockets
