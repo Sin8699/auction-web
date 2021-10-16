@@ -49,12 +49,7 @@ function SidenavCollapse({ icon, name, children, active, noCollapse, open, ...re
 }
 
 // Setting default values for the props of SidenavCollapse
-SidenavCollapse.defaultProps = {
-  active: false,
-  noCollapse: false,
-  children: false,
-  open: false
-}
+SidenavCollapse.defaultProps = { active: false, noCollapse: false, children: false, open: false }
 
 // Typechecking props for the SidenavCollapse
 SidenavCollapse.propTypes = {

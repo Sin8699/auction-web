@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -21,12 +21,14 @@ import Breadcrumbs from 'component-pages/Breadcrumbs'
 import styles from 'component-pages/Header/styles'
 
 import { useSoftUIController } from 'context'
+import { ROUTER_DEFAULT } from 'constants/router'
 
 const ItemIconList = withStyles((theme) => ({
   root: { minWidth: 0, marginRight: 10 }
 }))(ListItemIcon)
 
 const Header = ({ absolute, light }) => {
+  const history = useHistory()
   const [navbarType, setNavbarType] = useState()
   const [openMenu, setOpenMenu] = useState(false)
   const [controller, dispatch] = useSoftUIController()
@@ -34,8 +36,7 @@ const Header = ({ absolute, light }) => {
   const classes = styles({ transparentNavbar, absolute, light })
   const route = useLocation().pathname.split('/').slice(1)
   useEffect(() => {
-    if (fixedNavbar) setNavbarType('sticky')
-    else setNavbarType('static')
+    fixedNavbar ? setNavbarType('sticky') : setNavbarType('static')
 
     function handleTransparentNavbar() {
       dispatch({
@@ -50,7 +51,10 @@ const Header = ({ absolute, light }) => {
   const handleMiniSidenav = () => dispatch({ type: 'MINI_SIDENAV', value: !miniSidenav })
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget)
   const handleCloseMenu = () => setOpenMenu(false)
-  const handleSignOut = () => {}
+  const handleSignOut = () => {
+    localStorage.clear()
+    history.replace(ROUTER_DEFAULT.SIGN_IN)
+  }
 
   const renderMenu = () => (
     <Menu
@@ -112,14 +116,8 @@ const Header = ({ absolute, light }) => {
   )
 }
 
-Header.defaultProps = {
-  absolute: false,
-  light: false
-}
+Header.defaultProps = { absolute: false, light: false }
 
-Header.propTypes = {
-  absolute: PropTypes.bool,
-  light: PropTypes.bool
-}
+Header.propTypes = { absolute: PropTypes.bool, light: PropTypes.bool }
 
 export default Header

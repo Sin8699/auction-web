@@ -13,7 +13,9 @@ import NavbarMobile from 'layouts/authentication/components/Header/ViewMobile'
 
 import breakpoints from 'assets/theme/base/breakpoints'
 
-import styles from 'component-pages/Navbars/DefaultNavbar/styles/defaultNavbar'
+import { ROUTER_DEFAULT } from 'constants/router'
+
+import styles from './styles'
 
 function Header({ transparent, light }) {
   const classes = styles({ transparent, light })
@@ -56,12 +58,12 @@ function Header({ transparent, light }) {
         </SuiBox>
         <SuiBox color="inherit" display={{ xs: 'none', lg: 'flex' }} m={0} p={0}>
           <NavbarLink
-            icon="account_circle"
+            icon="person_add"
             name="sign up"
-            route="/authentication/sign-up"
+            route={ROUTER_DEFAULT.SIGN_UP}
             light={light}
           />
-          <NavbarLink icon="key" name="sign in" route="/authentication/sign-in" light={light} />
+          <NavbarLink icon="key" name="sign in" route={ROUTER_DEFAULT.SIGN_IN} light={light} />
         </SuiBox>
         <SuiBox
           display={{ xs: 'inline-block', lg: 'none' }}

@@ -1,35 +1,18 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import { useState } from 'react'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Card from '@material-ui/core/Card'
+import Switch from '@material-ui/core/Switch'
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState } from "react";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Switch from "@material-ui/core/Switch";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
 function PlatformSettings() {
-  const [followsMe, setFollowsMe] = useState(true);
-  const [answersPost, setAnswersPost] = useState(false);
-  const [mentionsMe, setMentionsMe] = useState(true);
-  const [newLaunches, setNewLaunches] = useState(false);
-  const [productUpdate, setProductUpdate] = useState(true);
-  const [newsletter, setNewsletter] = useState(true);
+  const [followsMe, setFollowsMe] = useState(true)
+  const [answersPost, setAnswersPost] = useState(false)
+  const [mentionsMe, setMentionsMe] = useState(true)
+  const [newLaunches, setNewLaunches] = useState(false)
+  const [productUpdate, setProductUpdate] = useState(true)
+  const [newsletter, setNewsletter] = useState(true)
 
   return (
     <Card>
@@ -119,7 +102,7 @@ function PlatformSettings() {
         </SuiBox>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
-export default PlatformSettings;
+export default PlatformSettings

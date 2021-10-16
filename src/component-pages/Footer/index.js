@@ -42,7 +42,7 @@ function Footer() {
         by
         <Link href="https://www.google.com/" target="_blank">
           <SuiTypography variant="button" fontWeight="medium">
-            &nbsp;4 anh em siêu nhân&nbsp;
+            &nbsp;Nhóm ??&nbsp;
           </SuiTypography>
         </Link>
         for a better web.

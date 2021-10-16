@@ -1,45 +1,24 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect } from 'react'
 
-// @material-ui core components
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 
-// Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 import SuiAvatar from 'components/SuiAvatar'
 
-// Soft UI Dashboard Material-UI example components
 import DashboardNavbar from 'component-pages/Header'
 
-// Soft UI Dashboard Material-UI icons
 import Cube from 'component-pages/Icons/Cube'
 import Document from 'component-pages/Icons/Document'
 import Settings from 'component-pages/Icons/Settings'
 
-// Soft UI Dashboard Material-UI base styles
 import breakpoints from 'assets/theme/base/breakpoints'
 
-// Custom styles for Header
-import styles from 'layouts/profile/components/Header/styles'
+import styles from './styles'
 
 // Images
 import burceMars from 'assets/images/bruce-mars.jpg'
@@ -57,15 +36,12 @@ function Header() {
         : setTabsOrientation('horizontal')
     }
 
-    /** 
-     The event listener that's calling the handleTabsOrientation function when resizing the window.
-    */
+    // The event listener that's calling the handleTabsOrientation function when resizing the window.
     window.addEventListener('resize', handleTabsOrientation)
 
     // Call the handleTabsOrientation function to set the state with the initial value.
     handleTabsOrientation()
 
-    // Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleTabsOrientation)
   }, [tabsOrientation])
 

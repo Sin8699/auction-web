@@ -2,7 +2,6 @@ import Grid from '@material-ui/core/Grid'
 
 // @material-ui icons
 import GitHubIcon from '@material-ui/icons/GitHub'
-import MaterialUi from 'component-pages/Icons/MaterialUiIcon'
 
 // Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
@@ -40,14 +39,18 @@ function Footer() {
             <SuiBox mr={3} color="secondary">
               <GitHubIcon fontSize="small" />
             </SuiBox>
-            <SuiBox color="secondary">
-              <MaterialUi size="1.25rem" />
-            </SuiBox>
+            <SuiTypography
+              verticalAlign="middle"
+              fontWeight="bold"
+              style={{ color: 'rgb(131, 146, 171)', fontSize: 16 }}
+            >
+              MUI
+            </SuiTypography>
           </SuiBox>
         </Grid>
         <Grid item xs={12} lg={8} className="text-center">
           <SuiTypography variant="body2" textColor="secondary">
-            Copyright &copy; 2021 Soft by 4 anh em siêu nhân.
+            Copyright &copy; 2021 Soft by Nhóm ??.
           </SuiTypography>
         </Grid>
       </Grid>

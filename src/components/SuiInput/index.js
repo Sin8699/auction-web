@@ -1,47 +1,24 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import { forwardRef } from 'react'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import InputBase from '@material-ui/core/InputBase'
+import Icon from '@material-ui/core/Icon'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
 
- =========================================================
+import styles from 'components/SuiInput/styles'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { forwardRef } from "react";
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// clsx is a utility for constructing className strings conditionally
-import clsx from "clsx";
-
-// @material-ui core components
-import InputBase from "@material-ui/core/InputBase";
-import Icon from "@material-ui/core/Icon";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-
-// Custom styles for SuiInput
-import styles from "components/SuiInput/styles";
-
-// Soft UI Dashboard Material-UI contexts
-import { useSoftUIController } from "context";
+import { useSoftUIController } from 'context'
 
 const SuiInput = forwardRef(
   ({ size, withIcon, error, success, customClass, disabled, ...rest }, ref) => {
-    let template;
-    const [controller] = useSoftUIController();
-    const { direction } = controller;
-    const classes = styles({ size, error, success, withIcon, direction, disabled });
+    let template
+    const [controller] = useSoftUIController()
+    const { direction } = controller
+    const classes = styles({ size, error, success, withIcon, direction, disabled })
 
-    if (withIcon.icon && withIcon.direction === "left") {
+    if (withIcon.icon && withIcon.direction === 'left') {
       template = (
         <SuiBox ref={ref} customClass={clsx(classes.suiInputIcon, customClass)}>
           <SuiBox customClass={classes.suiInputIcon_Right}>
@@ -54,18 +31,18 @@ const SuiInput = forwardRef(
             className={clsx(classes.suiInput, classes.suiInputIcon_input, {
               [classes.suiInput_error]: error,
               [classes.suiInput_success]: success,
-              [classes[`suiInput_${size}`]]: size,
+              [classes[`suiInput_${size}`]]: size
             })}
             classes={{
               focused: classes.suiInput_focused,
               disabled: classes.suiInput_disabled,
               error: classes.suiInput_error,
-              multiline: classes.suiInput_multiline,
+              multiline: classes.suiInput_multiline
             }}
           />
         </SuiBox>
-      );
-    } else if (withIcon.icon && withIcon.direction === "right") {
+      )
+    } else if (withIcon.icon && withIcon.direction === 'right') {
       template = (
         <SuiBox customClass={clsx(classes.suiInputIcon, customClass)}>
           <InputBase
@@ -73,13 +50,13 @@ const SuiInput = forwardRef(
             className={clsx(classes.suiInput, classes.suiInputIcon_input, {
               [classes.suiInput_error]: error,
               [classes.suiInput_success]: success,
-              [classes[`suiInput_${size}`]]: size,
+              [classes[`suiInput_${size}`]]: size
             })}
             classes={{
               focused: classes.suiInput_focused,
               disabled: classes.suiInput_disabled,
               error: classes.suiInput_error,
-              multiline: classes.suiInput_multiline,
+              multiline: classes.suiInput_multiline
             }}
           />
           <SuiBox customClass={classes.suiInputIcon_Right}>
@@ -88,7 +65,7 @@ const SuiInput = forwardRef(
             </Icon>
           </SuiBox>
         </SuiBox>
-      );
+      )
     } else {
       template = (
         <InputBase
@@ -96,46 +73,43 @@ const SuiInput = forwardRef(
           className={clsx(classes.suiInput, customClass, {
             [classes.suiInput_error]: error,
             [classes.suiInput_success]: success,
-            [classes[`suiInput_${size}`]]: size,
+            [classes[`suiInput_${size}`]]: size
           })}
           classes={{
             focused: classes.suiInput_focused,
             disabled: classes.suiInput_disabled,
             error: classes.suiInput_error,
-            multiline: classes.suiInput_multiline,
+            multiline: classes.suiInput_multiline
           }}
         />
-      );
+      )
     }
 
-    return template;
+    return template
   }
-);
+)
 
 // Setting default values for the props of SuiInput
 SuiInput.defaultProps = {
-  size: "medium",
-  withIcon: {
-    icon: false,
-    direction: "none",
-  },
+  size: 'medium',
+  withIcon: { icon: false, direction: 'none' },
   error: false,
   success: false,
-  customClass: "",
-  disabled: false,
-};
+  customClass: '',
+  disabled: false
+}
 
 // Typechecking props for the SuiInput
 SuiInput.propTypes = {
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
   withIcon: PropTypes.shape({
     icon: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-    direction: PropTypes.oneOf(["none", "left", "right"]),
+    direction: PropTypes.oneOf(['none', 'left', 'right'])
   }),
   error: PropTypes.bool,
   success: PropTypes.bool,
   customClass: PropTypes.string,
-  disabled: PropTypes.bool,
-};
+  disabled: PropTypes.bool
+}
 
-export default SuiInput;
+export default SuiInput

@@ -20,11 +20,11 @@ import DefaultProjectCard from 'component-pages/Cards/ProjectCards/DefaultProjec
 import PlaceholderCard from 'component-pages/Cards/PlaceholderCard'
 
 // Overview page components
-import Header from 'layouts/profile/components/Header'
-import PlatformSettings from 'layouts/profile/components/PlatformSettings'
+import Header from './components/Header'
+import PlatformSettings from './components/PlatformSettings'
 
 // Data
-import profilesListData from 'layouts/profile/data/profilesListData'
+import profilesListData from './data/profilesListData'
 
 // Images
 import homeDecor1 from 'assets/images/home-decor-1.jpg'

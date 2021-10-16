@@ -37,6 +37,8 @@ function DefaultNavbarLink({ icon, name, route, light }) {
   )
 }
 
+DefaultNavbarLink.defaultProps = { light: false }
+
 // Typechecking props for the DefaultNavbarLink
 DefaultNavbarLink.propTypes = {
   icon: PropTypes.string.isRequired,

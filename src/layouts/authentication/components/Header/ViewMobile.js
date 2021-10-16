@@ -3,6 +3,8 @@ import Menu from '@material-ui/core/Menu'
 import SuiBox from 'components/SuiBox'
 import NavbarLink from 'layouts/authentication/components/Header/ViewDefault'
 
+import { ROUTER_DEFAULT } from 'constants/router'
+
 function NavbarMobile({ open, close }) {
   const { width } = open && open.getBoundingClientRect()
 
@@ -17,8 +19,8 @@ function NavbarMobile({ open, close }) {
       MenuListProps={{ style: { width: `calc(${width}px - 4rem)` } }}
     >
       <SuiBox px={0.5}>
-        <NavbarLink icon="account_circle" name="sign up" route="/authentication/sign-up" />
-        <NavbarLink icon="key" name="sign in" route="/authentication/sign-in" />
+        <NavbarLink icon="person_add" name="sign up" route={ROUTER_DEFAULT.SIGN_UP} />
+        <NavbarLink icon="key" name="sign in" route={ROUTER_DEFAULT.SIGN_IN} />
       </SuiBox>
     </Menu>
   )

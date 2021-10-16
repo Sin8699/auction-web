@@ -42,13 +42,11 @@ function Sidenav({ routes, ...rest }) {
     function handleMiniSidenav() {
       dispatch({ type: 'MINI_SIDENAV', value: window.innerWidth < 1200 })
     }
-
     // The event listener that's calling the handleMiniSidenav function when resizing the window.
     window.addEventListener('resize', handleMiniSidenav)
 
     // Call the handleMiniSidenav function to set the state with the initial value.
     handleMiniSidenav()
-
     return () => window.removeEventListener('resize', handleMiniSidenav)
   }, [dispatch, location])
 

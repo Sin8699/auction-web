@@ -13,6 +13,8 @@ import BasicLayout from 'layouts/authentication/components/BasicLayout'
 // import Socials from 'layouts/authentication/components/Socials'
 // import Separator from 'layouts/authentication/components/Separator'
 
+import { ROUTER_DEFAULT } from 'constants/router'
+
 import curved6 from 'assets/images/curved-images/curved14.jpg'
 
 function SignUp() {
@@ -71,7 +73,7 @@ function SignUp() {
                 Already have an account?&nbsp;
                 <SuiTypography
                   component={Link}
-                  to="/authentication/sign-in"
+                  to={ROUTER_DEFAULT.SIGN_IN}
                   variant="button"
                   textColor="dark"
                   fontWeight="bold"
