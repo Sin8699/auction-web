@@ -1,42 +1,24 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+// @material-ui components
+import Switch from '@material-ui/core/Switch'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState } from "react";
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @material-ui core components
-import Switch from "@material-ui/core/Switch";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+// components
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiInput from 'components/SuiInput'
+import SuiButton from 'components/SuiButton'
 
 // Authentication layout components
-import CoverLayout from "layouts/authentication/components/CoverLayout";
+import CoverLayout from 'layouts/authentication/components/CoverLayout'
 
 // Images
-import curved9 from "assets/images/curved-images/curved-6.jpg";
+import curved9 from 'assets/images/curved-images/curved-6.jpg'
 
 function SignIn() {
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false)
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const handleSetRememberMe = () => setRememberMe(!rememberMe)
 
   return (
     <CoverLayout
@@ -69,7 +51,7 @@ function SignIn() {
             onClick={handleSetRememberMe}
             customClass="cursor-pointer user-select-none"
           >
-            &nbsp;&nbsp;Remember me
+            &nbsp;&nbsp;Remember me (unavailable)
           </SuiTypography>
         </SuiBox>
         <SuiBox mt={4} mb={1}>
@@ -79,7 +61,7 @@ function SignIn() {
         </SuiBox>
         <SuiBox mt={3} textAlign="center">
           <SuiTypography variant="button" textColor="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
+            Don&apos;t have an account?{' '}
             <SuiTypography
               component={Link}
               to="/authentication/sign-up"
@@ -94,7 +76,7 @@ function SignIn() {
         </SuiBox>
       </SuiBox>
     </CoverLayout>
-  );
+  )
 }
 
-export default SignIn;
+export default SignIn

@@ -34,27 +34,21 @@ function Sidenav({ routes, ...rest }) {
   const location = useLocation()
   const { pathname } = location
   const collapseName = pathname.split('/').slice(1)[0]
+  const isAuthentication = collapseName === 'authentication'
 
   const closeSizenav = () => dispatch({ type: 'MINI_SIDENAV', value: true })
 
   useEffect(() => {
-    // A function that sets the mini state of the sidenav.
     function handleMiniSidenav() {
-      dispatch({
-        type: 'MINI_SIDENAV',
-        value: window.innerWidth < 1200
-      })
+      dispatch({ type: 'MINI_SIDENAV', value: window.innerWidth < 1200 })
     }
 
-    /** 
-     The event listener that's calling the handleMiniSidenav function when resizing the window.
-    */
+    // The event listener that's calling the handleMiniSidenav function when resizing the window.
     window.addEventListener('resize', handleMiniSidenav)
 
     // Call the handleMiniSidenav function to set the state with the initial value.
     handleMiniSidenav()
 
-    // Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleMiniSidenav)
   }, [dispatch, location])
 
@@ -106,6 +100,7 @@ function Sidenav({ routes, ...rest }) {
 
     return returnValue
   })
+  if (isAuthentication) return <></>
 
   return (
     <Drawer

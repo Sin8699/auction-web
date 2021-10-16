@@ -1,55 +1,25 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import PropTypes from 'prop-types'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Grid from '@material-ui/core/Grid'
 
-Coded by www.creative-tim.com
+// components
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
- =========================================================
+import Header from 'layouts/authentication/components/Header'
+import PageLayout from 'component-pages/LayoutContainers/PageLayout'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import Footer from 'layouts/authentication/components/Footer'
+import styles from 'layouts/authentication/components/CoverLayout/styles'
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Grid from "@material-ui/core/Grid";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// Soft UI Dashboard Material-UI example components
-import DefaultNavbar from "component-pages/Navbars/DefaultNavbar";
-import PageLayout from "component-pages/LayoutContainers/PageLayout";
-
-// Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
-
-// Custom styles for the Baise
-import styles from "layouts/authentication/components/CoverLayout/styles";
-
-// Soft UI Dashboard Material-UI page layout routes
-import routes from "routes";
+import routes from 'routes'
 
 function CoverLayout({ color, header, title, description, image, top, children }) {
-  const classes = styles({ image });
+  const classes = styles({ image })
 
   return (
     <PageLayout background="white">
-      <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/soft-ui-dashboard-material-ui",
-          label: "free download",
-          color: "dark",
-        }}
-      />
+      <Header routes={routes} />
       <Grid container justifyContent="center" className={classes.coverLayout}>
         <Grid item xs={11} sm={8} md={5} xl={3}>
           <SuiBox mt={top}>
@@ -74,9 +44,9 @@ function CoverLayout({ color, header, title, description, image, top, children }
         </Grid>
         <Grid item xs={12} md={5}>
           <SuiBox
-            display={{ xs: "none", md: "block" }}
+            display={{ xs: 'none', md: 'block' }}
             position="relative"
-            right={{ md: "-12rem", xl: "-16rem" }}
+            right={{ md: '-12rem', xl: '-16rem' }}
             customClass={classes.coverLayout_imageBox}
           >
             <SuiBox customClass={classes.coverLayout_image} />
@@ -85,36 +55,30 @@ function CoverLayout({ color, header, title, description, image, top, children }
       </Grid>
       <Footer />
     </PageLayout>
-  );
+  )
 }
 
 // Setting default values for the props of CoverLayout
-CoverLayout.defaultProps = {
-  header: "",
-  title: "",
-  description: "",
-  color: "info",
-  top: 20,
-};
+CoverLayout.defaultProps = { header: '', title: '', description: '', color: 'info', top: 20 }
 
 // Typechecking props for the CoverLayout
 CoverLayout.propTypes = {
   color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "dark",
-    "light",
+    'primary',
+    'secondary',
+    'info',
+    'success',
+    'warning',
+    'error',
+    'dark',
+    'light'
   ]),
   header: PropTypes.node,
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string.isRequired,
   top: PropTypes.number,
-  children: PropTypes.node.isRequired,
-};
+  children: PropTypes.node.isRequired
+}
 
-export default CoverLayout;
+export default CoverLayout

@@ -1,45 +1,24 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Card from '@material-ui/core/Card'
+import Checkbox from '@material-ui/core/Checkbox'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiInput from 'components/SuiInput'
+import SuiButton from 'components/SuiButton'
 
- =========================================================
+import BasicLayout from 'layouts/authentication/components/BasicLayout'
+// import Socials from 'layouts/authentication/components/Socials'
+// import Separator from 'layouts/authentication/components/Separator'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState } from "react";
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Checkbox from "@material-ui/core/Checkbox";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
-
-// Authentication layout components
-import BasicLayout from "layouts/authentication/components/BasicLayout";
-import Socials from "layouts/authentication/components/Socials";
-import Separator from "layouts/authentication/components/Separator";
-
-// Images
-import curved6 from "assets/images/curved-images/curved14.jpg";
+import curved6 from 'assets/images/curved-images/curved14.jpg'
 
 function SignUp() {
-  const [agreement, setAgremment] = useState(true);
+  const [agreement, setAgremment] = useState(true)
 
-  const handleSetAgremment = () => setAgremment(!agreement);
+  const handleSetAgremment = () => setAgremment(!agreement)
 
   return (
     <BasicLayout
@@ -53,10 +32,10 @@ function SignUp() {
             Register with
           </SuiTypography>
         </SuiBox>
-        <SuiBox mb={2}>
+        {/* <SuiBox mb={2}>
           <Socials />
         </SuiBox>
-        <Separator />
+        <Separator /> */}
         <SuiBox pt={2} pb={3} px={3}>
           <SuiBox component="form" role="form">
             <SuiBox mb={2}>
@@ -106,7 +85,7 @@ function SignUp() {
         </SuiBox>
       </Card>
     </BasicLayout>
-  );
+  )
 }
 
-export default SignUp;
+export default SignUp
