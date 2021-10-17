@@ -13,76 +13,73 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
-
-// react-github-btn
-import GitHubButton from "react-github-btn";
+import { useState, useEffect } from 'react'
 
 // clsx is a utility for constructing className strings conditionally
-import clsx from "clsx";
+import clsx from 'clsx'
 
 // @material-ui core components
-import Drawer from "@material-ui/core/Drawer";
-import Divider from "@material-ui/core/Divider";
-import Switch from "@material-ui/core/Switch";
-import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
-import Icon from "@material-ui/core/Icon";
+import Drawer from '@material-ui/core/Drawer'
+import Divider from '@material-ui/core/Divider'
+import Switch from '@material-ui/core/Switch'
+import IconButton from '@material-ui/core/IconButton'
+import Link from '@material-ui/core/Link'
+import Icon from '@material-ui/core/Icon'
 
 // @material-ui icons
-import TwitterIcon from "@material-ui/icons/Twitter";
-import FacebookIcon from "@material-ui/icons/Facebook";
+import TwitterIcon from '@material-ui/icons/Twitter'
+import FacebookIcon from '@material-ui/icons/Facebook'
 
 // Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiButton from 'components/SuiButton'
 
 // Custom styles for the Configurator
-import styles from "component-pages/Configurator/styles";
+import styles from 'component-pages/Configurator/styles'
 
 // Soft UI Dashboard Material-UI context
-import { useSoftUIController } from "context";
+import { useSoftUIController } from 'context'
 
 function Configurator() {
-  const [controller, dispatch] = useSoftUIController();
-  const { openConfigurator, transparentSidenav, fixedNavbar, sidenavColor } = controller;
-  const [disabled, setDisabled] = useState(false);
-  const classes = styles({ sidenavColor });
-  const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
+  const [controller, dispatch] = useSoftUIController()
+  const { openConfigurator, transparentSidenav, fixedNavbar, sidenavColor } = controller
+  const [disabled, setDisabled] = useState(false)
+  const classes = styles({ sidenavColor })
+  const sidenavColors = ['primary', 'dark', 'info', 'success', 'warning', 'error']
 
   // Use the useEffect hook to change the button state for the sidenav type based on window size.
   useEffect(() => {
     // A function that sets the disabled state of the buttons for the sidenav type.
     function handleDisabled() {
-      return window.innerWidth > 1200 ? setDisabled(false) : setDisabled(true);
+      return window.innerWidth > 1200 ? setDisabled(false) : setDisabled(true)
     }
 
     // The event listener that's calling the handleDisabled function when resizing the window.
-    window.addEventListener("resize", handleDisabled);
+    window.addEventListener('resize', handleDisabled)
 
     // Call the handleDisabled function to set the state with the initial value.
-    handleDisabled();
+    handleDisabled()
 
     // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleDisabled);
-  }, []);
+    return () => window.removeEventListener('resize', handleDisabled)
+  }, [])
 
   const handleCloseConfigurator = () => {
-    dispatch({ type: "OPEN_CONFIGURATOR", value: false });
-  };
+    dispatch({ type: 'OPEN_CONFIGURATOR', value: false })
+  }
 
   const handleTransparentSidenav = () => {
-    dispatch({ type: "TRANSPARENT_SIDENAV", value: true });
-  };
+    dispatch({ type: 'TRANSPARENT_SIDENAV', value: true })
+  }
 
   const handleWhiteSidenav = () => {
-    dispatch({ type: "TRANSPARENT_SIDENAV", value: false });
-  };
+    dispatch({ type: 'TRANSPARENT_SIDENAV', value: false })
+  }
 
   const handleFixedNavbar = () => {
-    dispatch({ type: "FIXED_NAVBAR", value: !fixedNavbar });
-  };
+    dispatch({ type: 'FIXED_NAVBAR', value: !fixedNavbar })
+  }
 
   return (
     <Drawer
@@ -90,8 +87,8 @@ function Configurator() {
       classes={{
         paper: clsx(classes.configurator, {
           [classes.configurator_open]: openConfigurator,
-          [classes.configurator_close]: !openConfigurator,
-        }),
+          [classes.configurator_close]: !openConfigurator
+        })
       }}
     >
       <SuiBox
@@ -128,9 +125,9 @@ function Configurator() {
               <IconButton
                 key={color}
                 className={clsx(classes.configurator_sidenav_color, classes[color], {
-                  [classes.active_color]: sidenavColor === color,
+                  [classes.active_color]: sidenavColor === color
                 })}
-                onClick={() => dispatch({ type: "SIDENAV_COLOR", value: color })}
+                onClick={() => dispatch({ type: 'SIDENAV_COLOR', value: color })}
               />
             ))}
           </SuiBox>
@@ -145,7 +142,7 @@ function Configurator() {
           <SuiBox customClass={classes.configurator_sidenav_types}>
             <SuiButton
               buttonColor="info"
-              variant={transparentSidenav ? "gradient" : "outlined"}
+              variant={transparentSidenav ? 'gradient' : 'outlined'}
               onClick={handleTransparentSidenav}
               disabled={disabled}
               fullWidth
@@ -154,7 +151,7 @@ function Configurator() {
             </SuiButton>
             <SuiButton
               buttonColor="info"
-              variant={transparentSidenav ? "outlined" : "gradient"}
+              variant={transparentSidenav ? 'outlined' : 'gradient'}
               onClick={handleWhiteSidenav}
               disabled={disabled}
               fullWidth
@@ -197,17 +194,6 @@ function Configurator() {
             view documentation
           </SuiButton>
         </SuiBox>
-        <SuiBox display="flex" justifyContent="center">
-          <GitHubButton
-            href="https://github.com/creativetimofficial/soft-ui-dashboard-material-ui"
-            data-icon="octicon-star"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star creativetimofficial/soft-ui-dashboard-material-ui on GitHub"
-          >
-            Star
-          </GitHubButton>
-        </SuiBox>
         <SuiBox mt={3} textAlign="center">
           <SuiBox mb={0.5}>
             <SuiTypography variant="h6">Thank you for sharing!</SuiTypography>
@@ -240,7 +226,7 @@ function Configurator() {
         </SuiBox>
       </SuiBox>
     </Drawer>
-  );
+  )
 }
 
-export default Configurator;
+export default Configurator
