@@ -12,7 +12,6 @@ import Tooltip from '@material-ui/core/Tooltip'
 // Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
-import SuiButton from 'components/SuiButton'
 import SuiAvatar from 'components/SuiAvatar'
 
 // Custom styles for the DefaultProjectCard
@@ -88,22 +87,8 @@ function DefaultProjectCard({
             {description}
           </SuiTypography>
         </SuiBox>
-        <SuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-          {action.type === 'comp' ? (
-            action.comp
-          ) : (
-            <SuiButton
-              component="a"
-              href={action.route}
-              target="_blank"
-              rel="noreferrer"
-              size="small"
-              buttonColor={action.color}
-            >
-              {action.label}
-            </SuiButton>
-          )}
-          <SuiBox display="flex">{renderAuthors}</SuiBox>
+        <SuiBox display="flex" justifyContent="flex-end" alignItems="center" mb={1}>
+          {renderAuthors}
         </SuiBox>
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {info}
@@ -111,6 +96,9 @@ function DefaultProjectCard({
             {countDown}
           </SuiTypography>
         </SuiBox>
+      </SuiBox>
+      <SuiBox py={1} px={0.5}>
+        {action.comp}
       </SuiBox>
     </Card>
   )

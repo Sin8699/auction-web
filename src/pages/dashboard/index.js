@@ -27,6 +27,7 @@ import { useGetProducts } from '../../apis/products/index'
 import { useGetBiddingProducts } from '../../apis/bidding-product/index'
 import BuyNowModal from './components/BuyNowModal/index'
 import keyBy from 'lodash/keyBy'
+import BidModal from './components/BidModal/index'
 
 function Dashboard() {
   const [openMenu, setOpenMenu] = useState(null)
@@ -65,14 +66,10 @@ function Dashboard() {
               description={description}
               action={{
                 type: 'comp',
-                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[id] || 0} />
+                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[id]} />
               }}
               authors={[{ image: team1, name: 'Elena Morison' }]}
-              info={
-                <SuiButton size="small" buttonColor="info" variant="outlined">
-                  Bid
-                </SuiButton>
-              }
+              info={<BidModal biddingProduct={objectBiddingProduct?.[id]} productName={name} />}
               countDown={'00:21:00'}
             />
           </Grid>
