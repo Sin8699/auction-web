@@ -9808,6 +9808,11 @@
   optionalDependencies:
     "fsevents" "^2.1.3"
 
+"react-st-modal@^1.1.3":
+  "integrity" "sha512-QNAKjxPPKcHHGDKvXjcTkGgSzxd495nBxunGf3t4XfKjEDARKANcFg8yC1a3T2h/kXKB+YQfVuR5bK9iERWDDg=="
+  "resolved" "https://registry.npmjs.org/react-st-modal/-/react-st-modal-1.1.3.tgz"
+  "version" "1.1.3"
+
 "react-transition-group@^4.4.0":
   "integrity" "sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.2.tgz"

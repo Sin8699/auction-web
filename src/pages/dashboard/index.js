@@ -24,16 +24,22 @@ import { useState } from 'react'
 import SuiPagination from '../../components/SuiPagination/index'
 import SuiInput from '../../components/SuiInput/index'
 import { useGetProducts } from '../../apis/products/index'
+import { useGetBiddingProducts } from '../../apis/bidding-product/index'
+import BuyNowModal from './components/BuyNowModal/index'
+import keyBy from 'lodash/keyBy'
 
 function Dashboard() {
   const [openMenu, setOpenMenu] = useState(null)
 
   const handleOpenMenu = ({ currentTarget }) => setOpenMenu(currentTarget)
   const handleCloseMenu = () => setOpenMenu(null)
-  const [{ data, loading, error }] = useGetProducts()
+
+  const [{ data: products, loading: loadingProducts, error: errorProducts }] = useGetProducts()
+  const [{ data: biddingProducts, loading: loadingBiddingProducts, error: errorBiddingProducts }] =
+    useGetBiddingProducts()
 
   const _renderData = () => {
-    if (loading) {
+    if (loadingProducts || loadingBiddingProducts) {
       return (
         <SuiBox display="flex" justifyContent="center">
           <CircularProgress color="info" />
@@ -41,13 +47,15 @@ function Dashboard() {
       )
     }
 
-    if (error) {
+    if (errorProducts || errorBiddingProducts) {
       return <div>error</div>
     }
 
+    const objectBiddingProduct = keyBy(biddingProducts, 'product')
+
     return (
       <Grid container spacing={3}>
-        {data.slice(0, 10).map(({ name, primaryImage, description, categories, id }) => (
+        {products.slice(0, 10).map(({ name, primaryImage, description, categories, id }) => (
           <Grid item xs={12} md={6} xl={3}>
             <ProductCard
               key={id}
@@ -56,10 +64,8 @@ function Dashboard() {
               title={name}
               description={description}
               action={{
-                type: 'internal',
-                route: '/',
-                color: 'error',
-                label: 'Buy Now'
+                type: 'comp',
+                comp: <BuyNowModal price={objectBiddingProduct?.[id] || 0} />
               }}
               authors={[{ image: team1, name: 'Elena Morison' }]}
               info={

@@ -61,7 +61,7 @@ function DefaultProjectCard({
           </SuiTypography>
         </SuiBox>
         <SuiBox mb={1}>
-          {action.type === 'internal' ? (
+          {action.type === 'comp' ? (
             <SuiTypography
               component={Link}
               to={action.route}
@@ -89,10 +89,8 @@ function DefaultProjectCard({
           </SuiTypography>
         </SuiBox>
         <SuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-          {action.type === 'internal' ? (
-            <SuiButton component={Link} to={action.route} size="small" buttonColor={action.color}>
-              {action.label}
-            </SuiButton>
+          {action.type === 'comp' ? (
+            action.comp
           ) : (
             <SuiButton
               component="a"
@@ -130,8 +128,8 @@ DefaultProjectCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   action: PropTypes.shape({
-    type: PropTypes.oneOf(['external', 'internal']),
-    route: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['external', 'internal', 'comp']),
+    route: PropTypes.string,
     color: PropTypes.oneOf([
       'primary',
       'secondary',
@@ -143,7 +141,8 @@ DefaultProjectCard.propTypes = {
       'dark',
       'white'
     ]).isRequired,
-    label: PropTypes.string.isRequired
+    label: PropTypes.string,
+    comp: PropTypes.element
   }).isRequired,
   authors: PropTypes.arrayOf(PropTypes.object),
   info: PropTypes.element,
