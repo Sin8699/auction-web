@@ -13,7 +13,6 @@ import Footer from 'component-pages/Footer'
 import SuiTypography from 'components/SuiTypography'
 import ProductCard from 'component-pages/Cards/ProjectCards/ProductCard'
 // Images
-import homeDecor1 from 'assets/images/home-decor-1.jpg'
 import team1 from 'assets/images/team-1.jpg'
 import Card from '@material-ui/core/Card'
 import SuiButton from 'components/SuiButton'
@@ -23,12 +22,49 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { useState } from 'react'
 import SuiPagination from '../../components/SuiPagination/index'
 import SuiInput from '../../components/SuiInput/index'
+import { useGetProducts } from '../../apis/products/index'
 
 function Dashboard() {
   const [openMenu, setOpenMenu] = useState(null)
 
   const handleOpenMenu = ({ currentTarget }) => setOpenMenu(currentTarget)
   const handleCloseMenu = () => setOpenMenu(null)
+  const [{ data, loading, error }] = useGetProducts()
+
+  const _renderData = () => {
+    if (loading) {
+      return <div>loading...</div>
+    }
+
+    if (error) {
+      return <div>error</div>
+    }
+
+    return (
+      <>
+        {data.slice(0, 10).map(({ name, primaryImage, description, categories, id }) => (
+          <Grid item xs={12} md={6} xl={3}>
+            <ProductCard
+              key={id}
+              image={primaryImage}
+              label="Phone"
+              title={name}
+              description={description}
+              action={{
+                type: 'internal',
+                route: '/pages/profile/profile-overview',
+                color: 'info',
+                label: 'Buy Now'
+              }}
+              authors={[{ image: team1, name: 'Elena Morison' }]}
+              info={<SuiButton buttonColor="error">Bid</SuiButton>}
+              countDown={'00:21:00'}
+            />
+          </Grid>
+        ))}
+      </>
+    )
+  }
 
   return (
     <DashboardLayout>
@@ -66,23 +102,7 @@ function Dashboard() {
           </SuiBox>
           <SuiBox p={2}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={6} xl={3}>
-                <ProductCard
-                  image={homeDecor1}
-                  label="Phone"
-                  title="Iphone 13"
-                  description="As Uber works through a huge amount of internal management turmoil."
-                  action={{
-                    type: 'internal',
-                    route: '/pages/profile/profile-overview',
-                    color: 'info',
-                    label: 'Buy Now'
-                  }}
-                  authors={[{ image: team1, name: 'Elena Morison' }]}
-                  info={<SuiButton buttonColor="error">Bid</SuiButton>}
-                  countDown={'00:21:00'}
-                />
-              </Grid>
+              {_renderData()}
             </Grid>
 
             <SuiPagination variant="contained">

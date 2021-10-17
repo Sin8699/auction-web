@@ -1,22 +1,22 @@
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
 // @material-ui core components
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import Tooltip from "@material-ui/core/Tooltip";
+import Card from '@material-ui/core/Card'
+import CardMedia from '@material-ui/core/CardMedia'
+import Tooltip from '@material-ui/core/Tooltip'
 
 // Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiButton from 'components/SuiButton'
+import SuiAvatar from 'components/SuiAvatar'
 
 // Custom styles for the DefaultProjectCard
-import styles from "component-pages/Cards/ProjectCards/DefaultProjectCard/styles";
+import styles from 'component-pages/Cards/ProjectCards/DefaultProjectCard/styles'
 
 function DefaultProjectCard({
   image,
@@ -26,20 +26,15 @@ function DefaultProjectCard({
   action,
   authors,
   info,
-  countDown,
+  countDown
 }) {
-  const classes = styles();
+  const classes = styles()
 
   const renderAuthors = authors.map(({ image: media, name }) => (
     <Tooltip key={name} title={name} placement="bottom">
-      <SuiAvatar
-        src={media}
-        alt={name}
-        size="xs"
-        customClass={classes.projectCard_avatar}
-      />
+      <SuiAvatar src={media} alt={name} size="xs" customClass={classes.projectCard_avatar} />
     </Tooltip>
-  ));
+  ))
 
   return (
     <Card className={classes.projectCard}>
@@ -63,7 +58,7 @@ function DefaultProjectCard({
           </SuiTypography>
         </SuiBox>
         <SuiBox mb={1}>
-          {action.type === "internal" ? (
+          {action.type === 'internal' ? (
             <SuiTypography
               component={Link}
               to={action.route}
@@ -90,13 +85,8 @@ function DefaultProjectCard({
             {description}
           </SuiTypography>
         </SuiBox>
-        <SuiBox
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          mb={1}
-        >
-          {action.type === "internal" ? (
+        <SuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+          {action.type === 'internal' ? (
             <SuiButton
               component={Link}
               to={action.route}
@@ -121,24 +111,21 @@ function DefaultProjectCard({
           )}
           <SuiBox display="flex">{renderAuthors}</SuiBox>
         </SuiBox>
-        <SuiBox
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {info}
-          <SuiTypography variant="h5"
-              textTransform="capitalize" >{countDown}</SuiTypography>
+          <SuiTypography variant="h5" textTransform="capitalize">
+            {countDown}
+          </SuiTypography>
         </SuiBox>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
 // Setting default values for the props of DefaultProjectCard
 DefaultProjectCard.defaultProps = {
-  authors: [],
-};
+  authors: []
+}
 
 // Typechecking props for the DefaultProjectCard
 DefaultProjectCard.propTypes = {
@@ -147,24 +134,24 @@ DefaultProjectCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   action: PropTypes.shape({
-    type: PropTypes.oneOf(["external", "internal"]),
+    type: PropTypes.oneOf(['external', 'internal']),
     route: PropTypes.string.isRequired,
     color: PropTypes.oneOf([
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "light",
-      "dark",
-      "white",
+      'primary',
+      'secondary',
+      'info',
+      'success',
+      'warning',
+      'error',
+      'light',
+      'dark',
+      'white'
     ]).isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
   }).isRequired,
   authors: PropTypes.arrayOf(PropTypes.object),
   info: PropTypes.element,
-  countDown: PropTypes.string,
-};
+  countDown: PropTypes.string
+}
 
-export default DefaultProjectCard;
+export default DefaultProjectCard
