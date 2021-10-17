@@ -16,6 +16,7 @@ import SuiAvatar from 'components/SuiAvatar'
 
 // Custom styles for the DefaultProjectCard
 import styles from 'component-pages/Cards/ProjectCards/DefaultProjectCard/styles'
+import Countdown from 'react-countdown'
 
 function DefaultProjectCard({
   image,
@@ -93,7 +94,7 @@ function DefaultProjectCard({
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {info}
           <SuiTypography variant="h5" textTransform="capitalize">
-            {countDown}
+            <Countdown date={Date.now() + countDown}>OUT OF STOCK</Countdown>
           </SuiTypography>
         </SuiBox>
       </SuiBox>
@@ -134,7 +135,7 @@ DefaultProjectCard.propTypes = {
   }).isRequired,
   authors: PropTypes.arrayOf(PropTypes.object),
   info: PropTypes.element,
-  countDown: PropTypes.string
+  countDown: PropTypes.number
 }
 
 export default DefaultProjectCard

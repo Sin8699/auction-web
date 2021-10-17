@@ -70,7 +70,7 @@ function Dashboard() {
               }}
               authors={[{ image: team1, name: 'Elena Morison' }]}
               info={<BidModal biddingProduct={objectBiddingProduct?.[id]} productName={name} />}
-              countDown={'00:21:00'}
+              countDown={60000} //seconds
             />
           </Grid>
         ))}
