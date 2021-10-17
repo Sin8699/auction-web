@@ -65,7 +65,7 @@ function Dashboard() {
               description={description}
               action={{
                 type: 'comp',
-                comp: <BuyNowModal price={objectBiddingProduct?.[id] || 0} />
+                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[id] || 0} />
               }}
               authors={[{ image: team1, name: 'Elena Morison' }]}
               info={
