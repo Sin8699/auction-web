@@ -18,6 +18,7 @@ import Card from '@material-ui/core/Card'
 import SuiButton from 'components/SuiButton'
 import Icon from '@material-ui/core/Icon'
 import Menu from '@material-ui/core/Menu'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import MenuItem from '@material-ui/core/MenuItem'
 import { useState } from 'react'
 import SuiPagination from '../../components/SuiPagination/index'
@@ -33,7 +34,11 @@ function Dashboard() {
 
   const _renderData = () => {
     if (loading) {
-      return <div>loading...</div>
+      return (
+        <SuiBox display="flex" justifyContent="center">
+          <CircularProgress color="info" />
+        </SuiBox>
+      )
     }
 
     if (error) {
@@ -41,7 +46,7 @@ function Dashboard() {
     }
 
     return (
-      <>
+      <Grid container spacing={3}>
         {data.slice(0, 10).map(({ name, primaryImage, description, categories, id }) => (
           <Grid item xs={12} md={6} xl={3}>
             <ProductCard
@@ -66,7 +71,7 @@ function Dashboard() {
             />
           </Grid>
         ))}
-      </>
+      </Grid>
     )
   }
 
@@ -105,9 +110,7 @@ function Dashboard() {
             </SuiBox>
           </SuiBox>
           <SuiBox p={2}>
-            <Grid container spacing={3}>
-              {_renderData()}
-            </Grid>
+            {_renderData()}
 
             <SuiPagination variant="contained">
               <SuiPagination item>

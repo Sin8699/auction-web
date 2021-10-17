@@ -44,6 +44,9 @@ function DefaultProjectCard({
           component="img"
           title={title}
           className={classes.projectCard_image}
+          style={{
+            minHeight: '235px'
+          }}
         />
       </SuiBox>
       <SuiBox pt={3} px={0.5}>
