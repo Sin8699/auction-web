@@ -52,12 +52,16 @@ function Dashboard() {
               description={description}
               action={{
                 type: 'internal',
-                route: '/pages/profile/profile-overview',
-                color: 'info',
+                route: '/',
+                color: 'error',
                 label: 'Buy Now'
               }}
               authors={[{ image: team1, name: 'Elena Morison' }]}
-              info={<SuiButton buttonColor="error">Bid</SuiButton>}
+              info={
+                <SuiButton size="small" buttonColor="info" variant="outlined">
+                  Bid
+                </SuiButton>
+              }
               countDown={'00:21:00'}
             />
           </Grid>

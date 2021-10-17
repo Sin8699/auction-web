@@ -87,13 +87,7 @@ function DefaultProjectCard({
         </SuiBox>
         <SuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
           {action.type === 'internal' ? (
-            <SuiButton
-              component={Link}
-              to={action.route}
-              variant="outlined"
-              size="small"
-              buttonColor={action.color}
-            >
+            <SuiButton component={Link} to={action.route} size="small" buttonColor={action.color}>
               {action.label}
             </SuiButton>
           ) : (
@@ -102,7 +96,6 @@ function DefaultProjectCard({
               href={action.route}
               target="_blank"
               rel="noreferrer"
-              variant="outlined"
               size="small"
               buttonColor={action.color}
             >
