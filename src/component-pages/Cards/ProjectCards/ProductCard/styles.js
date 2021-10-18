@@ -28,7 +28,8 @@ export default makeStyles(({ palette, boxShadows, functions, borders }) => {
       flexDirection: 'column',
       backgroundColor: transparent.main,
       boxShadow: 'none',
-      overflow: 'visible'
+      overflow: 'visible',
+      position: 'relative'
     },
 
     projectCard_imageContainer: {
@@ -55,6 +56,28 @@ export default makeStyles(({ palette, boxShadows, functions, borders }) => {
       '&:hover, &:focus': {
         zIndex: '10'
       }
+    },
+
+    projectCard_stock: {
+      content: '',
+      position: 'absolute',
+      top: '0',
+      right: '0',
+      bottom: '0',
+      left: '0',
+      background: '#0000009e',
+      textAlign: 'center',
+      lineHeight: '300px',
+      zIndex: '100',
+      color: 'white',
+      borderRadius: borderRadius.xl,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+
+    stock_img: {
+      width: '70%'
     }
   }
 })

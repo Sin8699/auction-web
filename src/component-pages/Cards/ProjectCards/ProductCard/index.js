@@ -15,7 +15,7 @@ import SuiTypography from 'components/SuiTypography'
 import SuiAvatar from 'components/SuiAvatar'
 
 // Custom styles for the DefaultProjectCard
-import styles from 'component-pages/Cards/ProjectCards/DefaultProjectCard/styles'
+import styles from 'component-pages/Cards/ProjectCards/ProductCard/styles'
 import Countdown from 'react-countdown'
 
 function DefaultProjectCard({
@@ -28,7 +28,8 @@ function DefaultProjectCard({
   info,
   countDown
 }) {
-  const classes = styles()
+  const classes = styles({})
+  console.log('classes', classes)
 
   const renderAuthors = authors.map(({ image: media, name }) => (
     <Tooltip key={name} title={name} placement="bottom">
@@ -94,7 +95,11 @@ function DefaultProjectCard({
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {info}
           <SuiTypography variant="h5" textTransform="capitalize">
-            <Countdown date={Date.now() + countDown}>OUT OF STOCK</Countdown>
+            <Countdown date={Date.now() + countDown}>
+              <div className={classes.projectCard_stock}>
+                <img className={classes.stock_img} src={'/images/sold-out.png'} alt="" />
+              </div>
+            </Countdown>
           </SuiTypography>
         </SuiBox>
       </SuiBox>

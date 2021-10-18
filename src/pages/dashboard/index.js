@@ -32,12 +32,12 @@ import BidModal from './components/BidModal/index'
 function Dashboard() {
   const [openMenu, setOpenMenu] = useState(null)
 
-  const handleOpenMenu = ({ currentTarget }) => setOpenMenu(currentTarget)
-  const handleCloseMenu = () => setOpenMenu(null)
-
   const [{ data: products, loading: loadingProducts, error: errorProducts }] = useGetProducts()
   const [{ data: biddingProducts, loading: loadingBiddingProducts, error: errorBiddingProducts }] =
     useGetBiddingProducts()
+
+  const handleOpenMenu = ({ currentTarget }) => setOpenMenu(currentTarget)
+  const handleCloseMenu = () => setOpenMenu(null)
 
   const _renderData = () => {
     if (loadingProducts || loadingBiddingProducts) {
@@ -56,20 +56,20 @@ function Dashboard() {
 
     return (
       <Grid container spacing={3}>
-        {products.slice(0, 10).map(({ name, primaryImage, description, categories, id }) => (
+        {products.slice(0, 10).map(({ name, primaryImage, description, categories, _id }) => (
           <Grid item xs={12} md={6} xl={3}>
             <ProductCard
-              key={id}
+              key={_id}
               image={primaryImage}
               label="Phone"
               title={name}
               description={description}
               action={{
                 type: 'comp',
-                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[id]} />
+                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />
               }}
               authors={[{ image: team1, name: 'Elena Morison' }]}
-              info={<BidModal biddingProduct={objectBiddingProduct?.[id]} productName={name} />}
+              info={<BidModal biddingProduct={objectBiddingProduct?.[_id]} productName={name} />}
               countDown={60000} //seconds
             />
           </Grid>

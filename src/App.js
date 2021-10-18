@@ -9,6 +9,7 @@ import routes from 'routes'
 import ItemSideNav from 'constants/sideNav'
 import { TYPE_ROUTER, ROUTER_DEFAULT } from 'constants/router'
 import { loadFromStorage } from 'utils/storage'
+import SocketContainer from './context/socket/SocketIOProvider'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const accessToken = loadFromStorage('isLogin') || '' // change after done function login
@@ -71,12 +72,14 @@ export default function App() {
   return (
     <StylesProvider jss={jss}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Sidenav routes={ItemSideNav} />
-        <Switch>
-          {getRoutes(routes)}
-          <Redirect from="*" to="/dashboard" />
-        </Switch>
+        <SocketContainer>
+          <CssBaseline />
+          <Sidenav routes={ItemSideNav} />
+          <Switch>
+            {getRoutes(routes)}
+            <Redirect from="*" to="/dashboard" />
+          </Switch>
+        </SocketContainer>
       </ThemeProvider>
     </StylesProvider>
   )
