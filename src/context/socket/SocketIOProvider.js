@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 import React, { useEffect, useState } from 'react'
-import { EMIT_KEYS, ENDPOINT_SOCKET } from './constants'
+import { EMIT_KEYS, ENDPOINT_SOCKET, ON_KEYS } from './constants'
 
 export const SocketContext = React.createContext('auction-socket')
 
@@ -11,6 +11,10 @@ const SocketContainer = ({ children }) => {
     const newSocket = io(ENDPOINT_SOCKET)
 
     setSocket(newSocket)
+
+    newSocket.on(ON_KEYS.SOLD_OUT_PRODUCT, (value) => {
+      console.log('value', value)
+    })
 
     return () => newSocket.close()
   }, [])
