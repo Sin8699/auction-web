@@ -3,7 +3,9 @@ export const ROUTER_DEFAULT = {
   SIGN_UP: '/authentication/sign-up',
   PROFILE: '/profile',
   PRODUCT_DETAIL: '/product-detail',
-  DASHBOARD: '/dashboard'
+  DASHBOARD: '/dashboard',
+  FAVORITE: '/favorite',
+  HISTORY: '/history'
 }
 
 export const TYPE_ROUTER = {
