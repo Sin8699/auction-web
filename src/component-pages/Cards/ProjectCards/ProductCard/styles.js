@@ -78,6 +78,15 @@ export default makeStyles(({ palette, boxShadows, functions, borders }) => {
 
     stock_img: {
       width: '70%'
+    },
+
+    icon_love: {
+      width: '20px',
+      fill: '#ff000036'
+    },
+
+    icon_love_active: {
+      fill: 'red'
     }
   }
 })

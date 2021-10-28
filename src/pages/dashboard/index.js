@@ -57,6 +57,7 @@ function Dashboard() {
           <Grid item xs={12} md={6} xl={3}>
             <ProductCard
               key={_id}
+              id={_id}
               image={primaryImage}
               label="Phone"
               title={name}
