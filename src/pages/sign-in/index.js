@@ -108,6 +108,15 @@ function SignIn() {
             &nbsp;&nbsp;Remember me (unavailable)
           </SuiTypography>
         </SuiBox>
+        <SuiButton
+          mt={4}
+          component="a"
+          href={'/forgot-password'}
+          variant="text"
+          buttonColor={'info'}
+        >
+          Forget password
+        </SuiButton>
         <SuiBox mt={4} mb={1}>
           <SuiButton variant="gradient" buttonColor="info" fullWidth onClick={handleSubmit}>
             sign in
