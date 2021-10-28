@@ -14,36 +14,36 @@ Coded by www.creative-tim.com
 */
 
 // @material-ui core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles(({ functions, breakpoints, transitions }) => {
-  const { pxToRem } = functions;
+  const { pxToRem } = functions
 
   return {
     layoutContainer: {
-      position: "relative",
+      position: 'relative',
       padding: pxToRem(24),
 
-      [breakpoints.up("xl")]: {
+      [breakpoints.up('xl')]: {
         marginLeft: ({ direction, miniSidenav }) => {
-          if (direction === "ltr") {
-            return miniSidenav ? pxToRem(120) : pxToRem(274);
+          if (direction === 'ltr') {
+            return miniSidenav ? pxToRem(120) : pxToRem(274)
           }
 
-          return false;
+          return false
         },
         marginRight: ({ direction, miniSidenav }) => {
-          if (direction === "rtl") {
-            return miniSidenav ? pxToRem(120) : pxToRem(274);
+          if (direction === 'rtl') {
+            return miniSidenav ? pxToRem(120) : pxToRem(274)
           }
 
-          return false;
+          return false
         },
-        transition: transitions.create(["margin-left", "margin-right"], {
+        transition: transitions.create(['margin-left', 'margin-right'], {
           easing: transitions.easing.easeInOut,
-          duration: transitions.duration.standard,
-        }),
-      },
-    },
-  };
-});
+          duration: transitions.duration.standard
+        })
+      }
+    }
+  }
+})

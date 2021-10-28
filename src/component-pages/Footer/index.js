@@ -23,6 +23,7 @@ function Footer() {
       justifyContent="space-between"
       alignItems="center"
       px={1.5}
+      mt={3}
     >
       <SuiBox
         display="flex"
