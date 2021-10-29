@@ -23,9 +23,8 @@ import styles from './styles'
 // Images
 import burceMars from 'assets/images/bruce-mars.jpg'
 
-function Header() {
+function Header({ handleSetTabValue, tabValue }) {
   const [tabsOrientation, setTabsOrientation] = useState('horizontal')
-  const [tabValue, setTabValue] = useState(0)
   const classes = styles()
 
   useEffect(() => {
@@ -44,8 +43,6 @@ function Header() {
 
     return () => window.removeEventListener('resize', handleTabsOrientation)
   }, [tabsOrientation])
-
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue)
 
   return (
     <SuiBox position="relative">
@@ -80,9 +77,8 @@ function Header() {
                 onChange={handleSetTabValue}
                 className="bg-transparent"
               >
-                <Tab label="App" icon={<Cube />} />
-                <Tab label="Message" icon={<Document />} />
-                <Tab label="Settings" icon={<Settings />} />
+                <Tab label="Profile" icon={<Cube />} />
+                <Tab label="Edit password" icon={<Settings />} />
               </Tabs>
             </AppBar>
           </Grid>
