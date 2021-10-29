@@ -56,15 +56,6 @@ const ItemSideNav = [
     route: '/billing',
     icon: <CreditCard size="12px" />,
     noCollapse: true
-  },
-  { type: 'title', title: 'Account Pages', key: 'account-pages' },
-  {
-    type: 'collapse',
-    name: 'Profile',
-    key: 'profile',
-    route: '/profile',
-    icon: <CustomerSupport size="12px" />,
-    noCollapse: true
   }
 ]
 
