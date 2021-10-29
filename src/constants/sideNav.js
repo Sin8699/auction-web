@@ -4,7 +4,6 @@ import Basket from 'component-pages/Icons/Basket'
 import Cube from 'component-pages/Icons/Cube'
 import CreditCard from 'component-pages/Icons/CreditCard'
 import Document from 'component-pages/Icons/Document'
-import CustomerSupport from 'component-pages/Icons/CustomerSupport'
 import {ROUTER_DEFAULT} from 'constants/router'
 
 const ItemSideNav = [

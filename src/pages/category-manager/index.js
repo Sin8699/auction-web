@@ -32,9 +32,14 @@ function CategoryManager() {
 
   const onNew = () => {}
 
+  const handleEdit = () => {
+    console.log('selectedItem: ', selectedItem)
+  }
+
   const listActions = renderAction({
     onEdit: () => {
       setAnchorEl(null)
+      handleEdit()
     },
     onDelete: () => {
       setAnchorEl(null)

@@ -1,5 +1,5 @@
 import Dashboard from 'pages/dashboard'
-import Tables from 'layouts/tables'
+// import Tables from 'layouts/tables'
 import Billing from 'layouts/billing'
 import Profile from 'pages/profile'
 import SignIn from 'pages/sign-in'

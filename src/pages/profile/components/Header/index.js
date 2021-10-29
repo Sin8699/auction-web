@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
@@ -13,7 +13,6 @@ import SuiAvatar from 'components/SuiAvatar'
 import DashboardNavbar from 'component-pages/Header'
 
 import Cube from 'component-pages/Icons/Cube'
-import Document from 'component-pages/Icons/Document'
 import Settings from 'component-pages/Icons/Settings'
 
 import breakpoints from 'assets/theme/base/breakpoints'
@@ -23,7 +22,7 @@ import styles from './styles'
 // Images
 import burceMars from 'assets/images/bruce-mars.jpg'
 
-function Header({ handleSetTabValue, tabValue }) {
+function Header({handleSetTabValue, tabValue}) {
   const [tabsOrientation, setTabsOrientation] = useState('horizontal')
   const classes = styles()
 
