@@ -8,7 +8,8 @@ export const ROUTER_DEFAULT = {
   DASHBOARD: '/dashboard',
   FAVORITE: '/favorite',
   HISTORY: '/history',
-  CATEGORY_MANAGER: '/category-manager'
+  CATEGORY_MANAGER: '/category-manager',
+  CATEGORY_MANAGER_NEW: '/category-manager/new'
 }
 
 export const TYPE_ROUTER = {

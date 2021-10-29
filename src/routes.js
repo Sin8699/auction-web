@@ -7,6 +7,7 @@ import SignUp from 'pages/sign-up'
 import ProductDetail from 'pages/product-detail'
 import FavoriteProducts from './pages/favorite-products/index'
 import CategoryManager from 'pages/category-manager'
+import NewCategory from 'pages/category-manager/new'
 
 import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
 import HistoryProducts from './pages/history-products/index'
@@ -43,6 +44,12 @@ const routes = [
     type: TYPE_ROUTER.PRIVATE,
     route: ROUTER_DEFAULT.CATEGORY_MANAGER,
     component: CategoryManager
+  },
+  {
+    key: 'category-manager-new',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.CATEGORY_MANAGER_NEW,
+    component: NewCategory
   },
   {
     key: 'billing',

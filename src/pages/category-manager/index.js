@@ -11,11 +11,9 @@ import {MenuContainer} from '../../assets/styled/MenuAction'
 
 import SuiBadge from '../../components/SuiBadge'
 import MenuAction from '../../components/MenuAction'
-import SuiTypography from '../../components/SuiTypography'
 import TableContainer from '../../components/TableContainer'
 import TablePagination from '../../components/TablePagination'
 
-import {TYPE_MODAL} from '../../constants/modal'
 import {renderAction} from './utils/moreAction'
 import TableHeader from './utils/tableHead'
 
@@ -25,8 +23,6 @@ function CategoryManager() {
   const [list, setList] = useState(categoriesData)
   const [selectedItem, setSelectedItem] = useState({})
   const [anchorEl, setAnchorEl] = useState(null)
-  const [showModal, setShowModal] = useState(false)
-  const [typeModal, setTypeModal] = useState(null)
   const [page, setPage] = useState(1)
 
   const [totalPage, setTotalPage] = useState()
@@ -34,17 +30,11 @@ function CategoryManager() {
     setTotalPage(Math.floor(list.length / 10) + 1)
   }, [list])
 
-  const onShowModal = type => {
-    setShowModal(true)
-    setTypeModal(type)
-    setAnchorEl(null)
-  }
+  const onNew = () => {}
 
   const listActions = renderAction({
     onEdit: () => {
       setAnchorEl(null)
-      setTypeModal(TYPE_MODAL.Edit)
-      setShowModal(true)
     },
     onDelete: () => {
       setAnchorEl(null)
@@ -58,7 +48,7 @@ function CategoryManager() {
         <TableContainer
           data={list}
           header={TableHeader}
-          onAddNew={() => onShowModal(TYPE_MODAL.Create)}
+          onAddNew={onNew}
           searchKey="name"
           page={page}
           renderRow={row => (
