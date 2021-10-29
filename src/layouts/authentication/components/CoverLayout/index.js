@@ -14,11 +14,11 @@ import styles from 'layouts/authentication/components/CoverLayout/styles'
 
 import routes from 'routes'
 
-function CoverLayout({ color, header, title, description, image, top, children }) {
+function CoverLayout({ color, header, title, description, image, top, children, style }) {
   const classes = styles({ image })
 
   return (
-    <PageLayout background="white">
+    <PageLayout background="white" style={style}>
       <Header routes={routes} />
       <Grid container justifyContent="center" className={classes.coverLayout}>
         <Grid item xs={11} sm={8} md={5} xl={3}>
