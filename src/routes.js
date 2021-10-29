@@ -6,8 +6,9 @@ import SignIn from 'pages/sign-in'
 import SignUp from 'pages/sign-up'
 import ProductDetail from 'pages/product-detail'
 import FavoriteProducts from './pages/favorite-products/index'
+import CategoryManager from 'pages/category-manager'
 
-import { TYPE_ROUTER, ROUTER_DEFAULT } from 'constants/router'
+import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
 import HistoryProducts from './pages/history-products/index'
 import ForgotPassword from './pages/forgot-password'
 import ResetPassword from './pages/reset-password'
@@ -38,10 +39,10 @@ const routes = [
     component: ProductDetail
   },
   {
-    key: 'tables',
+    key: 'category-manager',
     type: TYPE_ROUTER.PRIVATE,
-    route: '/tables',
-    component: Tables
+    route: ROUTER_DEFAULT.CATEGORY_MANAGER,
+    component: CategoryManager
   },
   {
     key: 'billing',

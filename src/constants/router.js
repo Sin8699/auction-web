@@ -7,7 +7,8 @@ export const ROUTER_DEFAULT = {
   PRODUCT_DETAIL: '/product-detail',
   DASHBOARD: '/dashboard',
   FAVORITE: '/favorite',
-  HISTORY: '/history'
+  HISTORY: '/history',
+  CATEGORY_MANAGER: '/category-manager'
 }
 
 export const TYPE_ROUTER = {

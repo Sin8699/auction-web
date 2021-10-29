@@ -1,4 +1,3 @@
-// Soft UI Dashboard Material-UI icons
 import Shop from 'component-pages/Icons/Shop'
 import Office from 'component-pages/Icons/Office'
 import Basket from 'component-pages/Icons/Basket'
@@ -6,7 +5,7 @@ import Cube from 'component-pages/Icons/Cube'
 import CreditCard from 'component-pages/Icons/CreditCard'
 import Document from 'component-pages/Icons/Document'
 import CustomerSupport from 'component-pages/Icons/CustomerSupport'
-import { ROUTER_DEFAULT } from 'constants/router'
+import {ROUTER_DEFAULT} from 'constants/router'
 
 const ItemSideNav = [
   {
@@ -43,9 +42,9 @@ const ItemSideNav = [
   },
   {
     type: 'collapse',
-    name: 'Tables',
-    key: 'tables',
-    route: '/tables',
+    name: 'Category manager',
+    key: 'category-manager',
+    route: ROUTER_DEFAULT.CATEGORY_MANAGER,
     icon: <Office size="12px" />,
     noCollapse: true
   },
@@ -57,6 +56,7 @@ const ItemSideNav = [
     icon: <CreditCard size="12px" />,
     noCollapse: true
   }
+  // {type: 'title', title: 'Account Pages', key: 'account-pages'},  }
 ]
 
 export default ItemSideNav
