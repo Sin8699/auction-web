@@ -22,7 +22,6 @@ import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { useState } from 'react'
 import SuiPagination from '../../components/SuiPagination/index'
 import SuiInput from '../../components/SuiInput/index'
 import { useGetProducts } from '../../apis/products/index'

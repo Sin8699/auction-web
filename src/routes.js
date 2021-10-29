@@ -9,6 +9,8 @@ import FavoriteProducts from './pages/favorite-products/index'
 
 import { TYPE_ROUTER, ROUTER_DEFAULT } from 'constants/router'
 import HistoryProducts from './pages/history-products/index'
+import ForgotPassword from './pages/forgot-password'
+import ResetPassword from './pages/reset-password'
 
 const routes = [
   {
@@ -64,6 +66,18 @@ const routes = [
     type: TYPE_ROUTER.AUTHENTICATION,
     route: ROUTER_DEFAULT.SIGN_UP,
     component: SignUp
+  },
+  {
+    key: 'forgot-password',
+    type: TYPE_ROUTER.AUTHENTICATION,
+    route: ROUTER_DEFAULT.FORGOT_PASSWORD,
+    component: ForgotPassword
+  },
+  {
+    key: 'reset-password',
+    type: TYPE_ROUTER.AUTHENTICATION,
+    route: ROUTER_DEFAULT.RESET_PASSWORD,
+    component: ResetPassword
   }
 ]
 
