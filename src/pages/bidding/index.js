@@ -1,15 +1,11 @@
-// @material-ui core components
 import Grid from '@material-ui/core/Grid'
 
-// Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 
-// Soft UI Dashboard Material-UI example components
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 
-// Images
 import team1 from 'assets/images/team-1.jpg'
 import Card from '@material-ui/core/Card'
 import SuiButton from 'components/SuiButton'

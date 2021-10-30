@@ -9,11 +9,12 @@ export const ROUTER_DEFAULT = {
   BIDDING: '/bidding',
   FAVORITE: '/favorite',
   HISTORY: '/history',
-  CATEGORY_MANAGER: '/manager/category',
-  CATEGORY_MANAGER_NEW: '/manager/category/new',
-  CATEGORY_MANAGER_EDIT: '/manager/category/edit',
-  USER_MANAGER: '/manager/user',
-  USER_MANAGER_EDIT: '/manager/user/edit'
+  CATEGORY_MANAGER: '/admin/manager/category',
+  CATEGORY_MANAGER_NEW: '/admin/manager/category/new',
+  CATEGORY_MANAGER_EDIT: '/admin/manager/category/edit',
+  USER_MANAGER: '/admin/manager/user',
+  USER_MANAGER_EDIT: '/admin/manager/user/edit',
+  PRODUCT_MANAGER_ADMIN: '/admin/manager/product'
 }
 
 export const TYPE_ROUTER = {

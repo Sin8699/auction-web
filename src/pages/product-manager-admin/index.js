@@ -17,41 +17,34 @@ import TablePagination from '../../components/TablePagination'
 
 import {renderAction} from './utils/moreAction'
 import TableHeader from './utils/tableHead'
+// import {ROUTER_DEFAULT} from '../../constants/router'
 
-import {ROUTER_DEFAULT} from '../../constants/router'
-
-import {categoriesData} from './mockData'
+import {productData} from './mockData'
 
 const LIMIT_PAGINATION = 10
 
-function CategoryManager() {
+function ProductAdminManager() {
   const navigate = useHistory()
 
   const [list, setList] = useState([])
   const [selectedItem, setSelectedItem] = useState({})
+  console.log('selectedItem: ', selectedItem)
   const [anchorEl, setAnchorEl] = useState(null)
   const [page, setPage] = useState(1)
 
-  const [totalPage, setTotalPage] = useState()
-
   useEffect(() => {
-    setList(categoriesData)
+    console.log('productData: ', productData)
+    setList(productData)
   }, [])
 
-  useEffect(() => {
-    setTotalPage(Math.floor(list.length / 10) + 1)
-  }, [list])
-
-  const onNew = () => navigate.push(ROUTER_DEFAULT.CATEGORY_MANAGER_NEW)
-
-  const handleEdit = () => {
-    navigate.push(`${ROUTER_DEFAULT.CATEGORY_MANAGER_EDIT}/${selectedItem.id}`)
+  const handleDetail = () => {
+    navigate.push(`/`)
   }
 
   const listActions = renderAction({
-    onEdit: () => {
+    onDetail: () => {
       setAnchorEl(null)
-      handleEdit()
+      handleDetail()
     },
     onDelete: () => {
       setAnchorEl(null)
@@ -65,22 +58,29 @@ function CategoryManager() {
         <TableContainer
           data={list}
           header={TableHeader}
-          onAddNew={onNew}
-          searchKey="name"
+          searchKey="owner"
           page={page}
           renderRow={row => (
             <>
-              <TableCell>{row.id}</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell align="center">{row.quantity}</TableCell>
+              <TableCell>{row.owner}</TableCell>
               <TableCell align="center">
                 <SuiBadge
                   variant="gradient"
                   badgeContent={row.status}
-                  color={row.status === 'open' ? 'success' : 'secondary'}
+                  color={
+                    row.status === 'SOLD'
+                      ? 'dark'
+                      : row.role === 'AVAILABLE'
+                      ? 'info'
+                      : row.role === 'EXPIRED'
+                      ? 'error'
+                      : 'primary'
+                  }
                   size="medium"
                 />
               </TableCell>
+
               <TableCell align="right">
                 <IconButton
                   onClick={e => {
@@ -110,4 +110,4 @@ function CategoryManager() {
   )
 }
 
-export default CategoryManager
+export default ProductAdminManager

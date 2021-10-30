@@ -15,8 +15,9 @@ import NewCategory from 'pages/category-manager/new'
 import EditCategory from 'pages/category-manager/edit'
 import EditUser from 'pages/user-manager/edit'
 import UserManager from 'pages/user-manager'
+import ProductAdminManager from 'pages/product-manager-admin'
 
-import { TYPE_ROUTER, ROUTER_DEFAULT } from 'constants/router'
+import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
 
 // import Tables from 'layouts/tables'
 import BiddingBoard from './pages/bidding/index'
@@ -87,6 +88,12 @@ const routes = [
     type: TYPE_ROUTER.PRIVATE,
     route: ROUTER_DEFAULT.USER_MANAGER_EDIT + '/:id',
     component: EditUser
+  },
+  {
+    key: 'product-manager-admin',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.PRODUCT_MANAGER_ADMIN,
+    component: ProductAdminManager
   },
   {
     key: 'profile',

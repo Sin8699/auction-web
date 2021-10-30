@@ -21,6 +21,8 @@ import {ROUTER_DEFAULT} from '../../constants/router'
 
 import {userData} from './mockData'
 
+const LIMIT_PAGINATION = 10
+
 function UserManager() {
   const navigate = useHistory()
 
@@ -29,15 +31,9 @@ function UserManager() {
   const [anchorEl, setAnchorEl] = useState(null)
   const [page, setPage] = useState(1)
 
-  const [totalPage, setTotalPage] = useState()
-
   useEffect(() => {
     setList(userData)
   }, [])
-
-  useEffect(() => {
-    setTotalPage(Math.floor(list.length / 10) + 1)
-  }, [list])
 
   const handleEdit = () => {
     navigate.push(`${ROUTER_DEFAULT.USER_MANAGER_EDIT}/${selectedItem.id}`)
@@ -104,7 +100,11 @@ function UserManager() {
           )}
         />
         <CoverLayout marginTop="10px">
-          <TablePagination page={page} totalPage={totalPage} onChangePage={setPage} />
+          <TablePagination
+            page={page}
+            totalPage={Math.ceil(list.length / LIMIT_PAGINATION)}
+            onChangePage={setPage}
+          />
         </CoverLayout>
         <Footer />
       </DashboardLayout>
