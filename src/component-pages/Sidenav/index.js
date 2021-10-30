@@ -2,16 +2,13 @@ import {useEffect} from 'react'
 import {useLocation, NavLink} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-
 import {Drawer, List, Divider, Icon, Link} from '@material-ui/core'
 
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
-import SuiButton from 'components/SuiButton'
 
 import SidenavCollapse from 'component-pages/Sidenav/SidenavCollapse'
 import SidenavCard from 'component-pages/Sidenav/SidenavCard'
-
 import styles from 'component-pages/Sidenav/styles/sidenav'
 
 import SoftUILogo from 'assets/images/logo-ct.png'
@@ -153,7 +150,6 @@ function Sidenav({routes, ...rest}) {
   )
 }
 
-// Typechecking props for the Sidenav
 Sidenav.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object).isRequired
 }
