@@ -56,6 +56,7 @@ function Table({ columns, rows }) {
   })
 
   const renderRows = rows.map((row, key) => {
+    console.log('row', row)
     const rowKey = `row-${key}`
 
     const tableRow = columns.map(({ key: keyCol, align }) => {
@@ -66,7 +67,16 @@ function Table({ columns, rows }) {
           <SuiBox key={row[keyCol][1]} component="td" p={1}>
             <SuiBox display="flex" alignItems="center" py={0.5} px={1}>
               <SuiBox mr={2}>
-                <SuiAvatar src={row[keyCol][0]} name={row[keyCol][1]} variant="rounded" size="sm" />
+                {typeof row[keyCol][0] === 'string' ? (
+                  <SuiAvatar
+                    src={row[keyCol][0]}
+                    name={row[keyCol][1]}
+                    variant="rounded"
+                    size="sm"
+                  />
+                ) : (
+                  row[keyCol][0]
+                )}
               </SuiBox>
               <SuiTypography variant="button" fontWeight="medium" customClass="w-max">
                 {row[keyCol][1]}

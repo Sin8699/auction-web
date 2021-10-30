@@ -9,14 +9,15 @@ import Table from 'component-pages/Table'
 import SuiButton from 'components/SuiButton'
 import Icon from '@material-ui/core/Icon'
 import { historyProductData } from '../fakeData'
+import Document from 'component-pages/Icons/Document'
 
 const data = {
   columns: [
     { key: 'name', align: 'left', name: 'Name' },
-    { key: 'currentPrice', align: 'left', name: 'Current Price' },
-    { key: 'status', align: 'left', name: 'Status' },
+    { key: 'currentPrice', align: 'left', name: 'Current Price ($)' },
     { key: 'product', align: 'left', name: 'Product' },
-    { key: 'endTime', align: 'left', name: 'End Time' }
+    { key: 'endTime', align: 'left', name: 'End Time' },
+    { key: 'status', align: 'left', name: 'Status' }
   ]
 }
 
@@ -24,6 +25,47 @@ const ProductTableData = () => {
   const classes = styles()
 
   const { columns } = data
+
+  const rows = historyProductData.map((history) => {
+    let statusComp = history.status
+
+    switch (history.status) {
+      case 'SOLD':
+        statusComp = (
+          <SuiButton
+            size="small"
+            style={{ color: 'rgb(189, 0, 0)', backgroundColor: 'rgb(252, 151, 151)' }}
+          >
+            SOLD
+          </SuiButton>
+        )
+        break
+      case 'AVAILABLE':
+        statusComp = (
+          <SuiButton
+            size="small"
+            style={{ background: 'rgb(205, 245, 155)', color: 'rgb(103, 177, 8)' }}
+          >
+            AVAILABLE
+          </SuiButton>
+        )
+        break
+
+      default:
+        statusComp = (
+          <SuiButton size="small" variant="gradient" buttonColor="dark">
+            EXPIRED
+          </SuiButton>
+        )
+        break
+    }
+
+    return {
+      ...history,
+      name: [<Document size="12px" />, history.name],
+      status: statusComp
+    }
+  })
 
   return (
     <Card>
@@ -45,7 +87,7 @@ const ProductTableData = () => {
         </SuiBox>
       </SuiBox>
       <SuiBox customClass={classes.tables_table}>
-        <Table columns={columns} rows={historyProductData} />
+        <Table columns={columns} rows={rows} />
       </SuiBox>
     </Card>
   )

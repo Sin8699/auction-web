@@ -59,7 +59,11 @@ function ResetPassword() {
   }
 
   return (
-    <CoverLayout title="Welcome back" description="Reset password" image={curved9}>
+    <CoverLayout
+      title="Reset password"
+      description="You will receive an e-mail in maximum 60 seconds"
+      image={curved9}
+    >
       <SuiBox component="form" role="form">
         <form autoComplete="off" noValidate onSubmit={onSubmit}>
           <SuiBox direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
