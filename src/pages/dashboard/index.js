@@ -93,7 +93,7 @@ function Dashboard() {
               <>
                 <Menu
                   menuButton={
-                    <SuiButton variant="gradient" buttonColor="secondary">
+                    <SuiButton variant="gradient" buttonColor="warning">
                       Category
                       <Icon className="material-icons-round font-bold">keyboard_arrow_down</Icon>
                     </SuiButton>

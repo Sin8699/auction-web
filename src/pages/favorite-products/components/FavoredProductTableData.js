@@ -101,7 +101,7 @@ const data = {
   ]
 }
 
-const ProductTableData = () => {
+const FavoredProductTableData = () => {
   const classes = styles()
 
   const { columns, rows } = data
@@ -118,4 +118,4 @@ const ProductTableData = () => {
   )
 }
 
-export default ProductTableData
+export default FavoredProductTableData

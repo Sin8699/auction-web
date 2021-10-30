@@ -1,4 +1,4 @@
-import {Menu, MenuItem, ListItemIcon} from '@material-ui/core'
+import { Menu, MenuItem, ListItemIcon } from '@material-ui/core'
 import styled from 'styled-components'
 
 export const MenuContainer = styled(Menu)`
