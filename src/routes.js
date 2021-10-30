@@ -1,18 +1,24 @@
-import Dashboard from 'pages/dashboard'
-// import Tables from 'layouts/tables'
-import Billing from 'layouts/billing'
-import Profile from 'pages/profile'
 import SignIn from 'pages/sign-in'
 import SignUp from 'pages/sign-up'
-import ProductDetail from 'pages/product-detail'
-import FavoriteProducts from './pages/favorite-products/index'
-import CategoryManager from 'pages/category-manager'
-import NewCategory from 'pages/category-manager/new'
-
-import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
-import HistoryProducts from './pages/history-products/index'
 import ForgotPassword from './pages/forgot-password'
 import ResetPassword from './pages/reset-password'
+
+import Dashboard from 'pages/dashboard'
+import Billing from 'layouts/billing'
+import Profile from 'pages/profile'
+import ProductDetail from 'pages/product-detail'
+import HistoryProducts from './pages/history-products'
+import FavoriteProducts from './pages/favorite-products'
+
+import CategoryManager from 'pages/category-manager'
+import NewCategory from 'pages/category-manager/new'
+import EditCategory from 'pages/category-manager/edit'
+import EditUser from 'pages/user-manager/edit'
+import UserManager from 'pages/user-manager'
+
+import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
+
+// import Tables from 'layouts/tables'
 
 const routes = [
   {
@@ -34,6 +40,12 @@ const routes = [
     component: HistoryProducts
   },
   {
+    key: 'billing',
+    type: TYPE_ROUTER.PRIVATE,
+    route: '/billing',
+    component: Billing
+  },
+  {
     key: 'product-detail',
     type: TYPE_ROUTER.PRIVATE,
     route: ROUTER_DEFAULT.PRODUCT_DETAIL + '/:id',
@@ -52,10 +64,22 @@ const routes = [
     component: NewCategory
   },
   {
-    key: 'billing',
+    key: 'category-manager-edit',
     type: TYPE_ROUTER.PRIVATE,
-    route: '/billing',
-    component: Billing
+    route: ROUTER_DEFAULT.CATEGORY_MANAGER_EDIT + '/:id',
+    component: EditCategory
+  },
+  {
+    key: 'user-manager',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.USER_MANAGER,
+    component: UserManager
+  },
+  {
+    key: 'user-manager-edit',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.USER_MANAGER_EDIT + '/:id',
+    component: EditUser
   },
   {
     key: 'profile',

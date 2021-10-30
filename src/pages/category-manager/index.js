@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
 import {TableCell, IconButton} from '@material-ui/core'
 import {MoreVert} from '@material-ui/icons'
 
@@ -17,9 +18,13 @@ import TablePagination from '../../components/TablePagination'
 import {renderAction} from './utils/moreAction'
 import TableHeader from './utils/tableHead'
 
+import {ROUTER_DEFAULT} from '../../constants/router'
+
 import {categoriesData} from './mockData'
 
 function CategoryManager() {
+  const navigate = useHistory()
+
   const [list, setList] = useState(categoriesData)
   const [selectedItem, setSelectedItem] = useState({})
   const [anchorEl, setAnchorEl] = useState(null)
@@ -30,10 +35,10 @@ function CategoryManager() {
     setTotalPage(Math.floor(list.length / 10) + 1)
   }, [list])
 
-  const onNew = () => {}
+  const onNew = () => navigate.push(ROUTER_DEFAULT.CATEGORY_MANAGER_NEW)
 
   const handleEdit = () => {
-    console.log('selectedItem: ', selectedItem)
+    navigate.push(`${ROUTER_DEFAULT.CATEGORY_MANAGER_EDIT}/${selectedItem.id}`)
   }
 
   const listActions = renderAction({
