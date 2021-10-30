@@ -1,8 +1,8 @@
-import {useMemo} from 'react'
+import { useMemo } from 'react'
 
 import PropTypes from 'prop-types'
 
-import {Table as MuiTable} from '@material-ui/core'
+import { Table as MuiTable } from '@material-ui/core'
 import TableBody from '@material-ui/core/TableBody'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableRow from '@material-ui/core/TableRow'
@@ -15,12 +15,12 @@ import colors from 'assets/theme/base/colors'
 import typography from 'assets/theme/base/typography'
 import borders from 'assets/theme/base/borders'
 
-function Table({columns, rows}) {
-  const {light} = colors
-  const {size, fontWeightBold} = typography
-  const {borderWidth} = borders
+function Table({ columns, rows }) {
+  const { light } = colors
+  const { size, fontWeightBold } = typography
+  const { borderWidth } = borders
 
-  const renderColumns = columns.map(({name, align}, key) => {
+  const renderColumns = columns.map(({ name, align }, key) => {
     let pl
     let pr
 
@@ -58,32 +58,32 @@ function Table({columns, rows}) {
   const renderRows = rows.map((row, key) => {
     const rowKey = `row-${key}`
 
-    const tableRow = columns.map(({name, align}) => {
+    const tableRow = columns.map(({ key: keyCol, align }) => {
       let template
 
-      if (Array.isArray(row[name])) {
+      if (Array.isArray(row[keyCol])) {
         template = (
-          <SuiBox key={row[name][1]} component="td" p={1}>
+          <SuiBox key={row[keyCol][1]} component="td" p={1}>
             <SuiBox display="flex" alignItems="center" py={0.5} px={1}>
               <SuiBox mr={2}>
-                <SuiAvatar src={row[name][0]} name={row[name][1]} variant="rounded" size="sm" />
+                <SuiAvatar src={row[keyCol][0]} name={row[keyCol][1]} variant="rounded" size="sm" />
               </SuiBox>
               <SuiTypography variant="button" fontWeight="medium" customClass="w-max">
-                {row[name][1]}
+                {row[keyCol][1]}
               </SuiTypography>
             </SuiBox>
           </SuiBox>
         )
       } else {
         template = (
-          <SuiBox key={row[name]} component="td" p={1} textAlign={align}>
+          <SuiBox key={row[keyCol]} component="td" p={1} textAlign={align}>
             <SuiTypography
               variant="button"
               fontWeight="regular"
               textColor="secondary"
               customClass="d-inline-block w-max"
             >
-              {row[name]}
+              {row[keyCol]}
             </SuiTypography>
           </SuiBox>
         )

@@ -15,9 +15,9 @@ import Table from 'component-pages/Table'
 
 const data = {
   columns: [
-    { name: 'product', align: 'left' },
-    { name: 'budget', align: 'left' },
-    { name: 'status', align: 'left' }
+    { name: 'product', align: 'left', key: 'product' },
+    { name: 'budget', align: 'left', key: 'budget' },
+    { name: 'status', align: 'left', key: 'status' }
   ],
   rows: [
     {
