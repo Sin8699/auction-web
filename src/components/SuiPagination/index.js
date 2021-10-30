@@ -1,44 +1,42 @@
-import { forwardRef, createContext } from 'react'
+import {forwardRef, createContext} from 'react'
 import PropTypes from 'prop-types'
 
-// Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 import SuiButton from 'components/SuiButton'
 import styles from 'components/SuiPagination/styles'
 
 const Context = createContext()
 
-const SuiPagination = forwardRef(
-  ({ item, variant, color, size, active, children, ...rest }, ref) => {
-    const classes = styles({ variant, active })
-    return (
-      <Context.Provider value={{ variant, color, size }}>
-        {item ? (
-          <SuiButton
-            {...rest}
-            ref={ref}
-            variant={active ? variant : 'outlined'}
-            buttonColor={active ? color : 'secondary'}
-            iconOnly
-            circular
-            customClass={classes.suiPagination}
-          >
-            {children}
-          </SuiButton>
-        ) : (
-          <SuiBox
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-            customClass="no-list-style"
-          >
-            {children}
-          </SuiBox>
-        )}
-      </Context.Provider>
-    )
-  }
-)
+const SuiPagination = forwardRef(({item, variant, color, size, active, children, ...rest}, ref) => {
+  const classes = styles({variant, active})
+  console.log('rest: ', rest.disabled)
+  return (
+    <Context.Provider value={{variant, color, size}}>
+      {item ? (
+        <SuiButton
+          {...rest}
+          ref={ref}
+          variant={active ? variant : 'outlined'}
+          buttonColor={active ? color : 'secondary'}
+          iconOnly
+          circular
+          customClass={classes.suiPagination}
+        >
+          {children}
+        </SuiButton>
+      ) : (
+        <SuiBox
+          display="flex"
+          justifyContent="flex-end"
+          alignItems="center"
+          customClass="no-list-style"
+        >
+          {children}
+        </SuiBox>
+      )}
+    </Context.Provider>
+  )
+})
 
 // Setting default values for the props of SuiPagination
 SuiPagination.defaultProps = {

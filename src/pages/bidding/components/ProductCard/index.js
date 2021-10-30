@@ -15,14 +15,23 @@ import SuiTypography from 'components/SuiTypography'
 import SuiAvatar from 'components/SuiAvatar'
 
 // Custom styles for the DefaultProjectCard
-import styles from 'component-pages/Cards/ProjectCards/ProductCard/styles'
+import styles from './styles'
 import Countdown from 'react-countdown'
 import cn from 'clsx'
 import { handleFavoredProduct, isFavoredProduct } from '../../../../helpers/favoredProduct'
+import { useState } from 'react'
+import BiddingHistoryModal from './BiddingHistoryModal'
 
 function ProductCard({ id, image, label, title, description, action, authors, info, countDown }) {
   const classes = styles({})
   const isFavored = isFavoredProduct(id)
+
+  const [isFavoredState, setIsFavoredState] = useState(isFavored)
+
+  const handleFavored = () => {
+    setIsFavoredState((prev) => !prev)
+    handleFavoredProduct(`${id}`)
+  }
 
   const renderAuthors = authors.map(({ image: media, name }) => (
     <Tooltip key={name} title={name} placement="bottom">
@@ -44,7 +53,7 @@ function ProductCard({ id, image, label, title, description, action, authors, in
         />
       </SuiBox>
       <SuiBox pt={3} px={0.5}>
-        <SuiBox mb={1}>
+        <SuiBox mb={1} display="flex" justifyContent="space-between" alignItems="center">
           <SuiTypography
             variant="button"
             fontWeight="regular"
@@ -53,6 +62,7 @@ function ProductCard({ id, image, label, title, description, action, authors, in
           >
             {label}
           </SuiTypography>
+          <BiddingHistoryModal id={id} />
         </SuiBox>
         <SuiBox mb={1}>
           {action.type === 'comp' ? (
@@ -84,8 +94,8 @@ function ProductCard({ id, image, label, title, description, action, authors, in
         </SuiBox>
         <SuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
           <div
-            className={cn(classes.icon_love, isFavored && classes.icon_love_active)}
-            onClick={handleFavoredProduct(`${id}`)}
+            className={cn(classes.icon_love, isFavoredState && classes.icon_love_active)}
+            onClick={handleFavored}
           >
             <svg class="heart" viewBox="0 0 32 29.6">
               <path

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import {forwardRef} from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 
@@ -9,14 +9,14 @@ import SuiBox from 'components/SuiBox'
 
 import styles from 'components/SuiInput/styles'
 
-import { useSoftUIController } from 'context'
+import {useSoftUIController} from 'context'
 
 const SuiInput = forwardRef(
-  ({ size, withIcon, error, success, customClass, disabled, ...rest }, ref) => {
+  ({size, withIcon, error, success, customClass, disabled, ...rest}, ref) => {
     let template
     const [controller] = useSoftUIController()
-    const { direction } = controller
-    const classes = styles({ size, error, success, withIcon, direction, disabled })
+    const {direction} = controller
+    const classes = styles({size, error, success, withIcon, direction, disabled})
 
     if (withIcon.icon && withIcon.direction === 'left') {
       template = (
@@ -27,6 +27,7 @@ const SuiInput = forwardRef(
             </Icon>
           </SuiBox>
           <InputBase
+            disabled={disabled}
             {...rest}
             className={clsx(classes.suiInput, classes.suiInputIcon_input, {
               [classes.suiInput_error]: error,
@@ -46,6 +47,7 @@ const SuiInput = forwardRef(
       template = (
         <SuiBox customClass={clsx(classes.suiInputIcon, customClass)}>
           <InputBase
+            disabled={disabled}
             {...rest}
             className={clsx(classes.suiInput, classes.suiInputIcon_input, {
               [classes.suiInput_error]: error,
@@ -69,6 +71,7 @@ const SuiInput = forwardRef(
     } else {
       template = (
         <InputBase
+          disabled={disabled}
           {...rest}
           className={clsx(classes.suiInput, customClass, {
             [classes.suiInput_error]: error,
@@ -92,7 +95,7 @@ const SuiInput = forwardRef(
 // Setting default values for the props of SuiInput
 SuiInput.defaultProps = {
   size: 'medium',
-  withIcon: { icon: false, direction: 'none' },
+  withIcon: {icon: false, direction: 'none'},
   error: false,
   success: false,
   customClass: '',

@@ -1,4 +1,3 @@
-// Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 
@@ -15,9 +14,9 @@ import Table from 'component-pages/Table'
 
 const data = {
   columns: [
-    { name: 'product', align: 'left' },
-    { name: 'budget', align: 'left' },
-    { name: 'status', align: 'left' }
+    { name: 'product', align: 'left', key: 'product' },
+    { name: 'budget', align: 'left', key: 'budget' },
+    { name: 'status', align: 'left', key: 'status' }
   ],
   rows: [
     {
@@ -101,7 +100,7 @@ const data = {
   ]
 }
 
-const ProductTableData = () => {
+const FavoredProductTableData = () => {
   const classes = styles()
 
   const { columns, rows } = data
@@ -118,4 +117,4 @@ const ProductTableData = () => {
   )
 }
 
-export default ProductTableData
+export default FavoredProductTableData

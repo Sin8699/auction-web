@@ -1,5 +1,5 @@
 const LOCAL_STORAGE_KEY_FAVORED = 'favored_products'
-export const handleFavoredProduct = (productID) => () => {
+export const handleFavoredProduct = (productID) => {
   try {
     const list = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_FAVORED)) || []
 
