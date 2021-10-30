@@ -148,19 +148,6 @@ function Sidenav({routes, ...rest}) {
       <List>{renderRoutes}</List>
       <SuiBox customClass={classes.sidenav_footer}>
         <SidenavCard />
-        <SuiBox mt={2}>
-          <SuiButton
-            component="a"
-            href="https://creative-tim.com/product/soft-ui-dashboard-pro-material-ui"
-            target="_blank"
-            rel="noreferrer"
-            variant="gradient"
-            buttonColor="info"
-            fullWidth
-          >
-            upgrade to pro
-          </SuiButton>
-        </SuiBox>
       </SuiBox>
     </Drawer>
   )

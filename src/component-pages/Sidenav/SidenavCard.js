@@ -30,19 +30,19 @@ function SidenavCard() {
           </SuiTypography>
           <SuiBox mb={1.5} mt={-1}>
             <SuiTypography variant="caption" textColor="white" fontWeight="medium">
-              Please check our docs
+              Please send your contact
             </SuiTypography>
           </SuiBox>
           <SuiButton
             component={Link}
-            href="https://www.creative-tim.com/learning-lab/material-ui/quick-start/soft-ui-dashboard"
+            href="https://google.com/"
             target="_blank"
             rel="noreferrer"
             size="small"
             color="default"
             fullWidth
           >
-            documentation
+            Form contact
           </SuiButton>
         </SuiBox>
       </CardContent>
