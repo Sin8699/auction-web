@@ -1,46 +1,48 @@
-import { useEffect } from 'react'
-import { useLocation, NavLink } from 'react-router-dom'
+import {useEffect} from 'react'
+import {useLocation, NavLink} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
+import {Drawer, List, Divider, Icon, Link} from '@material-ui/core'
 
-// @material-ui core components
-import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
-import Icon from '@material-ui/core/Icon'
-import Link from '@material-ui/core/Link'
-
-// Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
-import SuiButton from 'components/SuiButton'
 
-// Soft UI Dashboard Material-UI example components
 import SidenavCollapse from 'component-pages/Sidenav/SidenavCollapse'
 import SidenavCard from 'component-pages/Sidenav/SidenavCard'
-
-// Custom styles for the Sidenav
 import styles from 'component-pages/Sidenav/styles/sidenav'
 
-// Images
 import SoftUILogo from 'assets/images/logo-ct.png'
 
-import { useSoftUIController } from 'context'
+import {useSoftUIController} from 'context'
 
-function Sidenav({ routes, ...rest }) {
+import {is_numeric} from '../../helpers/number'
+
+function Sidenav({routes, ...rest}) {
   const [controller, dispatch] = useSoftUIController()
-  const { miniSidenav, transparentSidenav } = controller
-  const classes = styles({ miniSidenav, transparentSidenav })
+  const {miniSidenav, transparentSidenav} = controller
+  const classes = styles({miniSidenav, transparentSidenav})
   const location = useLocation()
-  const { pathname } = location
+  const {pathname} = location
   const collapseName = pathname.split('/').slice(1)[0]
   const isAuthentication = collapseName === 'authentication'
 
-  const closeSizenav = () => dispatch({ type: 'MINI_SIDENAV', value: true })
+  const getActive = () => {
+    const arr = pathname.split('/')
+    let str
+    arr.forEach((s, i) => {
+      if (i !== 0) {
+        if (s === 'edit' || s === 'new' || is_numeric(s)) return
+        if (!str) str = s
+        else str = str + '/' + s
+      }
+    })
+    return str
+  }
+  const closeSizenav = () => dispatch({type: 'MINI_SIDENAV', value: true})
 
   useEffect(() => {
     function handleMiniSidenav() {
-      dispatch({ type: 'MINI_SIDENAV', value: window.innerWidth < 1200 })
+      dispatch({type: 'MINI_SIDENAV', value: window.innerWidth < 1200})
     }
     // The event listener that's calling the handleMiniSidenav function when resizing the window.
     window.addEventListener('resize', handleMiniSidenav)
@@ -51,7 +53,7 @@ function Sidenav({ routes, ...rest }) {
   }, [dispatch, location])
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
+  const renderRoutes = routes.map(({type, name, icon, title, noCollapse, key, route, href}) => {
     let returnValue
 
     if (type === 'collapse') {
@@ -66,7 +68,7 @@ function Sidenav({ routes, ...rest }) {
           <SidenavCollapse
             name={name}
             icon={icon}
-            active={key === collapseName}
+            active={key === getActive()}
             noCollapse={noCollapse}
           />
         </Link>
@@ -75,7 +77,7 @@ function Sidenav({ routes, ...rest }) {
           <SidenavCollapse
             name={name}
             icon={icon}
-            active={key === collapseName}
+            active={key === getActive()}
             noCollapse={noCollapse}
           />
         </NavLink>
@@ -113,7 +115,7 @@ function Sidenav({ routes, ...rest }) {
     >
       <SuiBox customClass={classes.sidenav_header}>
         <SuiBox
-          display={{ xs: 'block', xl: 'none' }}
+          display={{xs: 'block', xl: 'none'}}
           position="absolute"
           top={0}
           right={0}
@@ -143,25 +145,11 @@ function Sidenav({ routes, ...rest }) {
       <List>{renderRoutes}</List>
       <SuiBox customClass={classes.sidenav_footer}>
         <SidenavCard />
-        <SuiBox mt={2}>
-          <SuiButton
-            component="a"
-            href="https://creative-tim.com/product/soft-ui-dashboard-pro-material-ui"
-            target="_blank"
-            rel="noreferrer"
-            variant="gradient"
-            buttonColor="info"
-            fullWidth
-          >
-            upgrade to pro
-          </SuiButton>
-        </SuiBox>
       </SuiBox>
     </Drawer>
   )
 }
 
-// Typechecking props for the Sidenav
 Sidenav.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object).isRequired
 }
