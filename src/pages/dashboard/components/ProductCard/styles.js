@@ -68,7 +68,7 @@ export default makeStyles(({ palette, boxShadows, functions, borders }) => {
       background: '#0000009e',
       textAlign: 'center',
       lineHeight: '300px',
-      zIndex: '100',
+      zIndex: '50',
       color: 'white',
       borderRadius: borderRadius.xl,
       display: 'flex',

@@ -138,7 +138,8 @@ function Dashboard() {
                     }
                   >
                     <MenuItem>
-                      Time (<Icon className="material-icons-round font-bold">arrow_downward</Icon>)
+                      End Time (
+                      <Icon className="material-icons-round font-bold">arrow_downward</Icon>)
                     </MenuItem>
                     <MenuItem>
                       Price (<Icon className="material-icons-round font-bold">arrow_upward</Icon>)
