@@ -79,7 +79,7 @@ const ProductTableData = () => {
   })
 
   return (
-    <Card>
+    <>
       <SuiBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <SuiTypography variant="h6">History Products</SuiTypography>
         <SuiBox display="flex" mb={1}>
@@ -99,13 +99,15 @@ const ProductTableData = () => {
       </SuiBox>
       <SuiBox customClass={classes.tables_table}>
         <Table columns={columns} rows={rows} />
-        <TablePagination
-          page={page}
-          totalPage={Math.ceil(list.length / LIMIT_PAGINATION)}
-          onChangePage={setPage}
-        />
+        <SuiBox mt={2}>
+          <TablePagination
+            page={page}
+            totalPage={Math.ceil(list.length / LIMIT_PAGINATION) - 1}
+            onChangePage={setPage}
+          />
+        </SuiBox>
       </SuiBox>
-    </Card>
+    </>
   )
 }
 

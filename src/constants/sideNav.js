@@ -5,7 +5,7 @@ import Cube from 'component-pages/Icons/Cube'
 import CreditCard from 'component-pages/Icons/CreditCard'
 import Document from 'component-pages/Icons/Document'
 import SupervisorAccount from '@material-ui/icons/SupervisorAccount'
-import {ROUTER_DEFAULT} from 'constants/router'
+import { ROUTER_DEFAULT } from 'constants/router'
 
 const ItemSideNav = [
   {
@@ -42,6 +42,15 @@ const ItemSideNav = [
   },
   {
     type: 'collapse',
+    name: 'Billing',
+    key: 'billing',
+    route: '/billing',
+    icon: <CreditCard size="12px" />,
+    noCollapse: true
+  },
+  { type: 'title', title: 'Manager', key: 'account-pages' },
+  {
+    type: 'collapse',
     name: 'Category manager',
     key: 'manager/category',
     route: ROUTER_DEFAULT.CATEGORY_MANAGER,
@@ -55,16 +64,7 @@ const ItemSideNav = [
     route: ROUTER_DEFAULT.USER_MANAGER,
     icon: <SupervisorAccount size="12px" />,
     noCollapse: true
-  },
-  {
-    type: 'collapse',
-    name: 'Billing',
-    key: 'billing',
-    route: '/billing',
-    icon: <CreditCard size="12px" />,
-    noCollapse: true
   }
-  // {type: 'title', title: 'Account Pages', key: 'account-pages'},  }
 ]
 
 export default ItemSideNav

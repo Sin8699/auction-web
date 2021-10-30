@@ -51,6 +51,7 @@ function Dashboard() {
     return chunk(products || [], LIMIT_PAGINATION)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errorBiddingProducts, errorProducts, loadingBiddingProducts, loadingProducts])
+  console.log('chuckList', chuckList)
 
   const listByPage = chuckList?.[page] || []
 
@@ -139,7 +140,7 @@ function Dashboard() {
             <SuiPagination variant="contained">
               <TablePagination
                 page={page}
-                totalPage={Math.ceil(products.length / LIMIT_PAGINATION)}
+                totalPage={Math.ceil(products.length / LIMIT_PAGINATION) - 1}
                 onChangePage={setPage}
               />
             </SuiPagination>
