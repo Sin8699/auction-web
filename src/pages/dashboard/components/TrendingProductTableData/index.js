@@ -1,6 +1,5 @@
 import Card from '@material-ui/core/Card'
-// import Divider from "@material-ui/core/Divider";
-import Icon from '@material-ui/core/Icon'
+import Divider from '@material-ui/core/Divider'
 
 // Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
@@ -14,28 +13,18 @@ function TrendingProductTableData() {
     <Card className="h-100">
       <SuiBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={2}>
         <SuiTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-          Your Transaction&apos;s
+          Products
         </SuiTypography>
-        <SuiBox display="flex" alignItems="flex-start">
-          <SuiBox color="text" mr={0.5} lineHeight={0}>
-            <Icon color="inherit" fontSize="small">
-              date_range
-            </Icon>
-          </SuiBox>
-          <SuiTypography variant="button" textColor="text" fontWeight="regular">
-            23 - 30 March 2020
-          </SuiTypography>
-        </SuiBox>
       </SuiBox>
       <SuiBox pt={3} pb={2} px={2}>
-        <SuiBox mb={2}>
+        <SuiBox mb={2} display="flex" justifyContent="center">
           <SuiTypography
             variant="caption"
             textColor="text"
             fontWeight="bold"
             textTransform="uppercase"
           >
-            newest
+            Products near the end of the auction
           </SuiTypography>
         </SuiBox>
         <SuiBox
@@ -61,14 +50,15 @@ function TrendingProductTableData() {
             value="+ $ 2,000"
           />
         </SuiBox>
-        <SuiBox mt={1} mb={2}>
+        <Divider />
+        <SuiBox mt={1} mb={2} display="flex" justifyContent="center">
           <SuiTypography
             variant="caption"
             textColor="text"
             fontWeight="bold"
             textTransform="uppercase"
           >
-            yesterday
+            Products with many auctions
           </SuiTypography>
         </SuiBox>
         <SuiBox
@@ -106,6 +96,47 @@ function TrendingProductTableData() {
             name="Webflow"
             description="26 March 2020, at 05:00 AM"
             value="Pending"
+          />
+        </SuiBox>
+        <Divider />
+        <SuiBox mt={1} mb={2} display="flex" justifyContent="center">
+          <SuiTypography
+            variant="caption"
+            textColor="text"
+            fontWeight="bold"
+            textTransform="uppercase"
+          >
+            The product with the highest price
+          </SuiTypography>
+        </SuiBox>
+        <SuiBox
+          component="ul"
+          display="flex"
+          flexDirection="column"
+          p={0}
+          m={0}
+          customClass="no-list-style"
+        >
+          <Transaction
+            color="success"
+            icon="arrow_upward"
+            name="Stripe"
+            description="26 March 2020, at 13:45 PM"
+            value="+ $ 750"
+          />
+          <Transaction
+            color="success"
+            icon="arrow_upward"
+            name="HubSpot"
+            description="26 March 2020, at 12:30 PM"
+            value="+ $ 1,000"
+          />
+          <Transaction
+            color="success"
+            icon="arrow_upward"
+            name="Creative Tim"
+            description="26 March 2020, at 08:30 AM"
+            value="+ $ 2,500"
           />
         </SuiBox>
       </SuiBox>
