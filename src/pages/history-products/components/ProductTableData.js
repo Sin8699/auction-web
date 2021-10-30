@@ -10,6 +10,11 @@ import SuiButton from 'components/SuiButton'
 import Icon from '@material-ui/core/Icon'
 import { historyProductData } from '../fakeData'
 import Document from 'component-pages/Icons/Document'
+import TablePagination from '../../../components/TablePagination/index'
+import { useState, useMemo } from 'react'
+import chunk from 'lodash/chunk'
+
+const LIMIT_PAGINATION = 10
 
 const data = {
   columns: [
@@ -25,8 +30,14 @@ const ProductTableData = () => {
   const classes = styles()
 
   const { columns } = data
+  const list = useMemo(() => historyProductData, [])
 
-  const rows = historyProductData.map((history) => {
+  const [page, setPage] = useState(1)
+
+  const chuckList = useMemo(() => chunk(list, LIMIT_PAGINATION), [list])
+  const listByPage = chuckList[page]
+
+  const rows = listByPage.map((history) => {
     let statusComp = history.status
 
     switch (history.status) {
@@ -88,6 +99,11 @@ const ProductTableData = () => {
       </SuiBox>
       <SuiBox customClass={classes.tables_table}>
         <Table columns={columns} rows={rows} />
+        <TablePagination
+          page={page}
+          totalPage={Math.ceil(list.length / LIMIT_PAGINATION)}
+          onChangePage={setPage}
+        />
       </SuiBox>
     </Card>
   )

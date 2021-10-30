@@ -12,6 +12,7 @@ import logoXD from 'assets/images/small-logos/logo-xd.svg'
 import styles from './styles'
 import Card from '@material-ui/core/Card'
 import Table from 'component-pages/Table'
+import TablePagination from '../../../components/TablePagination/index'
 
 const data = {
   columns: [

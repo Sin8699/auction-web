@@ -1,7 +1,7 @@
 import SuiPagination from '../SuiPagination'
-import {ChevronLeft, ChevronRight} from '@material-ui/icons'
+import { ChevronLeft, ChevronRight } from '@material-ui/icons'
 
-const TablePagination = ({page, totalPage, onChangePage}) => {
+const TablePagination = ({ page, totalPage, onChangePage }) => {
   return (
     <SuiPagination variant="contained">
       <SuiPagination item onClick={() => onChangePage(1)}>

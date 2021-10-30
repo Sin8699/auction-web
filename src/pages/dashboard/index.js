@@ -29,11 +29,30 @@ import { useGetBiddingProducts } from '../../apis/bidding-product/index'
 import BuyNowModal from './components/BuyNowModal/index'
 import keyBy from 'lodash/keyBy'
 import BidModal from './components/BidModal/index'
+import { useState } from 'react'
+import chunk from 'lodash/chunk'
+import { useMemo } from 'react'
+import TablePagination from '../../components/TablePagination/index'
+
+const LIMIT_PAGINATION = 12
 
 function Dashboard() {
-  const [{ data: products, loading: loadingProducts, error: errorProducts }] = useGetProducts()
-  const [{ data: biddingProducts, loading: loadingBiddingProducts, error: errorBiddingProducts }] =
-    useGetBiddingProducts()
+  const [{ data: products = [], loading: loadingProducts, error: errorProducts }] = useGetProducts()
+  const [
+    { data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts }
+  ] = useGetBiddingProducts()
+
+  const [page, setPage] = useState(1)
+
+  const chuckList = useMemo(() => {
+    if (loadingProducts || loadingBiddingProducts || errorProducts || errorBiddingProducts) {
+      return []
+    }
+    return chunk(products || [], LIMIT_PAGINATION)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errorBiddingProducts, errorProducts, loadingBiddingProducts, loadingProducts])
+
+  const listByPage = chuckList?.[page] || []
 
   const _renderData = () => {
     if (loadingProducts || loadingBiddingProducts) {
@@ -52,7 +71,7 @@ function Dashboard() {
 
     return (
       <Grid container spacing={3}>
-        {products.slice(0, 10).map(({ name, primaryImage, description, categories, _id }) => (
+        {listByPage.map(({ name, primaryImage, description, categories, _id }) => (
           <Grid item xs={12} md={6} xl={3}>
             <ProductCard
               key={_id}
@@ -118,17 +137,11 @@ function Dashboard() {
             {_renderData()}
 
             <SuiPagination variant="contained">
-              <SuiPagination item>
-                <Icon className="material-icons-round font-bold">chevron_left</Icon>
-              </SuiPagination>
-              <SuiPagination active item>
-                1
-              </SuiPagination>
-              <SuiPagination item>2</SuiPagination>
-              <SuiPagination item>3</SuiPagination>
-              <SuiPagination item>
-                <Icon className="material-icons-round font-bold">chevron_right</Icon>
-              </SuiPagination>
+              <TablePagination
+                page={page}
+                totalPage={Math.ceil(products.length / LIMIT_PAGINATION)}
+                onChangePage={setPage}
+              />
             </SuiPagination>
           </SuiBox>
         </Card>
