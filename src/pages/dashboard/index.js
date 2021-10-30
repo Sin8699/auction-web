@@ -9,8 +9,6 @@ import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 
-// Data
-import SuiTypography from 'components/SuiTypography'
 // Images
 import team1 from 'assets/images/team-1.jpg'
 import Card from '@material-ui/core/Card'
@@ -51,7 +49,6 @@ function Dashboard() {
     return chunk(products || [], LIMIT_PAGINATION)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errorBiddingProducts, errorProducts, loadingBiddingProducts, loadingProducts])
-  console.log('chuckList', chuckList)
 
   const listByPage = chuckList?.[page] || []
 
