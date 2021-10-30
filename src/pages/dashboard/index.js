@@ -11,7 +11,6 @@ import Footer from 'component-pages/Footer'
 
 // Data
 import SuiTypography from 'components/SuiTypography'
-import ProductCard from 'component-pages/Cards/ProjectCards/ProductCard'
 // Images
 import team1 from 'assets/images/team-1.jpg'
 import Card from '@material-ui/core/Card'
@@ -33,6 +32,7 @@ import { useState } from 'react'
 import chunk from 'lodash/chunk'
 import { useMemo } from 'react'
 import TablePagination from '../../components/TablePagination/index'
+import ProductCard from './components/ProductCard/index'
 
 const LIMIT_PAGINATION = 12
 
@@ -101,36 +101,53 @@ function Dashboard() {
       <SuiBox mb={3}>
         <Card>
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
-            <SuiBox mb={0.5}>
-              <SuiTypography variant="h6" fontWeight="medium">
-                Product
-              </SuiTypography>
+            <SuiBox mb={0.5} display="flex" alignItems="center">
+              <Menu
+                menuButton={
+                  <SuiButton variant="gradient" buttonColor="warning">
+                    Category
+                    <Icon className="material-icons-round font-bold">keyboard_arrow_down</Icon>
+                  </SuiButton>
+                }
+              >
+                <MenuItem>New File</MenuItem>
+                <SubMenu label="Open">
+                  <MenuItem>index.html</MenuItem>
+                  <MenuItem>example.js</MenuItem>
+                  <SubMenu label="Styles">
+                    <MenuItem>about.css</MenuItem>
+                    <MenuItem>home.css</MenuItem>
+                    <MenuItem>index.css</MenuItem>
+                  </SubMenu>
+                </SubMenu>
+                <MenuItem>Save</MenuItem>
+              </Menu>
             </SuiBox>
             <SuiBox display="flex" mb={1}>
               <SuiBox mr={1}>
-                <SuiInput withIcon={{ icon: 'search', direction: 'right' }} placeholder="Search" />
+                <SuiInput
+                  withIcon={{ icon: 'search', direction: 'right' }}
+                  placeholder="Search name, category"
+                />
               </SuiBox>
               <>
-                <Menu
-                  menuButton={
-                    <SuiButton variant="gradient" buttonColor="warning">
-                      Category
-                      <Icon className="material-icons-round font-bold">keyboard_arrow_down</Icon>
-                    </SuiButton>
-                  }
-                >
-                  <MenuItem>New File</MenuItem>
-                  <SubMenu label="Open">
-                    <MenuItem>index.html</MenuItem>
-                    <MenuItem>example.js</MenuItem>
-                    <SubMenu label="Styles">
-                      <MenuItem>about.css</MenuItem>
-                      <MenuItem>home.css</MenuItem>
-                      <MenuItem>index.css</MenuItem>
-                    </SubMenu>
-                  </SubMenu>
-                  <MenuItem>Save</MenuItem>
-                </Menu>
+                <SuiBox ml={0.5}>
+                  <Menu
+                    menuButton={
+                      <SuiButton variant="gradient" buttonColor="info">
+                        Sort by
+                        <Icon className="material-icons-round font-bold">keyboard_arrow_down</Icon>
+                      </SuiButton>
+                    }
+                  >
+                    <MenuItem>
+                      Time (<Icon className="material-icons-round font-bold">arrow_downward</Icon>)
+                    </MenuItem>
+                    <MenuItem>
+                      Price (<Icon className="material-icons-round font-bold">arrow_upward</Icon>)
+                    </MenuItem>
+                  </Menu>
+                </SuiBox>
               </>
             </SuiBox>
           </SuiBox>

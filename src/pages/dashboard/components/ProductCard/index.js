@@ -15,12 +15,11 @@ import SuiTypography from 'components/SuiTypography'
 import SuiAvatar from 'components/SuiAvatar'
 
 // Custom styles for the DefaultProjectCard
-import styles from 'component-pages/Cards/ProjectCards/ProductCard/styles'
+import styles from './styles'
 import Countdown from 'react-countdown'
 import cn from 'clsx'
 import { handleFavoredProduct, isFavoredProduct } from '../../../../helpers/favoredProduct'
 import { useState } from 'react'
-import Document from '../../../../component-pages/Icons/Document'
 import BiddingHistoryModal from './BiddingHistoryModal'
 
 function ProductCard({ id, image, label, title, description, action, authors, info, countDown }) {
