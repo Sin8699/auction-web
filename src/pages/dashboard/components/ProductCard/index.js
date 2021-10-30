@@ -20,6 +20,8 @@ import Countdown from 'react-countdown'
 import cn from 'clsx'
 import { handleFavoredProduct, isFavoredProduct } from '../../../../helpers/favoredProduct'
 import { useState } from 'react'
+import Document from '../../../../component-pages/Icons/Document'
+import BiddingHistoryModal from './BiddingHistoryModal'
 
 function ProductCard({ id, image, label, title, description, action, authors, info, countDown }) {
   const classes = styles({})
@@ -52,7 +54,7 @@ function ProductCard({ id, image, label, title, description, action, authors, in
         />
       </SuiBox>
       <SuiBox pt={3} px={0.5}>
-        <SuiBox mb={1}>
+        <SuiBox mb={1} display="flex" justifyContent="space-between" alignItems="center">
           <SuiTypography
             variant="button"
             fontWeight="regular"
@@ -61,6 +63,7 @@ function ProductCard({ id, image, label, title, description, action, authors, in
           >
             {label}
           </SuiTypography>
+          <BiddingHistoryModal id={id} />
         </SuiBox>
         <SuiBox mb={1}>
           {action.type === 'comp' ? (
