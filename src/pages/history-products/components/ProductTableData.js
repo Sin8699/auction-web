@@ -4,7 +4,6 @@ import SuiTypography from 'components/SuiTypography'
 import { Menu, MenuItem } from '@szhsin/react-menu'
 // Images
 import styles from './styles'
-import Card from '@material-ui/core/Card'
 import Table from 'component-pages/Table'
 import SuiButton from 'components/SuiButton'
 import Icon from '@material-ui/core/Icon'
@@ -13,6 +12,7 @@ import Document from 'component-pages/Icons/Document'
 import TablePagination from '../../../components/TablePagination/index'
 import { useState, useMemo } from 'react'
 import chunk from 'lodash/chunk'
+import CommentModal from './CommentModal'
 
 const LIMIT_PAGINATION = 10
 
@@ -22,7 +22,8 @@ const data = {
     { key: 'currentPrice', align: 'left', name: 'Current Price ($)' },
     { key: 'product', align: 'left', name: 'Product' },
     { key: 'endTime', align: 'left', name: 'End Time' },
-    { key: 'status', align: 'left', name: 'Status' }
+    { key: 'status', align: 'left', name: 'Status' },
+    { key: 'cmt', align: 'right', name: '' }
   ]
 }
 
@@ -74,7 +75,8 @@ const ProductTableData = () => {
     return {
       ...history,
       name: [<Document size="12px" />, history.name],
-      status: statusComp
+      status: statusComp,
+      cmt: <CommentModal id={history.id} />
     }
   })
 
