@@ -137,13 +137,15 @@ function Dashboard() {
           <SuiBox p={2}>
             {_renderData()}
 
-            <SuiPagination variant="contained">
-              <TablePagination
-                page={page}
-                totalPage={Math.ceil(products.length / LIMIT_PAGINATION) - 1}
-                onChangePage={setPage}
-              />
-            </SuiPagination>
+            <SuiBox mt={2}>
+              <SuiPagination variant="contained">
+                <TablePagination
+                  page={page}
+                  totalPage={Math.ceil(products.length / LIMIT_PAGINATION) - 1}
+                  onChangePage={setPage}
+                />
+              </SuiPagination>
+            </SuiBox>
           </SuiBox>
         </Card>
       </SuiBox>
