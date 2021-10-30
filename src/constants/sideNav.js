@@ -21,7 +21,7 @@ const ItemSideNav = [
     name: 'Bidding',
     key: 'bidding',
     route: '/bidding',
-    icon: <Shop size="12px" />,
+    icon: <Basket size="12px" />,
     noCollapse: true
   },
   {

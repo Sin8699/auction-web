@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ThumbDownIcon from '@material-ui/icons/ThumbDown'
+import Tooltip from '@material-ui/core/Tooltip'
 
 export default function CommentModal({ id }) {
   const [message, setMessage] = useState()
@@ -29,7 +30,9 @@ export default function CommentModal({ id }) {
   return (
     <div>
       <SuiBox mx={3} onClick={handleOpenDialog()}>
-        <Icon classsName="material-icons-round">lightbulb</Icon>
+        <Tooltip title="Review product" placement="top">
+          <Icon classsName="material-icons-round">lightbulb</Icon>
+        </Tooltip>
       </SuiBox>
       <Dialog
         fullWidth

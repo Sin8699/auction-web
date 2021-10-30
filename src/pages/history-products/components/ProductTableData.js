@@ -13,6 +13,7 @@ import TablePagination from '../../../components/TablePagination/index'
 import { useState, useMemo } from 'react'
 import chunk from 'lodash/chunk'
 import CommentModal from './CommentModal'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const LIMIT_PAGINATION = 10
 

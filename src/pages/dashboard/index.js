@@ -4,14 +4,14 @@ import SuiBox from 'components/SuiBox'
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
-import FavoredProductTableData from './components/FavoredProductTableData'
+import TrendingProductTableData from './components/TrendingProductTableData/index'
 
 function Dashboard() {
   return (
     <DashboardLayout>
       <SuiBox mb={3}>
         <Header />
-        <FavoredProductTableData />
+        <TrendingProductTableData />
         <Footer />
       </SuiBox>
     </DashboardLayout>
