@@ -1,38 +1,16 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {Card, Grid, Icon, Tooltip} from '@material-ui/core'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiButton from 'components/SuiButton'
 
-Coded by www.creative-tim.com
+import borders from 'assets/theme/base/borders'
 
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-import Icon from "@material-ui/core/Icon";
-import Tooltip from "@material-ui/core/Tooltip";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-
-// Soft UI Dashboard Material-UI base styles
-import borders from "assets/theme/base/borders";
-
-// Images
-import masterCardLogo from "assets/images/logos/mastercard.png";
-import visaLogo from "assets/images/logos/visa.png";
+import masterCardLogo from 'assets/images/logos/mastercard.png'
+import visaLogo from 'assets/images/logos/visa.png'
 
 function PaymentMethod() {
-  const { borderWidth, borderColor } = borders;
+  const {borderWidth, borderColor} = borders
 
   return (
     <Card id="delete-account">
@@ -94,7 +72,7 @@ function PaymentMethod() {
         </Grid>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
-export default PaymentMethod;
+export default PaymentMethod

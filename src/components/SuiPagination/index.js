@@ -9,7 +9,7 @@ const Context = createContext()
 
 const SuiPagination = forwardRef(({item, variant, color, size, active, children, ...rest}, ref) => {
   const classes = styles({variant, active})
-  console.log('rest: ', rest.disabled)
+
   return (
     <Context.Provider value={{variant, color, size}}>
       {item ? (

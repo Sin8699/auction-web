@@ -1,30 +1,12 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import PropTypes from 'prop-types'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Icon from '@material-ui/core/Icon'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiButton from 'components/SuiButton'
 
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Icon from "@material-ui/core/Icon";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-
-function Bill({ name, company, email, vat, noGutter }) {
+function Bill({name, company, email, vat, noGutter}) {
   return (
     <SuiBox
       component="li"
@@ -41,15 +23,15 @@ function Bill({ name, company, email, vat, noGutter }) {
         <SuiBox
           display="flex"
           justifyContent="space-between"
-          alignItems={{ xs: "flex-start", sm: "center" }}
-          flexDirection={{ xs: "column", sm: "row" }}
+          alignItems={{xs: 'flex-start', sm: 'center'}}
+          flexDirection={{xs: 'column', sm: 'row'}}
           mb={2}
         >
           <SuiTypography variant="button" fontWeight="medium" textTransform="capitalize">
             {name}
           </SuiTypography>
 
-          <SuiBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
+          <SuiBox display="flex" alignItems="center" mt={{xs: 2, sm: 0}} ml={{xs: -1.5, sm: 0}}>
             <SuiBox mr={1}>
               <SuiButton variant="text" buttonColor="error">
                 <Icon className="material-icons-round">delete</Icon>&nbsp;delete
@@ -84,13 +66,13 @@ function Bill({ name, company, email, vat, noGutter }) {
         </SuiTypography>
       </SuiBox>
     </SuiBox>
-  );
+  )
 }
 
 // Setting default values for the props of Bill
 Bill.defaultProps = {
-  noGutter: false,
-};
+  noGutter: false
+}
 
 // Typechecking props for the Bill
 Bill.propTypes = {
@@ -98,7 +80,7 @@ Bill.propTypes = {
   company: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   vat: PropTypes.string.isRequired,
-  noGutter: PropTypes.bool,
-};
+  noGutter: PropTypes.bool
+}
 
-export default Bill;
+export default Bill

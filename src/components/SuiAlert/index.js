@@ -1,37 +1,18 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {useState} from 'react'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import PropTypes from 'prop-types'
 
-Coded by www.creative-tim.com
+import Fade from '@material-ui/core/Fade'
 
- =========================================================
+import SuiBox from 'components/SuiBox'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import styles from 'components/SuiAlert/styles'
 
-import { useState } from "react";
+function SuiAlert({color, dismissible, children, ...rest}) {
+  const [alertStatus, setAlertStatus] = useState('mount')
+  const classes = styles({color})
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Fade from "@material-ui/core/Fade";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-
-// Custom styles for the SuiAlert
-import styles from "components/SuiAlert/styles";
-
-function SuiAlert({ color, dismissible, children, ...rest }) {
-  const [alertStatus, setAlertStatus] = useState("mount");
-  const classes = styles({ color });
-
-  const handleAlertStatus = () => setAlertStatus("fadeOut");
+  const handleAlertStatus = () => setAlertStatus('fadeOut')
 
   // The base template for the alert
   const alertTemplate = (mount = true) => (
@@ -51,42 +32,42 @@ function SuiAlert({ color, dismissible, children, ...rest }) {
         ) : null}
       </SuiBox>
     </Fade>
-  );
+  )
 
   switch (true) {
-    case alertStatus === "mount":
-      return alertTemplate();
-    case alertStatus === "fadeOut":
-      setTimeout(() => setAlertStatus("unmount"), 400);
-      return alertTemplate(false);
+    case alertStatus === 'mount':
+      return alertTemplate()
+    case alertStatus === 'fadeOut':
+      setTimeout(() => setAlertStatus('unmount'), 400)
+      return alertTemplate(false)
     default:
-      alertTemplate();
-      break;
+      alertTemplate()
+      break
   }
 
-  return null;
+  return null
 }
 
 // Setting default values for the props of SuiAlert
 SuiAlert.defaultProps = {
-  color: "info",
-  dismissible: false,
-};
+  color: 'info',
+  dismissible: false
+}
 
 // Typechecking props of the SuiAlert
 SuiAlert.propTypes = {
   color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
+    'primary',
+    'secondary',
+    'info',
+    'success',
+    'warning',
+    'error',
+    'light',
+    'dark'
   ]),
   dismissible: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-};
+  children: PropTypes.node.isRequired
+}
 
-export default SuiAlert;
+export default SuiAlert

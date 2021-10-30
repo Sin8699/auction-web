@@ -1,38 +1,18 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {useMemo} from 'react'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import PropTypes from 'prop-types'
 
-Coded by www.creative-tim.com
+import {Pie} from 'react-chartjs-2'
 
- =========================================================
+import Card from '@material-ui/core/Card'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
-import { useMemo } from "react";
+import configs from 'component-pages/Charts/PieChart/configs'
 
-// porp-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// react-chartjs-2 components
-import { Pie } from "react-chartjs-2";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// PieChart configurations
-import configs from "component-pages/Charts/PieChart/configs";
-
-function PieChart({ title, description, height, chart }) {
-  const { data, options } = configs(chart.labels, chart.datasets);
+function PieChart({title, description, height, chart}) {
+  const {data, options} = configs(chart.labels, chart.datasets)
 
   const renderChart = (
     <SuiBox p={2}>
@@ -59,24 +39,24 @@ function PieChart({ title, description, height, chart }) {
         [chart, height]
       )}
     </SuiBox>
-  );
+  )
 
-  return title || description ? <Card>{renderChart}</Card> : renderChart;
+  return title || description ? <Card>{renderChart}</Card> : renderChart
 }
 
 // Setting default values for the props of PieChart
 PieChart.defaultProps = {
-  title: "",
-  description: "",
-  height: "19.125rem",
-};
+  title: '',
+  description: '',
+  height: '19.125rem'
+}
 
 // Typechecking props for the PieChart
 PieChart.propTypes = {
   title: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
-};
+  chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired
+}
 
-export default PieChart;
+export default PieChart

@@ -1,43 +1,23 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import PropTypes from 'prop-types'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import clsx from 'clsx'
 
-Coded by www.creative-tim.com
+import Card from '@material-ui/core/Card'
+import Icon from '@material-ui/core/Icon'
 
- =========================================================
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import styles from 'component-pages/Cards/PlaceholderCard/styles'
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// clsx is a utility for constructing className strings conditionally
-import clsx from "clsx";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Icon from "@material-ui/core/Icon";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// Custom styles for PlaceholderCard
-import styles from "component-pages/Cards/PlaceholderCard/styles";
-
-function PlaceholderCard({ icon, title, hasBorder, outlined }) {
-  const classes = styles({ hasBorder });
+function PlaceholderCard({icon, title, hasBorder, outlined}) {
+  const classes = styles({hasBorder})
 
   return (
     <Card
       raised
       className={clsx(classes.placeholderCard, {
-        [classes.placeholderCard_outlined]: outlined,
+        [classes.placeholderCard_outlined]: outlined
       })}
     >
       <SuiBox
@@ -58,25 +38,25 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
         </SuiTypography>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
 // Setting default values for the props of PlaceholderCard
 PlaceholderCard.defaultProps = {
-  icon: "add",
+  icon: 'add',
   hasBorder: false,
-  outlined: false,
-};
+  outlined: false
+}
 
 // Typechecking props for the PlaceholderCard
 PlaceholderCard.propTypes = {
   icon: PropTypes.node,
   title: PropTypes.shape({
     variant: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
   }).isRequired,
   hasBorder: PropTypes.bool,
-  outlined: PropTypes.bool,
-};
+  outlined: PropTypes.bool
+}
 
-export default PlaceholderCard;
+export default PlaceholderCard

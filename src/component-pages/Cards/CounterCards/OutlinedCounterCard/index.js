@@ -1,35 +1,16 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import CountUp from 'react-countup'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import PropTypes from 'prop-types'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
- =========================================================
+import colors from 'assets/theme/base/colors'
+import borders from 'assets/theme/base/borders'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// react-countup components
-import CountUp from "react-countup";
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// Soft UI Dashboard Material-UI base styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
-
-function OutlinedCounterCard({ color, count, title, prefix, suffix }) {
-  const { secondary } = colors;
-  const { borderWidth } = borders;
+function OutlinedCounterCard({color, count, title, prefix, suffix}) {
+  const {secondary} = colors
+  const {borderWidth} = borders
 
   return (
     <SuiBox
@@ -57,23 +38,23 @@ function OutlinedCounterCard({ color, count, title, prefix, suffix }) {
         )}
       </SuiTypography>
     </SuiBox>
-  );
+  )
 }
 
 // Setting default values for the props of OutlinedCounterCard
 OutlinedCounterCard.defaultProps = {
-  color: "info",
-  prefix: "",
-  suffix: "",
-};
+  color: 'info',
+  prefix: '',
+  suffix: ''
+}
 
 // Typechecking props for the BlogCard
 OutlinedCounterCard.propTypes = {
-  color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
+  color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'warning', 'error', 'dark']),
   count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
   prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-};
+  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+}
 
-export default OutlinedCounterCard;
+export default OutlinedCounterCard

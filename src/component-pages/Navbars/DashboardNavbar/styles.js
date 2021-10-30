@@ -1,39 +1,23 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 
 export default makeStyles(
-  ({ palette, boxShadows, functions, transitions, breakpoints, borders, typography }) => {
-    const { dark, white, text, transparent } = palette
-    const { navbarBoxShadow } = boxShadows
-    const { rgba, pxToRem } = functions
-    const { borderRadius } = borders
-    const { size } = typography
+  ({palette, boxShadows, functions, transitions, breakpoints, borders, typography}) => {
+    const {dark, white, text, transparent} = palette
+    const {navbarBoxShadow} = boxShadows
+    const {rgba, pxToRem} = functions
+    const {borderRadius} = borders
+    const {size} = typography
 
     return {
       navbar: {
-        boxShadow: ({ transparentNavbar, absolute }) =>
+        boxShadow: ({transparentNavbar, absolute}) =>
           transparentNavbar || absolute ? 'none' : navbarBoxShadow,
-        backdropFilter: ({ transparentNavbar, absolute }) =>
+        backdropFilter: ({transparentNavbar, absolute}) =>
           transparentNavbar || absolute ? 'none' : `saturate(200%) blur(${pxToRem(30)})`,
-        backgroundColor: ({ transparentNavbar, absolute }) =>
+        backgroundColor: ({transparentNavbar, absolute}) =>
           transparentNavbar || absolute ? transparent.main : rgba(white.main, 0.8),
 
-        color: ({ transparentNavbar, light }) => {
+        color: ({transparentNavbar, light}) => {
           let color
 
           if (light) {
@@ -46,15 +30,15 @@ export default makeStyles(
 
           return color
         },
-        top: ({ absolute }) => (absolute ? 0 : pxToRem(12)),
+        top: ({absolute}) => (absolute ? 0 : pxToRem(12)),
         minHeight: pxToRem(75),
         display: 'grid',
         alignItems: 'center',
         borderRadius: borderRadius.xl,
         paddingTop: pxToRem(8),
         paddingBottom: pxToRem(8),
-        paddingRight: ({ absolute }) => (absolute ? pxToRem(8) : 0),
-        paddingLeft: ({ absolute }) => (absolute ? pxToRem(16) : 0),
+        paddingRight: ({absolute}) => (absolute ? pxToRem(8) : 0),
+        paddingLeft: ({absolute}) => (absolute ? pxToRem(16) : 0),
 
         '& > *': {
           transition: transitions.create('all', {
@@ -97,8 +81,8 @@ export default makeStyles(
         width: '100%',
 
         [breakpoints.up('md')]: {
-          justifyContent: ({ isMini }) => (isMini ? 'space-between' : 'stretch'),
-          width: ({ isMini }) => (isMini ? '100%' : 'max-content')
+          justifyContent: ({isMini}) => (isMini ? 'space-between' : 'stretch'),
+          width: ({isMini}) => (isMini ? '100%' : 'max-content')
         },
 
         [breakpoints.up('xl')]: {

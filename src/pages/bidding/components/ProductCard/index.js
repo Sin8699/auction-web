@@ -1,5 +1,5 @@
 // react-router-dom components
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 // prop-types is a library for typechecking of props
 import PropTypes from 'prop-types'
@@ -18,22 +18,22 @@ import SuiAvatar from 'components/SuiAvatar'
 import styles from './styles'
 import Countdown from 'react-countdown'
 import cn from 'clsx'
-import { handleFavoredProduct, isFavoredProduct } from '../../../../helpers/favoredProduct'
-import { useState } from 'react'
+import {handleFavoredProduct, isFavoredProduct} from '../../../../helpers/favoredProduct'
+import {useState} from 'react'
 import BiddingHistoryModal from './BiddingHistoryModal'
 
-function ProductCard({ id, image, label, title, description, action, authors, info, countDown }) {
+function ProductCard({id, image, label, title, description, action, authors, info, countDown}) {
   const classes = styles({})
   const isFavored = isFavoredProduct(id)
 
   const [isFavoredState, setIsFavoredState] = useState(isFavored)
 
   const handleFavored = () => {
-    setIsFavoredState((prev) => !prev)
+    setIsFavoredState(prev => !prev)
     handleFavoredProduct(`${id}`)
   }
 
-  const renderAuthors = authors.map(({ image: media, name }) => (
+  const renderAuthors = authors.map(({image: media, name}) => (
     <Tooltip key={name} title={name} placement="bottom">
       <SuiAvatar src={media} alt={name} size="xs" customClass={classes.projectCard_avatar} />
     </Tooltip>
@@ -97,7 +97,7 @@ function ProductCard({ id, image, label, title, description, action, authors, in
             className={cn(classes.icon_love, isFavoredState && classes.icon_love_active)}
             onClick={handleFavored}
           >
-            <svg class="heart" viewBox="0 0 32 29.6">
+            <svg className="heart" viewBox="0 0 32 29.6">
               <path
                 d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
 	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"

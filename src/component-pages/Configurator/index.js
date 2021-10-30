@@ -1,24 +1,8 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 
 // clsx is a utility for constructing className strings conditionally
 import clsx from 'clsx'
 
-// @material-ui core components
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import Switch from '@material-ui/core/Switch'
@@ -26,11 +10,9 @@ import IconButton from '@material-ui/core/IconButton'
 import Link from '@material-ui/core/Link'
 import Icon from '@material-ui/core/Icon'
 
-// @material-ui icons
 import TwitterIcon from '@material-ui/icons/Twitter'
 import FacebookIcon from '@material-ui/icons/Facebook'
 
-// Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 import SuiButton from 'components/SuiButton'
@@ -39,13 +21,13 @@ import SuiButton from 'components/SuiButton'
 import styles from 'component-pages/Configurator/styles'
 
 // Soft UI Dashboard Material-UI context
-import { useSoftUIController } from 'context'
+import {useSoftUIController} from 'context'
 
 function Configurator() {
   const [controller, dispatch] = useSoftUIController()
-  const { openConfigurator, transparentSidenav, fixedNavbar, sidenavColor } = controller
+  const {openConfigurator, transparentSidenav, fixedNavbar, sidenavColor} = controller
   const [disabled, setDisabled] = useState(false)
-  const classes = styles({ sidenavColor })
+  const classes = styles({sidenavColor})
   const sidenavColors = ['primary', 'dark', 'info', 'success', 'warning', 'error']
 
   // Use the useEffect hook to change the button state for the sidenav type based on window size.
@@ -66,19 +48,19 @@ function Configurator() {
   }, [])
 
   const handleCloseConfigurator = () => {
-    dispatch({ type: 'OPEN_CONFIGURATOR', value: false })
+    dispatch({type: 'OPEN_CONFIGURATOR', value: false})
   }
 
   const handleTransparentSidenav = () => {
-    dispatch({ type: 'TRANSPARENT_SIDENAV', value: true })
+    dispatch({type: 'TRANSPARENT_SIDENAV', value: true})
   }
 
   const handleWhiteSidenav = () => {
-    dispatch({ type: 'TRANSPARENT_SIDENAV', value: false })
+    dispatch({type: 'TRANSPARENT_SIDENAV', value: false})
   }
 
   const handleFixedNavbar = () => {
-    dispatch({ type: 'FIXED_NAVBAR', value: !fixedNavbar })
+    dispatch({type: 'FIXED_NAVBAR', value: !fixedNavbar})
   }
 
   return (
@@ -121,13 +103,13 @@ function Configurator() {
           <SuiTypography variant="h6">Sidenav Colors</SuiTypography>
 
           <SuiBox my={0.5}>
-            {sidenavColors.map((color) => (
+            {sidenavColors.map(color => (
               <IconButton
                 key={color}
                 className={clsx(classes.configurator_sidenav_color, classes[color], {
                   [classes.active_color]: sidenavColor === color
                 })}
-                onClick={() => dispatch({ type: 'SIDENAV_COLOR', value: color })}
+                onClick={() => dispatch({type: 'SIDENAV_COLOR', value: color})}
               />
             ))}
           </SuiBox>

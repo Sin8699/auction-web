@@ -1,27 +1,9 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import Card from '@material-ui/core/Card'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// Billing page components
-import Bill from "layouts/billing/components/Bill";
+import Bill from 'layouts/billing/components/Bill'
 
 function BillingInformation() {
   return (
@@ -55,7 +37,7 @@ function BillingInformation() {
         </SuiBox>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
-export default BillingInformation;
+export default BillingInformation

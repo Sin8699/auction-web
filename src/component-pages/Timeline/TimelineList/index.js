@@ -1,38 +1,19 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import PropTypes from 'prop-types'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Card from '@material-ui/core/Card'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
- =========================================================
+import {TimelineProvider} from 'component-pages/Timeline/context'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// Timeline context
-import { TimelineProvider } from "component-pages/Timeline/context";
-
-function TimelineList({ title, dark, children }) {
+function TimelineList({title, dark, children}) {
   return (
     <TimelineProvider value={dark}>
       <Card>
-        <SuiBox backgroundColor={dark ? "dark" : "white"} backgroundGradient={dark}>
+        <SuiBox backgroundColor={dark ? 'dark' : 'white'} backgroundGradient={dark}>
           <SuiBox pt={3} px={3}>
-            <SuiTypography variant="h6" fontWeight="medium" textColor={dark ? "white" : "dark"}>
+            <SuiTypography variant="h6" fontWeight="medium" textColor={dark ? 'white' : 'dark'}>
               {title}
             </SuiTypography>
           </SuiBox>
@@ -40,19 +21,19 @@ function TimelineList({ title, dark, children }) {
         </SuiBox>
       </Card>
     </TimelineProvider>
-  );
+  )
 }
 
 // Setting default values for the props of TimelineList
 TimelineList.defaultProps = {
-  dark: false,
-};
+  dark: false
+}
 
 // Typechecking props for the TimelineList
 TimelineList.propTypes = {
   title: PropTypes.string.isRequired,
   dark: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-};
+  children: PropTypes.node.isRequired
+}
 
-export default TimelineList;
+export default TimelineList

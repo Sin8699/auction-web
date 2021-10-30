@@ -24,12 +24,17 @@ import {userData} from './mockData'
 function UserManager() {
   const navigate = useHistory()
 
-  const [list, setList] = useState(userData)
+  const [list, setList] = useState([])
   const [selectedItem, setSelectedItem] = useState({})
   const [anchorEl, setAnchorEl] = useState(null)
   const [page, setPage] = useState(1)
 
   const [totalPage, setTotalPage] = useState()
+
+  useEffect(() => {
+    setList(userData)
+  }, [])
+
   useEffect(() => {
     setTotalPage(Math.floor(list.length / 10) + 1)
   }, [list])

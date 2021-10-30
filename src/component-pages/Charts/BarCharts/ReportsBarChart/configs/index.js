@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 function configs(labels, datasets) {
   return {
     data: {
@@ -24,11 +9,11 @@ function configs(labels, datasets) {
           borderWidth: 0,
           borderRadius: 4,
           borderSkipped: false,
-          backgroundColor: "#fff",
+          backgroundColor: '#fff',
           data: datasets.data,
-          maxBarThickness: 6,
-        },
-      ],
+          maxBarThickness: 6
+        }
+      ]
     },
 
     options: {
@@ -36,12 +21,12 @@ function configs(labels, datasets) {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: false,
-        },
+          display: false
+        }
       },
       interaction: {
         intersect: false,
-        mode: "index",
+        mode: 'index'
       },
       scales: {
         y: {
@@ -49,7 +34,7 @@ function configs(labels, datasets) {
             drawBorder: false,
             display: false,
             drawOnChartArea: false,
-            drawTicks: false,
+            drawTicks: false
           },
           ticks: {
             suggestedMin: 0,
@@ -58,27 +43,27 @@ function configs(labels, datasets) {
             padding: 15,
             font: {
               size: 14,
-              family: "Roboto",
-              style: "normal",
-              lineHeight: 2,
+              family: 'Roboto',
+              style: 'normal',
+              lineHeight: 2
             },
-            color: "#fff",
-          },
+            color: '#fff'
+          }
         },
         x: {
           grid: {
             drawBorder: false,
             display: false,
             drawOnChartArea: false,
-            drawTicks: false,
+            drawTicks: false
           },
           ticks: {
-            display: false,
-          },
-        },
-      },
-    },
-  };
+            display: false
+          }
+        }
+      }
+    }
+  }
 }
 
-export default configs;
+export default configs

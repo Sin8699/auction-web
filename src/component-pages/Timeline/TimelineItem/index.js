@@ -1,50 +1,31 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import PropTypes from 'prop-types'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Icon from '@material-ui/core/Icon'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiBadge from 'components/SuiBadge'
 
- =========================================================
+import styles from 'component-pages/Timeline/TimelineItem/styles'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import {useTimeline} from 'component-pages/Timeline/context'
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Icon from "@material-ui/core/Icon";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiBadge from "components/SuiBadge";
-
-// Custom styles for the TimelineItem
-import styles from "component-pages/Timeline/TimelineItem/styles";
-
-import { useTimeline } from "component-pages/Timeline/context";
-
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem }) {
-  const isDark = useTimeline();
-  const classes = styles({ color, lastItem, isDark });
+function TimelineItem({color, icon, title, dateTime, description, badges, lastItem}) {
+  const isDark = useTimeline()
+  const classes = styles({color, lastItem, isDark})
 
   const renderBadges =
     badges.length > 0
       ? badges.map((badge, key) => {
-          const badgeKey = `badge-${key}`;
+          const badgeKey = `badge-${key}`
 
           return (
             <SuiBox key={badgeKey} mr={key === badges.length - 1 ? 0 : 0.5}>
               <SuiBadge color={color} size="extra-small" badgeContent={badge} container />
             </SuiBox>
-          );
+          )
         })
-      : null;
+      : null
 
   return (
     <SuiBox customClass={classes.timelineItem}>
@@ -52,14 +33,14 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         <Icon className={`material-icons-round ${classes.timelineItem_icon}`}>{icon}</Icon>
       </SuiBox>
       <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
-        <SuiTypography variant="button" fontWeight="medium" textColor={isDark ? "white" : "dark"}>
+        <SuiTypography variant="button" fontWeight="medium" textColor={isDark ? 'white' : 'dark'}>
           {title}
         </SuiTypography>
         <SuiBox mt={0.5}>
           <SuiTypography
             variant="caption"
             fontWeight="medium"
-            textColor={isDark ? "secondary" : "text"}
+            textColor={isDark ? 'secondary' : 'text'}
           >
             {dateTime}
           </SuiTypography>
@@ -78,35 +59,35 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         ) : null}
       </SuiBox>
     </SuiBox>
-  );
+  )
 }
 
 // Setting default values for the props of TimelineItem
 TimelineItem.defaultProps = {
-  color: "info",
+  color: 'info',
   badges: [],
   lastItem: false,
-  description: "",
-};
+  description: ''
+}
 
 // Typechecking props for the TimelineItem
 TimelineItem.propTypes = {
   color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "dark",
-    "light",
+    'primary',
+    'secondary',
+    'info',
+    'success',
+    'warning',
+    'error',
+    'dark',
+    'light'
   ]),
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.string.isRequired,
   description: PropTypes.string,
   badges: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-  lastItem: PropTypes.bool,
-};
+  lastItem: PropTypes.bool
+}
 
-export default TimelineItem;
+export default TimelineItem

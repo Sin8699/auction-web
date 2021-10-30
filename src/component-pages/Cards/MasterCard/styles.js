@@ -1,44 +1,27 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {makeStyles} from '@material-ui/core/styles'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import curved14 from 'assets/images/curved-images/curved14.jpg'
+import pxToRem from 'assets/theme/functions/pxToRem'
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import { makeStyles } from "@material-ui/core/styles";
-
-// Images
-import curved14 from "assets/images/curved-images/curved14.jpg";
-import pxToRem from "assets/theme/functions/pxToRem";
-
-export default makeStyles(({ functions, palette, boxShadows }) => {
-  const { linearGradient, rgba } = functions;
-  const { gradients } = palette;
-  const { xl } = boxShadows;
+export default makeStyles(({functions, palette, boxShadows}) => {
+  const {linearGradient, rgba} = functions
+  const {gradients} = palette
+  const {xl} = boxShadows
 
   return {
     masterCard: {
-      background: ({ color }) =>
+      background: ({color}) =>
         `${linearGradient(
           rgba(gradients[color].main, 0.8),
           rgba(gradients[color].state, 0.8)
         )}, url(${curved14})`,
-      boxShadow: xl,
+      boxShadow: xl
     },
 
     masterCard_number: {
       marginTop: pxToRem(24),
       marginBottom: pxToRem(40),
-      paddingBottom: pxToRem(8),
-    },
-  };
-});
+      paddingBottom: pxToRem(8)
+    }
+  }
+})

@@ -1,29 +1,11 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import PropTypes from 'prop-types'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Icon from '@material-ui/core/Icon'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Icon from "@material-ui/core/Icon";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-function Invoice({ date, id, price, noGutter }) {
+function Invoice({date, id, price, noGutter}) {
   return (
     <SuiBox
       component="li"
@@ -60,20 +42,20 @@ function Invoice({ date, id, price, noGutter }) {
         </SuiBox>
       </SuiBox>
     </SuiBox>
-  );
+  )
 }
 
 // Setting default values for the props of Invoice
 Invoice.defaultProps = {
-  noGutter: false,
-};
+  noGutter: false
+}
 
 // Typechecking props for the Invoice
 Invoice.propTypes = {
   date: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  noGutter: PropTypes.bool,
-};
+  noGutter: PropTypes.bool
+}
 
-export default Invoice;
+export default Invoice

@@ -14,30 +14,32 @@ import team1 from 'assets/images/team-1.jpg'
 import Card from '@material-ui/core/Card'
 import SuiButton from 'components/SuiButton'
 import Icon from '@material-ui/core/Icon'
-import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu'
+import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/index.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
+
 import SuiPagination from '../../components/SuiPagination/index'
 import SuiInput from '../../components/SuiInput/index'
-import { useGetProducts } from '../../apis/products/index'
-import { useGetBiddingProducts } from '../../apis/bidding-product/index'
+import {useGetProducts} from '../../apis/products/index'
+import {useGetBiddingProducts} from '../../apis/bidding-product/index'
 import BuyNowModal from './components/BuyNowModal/index'
 import keyBy from 'lodash/keyBy'
 import BidModal from './components/BidModal/index'
-import { useState } from 'react'
+import {useState} from 'react'
 import chunk from 'lodash/chunk'
-import { useMemo } from 'react'
+import {useMemo} from 'react'
 import TablePagination from '../../components/TablePagination/index'
 import ProductCard from './components/ProductCard/index'
 
 const LIMIT_PAGINATION = 12
 
 function BiddingBoard() {
-  const [{ data: products = [], loading: loadingProducts, error: errorProducts }] = useGetProducts()
+  const [{data: products = [], loading: loadingProducts, error: errorProducts}] = useGetProducts()
+
   const [
-    { data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts }
+    {data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts}
   ] = useGetBiddingProducts()
 
   const [page, setPage] = useState(1)
@@ -56,7 +58,7 @@ function BiddingBoard() {
     if (loadingProducts || loadingBiddingProducts) {
       return (
         <SuiBox display="flex" justifyContent="center">
-          <CircularProgress color="info" />
+          <CircularProgress />
         </SuiBox>
       )
     }
@@ -69,10 +71,9 @@ function BiddingBoard() {
 
     return (
       <Grid container spacing={3}>
-        {listByPage.map(({ name, primaryImage, description, categories, _id }) => (
-          <Grid item xs={12} md={6} xl={3}>
+        {listByPage.map(({name, primaryImage, description, categories, _id}) => (
+          <Grid item xs={12} md={6} xl={3} key={_id}>
             <ProductCard
-              key={_id}
               id={_id}
               image={primaryImage}
               label="Phone"
@@ -80,9 +81,10 @@ function BiddingBoard() {
               description={description}
               action={{
                 type: 'comp',
-                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />
+                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />,
+                color: 'info'
               }}
-              authors={[{ image: team1, name: 'Elena Morison' }]}
+              authors={[{image: team1, name: 'Elena Morison'}]}
               info={<BidModal biddingProduct={objectBiddingProduct?.[_id]} productName={name} />}
               countDown={60000} //seconds
             />
@@ -123,7 +125,7 @@ function BiddingBoard() {
             <SuiBox display="flex" mb={1}>
               <SuiBox mr={1}>
                 <SuiInput
-                  withIcon={{ icon: 'search', direction: 'right' }}
+                  withIcon={{icon: 'search', direction: 'right'}}
                   placeholder="Search name, category"
                 />
               </SuiBox>

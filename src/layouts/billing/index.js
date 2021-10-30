@@ -1,37 +1,17 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import Grid from '@material-ui/core/Grid'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import SuiBox from 'components/SuiBox'
 
-Coded by www.creative-tim.com
+import MasterCard from 'component-pages/Cards/MasterCard'
+import DefaultInfoCard from 'component-pages/Cards/InfoCards/DefaultInfoCard'
 
- =========================================================
+import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
+import DashboardNavbar from 'component-pages/Navbars/DashboardNavbar'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import Grid from "@material-ui/core/Grid";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-
-// Soft UI Dashboard Material-UI components
-import MasterCard from "component-pages/Cards/MasterCard";
-import DefaultInfoCard from "component-pages/Cards/InfoCards/DefaultInfoCard";
-
-// Soft UI Dashboard Material-UI example components
-import DashboardLayout from "component-pages/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "component-pages/Navbars/DashboardNavbar";
-
-// Billing page components
-import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
-import BillingInformation from "layouts/billing/components/BillingInformation";
-import Transactions from "layouts/billing/components/Transactions";
+import PaymentMethod from 'layouts/billing/components/PaymentMethod'
+import Invoices from 'layouts/billing/components/Invoices'
+import BillingInformation from 'layouts/billing/components/BillingInformation'
+import Transactions from 'layouts/billing/components/Transactions'
 
 function Billing() {
   return (
@@ -83,7 +63,7 @@ function Billing() {
         </SuiBox>
       </SuiBox>
     </DashboardLayout>
-  );
+  )
 }
 
-export default Billing;
+export default Billing

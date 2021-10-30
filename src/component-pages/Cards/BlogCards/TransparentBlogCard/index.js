@@ -1,43 +1,23 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {Link} from 'react-router-dom'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import PropTypes from 'prop-types'
 
-Coded by www.creative-tim.com
+import Card from '@material-ui/core/Card'
+import CardMedia from '@material-ui/core/CardMedia'
+import Icon from '@material-ui/core/Icon'
+import MuiLink from '@material-ui/core/Link'
 
- =========================================================
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import styles from 'component-pages/Cards/BlogCards/TransparentBlogCard/styles'
 
-// react-router components
-import { Link } from "react-router-dom";
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import Icon from "@material-ui/core/Icon";
-import MuiLink from "@material-ui/core/Link";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// Custom styles for the TransparentBlogCard
-import styles from "component-pages/Cards/BlogCards/TransparentBlogCard/styles";
-
-function TransparentBlogCard({ image, title, description, action }) {
-  const classes = styles();
+function TransparentBlogCard({image, title, description, action}) {
+  const classes = styles()
 
   return (
     <Card className={classes.card}>
-      {action.type === "internal" ? (
+      {action.type === 'internal' ? (
         <Link to={action.route}>
           <CardMedia src={image} component="img" title={title} className={classes.card_image} />
         </Link>
@@ -47,7 +27,7 @@ function TransparentBlogCard({ image, title, description, action }) {
         </MuiLink>
       )}
       <SuiBox py={3}>
-        {action.type === "internal" ? (
+        {action.type === 'internal' ? (
           <Link to={action.route} className={classes.card_action}>
             <SuiTypography variant="h5" gutterBottom>
               {title}
@@ -70,7 +50,7 @@ function TransparentBlogCard({ image, title, description, action }) {
             {description}
           </SuiTypography>
         </SuiBox>
-        {action.type === "internal" ? (
+        {action.type === 'internal' ? (
           <Link to={action.route} className={classes.card_action}>
             <SuiTypography
               variant="body2"
@@ -102,7 +82,7 @@ function TransparentBlogCard({ image, title, description, action }) {
         )}
       </SuiBox>
     </Card>
-  );
+  )
 }
 
 // Typechecking props for the TransparentBlogCard
@@ -111,22 +91,22 @@ TransparentBlogCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   action: PropTypes.shape({
-    type: PropTypes.oneOf(["external", "internal"]),
+    type: PropTypes.oneOf(['external', 'internal']),
     route: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     color: PropTypes.oneOf([
-      "inherit",
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "light",
-      "dark",
-      "text",
-    ]).isRequired,
-  }).isRequired,
-};
+      'inherit',
+      'primary',
+      'secondary',
+      'info',
+      'success',
+      'warning',
+      'error',
+      'light',
+      'dark',
+      'text'
+    ]).isRequired
+  }).isRequired
+}
 
-export default TransparentBlogCard;
+export default TransparentBlogCard

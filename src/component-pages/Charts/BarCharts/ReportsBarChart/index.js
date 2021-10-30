@@ -1,53 +1,32 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {useMemo} from 'react'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import PropTypes from 'prop-types'
 
-Coded by www.creative-tim.com
+import {Bar} from 'react-chartjs-2'
 
- =========================================================
+import Card from '@material-ui/core/Card'
+import Grid from '@material-ui/core/Grid'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
-import { useMemo } from "react";
+import BarReportsChartItem from 'component-pages/Charts/BarCharts/ReportsBarChart/ReportsBarChartItem'
 
-// porp-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import configs from 'component-pages/Charts/BarCharts/ReportsBarChart/configs'
 
-// react-chartjs-2 components
-import { Bar } from "react-chartjs-2";
+function ReportsBarChart({color, title, description, chart, items}) {
+  const {data, options} = configs(chart.labels, chart.datasets)
 
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// Soft UI Dashboard Material-UI example components
-import BarReportsChartItem from "component-pages/Charts/BarCharts/ReportsBarChart/ReportsBarChartItem";
-
-// ReportsBarChart configurations
-import configs from "component-pages/Charts/BarCharts/ReportsBarChart/configs";
-
-function ReportsBarChart({ color, title, description, chart, items }) {
-  const { data, options } = configs(chart.labels, chart.datasets);
-
-  const renderItems = items.map(({ icon, label, progress }) => (
+  const renderItems = items.map(({icon, label, progress}) => (
     <Grid item xs={6} sm={3} key={label}>
       <BarReportsChartItem
         color={color}
-        icon={{ color: icon.color, component: icon.component }}
+        icon={{color: icon.color, component: icon.component}}
         label={label}
-        progress={{ content: progress.content, percentage: progress.percentage }}
+        progress={{content: progress.content, percentage: progress.percentage}}
       />
     </Grid>
-  ));
+  ))
 
   return (
     <Card>
@@ -85,23 +64,23 @@ function ReportsBarChart({ color, title, description, chart, items }) {
         </SuiBox>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
 // Setting default values for the props of ReportsBarChart
 ReportsBarChart.defaultProps = {
-  color: "dark",
-  description: "",
-  items: [],
-};
+  color: 'dark',
+  description: '',
+  items: []
+}
 
 // Typechecking props for the ReportsBarChart
 ReportsBarChart.propTypes = {
-  color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
+  color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'warning', 'error', 'dark']),
   title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
-  items: PropTypes.arrayOf(PropTypes.object),
-};
+  items: PropTypes.arrayOf(PropTypes.object)
+}
 
-export default ReportsBarChart;
+export default ReportsBarChart

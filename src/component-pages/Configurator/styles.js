@@ -1,36 +1,20 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {makeStyles} from '@material-ui/core/styles'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import { makeStyles } from "@material-ui/core/styles";
-
-export default makeStyles(({ palette, borders, boxShadows, functions, transitions }) => {
-  const configuratorWidth = 360;
-  const { dark, white, gradients } = palette;
-  const { borderWidth } = borders;
-  const { lg, buttonBoxShadow } = boxShadows;
-  const { pxToRem, linearGradient } = functions;
+export default makeStyles(({palette, borders, boxShadows, functions, transitions}) => {
+  const configuratorWidth = 360
+  const {dark, white, gradients} = palette
+  const {borderWidth} = borders
+  const {lg, buttonBoxShadow} = boxShadows
+  const {pxToRem, linearGradient} = functions
 
   return {
     configurator: {
-      height: "100vh",
+      height: '100vh',
       margin: 0,
       padding: `0 ${pxToRem(10)}`,
       borderRadius: 0,
       boxShadow: lg,
-      overflowY: "auto",
+      overflowY: 'auto'
     },
 
     configurator_close_icon: {
@@ -39,7 +23,7 @@ export default makeStyles(({ palette, borders, boxShadows, functions, transition
       stroke: dark.main,
       strokeWidth: pxToRem(2),
       marginTop: pxToRem(16),
-      cursor: "pointer",
+      cursor: 'pointer'
     },
 
     configurator_sidenav_color: {
@@ -47,83 +31,83 @@ export default makeStyles(({ palette, borders, boxShadows, functions, transition
       height: pxToRem(24),
       padding: 0,
       border: `${borderWidth[1]} solid ${white.main}`,
-      transition: transitions.create("border-color", {
+      transition: transitions.create('border-color', {
         easing: transitions.easing.sharp,
-        duration: transitions.duration.shorter,
+        duration: transitions.duration.shorter
       }),
 
-      "&:not(:last-child)": {
-        marginRight: pxToRem(8),
+      '&:not(:last-child)': {
+        marginRight: pxToRem(8)
       },
 
-      "&:hover, &:focus, &:active": {
-        borderColor: dark.main,
-      },
+      '&:hover, &:focus, &:active': {
+        borderColor: dark.main
+      }
     },
 
     configurator_sidenav_types: {
-      display: "flex",
+      display: 'flex',
       marginTop: pxToRem(16),
 
-      "& .MuiButton-root": {
+      '& .MuiButton-root': {
         height: pxToRem(42),
         boxShadow: buttonBoxShadow.main,
 
-        "&:first-child": {
-          marginRight: pxToRem(8),
+        '&:first-child': {
+          marginRight: pxToRem(8)
         },
 
-        "&:hover, &:focus": {
-          opacity: 1,
-        },
-      },
+        '&:hover, &:focus': {
+          opacity: 1
+        }
+      }
     },
 
     configurator_open: {
       width: configuratorWidth,
-      left: "initial",
+      left: 'initial',
       right: 0,
-      transition: transitions.create("right", {
+      transition: transitions.create('right', {
         easing: transitions.easing.sharp,
-        duration: transitions.duration.short,
-      }),
+        duration: transitions.duration.short
+      })
     },
 
     configurator_close: {
-      left: "initial",
+      left: 'initial',
       right: pxToRem(-350),
-      transition: transitions.create("all", {
+      transition: transitions.create('all', {
         easing: transitions.easing.sharp,
-        duration: transitions.duration.short,
-      }),
+        duration: transitions.duration.short
+      })
     },
 
     primary: {
-      backgroundImage: linearGradient(gradients.primary.main, gradients.primary.state),
+      backgroundImage: linearGradient(gradients.primary.main, gradients.primary.state)
     },
 
     dark: {
-      backgroundImage: linearGradient(gradients.dark.main, gradients.dark.state),
+      backgroundImage: linearGradient(gradients.dark.main, gradients.dark.state)
     },
 
     info: {
-      backgroundImage: linearGradient(gradients.info.main, gradients.info.state),
+      backgroundImage: linearGradient(gradients.info.main, gradients.info.state)
     },
 
     success: {
-      backgroundImage: linearGradient(gradients.success.main, gradients.success.state),
+      backgroundImage: linearGradient(gradients.success.main, gradients.success.state)
     },
 
     warning: {
-      backgroundImage: linearGradient(gradients.warning.main, gradients.warning.state),
+      backgroundImage: linearGradient(gradients.warning.main, gradients.warning.state)
     },
 
     error: {
-      backgroundImage: linearGradient(gradients.error.main, gradients.error.state),
+      backgroundImage: linearGradient(gradients.error.main, gradients.error.state)
     },
 
     active_color: {
-      borderColor: dark.main,
-    },
-  };
-});
+      borderColor: dark.main
+    }
+  }
+})

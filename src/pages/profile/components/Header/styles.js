@@ -1,29 +1,12 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {makeStyles} from '@material-ui/core/styles'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import curved0 from 'assets/images/curved-images/curved0.jpg'
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import { makeStyles } from "@material-ui/core/styles";
-
-// Images
-import curved0 from "assets/images/curved-images/curved0.jpg";
-
-export default makeStyles(({ palette, functions, borders, boxShadows }) => {
-  const { gradients, white } = palette;
-  const { linearGradient, rgba, pxToRem } = functions;
-  const { borderRadius } = borders;
-  const { navbarBoxShadow } = boxShadows;
+export default makeStyles(({palette, functions, borders, boxShadows}) => {
+  const {gradients, white} = palette
+  const {linearGradient, rgba, pxToRem} = functions
+  const {borderRadius} = borders
+  const {navbarBoxShadow} = boxShadows
 
   return {
     profileHeader_background: {
@@ -31,14 +14,14 @@ export default makeStyles(({ palette, functions, borders, boxShadows }) => {
         rgba(gradients.info.main, 0.6),
         rgba(gradients.info.state, 0.6)
       )}, url(${curved0})`,
-      backgroundSize: "cover",
-      backgroundPosition: "50%",
-      display: "flex",
-      alignItems: "center",
-      position: "relative",
-      overflow: "hidden",
+      backgroundSize: 'cover',
+      backgroundPosition: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      position: 'relative',
+      overflow: 'hidden',
       minHeight: pxToRem(300),
-      borderRadius: borderRadius.xl,
+      borderRadius: borderRadius.xl
     },
 
     profileHeader_profile: {
@@ -47,7 +30,7 @@ export default makeStyles(({ palette, functions, borders, boxShadows }) => {
       boxShadow: navbarBoxShadow,
       margin: `${pxToRem(-64)} ${pxToRem(24)} 0`,
       padding: pxToRem(16),
-      position: "relative",
-    },
-  };
-});
+      position: 'relative'
+    }
+  }
+})

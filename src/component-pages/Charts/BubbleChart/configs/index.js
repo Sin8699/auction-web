@@ -1,33 +1,17 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard Material-UI base styles
-import typography from "assets/theme/base/typography";
+import typography from 'assets/theme/base/typography'
 
 function configs(labels, datasets) {
   return {
     data: {
       labels,
-      datasets: [...datasets],
+      datasets: [...datasets]
     },
     options: {
       responsive: true,
       plugins: {
         legend: {
-          display: false,
-        },
+          display: false
+        }
       },
       scales: {
         y: {
@@ -36,19 +20,19 @@ function configs(labels, datasets) {
             display: true,
             drawOnChartArea: true,
             drawTicks: false,
-            borderDash: [5, 5],
+            borderDash: [5, 5]
           },
           ticks: {
             display: true,
             padding: 10,
-            color: "#b2b9bf",
+            color: '#b2b9bf',
             font: {
               size: 11,
               family: typography.fontFamily,
-              style: "normal",
-              lineHeight: 2,
-            },
-          },
+              style: 'normal',
+              lineHeight: 2
+            }
+          }
         },
         x: {
           grid: {
@@ -56,23 +40,23 @@ function configs(labels, datasets) {
             display: true,
             drawOnChartArea: true,
             drawTicks: false,
-            borderDash: [5, 5],
+            borderDash: [5, 5]
           },
           ticks: {
             display: true,
-            color: "#b2b9bf",
+            color: '#b2b9bf',
             padding: 10,
             font: {
               size: 11,
               family: typography.fontFamily,
-              style: "normal",
-              lineHeight: 2,
-            },
-          },
-        },
-      },
-    },
-  };
+              style: 'normal',
+              lineHeight: 2
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-export default configs;
+export default configs

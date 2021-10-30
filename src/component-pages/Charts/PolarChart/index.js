@@ -1,38 +1,18 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {useMemo} from 'react'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import PropTypes from 'prop-types'
 
-Coded by www.creative-tim.com
+import {PolarArea} from 'react-chartjs-2'
 
- =========================================================
+import Card from '@material-ui/core/Card'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
-import { useMemo } from "react";
+import configs from 'component-pages/Charts/PolarChart/configs'
 
-// porp-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// react-chartjs-2 components
-import { PolarArea } from "react-chartjs-2";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-// PolarChart configurations
-import configs from "component-pages/Charts/PolarChart/configs";
-
-function PolarChart({ title, description, chart }) {
-  const { data, options } = configs(chart.labels, chart.datasets, chart.cutout);
+function PolarChart({title, description, chart}) {
+  const {data, options} = configs(chart.labels, chart.datasets, chart.cutout)
 
   const renderChart = (
     <SuiBox p={2}>
@@ -59,22 +39,22 @@ function PolarChart({ title, description, chart }) {
         [chart]
       )}
     </SuiBox>
-  );
+  )
 
-  return title || description ? <Card>{renderChart}</Card> : renderChart;
+  return title || description ? <Card>{renderChart}</Card> : renderChart
 }
 
 // Setting default values for the props of PolarChart
 PolarChart.defaultProps = {
-  title: "",
-  description: "",
-};
+  title: '',
+  description: ''
+}
 
 // Typechecking props for the PolarChart
 PolarChart.propTypes = {
   title: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
-};
+  chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired
+}
 
-export default PolarChart;
+export default PolarChart

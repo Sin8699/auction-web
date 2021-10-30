@@ -1,31 +1,13 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import PropTypes from 'prop-types'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import Card from '@material-ui/core/Card'
+import Divider from '@material-ui/core/Divider'
+import Icon from '@material-ui/core/Icon'
 
-Coded by www.creative-tim.com
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
 
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// prop-types is library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import Divider from "@material-ui/core/Divider";
-import Icon from "@material-ui/core/Icon";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-
-function DefaultInfoCard({ color, icon, title, description, value }) {
+function DefaultInfoCard({color, icon, title, description, value}) {
   return (
     <Card>
       <SuiBox p={2} mx={3} display="flex" justifyContent="center">
@@ -63,23 +45,23 @@ function DefaultInfoCard({ color, icon, title, description, value }) {
         )}
       </SuiBox>
     </Card>
-  );
+  )
 }
 
 // Setting default values for the props of DefaultInfoCard
 DefaultInfoCard.defaultProps = {
-  color: "info",
-  value: "",
-  description: "",
-};
+  color: 'info',
+  value: '',
+  description: ''
+}
 
 // Typechecking props for the DefaultInfoCard
 DefaultInfoCard.propTypes = {
-  color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
+  color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'warning', 'error', 'dark']),
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
 
-export default DefaultInfoCard;
+export default DefaultInfoCard

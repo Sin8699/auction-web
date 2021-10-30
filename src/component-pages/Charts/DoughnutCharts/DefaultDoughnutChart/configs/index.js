@@ -1,34 +1,17 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import colors from 'assets/theme/base/colors'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-/* eslint-disable no-dupe-keys */
-// Soft UI Dashboard Material-UI base styles
-import colors from "assets/theme/base/colors";
-
-const { gradients } = colors;
+const {gradients} = colors
 
 function configs(labels, datasets, cutout = 60) {
-  const backgroundColors = [];
+  const backgroundColors = []
 
-  datasets.backgroundColors.forEach((color) => {
-    if (color === "info") {
-      backgroundColors.push(gradients.info.main);
+  datasets.backgroundColors.forEach(color => {
+    if (color === 'info') {
+      backgroundColors.push(gradients.info.main)
     } else {
-      backgroundColors.push(gradients[color].state);
+      backgroundColors.push(gradients[color].state)
     }
-  });
+  })
 
   return {
     data: {
@@ -43,21 +26,21 @@ function configs(labels, datasets, cutout = 60) {
           borderWidth: 2,
           backgroundColor: backgroundColors,
           fill: false,
-          data: datasets.data,
-        },
-      ],
+          data: datasets.data
+        }
+      ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: false,
-        },
+          display: false
+        }
       },
       interaction: {
         intersect: false,
-        mode: "index",
+        mode: 'index'
       },
       scales: {
         y: {
@@ -65,26 +48,26 @@ function configs(labels, datasets, cutout = 60) {
             drawBorder: false,
             display: false,
             drawOnChartArea: false,
-            drawTicks: false,
+            drawTicks: false
           },
           ticks: {
-            display: false,
-          },
+            display: false
+          }
         },
         x: {
           grid: {
             drawBorder: false,
             display: false,
             drawOnChartArea: false,
-            drawTicks: false,
+            drawTicks: false
           },
           ticks: {
-            display: false,
-          },
-        },
-      },
-    },
-  };
+            display: false
+          }
+        }
+      }
+    }
+  }
 }
 
-export default configs;
+export default configs

@@ -1,142 +1,126 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {makeStyles} from '@material-ui/core/styles'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import { makeStyles } from "@material-ui/core/styles";
-
-export default makeStyles(({ palette, functions, borders, boxShadows }) => {
-  const { gradients, grey } = palette;
-  const { linearGradient } = functions;
-  const { borderRadius: radius } = borders;
+export default makeStyles(({palette, functions, borders, boxShadows}) => {
+  const {gradients, grey} = palette
+  const {linearGradient} = functions
+  const {borderRadius: radius} = borders
 
   const greyColors = {
-    "grey-100": grey[100],
-    "grey-200": grey[200],
-    "grey-300": grey[300],
-    "grey-400": grey[400],
-    "grey-500": grey[500],
-    "grey-600": grey[600],
-    "grey-700": grey[700],
-    "grey-800": grey[800],
-    "grey-900": grey[900],
-  };
+    'grey-100': grey[100],
+    'grey-200': grey[200],
+    'grey-300': grey[300],
+    'grey-400': grey[400],
+    'grey-500': grey[500],
+    'grey-600': grey[600],
+    'grey-700': grey[700],
+    'grey-800': grey[800],
+    'grey-900': grey[900]
+  }
 
   const validGradients = [
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "dark",
-    "light",
-  ];
+    'primary',
+    'secondary',
+    'info',
+    'success',
+    'warning',
+    'error',
+    'dark',
+    'light'
+  ]
 
   const validColors = [
-    "transparent",
-    "white",
-    "black",
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-    "text",
-    "grey-100",
-    "grey-200",
-    "grey-300",
-    "grey-400",
-    "grey-500",
-    "grey-600",
-    "grey-700",
-    "grey-800",
-    "grey-900",
-  ];
+    'transparent',
+    'white',
+    'black',
+    'primary',
+    'secondary',
+    'info',
+    'success',
+    'warning',
+    'error',
+    'light',
+    'dark',
+    'text',
+    'grey-100',
+    'grey-200',
+    'grey-300',
+    'grey-400',
+    'grey-500',
+    'grey-600',
+    'grey-700',
+    'grey-800',
+    'grey-900'
+  ]
 
-  const validBorderRadius = ["xs", "sm", "md", "lg", "xl", "xxl", "section"];
-  const validBoxShadows = ["xs", "sm", "regular", "lg", "xl", "xxl", "inset"];
+  const validBorderRadius = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'section']
+  const validBoxShadows = ['xs', 'sm', 'regular', 'lg', 'xl', 'xxl', 'inset']
 
   return {
     suiBox: {
-      opacity: ({ opacity }) => opacity,
-      backgroundColor: ({ backgroundColor }) => {
-        let backgroundColorValue;
+      opacity: ({opacity}) => opacity,
+      backgroundColor: ({backgroundColor}) => {
+        let backgroundColorValue
 
-        if (validColors.find((el) => el === backgroundColor)) {
+        if (validColors.find(el => el === backgroundColor)) {
           backgroundColorValue = palette[backgroundColor]
             ? palette[backgroundColor].main
-            : greyColors[backgroundColor];
+            : greyColors[backgroundColor]
         } else {
-          backgroundColorValue = backgroundColor;
+          backgroundColorValue = backgroundColor
         }
 
-        return backgroundColorValue;
+        return backgroundColorValue
       },
-      color: ({ color }) => {
-        let colorValue;
+      color: ({color}) => {
+        let colorValue
 
-        if (validColors.find((el) => el === color)) {
-          colorValue = palette[color] ? palette[color].main : greyColors[color];
+        if (validColors.find(el => el === color)) {
+          colorValue = palette[color] ? palette[color].main : greyColors[color]
         } else {
-          colorValue = color;
+          colorValue = color
         }
 
-        return colorValue;
+        return colorValue
       },
-      borderRadius: ({ borderRadius }) => {
-        let borderRadiusValue;
+      borderRadius: ({borderRadius}) => {
+        let borderRadiusValue
 
-        if (validBorderRadius.find((el) => el === borderRadius)) {
-          borderRadiusValue = radius[borderRadius];
+        if (validBorderRadius.find(el => el === borderRadius)) {
+          borderRadiusValue = radius[borderRadius]
         } else {
-          borderRadiusValue = borderRadius;
+          borderRadiusValue = borderRadius
         }
 
-        return borderRadiusValue;
+        return borderRadiusValue
       },
-      boxShadow: ({ boxShadow }) => {
-        let boxShadowValue;
+      boxShadow: ({boxShadow}) => {
+        let boxShadowValue
 
-        if (validBoxShadows.find((el) => el === boxShadow)) {
-          boxShadowValue = boxShadows[boxShadow];
+        if (validBoxShadows.find(el => el === boxShadow)) {
+          boxShadowValue = boxShadows[boxShadow]
         } else {
-          boxShadowValue = boxShadows;
+          boxShadowValue = boxShadows
         }
 
-        return boxShadowValue;
-      },
+        return boxShadowValue
+      }
     },
 
     suiBox_backgroundGradient: {
-      backgroundImage: ({ backgroundColor }) => {
-        let backgroundValue;
+      backgroundImage: ({backgroundColor}) => {
+        let backgroundValue
 
-        if (validGradients.find((el) => el === backgroundColor)) {
+        if (validGradients.find(el => el === backgroundColor)) {
           backgroundValue = linearGradient(
             gradients[backgroundColor].main,
             gradients[backgroundColor].state
-          );
+          )
         } else {
-          backgroundValue = "none";
+          backgroundValue = 'none'
         }
 
-        return backgroundValue;
-      },
-    },
-  };
-});
+        return backgroundValue
+      }
+    }
+  }
+})

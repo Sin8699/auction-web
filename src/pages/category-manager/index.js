@@ -25,12 +25,17 @@ import {categoriesData} from './mockData'
 function CategoryManager() {
   const navigate = useHistory()
 
-  const [list, setList] = useState(categoriesData)
+  const [list, setList] = useState([])
   const [selectedItem, setSelectedItem] = useState({})
   const [anchorEl, setAnchorEl] = useState(null)
   const [page, setPage] = useState(1)
 
   const [totalPage, setTotalPage] = useState()
+
+  useEffect(() => {
+    setList(categoriesData)
+  }, [])
+
   useEffect(() => {
     setTotalPage(Math.floor(list.length / 10) + 1)
   }, [list])

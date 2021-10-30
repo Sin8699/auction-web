@@ -1,34 +1,29 @@
-// react-routers components
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
-// prop-types is library for typechecking of props
 import PropTypes from 'prop-types'
 
-// @material-ui core components
 import Card from '@material-ui/core/Card'
 import Divider from '@material-ui/core/Divider'
 import Tooltip from '@material-ui/core/Tooltip'
 import Icon from '@material-ui/core/Icon'
 
-// Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 
-// Soft UI Dashboard Material-UI base styles
 import colors from 'assets/theme/base/colors'
 import typography from 'assets/theme/base/typography'
 import SuiInput from 'components/SuiInput'
 
-function ProfileInfoCard({ title, description, info, social, action, editing = false }) {
+function ProfileInfoCard({title, description, info, social, action, editing = false}) {
   const labels = []
   const values = []
-  const { socialMediaColors } = colors
-  const { size } = typography
+  const {socialMediaColors} = colors
+  const {size} = typography
 
   // Convert this form `objectKey` of the object key in to this `object key`
-  Object.keys(info).forEach((el) => {
+  Object.keys(info).forEach(el => {
     if (el.match(/[A-Z\s]+/)) {
-      const uppercaseLetter = Array.from(el).find((i) => i.match(/[A-Z]+/))
+      const uppercaseLetter = Array.from(el).find(i => i.match(/[A-Z]+/))
       const newElement = el.replace(uppercaseLetter, ` ${uppercaseLetter.toLowerCase()}`)
 
       labels.push(newElement)
@@ -38,7 +33,7 @@ function ProfileInfoCard({ title, description, info, social, action, editing = f
   })
 
   // Push the object values into the values array
-  Object.values(info).forEach((el) => values.push(el))
+  Object.values(info).forEach(el => values.push(el))
 
   // Render the card info items
   const renderItems = labels.map((label, key) => (
@@ -63,7 +58,7 @@ function ProfileInfoCard({ title, description, info, social, action, editing = f
   ))
 
   // Render the card social media icons
-  const renderSocial = (social || []).map(({ link, icon, color }) => (
+  const renderSocial = (social || []).map(({link, icon, color}) => (
     <SuiBox
       key={color}
       component="a"

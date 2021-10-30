@@ -1,46 +1,26 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {Link} from 'react-router-dom'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import PropTypes from 'prop-types'
 
-Coded by www.creative-tim.com
+import Card from '@material-ui/core/Card'
+import CardMedia from '@material-ui/core/CardMedia'
+import Tooltip from '@material-ui/core/Tooltip'
 
- =========================================================
+import SuiBox from 'components/SuiBox'
+import SuiTypography from 'components/SuiTypography'
+import SuiButton from 'components/SuiButton'
+import SuiAvatar from 'components/SuiAvatar'
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import styles from 'component-pages/Cards/ProjectCards/DefaultProjectCard/styles'
 
-// react-router-dom components
-import { Link } from "react-router-dom";
+function DefaultProjectCard({image, label, title, description, action, authors}) {
+  const classes = styles()
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// @material-ui core components
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import Tooltip from "@material-ui/core/Tooltip";
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiAvatar from "components/SuiAvatar";
-
-// Custom styles for the DefaultProjectCard
-import styles from "component-pages/Cards/ProjectCards/DefaultProjectCard/styles";
-
-function DefaultProjectCard({ image, label, title, description, action, authors }) {
-  const classes = styles();
-
-  const renderAuthors = authors.map(({ image: media, name }) => (
+  const renderAuthors = authors.map(({image: media, name}) => (
     <Tooltip key={name} title={name} placement="bottom">
       <SuiAvatar src={media} alt={name} size="xs" customClass={classes.projectCard_avatar} />
     </Tooltip>
-  ));
+  ))
 
   return (
     <Card className={classes.projectCard}>
@@ -64,7 +44,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
           </SuiTypography>
         </SuiBox>
         <SuiBox mb={1}>
-          {action.type === "internal" ? (
+          {action.type === 'internal' ? (
             <SuiTypography
               component={Link}
               to={action.route}
@@ -92,7 +72,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
           </SuiTypography>
         </SuiBox>
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
-          {action.type === "internal" ? (
+          {action.type === 'internal' ? (
             <SuiButton
               component={Link}
               to={action.route}
@@ -119,13 +99,13 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
         </SuiBox>
       </SuiBox>
     </Card>
-  );
+  )
 }
 
 // Setting default values for the props of DefaultProjectCard
 DefaultProjectCard.defaultProps = {
-  authors: [],
-};
+  authors: []
+}
 
 // Typechecking props for the DefaultProjectCard
 DefaultProjectCard.propTypes = {
@@ -134,22 +114,22 @@ DefaultProjectCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   action: PropTypes.shape({
-    type: PropTypes.oneOf(["external", "internal"]),
+    type: PropTypes.oneOf(['external', 'internal']),
     route: PropTypes.string.isRequired,
     color: PropTypes.oneOf([
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "light",
-      "dark",
-      "white",
+      'primary',
+      'secondary',
+      'info',
+      'success',
+      'warning',
+      'error',
+      'light',
+      'dark',
+      'white'
     ]).isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
   }).isRequired,
-  authors: PropTypes.arrayOf(PropTypes.object),
-};
+  authors: PropTypes.arrayOf(PropTypes.object)
+}
 
-export default DefaultProjectCard;
+export default DefaultProjectCard

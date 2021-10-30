@@ -1,23 +1,7 @@
-/**
-=========================================================
-* Soft UI Dashboard Material-UI - v1.0.0
-=========================================================
+import {makeStyles} from '@material-ui/core/styles'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @material-ui core components
-import { makeStyles } from '@material-ui/core/styles'
-
-export default makeStyles(({ functions, breakpoints, transitions }) => {
-  const { pxToRem } = functions
+export default makeStyles(({functions, breakpoints, transitions}) => {
+  const {pxToRem} = functions
 
   return {
     layoutContainer: {
@@ -25,14 +9,14 @@ export default makeStyles(({ functions, breakpoints, transitions }) => {
       padding: pxToRem(24),
 
       [breakpoints.up('xl')]: {
-        marginLeft: ({ direction, miniSidenav }) => {
+        marginLeft: ({direction, miniSidenav}) => {
           if (direction === 'ltr') {
             return miniSidenav ? pxToRem(120) : pxToRem(274)
           }
 
           return false
         },
-        marginRight: ({ direction, miniSidenav }) => {
+        marginRight: ({direction, miniSidenav}) => {
           if (direction === 'rtl') {
             return miniSidenav ? pxToRem(120) : pxToRem(274)
           }
