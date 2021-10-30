@@ -10,9 +10,17 @@ import { ROUTER_DEFAULT } from 'constants/router'
 const ItemSideNav = [
   {
     type: 'collapse',
-    name: 'Dashboard',
+    name: 'Home',
     key: 'dashboard',
     route: '/dashboard',
+    icon: <Shop size="12px" />,
+    noCollapse: true
+  },
+  {
+    type: 'collapse',
+    name: 'Bidding',
+    key: 'bidding',
+    route: '/bidding',
     icon: <Shop size="12px" />,
     noCollapse: true
   },

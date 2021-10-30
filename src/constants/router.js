@@ -6,6 +6,7 @@ export const ROUTER_DEFAULT = {
   PROFILE: '/profile',
   PRODUCT_DETAIL: '/product-detail',
   DASHBOARD: '/dashboard',
+  BIDDING: '/bidding',
   FAVORITE: '/favorite',
   HISTORY: '/history',
   CATEGORY_MANAGER: '/manager/category',
