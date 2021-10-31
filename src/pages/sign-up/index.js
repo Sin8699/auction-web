@@ -16,9 +16,15 @@ import {ROUTER_DEFAULT} from 'constants/router'
 import curved6 from 'assets/images/curved-images/curved14.jpg'
 
 function SignUp() {
-  const [agreement, setAgremment] = useState(true)
+  const [formValue, setFormValue] = useState({})
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [agreement, setAgremment] = useState(false)
 
   const handleSetAgremment = () => setAgremment(!agreement)
+
+  const handleChangeValue = key => e => {
+    setFormValue({...formValue, [key]: e.target.value})
+  }
 
   return (
     <BasicLayout
@@ -35,13 +41,35 @@ function SignUp() {
         <SuiBox pt={2} pb={3} px={3}>
           <SuiBox component="form" role="form">
             <SuiBox mb={2}>
-              <SuiInput placeholder="Name" />
+              <SuiInput
+                placeholder="Full name"
+                value={formValue.fullName || ''}
+                onChange={handleChangeValue('fullName')}
+              />
             </SuiBox>
             <SuiBox mb={2}>
-              <SuiInput type="email" placeholder="Email" />
+              <SuiInput
+                type="email"
+                placeholder="Email"
+                value={formValue.email || ''}
+                onChange={handleChangeValue('email')}
+              />
             </SuiBox>
             <SuiBox mb={2}>
-              <SuiInput type="password" placeholder="Password" />
+              <SuiInput
+                type="password"
+                placeholder="Password"
+                value={formValue.password || ''}
+                onChange={handleChangeValue('password')}
+              />
+            </SuiBox>
+            <SuiBox mb={2}>
+              <SuiInput
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+              />
             </SuiBox>
             <SuiBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
@@ -73,7 +101,7 @@ function SignUp() {
                   fontWeight="bold"
                   textGradient
                 >
-                  Sign in
+                  Sign up
                 </SuiTypography>
               </SuiTypography>
             </SuiBox>

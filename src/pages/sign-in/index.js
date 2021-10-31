@@ -17,8 +17,9 @@ import Separator from 'layouts/authentication/components/Separator'
 import curved9 from 'assets/images/curved-images/curved-6.jpg'
 
 import {ROUTER_DEFAULT} from 'constants/router'
-import {saveToStorage} from 'utils/storage'
+import appAPI from 'apis/config'
 import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
+import {saveToStorage} from 'utils/storage'
 
 function SignIn() {
   const history = useHistory()
@@ -34,19 +35,23 @@ function SignIn() {
     setFormValue({...formValue, [key]: event.target.value})
   }
 
+  const [loading, setLoading] = useState(false)
+
   const handleSubmit = async () => {
+    setLoading(true)
     try {
-      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, data => {
-        saveToStorage('user', {
-          accessToken:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhZGY1YTJhNDdiNGIzMTA1MDIwZiIsImVtYWlsIjoibWVnYW1pbmQuZnRAZ21haWwuY29tIiwiaWF0IjoxNjM1NjcyNTc2LCJleHAiOjE2MzU3MTU3NzZ9.55_zwLxe6NVk1UJ4xCw4CCOPnJtb16HKZc0zT5YIjEE',
-          role: 'USER'
-        })
-        history.replace(ROUTER_DEFAULT.DASHBOARD)
+      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, async data => {
+        const res = await appAPI.post('auth/login', data)
+        if (res.status === 200) {
+          saveToStorage('user', {accessToken: res.data.access_token, role: res.data.role})
+          history.replace(ROUTER_DEFAULT.DASHBOARD)
+        } else {
+        }
       })
     } catch (errs) {
       setErrors(errs)
     }
+    setLoading(false)
   }
 
   const handleSignInGoogle = () => {
@@ -125,8 +130,14 @@ function SignIn() {
           Forget password
         </SuiButton>
         <SuiBox mt={4} mb={1}>
-          <SuiButton variant="gradient" buttonColor="info" fullWidth onClick={handleSubmit}>
-            sign in
+          <SuiButton
+            variant="gradient"
+            buttonColor="info"
+            fullWidth
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {!loading ? 'sign in' : 'loading'}
           </SuiButton>
         </SuiBox>
         <SuiBox mt={3} textAlign="center">
