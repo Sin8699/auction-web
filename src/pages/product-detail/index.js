@@ -25,7 +25,7 @@ function ProductDetail() {
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
             <Grid container alignItems="center">
               <Grid item xs={6}>
-                LEFT
+                <img src="https://cdn.tgdd.vn/Products/Images/44/236131/apple-macbook-pro-m1-2020-z11c000cj-600x600.jpg"/>
               </Grid>
 
               <Grid item xs={6}>
