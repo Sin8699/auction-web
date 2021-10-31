@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import {useState} from 'react'
+import {Link, useHistory} from 'react-router-dom'
 // @material-ui components
 import Switch from '@material-ui/core/Switch'
 
@@ -11,15 +11,14 @@ import SuiButton from 'components/SuiButton'
 
 // Authentication layout components
 import CoverLayout from 'layouts/authentication/components/CoverLayout'
-import Socials from 'layouts/authentication/components/Socials'
+import Socials from './Socials'
 import Separator from 'layouts/authentication/components/Separator'
 
-// Images
 import curved9 from 'assets/images/curved-images/curved-6.jpg'
 
-import { ROUTER_DEFAULT } from 'constants/router'
-import { saveToStorage } from 'utils/storage'
-import validateData, { TYPE_SCHEMA } from 'utils/validationSchema'
+import {ROUTER_DEFAULT} from 'constants/router'
+import {saveToStorage} from 'utils/storage'
+import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
 
 function SignIn() {
   const history = useHistory()
@@ -30,14 +29,14 @@ function SignIn() {
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe)
 
-  const handleChangeForm = (key) => (event) => {
-    setErrors({ ...errors, [key]: false })
-    setFormValue({ ...formValue, [key]: event.target.value })
+  const handleChangeForm = key => event => {
+    setErrors({...errors, [key]: false})
+    setFormValue({...formValue, [key]: event.target.value})
   }
 
   const handleSubmit = async () => {
     try {
-      await validateData(TYPE_SCHEMA.LOGIN, { ...formValue }, (data) => {
+      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, data => {
         saveToStorage('isLogin', true) //change after done function login
         history.replace(ROUTER_DEFAULT.DASHBOARD)
       })
@@ -46,9 +45,13 @@ function SignIn() {
     }
   }
 
+  const handleSignInGoogle = () => {
+    alert('Sign in Google')
+  }
+
   return (
     <CoverLayout title="Welcome back" description="Login with" image={curved9}>
-      <SuiBox mb={2}>
+      <SuiBox mb={2} onClick={handleSignInGoogle}>
         <Socials />
       </SuiBox>
       <Separator />

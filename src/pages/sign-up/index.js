@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import {useState} from 'react'
+import {Link} from 'react-router-dom'
 
 import Card from '@material-ui/core/Card'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -10,10 +10,8 @@ import SuiInput from 'components/SuiInput'
 import SuiButton from 'components/SuiButton'
 
 import BasicLayout from 'layouts/authentication/components/BasicLayout'
-// import Socials from 'layouts/authentication/components/Socials'
-// import Separator from 'layouts/authentication/components/Separator'
 
-import { ROUTER_DEFAULT } from 'constants/router'
+import {ROUTER_DEFAULT} from 'constants/router'
 
 import curved6 from 'assets/images/curved-images/curved14.jpg'
 
@@ -34,10 +32,6 @@ function SignUp() {
             Register with
           </SuiTypography>
         </SuiBox>
-        {/* <SuiBox mb={2}>
-          <Socials />
-        </SuiBox>
-        <Separator /> */}
         <SuiBox pt={2} pb={3} px={3}>
           <SuiBox component="form" role="form">
             <SuiBox mb={2}>

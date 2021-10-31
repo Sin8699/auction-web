@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import {forwardRef} from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 
@@ -9,8 +9,8 @@ import Button from '@material-ui/core/Button'
 import styles from 'components/SuiButton/styles'
 
 const SuiButton = forwardRef(
-  ({ buttonColor, variant, size, circular, iconOnly, children, customClass, ...rest }, ref) => {
-    const classes = styles({ buttonColor, variant, size, iconOnly })
+  ({buttonColor, variant, size, circular, iconOnly, children, customClass, ...rest}, ref) => {
+    const classes = styles({buttonColor, variant, size, iconOnly})
 
     return (
       <Button
