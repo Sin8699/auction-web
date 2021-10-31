@@ -8,11 +8,8 @@ import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 import SuiTypography from 'components/SuiTypography'
-import SuiInput from 'components/SuiInput'
-import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu'
-import SuiButton from 'components/SuiButton'
-import Icon from '@material-ui/core/Icon'
-import SuiPagination from 'components/SuiPagination'
+import RelatedProductsTable from './components/RelatedProductsTable'
+import Grid from '@material-ui/core/Grid'
 
 function ProductDetail() {
   return (
@@ -21,55 +18,26 @@ function ProductDetail() {
       <SuiBox mb={3}>
         <Card>
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
-            <SuiBox mb={0.5}>
-              <SuiTypography variant="h6" fontWeight="medium">
-                Product
-              </SuiTypography>
-            </SuiBox>
-            <SuiBox display="flex" mb={1}>
-              <SuiBox mr={1}>
-                <SuiInput withIcon={{ icon: 'search', direction: 'right' }} placeholder="Search" />
-              </SuiBox>
-              <>
-                <Menu
-                  menuButton={
-                    <SuiButton variant="gradient" buttonColor="secondary">
-                      Category
-                      <Icon className="material-icons-round font-bold">keyboard_arrow_down</Icon>
-                    </SuiButton>
-                  }
-                >
-                  <MenuItem>New File</MenuItem>
-                  <SubMenu label="Open">
-                    <MenuItem>index.html</MenuItem>
-                    <MenuItem>example.js</MenuItem>
-                    <SubMenu label="Styles">
-                      <MenuItem>about.css</MenuItem>
-                      <MenuItem>home.css</MenuItem>
-                      <MenuItem>index.css</MenuItem>
-                    </SubMenu>
-                  </SubMenu>
-                  <MenuItem>Save</MenuItem>
-                </Menu>
-              </>
-            </SuiBox>
+            <SuiTypography variant="h6" fontWeight="medium">
+              Products
+            </SuiTypography>
           </SuiBox>
-          <SuiBox p={2}>
+          <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
+            <Grid container alignItems="center">
+              <Grid item xs={6}>
+                LEFT
+              </Grid>
 
-            <SuiPagination variant="contained">
-              <SuiPagination item>
-                <Icon className="material-icons-round font-bold">chevron_left</Icon>
-              </SuiPagination>
-              <SuiPagination active item>
-                1
-              </SuiPagination>
-              <SuiPagination item>2</SuiPagination>
-              <SuiPagination item>3</SuiPagination>
-              <SuiPagination item>
-                <Icon className="material-icons-round font-bold">chevron_right</Icon>
-              </SuiPagination>
-            </SuiPagination>
+              <Grid item xs={6}>
+                RIGHT
+              </Grid>
+            </Grid>
           </SuiBox>
+
+          <SuiBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
+            <SuiTypography variant="h6">Related Products</SuiTypography>
+          </SuiBox>
+          <RelatedProductsTable />
         </Card>
       </SuiBox>
       <Footer />
