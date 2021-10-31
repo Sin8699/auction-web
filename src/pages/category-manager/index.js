@@ -32,15 +32,9 @@ function CategoryManager() {
   const [anchorEl, setAnchorEl] = useState(null)
   const [page, setPage] = useState(1)
 
-  const [totalPage, setTotalPage] = useState()
-
   useEffect(() => {
     setList(categoriesData)
   }, [])
-
-  useEffect(() => {
-    setTotalPage(Math.floor(list.length / 10) + 1)
-  }, [list])
 
   const onNew = () => navigate.push(ROUTER_DEFAULT.CATEGORY_MANAGER_NEW)
 

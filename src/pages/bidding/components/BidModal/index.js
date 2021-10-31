@@ -1,10 +1,14 @@
+import {useSelector} from 'react-redux'
 import SuiButton from 'components/SuiButton'
-import { Prompt, Alert } from 'react-st-modal'
-import { useContext } from 'react'
-import { SocketContext } from '../../../../context/socket/SocketIOProvider'
+import {Prompt, Alert} from 'react-st-modal'
+import {useContext} from 'react'
+import {SocketContext} from '../../../../context/socket/SocketIOProvider'
 
-export default function BidModal({ biddingProduct, productName }) {
-  const { biddingProduct: biddingProductSocket } = useContext(SocketContext)
+export default function BidModal({biddingProduct, productName}) {
+  const userProfile = useSelector(state => state.userState.profile)
+  console.log('userProfile: ', userProfile)
+
+  const {biddingProduct: biddingProductSocket} = useContext(SocketContext)
 
   const handleBidding = async () => {
     const price = await Prompt('How much do you want to bidding?', {

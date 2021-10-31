@@ -14,7 +14,7 @@ import SocketContainer from './context/socket/SocketIOProvider'
 import appStore from './redux/store'
 
 const PrivateRoute = ({component: Component, ...rest}) => {
-  const accessToken = loadFromStorage('isLogin') || '' // change after done function login
+  const accessToken = loadFromStorage('user') || '' // change after done function login
 
   return (
     <Route
@@ -27,7 +27,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 }
 
 const AuthenticationRoute = ({component: Component, ...rest}) => {
-  const accessToken = loadFromStorage('isLogin') || false // change after done function login
+  const accessToken = loadFromStorage('user') || false // change after done function login
 
   return (
     <Route

@@ -37,7 +37,11 @@ function SignIn() {
   const handleSubmit = async () => {
     try {
       await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, data => {
-        saveToStorage('isLogin', true) //change after done function login
+        saveToStorage('user', {
+          accessToken:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhZGY1YTJhNDdiNGIzMTA1MDIwZiIsImVtYWlsIjoibWVnYW1pbmQuZnRAZ21haWwuY29tIiwiaWF0IjoxNjM1NjcyNTc2LCJleHAiOjE2MzU3MTU3NzZ9.55_zwLxe6NVk1UJ4xCw4CCOPnJtb16HKZc0zT5YIjEE',
+          role: 'USER'
+        })
         history.replace(ROUTER_DEFAULT.DASHBOARD)
       })
     } catch (errs) {
