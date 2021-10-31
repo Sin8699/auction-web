@@ -5,7 +5,8 @@ export const historyProductData = [
     name: 'bidding 1',
     status: 'SOLD',
     product: 11,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ export const historyProductData = [
     name: 'bidding 2',
     status: 'AVAILABLE',
     product: 34,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 3,
@@ -21,7 +23,8 @@ export const historyProductData = [
     name: 'bidding 3',
     status: 'EXPIRED',
     product: 76,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 4,
@@ -29,7 +32,8 @@ export const historyProductData = [
     name: 'bidding 4',
     status: 'AVAILABLE',
     product: 34,
-    currentPrice: '19'
+    currentPrice: '19',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 5,
@@ -37,7 +41,8 @@ export const historyProductData = [
     name: 'bidding 5',
     status: 'SOLD',
     product: 4,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 6,
@@ -45,7 +50,8 @@ export const historyProductData = [
     name: 'bidding 6',
     status: 'AVAILABLE',
     product: 30,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 7,
@@ -53,7 +59,8 @@ export const historyProductData = [
     name: 'bidding 7',
     status: 'AVAILABLE',
     product: 10,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 8,
@@ -61,7 +68,8 @@ export const historyProductData = [
     name: 'bidding 8',
     status: 'AVAILABLE',
     product: 87,
-    currentPrice: '12'
+    currentPrice: '12',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 9,
@@ -69,7 +77,8 @@ export const historyProductData = [
     name: 'bidding 9',
     status: 'SOLD',
     product: 123,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 10,
@@ -77,7 +86,8 @@ export const historyProductData = [
     name: 'bidding 10',
     status: 'AVAILABLE',
     product: 10,
-    currentPrice: '100'
+    currentPrice: '100',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 11,
@@ -85,7 +95,8 @@ export const historyProductData = [
     name: 'bidding 11',
     status: 'SOLD',
     product: 43,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 12,
@@ -93,7 +104,8 @@ export const historyProductData = [
     name: 'bidding 12',
     status: 'AVAILABLE',
     product: 56,
-    currentPrice: '50'
+    currentPrice: '50',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 13,
@@ -101,7 +113,8 @@ export const historyProductData = [
     name: 'bidding 13',
     status: 'SOLD',
     product: 86,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 14,
@@ -109,7 +122,8 @@ export const historyProductData = [
     name: 'bidding 14',
     status: 'AVAILABLE',
     product: 0,
-    currentPrice: '20'
+    currentPrice: '20',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 15,
@@ -117,7 +131,8 @@ export const historyProductData = [
     name: 'bidding 15',
     status: 'AVAILABLE',
     product: 67,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 16,
@@ -125,7 +140,8 @@ export const historyProductData = [
     name: 'bidding 16',
     status: 'SOLD',
     product: 55,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 17,
@@ -133,7 +149,8 @@ export const historyProductData = [
     name: 'bidding 17',
     status: 'AVAILABLE',
     product: 7,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 18,
@@ -141,7 +158,8 @@ export const historyProductData = [
     name: 'bidding 18',
     status: 'AVAILABLE',
     product: 7,
-    currentPrice: '30'
+    currentPrice: '30',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 19,
@@ -149,7 +167,8 @@ export const historyProductData = [
     name: 'bidding 19',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 20,
@@ -157,7 +176,8 @@ export const historyProductData = [
     name: 'bidding 20',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 21,
@@ -165,7 +185,8 @@ export const historyProductData = [
     name: 'bidding 21',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '40'
+    currentPrice: '40',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 22,
@@ -173,7 +194,8 @@ export const historyProductData = [
     name: 'bidding 22',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 23,
@@ -181,7 +203,8 @@ export const historyProductData = [
     name: 'bidding 23',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 24,
@@ -189,7 +212,8 @@ export const historyProductData = [
     name: 'bidding 24',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 25,
@@ -197,7 +221,8 @@ export const historyProductData = [
     name: 'bidding 25',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 26,
@@ -205,7 +230,8 @@ export const historyProductData = [
     name: 'bidding 26',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '40'
+    currentPrice: '40',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 27,
@@ -213,7 +239,8 @@ export const historyProductData = [
     name: 'bidding 27',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 28,
@@ -221,7 +248,8 @@ export const historyProductData = [
     name: 'bidding 28',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 29,
@@ -229,7 +257,8 @@ export const historyProductData = [
     name: 'bidding 29',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 30,
@@ -237,7 +266,8 @@ export const historyProductData = [
     name: 'bidding 30',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '20'
+    currentPrice: '20',
+    image: 'http://placeimg.com/640/480/city'
   },
   {
     id: 31,
@@ -245,6 +275,7 @@ export const historyProductData = [
     name: 'bidding 31',
     status: 'AVAILABLE',
     product: 5,
-    currentPrice: '10'
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
   }
 ]
