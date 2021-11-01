@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 // @material-ui components
-import {Switch, CircularProgress} from '@material-ui/core'
+import {CircularProgress} from '@material-ui/core'
 
 // components
 import SuiBox from 'components/SuiBox'
@@ -27,11 +27,8 @@ function SignIn() {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const [rememberMe, setRememberMe] = useState(false)
   const [formValue, setFormValue] = useState({})
   const [errors, setErrors] = useState({})
-
-  const handleSetRememberMe = () => setRememberMe(!rememberMe)
 
   const handleChangeForm = key => event => {
     setErrors({...errors, [key]: false})
@@ -118,17 +115,6 @@ function SignIn() {
               </SuiTypography>
             </SuiBox>
           )}
-        </SuiBox>
-        <SuiBox display="flex" alignItems="center">
-          <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-          <SuiTypography
-            variant="button"
-            fontWeight="regular"
-            onClick={handleSetRememberMe}
-            customClass="cursor-pointer user-select-none"
-          >
-            &nbsp;&nbsp;Remember me (unavailable)
-          </SuiTypography>
         </SuiBox>
         <SuiButton
           mt={4}
