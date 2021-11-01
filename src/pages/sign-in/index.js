@@ -31,7 +31,7 @@ function SignIn() {
   const [errors, setErrors] = useState({})
 
   const handleChangeForm = key => event => {
-    setErrors({...errors, [key]: false})
+    setErrors({...errors, [key]: ''})
     setFormValue({...formValue, [key]: event.target.value})
   }
 
