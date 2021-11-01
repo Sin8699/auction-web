@@ -1,7 +1,8 @@
 import {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 // @material-ui components
-import Switch from '@material-ui/core/Switch'
+import {CircularProgress} from '@material-ui/core'
 
 // components
 import SuiBox from 'components/SuiBox'
@@ -17,36 +18,47 @@ import Separator from 'layouts/authentication/components/Separator'
 import curved9 from 'assets/images/curved-images/curved-6.jpg'
 
 import {ROUTER_DEFAULT} from 'constants/router'
-import {saveToStorage} from 'utils/storage'
+import UserApi from 'apis/user'
 import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
+import {saveToStorage} from 'utils/storage'
+import {openAlert} from 'redux/actions/alert'
 
 function SignIn() {
   const history = useHistory()
+  const dispatch = useDispatch()
 
-  const [rememberMe, setRememberMe] = useState(false)
   const [formValue, setFormValue] = useState({})
   const [errors, setErrors] = useState({})
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe)
-
   const handleChangeForm = key => event => {
-    setErrors({...errors, [key]: false})
+    setErrors({...errors, [key]: ''})
     setFormValue({...formValue, [key]: event.target.value})
   }
 
+  const [loading, setLoading] = useState(false)
+
   const handleSubmit = async () => {
+    setLoading(true)
     try {
-      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, data => {
-        saveToStorage('user', {
-          accessToken:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhZGY1YTJhNDdiNGIzMTA1MDIwZiIsImVtYWlsIjoibWVnYW1pbmQuZnRAZ21haWwuY29tIiwiaWF0IjoxNjM1NjcyNTc2LCJleHAiOjE2MzU3MTU3NzZ9.55_zwLxe6NVk1UJ4xCw4CCOPnJtb16HKZc0zT5YIjEE',
-          role: 'USER'
-        })
-        history.replace(ROUTER_DEFAULT.DASHBOARD)
+      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, async dataLogin => {
+        const {status, data, error} = await UserApi.login(dataLogin)
+        if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+        else {
+          const isLoginSuccess = () => {
+            saveToStorage('user', {accessToken: data.access_token, role: data.role})
+            history.replace(ROUTER_DEFAULT.DASHBOARD)
+          }
+          status === 200
+            ? isLoginSuccess()
+            : dispatch(
+                openAlert({messageAlert: data.message || 'Something error', typeAlert: 'error'})
+              )
+        }
       })
     } catch (errs) {
       setErrors(errs)
     }
+    setLoading(false)
   }
 
   const handleSignInGoogle = () => {
@@ -104,17 +116,6 @@ function SignIn() {
             </SuiBox>
           )}
         </SuiBox>
-        <SuiBox display="flex" alignItems="center">
-          <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-          <SuiTypography
-            variant="button"
-            fontWeight="regular"
-            onClick={handleSetRememberMe}
-            customClass="cursor-pointer user-select-none"
-          >
-            &nbsp;&nbsp;Remember me (unavailable)
-          </SuiTypography>
-        </SuiBox>
         <SuiButton
           mt={4}
           component="a"
@@ -125,8 +126,14 @@ function SignIn() {
           Forget password
         </SuiButton>
         <SuiBox mt={4} mb={1}>
-          <SuiButton variant="gradient" buttonColor="info" fullWidth onClick={handleSubmit}>
-            sign in
+          <SuiButton
+            variant="gradient"
+            buttonColor="info"
+            fullWidth
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {!loading ? 'sign in' : <CircularProgress size={15} color="light" />}
           </SuiButton>
         </SuiBox>
         <SuiBox mt={3} textAlign="center">

@@ -14,3 +14,7 @@ const useAxios = makeUseAxios({
 export const useGetProducts = () => {
   return useAxios('/products')
 }
+
+export const useGetProductId = (id) => {
+  return useAxios(`/products/${id}`)
+}

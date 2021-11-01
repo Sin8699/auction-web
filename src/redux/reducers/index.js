@@ -1,7 +1,12 @@
 import {combineReducers} from 'redux'
-import {exampleReducer} from './example'
-import {userReducer} from './user'
+import {ExampleReducer} from './example'
+import {UserReducer} from './user'
+import {AlertReducer} from './alert'
 
-const rootReducer = combineReducers({exampleSate: exampleReducer, userState: userReducer})
+const rootReducer = combineReducers({
+  exampleSate: ExampleReducer,
+  userState: UserReducer,
+  alertState: AlertReducer
+})
 
 export default rootReducer

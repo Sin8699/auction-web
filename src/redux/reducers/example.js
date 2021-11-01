@@ -5,7 +5,7 @@ const initialState = {
   loading: false
 }
 
-export function exampleReducer(state = initialState, action) {
+export function ExampleReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypesExample.REQUEST_EXAMPLE_DATA: {
       return {...state, loading: true}

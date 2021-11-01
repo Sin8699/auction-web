@@ -25,11 +25,42 @@ function ProductDetail() {
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
             <Grid container alignItems="center">
               <Grid item xs={6}>
-                LEFT
+                <Grid item>
+                  <img src="https://cdn.tgdd.vn/Products/Images/44/236131/apple-macbook-pro-m1-2020-z11c000cj-600x600.jpg" />
+                </Grid>
+                <Grid container item>
+                  <Grid item xs={4}>
+                    <a href="#">
+                      <img
+                        src="https://cdn.tgdd.vn/Products/Images/44/236131/apple-macbook-pro-m1-2020-z11c000cj-600x600.jpg"
+                        width="120px"
+                        height="80px"
+                      />
+                    </a>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <a href="#">
+                      <img
+                        src="https://cdn.tgdd.vn/Products/Images/44/236131/apple-macbook-pro-m1-2020-z11c000cj-600x600.jpg"
+                        width="120px"
+                        height="80px"
+                      />
+                    </a>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <a href="#">
+                      <img
+                        src="https://cdn.tgdd.vn/Products/Images/44/236131/apple-macbook-pro-m1-2020-z11c000cj-600x600.jpg"
+                        width="120px"
+                        height="80px"
+                      />
+                    </a>
+                  </Grid>
+                </Grid>
               </Grid>
 
               <Grid item xs={6}>
-                RIGHT
+                <h1>Macbook pro</h1>
               </Grid>
             </Grid>
           </SuiBox>

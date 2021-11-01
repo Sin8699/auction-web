@@ -5,7 +5,7 @@ const initialState = {
   loading: false
 }
 
-export function userReducer(state = initialState, action) {
+export function UserReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypesUser.REQUEST_PROFILE: {
       return {...state, loading: true}
