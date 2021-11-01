@@ -133,7 +133,7 @@ function SignIn() {
             onClick={handleSubmit}
             disabled={loading}
           >
-            {!loading ? 'sign in' : <CircularProgress size={15} color="light" />}
+            {!loading ? 'sign in' : <CircularProgress size={15} color="inherit" />}
           </SuiButton>
         </SuiBox>
         <SuiBox mt={3} textAlign="center">

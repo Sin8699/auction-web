@@ -1,6 +1,7 @@
 export const ROUTER_DEFAULT = {
   SIGN_IN: '/authentication/sign-in',
   SIGN_UP: '/authentication/sign-up',
+  SIGN_UP_SUCCESS: '/authentication/sign-up-success',
   FORGOT_PASSWORD: '/authentication/forgot-password',
   RESET_PASSWORD: '/authentication/reset-password',
   PROFILE: '/profile',
