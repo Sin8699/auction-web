@@ -1,29 +1,36 @@
 import * as Yup from 'yup'
-import { get, set, forEach } from 'lodash'
+import {get, set, forEach} from 'lodash'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Email invalid').required('Email is required'),
   password: Yup.string().required('Password is required')
 })
 
+const registerSchema = Yup.object().shape({
+  fullName: Yup.string().required('Full name is required'),
+  email: Yup.string().email('Email invalid').required('Email is required'),
+  password: Yup.string().required('Password is required')
+})
+
 export const TYPE_SCHEMA = {
-  LOGIN: 'loginSchema'
+  LOGIN: 'loginSchema',
+  REGISTER: 'registerSchema'
 }
 
-const schema = { loginSchema }
+const schema = {loginSchema, registerSchema}
 
 const validateData = (validateChoose, formValue, callback) => {
   return new Promise((resolve, reject) => {
     schema[validateChoose]
-      .validate(formValue, { abortEarly: false })
+      .validate(formValue, {abortEarly: false})
       .then(() => {
         callback && callback(formValue)
         resolve()
       })
-      .catch((err) => {
+      .catch(err => {
         const listError = get(err, 'inner')
         let errors = {}
-        forEach(listError, (error) => {
+        forEach(listError, error => {
           set(errors, error.path, get(error, 'errors[0]'))
         })
         reject(errors)

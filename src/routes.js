@@ -1,5 +1,6 @@
 import SignIn from 'pages/sign-in'
 import SignUp from 'pages/sign-up'
+import SignUpSuccess from 'pages/sign-up-success'
 import ForgotPassword from './pages/forgot-password'
 import ResetPassword from './pages/reset-password'
 
@@ -112,6 +113,12 @@ const routes = [
     type: TYPE_ROUTER.AUTHENTICATION,
     route: ROUTER_DEFAULT.SIGN_UP,
     component: SignUp
+  },
+  {
+    key: 'sign-up-success',
+    type: TYPE_ROUTER.AUTHENTICATION,
+    route: ROUTER_DEFAULT.SIGN_UP_SUCCESS,
+    component: SignUpSuccess
   },
   {
     key: 'forgot-password',
