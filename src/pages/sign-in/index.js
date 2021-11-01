@@ -1,7 +1,8 @@
 import {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 // @material-ui components
-import Switch from '@material-ui/core/Switch'
+import {Switch, CircularProgress} from '@material-ui/core'
 
 // components
 import SuiBox from 'components/SuiBox'
@@ -17,12 +18,14 @@ import Separator from 'layouts/authentication/components/Separator'
 import curved9 from 'assets/images/curved-images/curved-6.jpg'
 
 import {ROUTER_DEFAULT} from 'constants/router'
-import appAPI from 'apis/config'
+import UserApi from 'apis/user'
 import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
 import {saveToStorage} from 'utils/storage'
+import {openAlert} from 'redux/actions/alert'
 
 function SignIn() {
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const [rememberMe, setRememberMe] = useState(false)
   const [formValue, setFormValue] = useState({})
@@ -40,12 +43,19 @@ function SignIn() {
   const handleSubmit = async () => {
     setLoading(true)
     try {
-      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, async data => {
-        const res = await appAPI.post('auth/login', data)
-        if (res.status === 200) {
-          saveToStorage('user', {accessToken: res.data.access_token, role: res.data.role})
-          history.replace(ROUTER_DEFAULT.DASHBOARD)
-        } else {
+      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, async dataLogin => {
+        const {status, data, error} = await UserApi.login(dataLogin)
+        if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+        else {
+          const isLoginSuccess = () => {
+            saveToStorage('user', {accessToken: data.access_token, role: data.role})
+            history.replace(ROUTER_DEFAULT.DASHBOARD)
+          }
+          status === 200
+            ? isLoginSuccess()
+            : dispatch(
+                openAlert({messageAlert: data.message || 'Something error', typeAlert: 'error'})
+              )
         }
       })
     } catch (errs) {
@@ -137,7 +147,7 @@ function SignIn() {
             onClick={handleSubmit}
             disabled={loading}
           >
-            {!loading ? 'sign in' : 'loading'}
+            {!loading ? 'sign in' : <CircularProgress size={15} color="light" />}
           </SuiButton>
         </SuiBox>
         <SuiBox mt={3} textAlign="center">

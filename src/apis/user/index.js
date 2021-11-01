@@ -1,9 +1,17 @@
-import {useAxios} from '../useAxiosConfig'
+import appAPI from '../config'
+import get from 'lodash/get'
+import {StatusApi} from '../constants'
 
-export const useLogin = () => {
-  return useAxios({url: 'auth/login', method: 'POST'}, false)
+const UserApi = {
+  login: async dataLogin => {
+    try {
+      const {data, status} = await appAPI.post('auth/login', dataLogin)
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
+  }
 }
 
-export const useSignUp = () => {
-  return useAxios('auth/register')
-}
+export default UserApi
