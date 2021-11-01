@@ -11,6 +11,7 @@ import SuiTypography from 'components/SuiTypography'
 import RelatedProductsTable from './components/RelatedProductsTable'
 import Grid from '@material-ui/core/Grid'
 import { useState } from 'react'
+import { getButtonByStatus } from '../../helpers/getButtonByStatus'
 
 const product_fake = {
   createdAt: '2021-10-18T11:49:25.180Z',
@@ -27,18 +28,28 @@ const product_fake = {
   _id: '1'
 }
 
-const bidding_record_fake = {
+const bidding_product_fake = {
   createdAt: '2021-10-18T10:18:50.343Z',
-  status: 'status 1',
+  status: 'AVAILABLE',
   stepPrice: 'stepPrice 1',
   initPrice: 'initPrice 1',
-  buyNowPrice: 'buyNowPrice 1',
-  currentPrice: 'currentPrice 1',
+  buyNowPrice: '200',
+  currentPrice: '100',
   publicTime: 'publicTime 1',
   endTime: 'endTime 1',
   winner: 'winner 1',
   product: '1',
   _id: '3'
+}
+
+const seller_fake = {
+  fullName: 'Antonio Kovacek',
+  rate: '10'
+}
+
+const bidder_fake = {
+  fullName: 'Julio Murphy',
+  rate: '10'
 }
 
 function ProductDetail() {
@@ -47,6 +58,9 @@ function ProductDetail() {
   )
 
   const product = product_fake
+  const bidding_product = bidding_product_fake
+  const seller = seller_fake
+  const bidder = bidder_fake
 
   const handleChangePreview = (url) => () => {
     setCurrentImagePreview(url)
@@ -80,7 +94,109 @@ function ProductDetail() {
               </Grid>
 
               <Grid item xs={6}>
-                <h1>Macbook pro</h1>
+                <h1>{product.name}</h1>
+                <SuiTypography
+                  variant="button"
+                  fontWeight="regular"
+                  textTransform="capitalize"
+                  textGradient
+                >
+                  Price: {bidding_product.currentPrice} $
+                </SuiTypography>
+
+                <SuiBox my={2}>
+                  <SuiTypography textGradient variant="h5" textColor="info">
+                    Price Buy Now: {bidding_product.buyNowPrice} $
+                  </SuiTypography>
+                </SuiBox>
+
+                {getButtonByStatus(bidding_product.status)}
+
+                <SuiBox my={2} display="flex">
+                  <SuiTypography
+                    style={{ lineHeight: '30px', marginRight: '20px' }}
+                    mt={2}
+                    variant="h6"
+                    color="info"
+                  >
+                    Seller: {seller.fullName}
+                  </SuiTypography>
+                  <h2>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star_half
+                    </span>
+                  </h2>
+                </SuiBox>
+
+                <SuiBox my={2} display="flex">
+                  <SuiTypography
+                    style={{ lineHeight: '30px', marginRight: '20px' }}
+                    mt={2}
+                    variant="h6"
+                    color="info"
+                  >
+                    Highest bidder: {bidder.fullName}
+                  </SuiTypography>
+                  <h2>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star
+                    </span>
+                    <span
+                      class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
+                      aria-hidden="true"
+                    >
+                      star_half
+                    </span>
+                  </h2>
+                </SuiBox>
               </Grid>
             </Grid>
           </SuiBox>
