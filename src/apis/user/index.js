@@ -11,6 +11,24 @@ const UserApi = {
       const errorMessage = get(error, 'response.data.message')
       return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
     }
+  },
+  register: async dataRegister => {
+    try {
+      const {data, status} = await appAPI.post('auth/register', dataRegister)
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
+  },
+  changePassword: async changePassword => {
+    try {
+      const {data, status} = await appAPI.post('auth/change-password', changePassword)
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
   }
 }
 

@@ -43,12 +43,7 @@ function ProfileInfoCard({title, description, info, social, action, editing = fa
       </SuiTypography>
 
       {editing ? (
-        <SuiInput
-          placeholder={label}
-          autoComplete="password"
-          label={label}
-          defaultValue={values[key]}
-        />
+        <SuiInput placeholder={label} label={label} defaultValue={values[key]} disabled />
       ) : (
         <SuiTypography variant="button" fontWeight="regular" textColor="text">
           &nbsp;{values[key]}
@@ -108,6 +103,7 @@ function ProfileInfoCard({title, description, info, social, action, editing = fa
         <SuiBox opacity={0.3}>
           <Divider />
         </SuiBox>
+
         <SuiBox>
           {renderItems}
           {(social || []).length > 0 && (
@@ -129,9 +125,9 @@ ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   info: PropTypes.objectOf(PropTypes.string).isRequired,
-  social: PropTypes.arrayOf(PropTypes.object).isRequired,
+  social: PropTypes.arrayOf(PropTypes.object),
   action: PropTypes.shape({
-    route: PropTypes.string.isRequired,
+    route: PropTypes.string,
     tooltip: PropTypes.string.isRequired,
     onClick: PropTypes.func
   }).isRequired,

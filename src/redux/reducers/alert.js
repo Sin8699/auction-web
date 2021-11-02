@@ -20,7 +20,7 @@ export function AlertReducer(state = initialState, action) {
       }
     }
     case actionTypesAlert.CLOSE_ALERT: {
-      return initialState
+      return {...state, openAlert: false}
     }
     default:
       return state
