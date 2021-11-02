@@ -18,38 +18,47 @@ import TablePagination from '../../components/TablePagination'
 import {renderAction} from './utils/moreAction'
 import TableHeader from './utils/tableHead'
 import {TYPE_MODAL} from 'constants/modal'
-import ModalCategory from './components/modal'
+import ModalSubCategory from './components/modal'
 
 import {requestCategoryData} from '../../redux/actions/category'
+import {requestSubCategoryData} from '../../redux/actions/subcategory'
 
 const LIMIT_PAGINATION = 10
 
-function CategoryManager() {
+export default function SubCategoryManager() {
   const dispatch = useDispatch()
   const {dataCategory} = useSelector(state => state.categoryState)
 
-  const [list, setList] = useState([])
+  const {dataSubCategory} = useSelector(state => state.subCategoryState)
+
+  const [categories, setCategories] = useState([])
+  const [subCategories, setSubCategories] = useState([])
   const [selectedItem, setSelectedItem] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null)
   const [typeModal, setTypeModal] = useState()
   const [page, setPage] = useState(1)
 
+  useEffect(() => {
+    dispatch(requestCategoryData())
+    dispatch(requestSubCategoryData())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    setCategories(dataCategory)
+    setSubCategories(dataSubCategory)
+  }, [dataCategory, dataSubCategory])
+
   const onSuccessCategory = () => {
     setShowModal(false)
-    dispatch(requestCategoryData())
+    dispatch(requestSubCategoryData())
   }
-
-  useEffect(() => dispatch(requestCategoryData()), [dispatch])
 
   const onAddNew = () => {
     setShowModal(true)
     setTypeModal(TYPE_MODAL.CREATE)
   }
-
-  useEffect(() => {
-    setList(dataCategory)
-  }, [dataCategory])
 
   const listActions = renderAction({
     onEdit: () => {
@@ -67,7 +76,7 @@ function CategoryManager() {
       <DashboardLayout>
         <Header />
         <TableContainer
-          data={list}
+          data={subCategories}
           header={TableHeader}
           onAddNew={onAddNew}
           searchKey="name"
@@ -77,6 +86,9 @@ function CategoryManager() {
             <>
               <TableCell>{row._id}</TableCell>
               <TableCell>{row.name}</TableCell>
+              <TableCell>
+                {dataCategory.find(category => category._id === row.category)?.name}
+              </TableCell>
               <TableCell align="right">
                 <IconButton
                   onClick={e => {
@@ -93,7 +105,7 @@ function CategoryManager() {
         <CoverLayout marginTop="10px">
           <TablePagination
             page={page}
-            totalPage={Math.ceil(list.length / LIMIT_PAGINATION)}
+            totalPage={Math.ceil(subCategories.length / LIMIT_PAGINATION)}
             onChangePage={setPage}
           />
         </CoverLayout>
@@ -103,10 +115,11 @@ function CategoryManager() {
         {anchorEl && <MenuAction listActions={listActions} />}
       </MenuContainer>
       {showModal && (
-        <ModalCategory
+        <ModalSubCategory
           show={showModal}
           onClose={() => setShowModal(false)}
           selectedItem={selectedItem}
+          categories={categories}
           onSuccess={onSuccessCategory}
           typeModal={typeModal}
         />
@@ -114,5 +127,3 @@ function CategoryManager() {
     </>
   )
 }
-
-export default CategoryManager
