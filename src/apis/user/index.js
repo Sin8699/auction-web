@@ -29,6 +29,15 @@ const UserApi = {
       const errorMessage = get(error, 'response.data.message')
       return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
     }
+  },
+  resetPassword: async email => {
+    try {
+      const {data, status} = await appAPI.post('auth/reset-password', {email})
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
   }
 }
 

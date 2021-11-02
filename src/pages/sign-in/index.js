@@ -118,8 +118,8 @@ function SignIn() {
         </SuiBox>
         <SuiButton
           mt={4}
-          component="a"
-          href={ROUTER_DEFAULT.FORGOT_PASSWORD}
+          component={Link}
+          to={ROUTER_DEFAULT.FORGOT_PASSWORD}
           variant="text"
           buttonColor={'info'}
         >

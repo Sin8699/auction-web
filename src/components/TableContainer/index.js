@@ -24,7 +24,8 @@ const TableContainer = ({
   ToolbarComponent,
   page,
   renderRow,
-  searchKey
+  searchKey,
+  keyRender = 'id'
 }) => {
   const classes = useStyles()
 
@@ -66,7 +67,7 @@ const TableContainer = ({
             {Header && <Header />}
             <TableBody>
               {localData.slice((page - 1) * 10, (page - 1) * 10 + 10).map((d, i) => (
-                <TableRow key={d.id} hover>
+                <TableRow key={d[keyRender]} hover>
                   {renderRow(d, i)}
                 </TableRow>
               ))}
