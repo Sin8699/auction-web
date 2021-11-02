@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 
-import {useDispatch} from 'react-redux'
+// import {useDispatch} from 'react-redux'
 
 import SuiBox from 'components/SuiBox'
 
@@ -9,16 +9,14 @@ import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 import TrendingProductTableData from './components/TrendingProductTableData/index'
 
-import {requestExampleData} from 'redux/actions/example'
-import {requestProfile} from 'redux/actions/user'
+// import {requestExampleData} from 'redux/actions/example'
 
 function Dashboard() {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(requestExampleData())
-    dispatch(requestProfile())
-  }, [dispatch])
+    // dispatch(requestExampleData())
+  }, [])
   return (
     <DashboardLayout>
       <SuiBox mb={3}>
