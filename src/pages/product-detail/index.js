@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid'
 import { useState } from 'react'
 import { getButtonByStatus } from '../../helpers/getButtonByStatus'
 import dayjs from 'dayjs'
+import BidModal from '../bidding/components/BidModal/index'
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
@@ -78,6 +79,12 @@ function ProductDetail() {
             <SuiTypography variant="h6" fontWeight="medium">
               Products
             </SuiTypography>
+            <BidModal
+              biddingProduct={bidding_product['_id']}
+              productName={product.name}
+              buttonColor="error"
+              variant="gradient"
+            />
           </SuiBox>
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
             <Grid container alignItems="center">
@@ -201,14 +208,26 @@ function ProductDetail() {
                   </h2>
                 </SuiBox>
 
+                <SuiBox mb={2}>
+                  <SuiTypography
+                    variant="button"
+                    fontWeight="regular"
+                    textTransform="capitalize"
+                    textColor={'error'}
+                    customClass="line-height-0"
+                  >
+                    {dayjs(product.createdAt).fromNow()}
+                  </SuiTypography>
+                </SuiBox>
+
                 <SuiTypography
                   variant="button"
-                  fontWeight="regular"
+                  fontWeight="medium"
                   textTransform="capitalize"
-                  textColor={'error'}
+                  textColor={'secondary'}
                   customClass="line-height-0"
                 >
-                  {dayjs(product.createdAt).fromNow()}
+                  Recommended price for you to bidding: 120$
                 </SuiTypography>
               </Grid>
             </Grid>
