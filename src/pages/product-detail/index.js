@@ -12,6 +12,9 @@ import RelatedProductsTable from './components/RelatedProductsTable'
 import Grid from '@material-ui/core/Grid'
 import { useState } from 'react'
 import { getButtonByStatus } from '../../helpers/getButtonByStatus'
+import dayjs from 'dayjs'
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 const product_fake = {
   createdAt: '2021-10-18T11:49:25.180Z',
@@ -197,11 +200,36 @@ function ProductDetail() {
                     </span>
                   </h2>
                 </SuiBox>
+
+                <SuiTypography
+                  variant="button"
+                  fontWeight="regular"
+                  textTransform="capitalize"
+                  textColor={'error'}
+                  customClass="line-height-0"
+                >
+                  {dayjs(product.createdAt).fromNow()}
+                </SuiTypography>
               </Grid>
             </Grid>
           </SuiBox>
 
-          <SuiBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
+          <SuiBox textColor="danger" mt={5} pt={2} px={2}>
+            <SuiTypography variant="h6">Description: </SuiTypography>
+            <SuiTypography fontWeight="regular" textTransform="capitalize">
+              {product.description}
+            </SuiTypography>
+          </SuiBox>
+
+          <SuiBox
+            mt={5}
+            textColor="danger"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            pt={2}
+            px={2}
+          >
             <SuiTypography variant="h6">Related Products</SuiTypography>
           </SuiBox>
           <RelatedProductsTable />
