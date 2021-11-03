@@ -67,6 +67,14 @@ const ItemSideNav = [
   },
   {
     type: 'collapse',
+    name: 'Sub category manager',
+    key: 'admin/manager/subcategory',
+    route: ROUTER_DEFAULT.SUB_CATEGORY_MANAGER,
+    icon: <Office size="12px" />,
+    noCollapse: true
+  },
+  {
+    type: 'collapse',
     name: 'User manager',
     key: 'admin/manager/user',
     route: ROUTER_DEFAULT.USER_MANAGER,

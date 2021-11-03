@@ -11,8 +11,7 @@ export const ROUTER_DEFAULT = {
   FAVORITE: '/favorite',
   HISTORY: '/history',
   CATEGORY_MANAGER: '/admin/manager/category',
-  CATEGORY_MANAGER_NEW: '/admin/manager/category/new',
-  CATEGORY_MANAGER_EDIT: '/admin/manager/category/edit',
+  SUB_CATEGORY_MANAGER: '/admin/manager/subcategory',
   USER_MANAGER: '/admin/manager/user',
   USER_MANAGER_EDIT: '/admin/manager/user/edit',
   PRODUCT_MANAGER_ADMIN: '/admin/manager/product'

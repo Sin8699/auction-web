@@ -12,12 +12,19 @@ const registerSchema = Yup.object().shape({
   password: Yup.string().required('Password is required')
 })
 
+const changePasswordSchema = Yup.object().shape({
+  oldPassword: Yup.string().required('Old password is required'),
+  newPassword: Yup.string().required('New password is required'),
+  confirmPassword: Yup.string().required('Confirm password is required')
+})
+
 export const TYPE_SCHEMA = {
   LOGIN: 'loginSchema',
-  REGISTER: 'registerSchema'
+  REGISTER: 'registerSchema',
+  CHANGE_PASSWORD: 'changePasswordSchema'
 }
 
-const schema = {loginSchema, registerSchema}
+const schema = {loginSchema, registerSchema, changePasswordSchema}
 
 const validateData = (validateChoose, formValue, callback) => {
   return new Promise((resolve, reject) => {

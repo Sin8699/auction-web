@@ -22,7 +22,7 @@ function SuiAlert() {
       <Snackbar
         anchorOrigin={{vertical: 'top', horizontal: 'center'}}
         open={alert.openAlert}
-        autoHideDuration={4000}
+        autoHideDuration={6000}
         onClose={() => dispatch(closeAlert())}
       >
         <Alert onClose={handleClose} severity={alert.typeAlert}>

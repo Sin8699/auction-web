@@ -24,7 +24,8 @@ const TableContainer = ({
   ToolbarComponent,
   page,
   renderRow,
-  searchKey
+  searchKey,
+  keyRender = 'id'
 }) => {
   const classes = useStyles()
 
@@ -34,7 +35,9 @@ const TableContainer = ({
 
   useEffect(() => {
     if (!!search) {
-      const filteredData = filter(data, item => includes(item[searchKey]?.toString(), search))
+      const filteredData = filter(data, item =>
+        includes(item[searchKey]?.toString()?.toLowerCase(), search.toLowerCase())
+      )
       setLocalData(filteredData)
     } else setLocalData(data)
   }, [data, search, searchKey])
@@ -66,7 +69,7 @@ const TableContainer = ({
             {Header && <Header />}
             <TableBody>
               {localData.slice((page - 1) * 10, (page - 1) * 10 + 10).map((d, i) => (
-                <TableRow key={d.id} hover>
+                <TableRow key={d[keyRender]} hover>
                   {renderRow(d, i)}
                 </TableRow>
               ))}

@@ -12,8 +12,7 @@ import HistoryProducts from './pages/history-products'
 import FavoriteProducts from './pages/favorite-products'
 
 import CategoryManager from 'pages/category-manager'
-import NewCategory from 'pages/category-manager/new'
-import EditCategory from 'pages/category-manager/edit'
+import SubCategoryManager from 'pages/subcategory-manager'
 import EditUser from 'pages/user-manager/edit'
 import UserManager from 'pages/user-manager'
 import ProductAdminManager from 'pages/product-manager-admin'
@@ -29,6 +28,12 @@ const routes = [
     type: TYPE_ROUTER.PRIVATE,
     route: ROUTER_DEFAULT.DASHBOARD,
     component: Dashboard
+  },
+  {
+    key: 'profile',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.PROFILE,
+    component: Profile
   },
   {
     key: 'bidding',
@@ -67,16 +72,10 @@ const routes = [
     component: CategoryManager
   },
   {
-    key: 'category-manager-new',
+    key: 'subcategory-manager',
     type: TYPE_ROUTER.PRIVATE,
-    route: ROUTER_DEFAULT.CATEGORY_MANAGER_NEW,
-    component: NewCategory
-  },
-  {
-    key: 'category-manager-edit',
-    type: TYPE_ROUTER.PRIVATE,
-    route: ROUTER_DEFAULT.CATEGORY_MANAGER_EDIT + '/:id',
-    component: EditCategory
+    route: ROUTER_DEFAULT.SUB_CATEGORY_MANAGER,
+    component: SubCategoryManager
   },
   {
     key: 'user-manager',
@@ -95,12 +94,6 @@ const routes = [
     type: TYPE_ROUTER.PRIVATE,
     route: ROUTER_DEFAULT.PRODUCT_MANAGER_ADMIN,
     component: ProductAdminManager
-  },
-  {
-    key: 'profile',
-    type: TYPE_ROUTER.PRIVATE,
-    route: ROUTER_DEFAULT.PROFILE,
-    component: Profile
   },
   {
     key: 'sign-in',

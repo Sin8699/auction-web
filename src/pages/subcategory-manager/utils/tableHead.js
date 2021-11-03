@@ -3,6 +3,7 @@ import {TableHead, TableRow, TableCell} from '@material-ui/core'
 const categoryColumn = [
   {label: 'id', stateValue: 'id', align: 'left'},
   {label: 'Name', stateValue: 'name', align: 'left'},
+  {label: 'Category', stateValue: 'categories', align: 'left'},
   {label: '', stateValue: 'action', align: 'right'}
 ]
 
