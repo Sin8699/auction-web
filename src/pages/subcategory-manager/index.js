@@ -8,9 +8,9 @@ import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 
-import CoverLayout from '../../assets/styled/CoverLayout'
 import {MenuContainer} from '../../assets/styled/MenuAction'
 
+import SuiBox from '../../components/SuiBox'
 import MenuAction from '../../components/MenuAction'
 import TableContainer from '../../components/TableContainer'
 import TablePagination from '../../components/TablePagination'
@@ -102,13 +102,13 @@ export default function SubCategoryManager() {
             </>
           )}
         />
-        <CoverLayout marginTop="10px">
+        <SuiBox mt={2}>
           <TablePagination
             page={page}
             totalPage={Math.ceil(subCategories.length / LIMIT_PAGINATION)}
             onChangePage={setPage}
           />
-        </CoverLayout>
+        </SuiBox>
         <Footer />
       </DashboardLayout>
       <MenuContainer open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)} anchorEl={anchorEl}>
