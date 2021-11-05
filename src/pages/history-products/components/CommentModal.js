@@ -1,6 +1,6 @@
 import SuiBox from '../../../components/SuiBox/index'
-import { Icon } from '@material-ui/core'
-import { useState } from 'react'
+import {Icon} from '@material-ui/core'
+import {useState} from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
@@ -11,20 +11,19 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 import Tooltip from '@material-ui/core/Tooltip'
 
-export default function CommentModal({ id }) {
+export default function CommentModal({id}) {
   const [message, setMessage] = useState()
-  console.log('message', message)
-
+  console.log('message: ', message)
   const [open, setOpen] = useState(false)
   const [isChecked, setIsChecked] = useState(true)
 
-  const handleOpenDialog = (v) => () => {
+  const handleOpenDialog = v => () => {
     if (v) {
       setOpen(v)
-    } else setOpen((prev) => !prev)
+    } else setOpen(prev => !prev)
   }
   const handleLiked = () => {
-    setIsChecked((prev) => !prev)
+    setIsChecked(prev => !prev)
   }
 
   return (
@@ -49,7 +48,7 @@ export default function CommentModal({ id }) {
             label="Message"
             type="text"
             fullWidth
-            onChange={(v) => setMessage(v.target.value)}
+            onChange={v => setMessage(v.target.value)}
           />
 
           <SuiBox mt={2}>

@@ -1,21 +1,26 @@
-import SignIn from 'pages/sign-in'
-import SignUp from 'pages/sign-up'
-import SignUpSuccess from 'pages/sign-up-success'
+import SignIn from './pages/sign-in'
+import SignUp from './pages/sign-up'
+import SignUpSuccess from './pages/sign-up-success'
 import ForgotPassword from './pages/forgot-password'
 import ResetPassword from './pages/reset-password'
 
-import Dashboard from 'pages/dashboard'
 import Billing from 'layouts/billing'
-import Profile from 'pages/profile'
-import ProductDetail from 'pages/product-detail'
+
+import Dashboard from './pages/dashboard'
+
+import Profile from './pages/profile'
+import ProductDetail from './pages/product-detail'
 import HistoryProducts from './pages/history-products'
 import FavoriteProducts from './pages/favorite-products'
+import ProductManagerSeller from './pages/product-manager-seller'
+import NewProduct from './pages/product-manager-seller/new'
+import EditProduct from './pages/product-manager-seller/edit'
 
-import CategoryManager from 'pages/category-manager'
-import SubCategoryManager from 'pages/subcategory-manager'
-import EditUser from 'pages/user-manager/edit'
-import UserManager from 'pages/user-manager'
-import ProductAdminManager from 'pages/product-manager-admin'
+import CategoryManager from './pages/category-manager'
+import SubCategoryManager from './pages/subcategory-manager'
+import EditUser from './pages/user-manager/edit'
+import UserManager from './pages/user-manager'
+import ProductAdminManager from './pages/product-manager-admin'
 
 import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
 
@@ -58,6 +63,24 @@ const routes = [
     type: TYPE_ROUTER.PRIVATE,
     route: '/billing',
     component: Billing
+  },
+  {
+    key: 'product-manager-seller',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER,
+    component: ProductManagerSeller
+  },
+  {
+    key: 'product-manager-seller-new',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_NEW,
+    component: NewProduct
+  },
+  {
+    key: 'product-manager-seller-new',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT + '/:id',
+    component: EditProduct
   },
   {
     key: 'product-detail',

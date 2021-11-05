@@ -42,7 +42,15 @@ const ItemSideNav = [
   },
   {
     type: 'collapse',
-    name: 'ProductDetail',
+    name: 'My product',
+    key: 'seller/manager/product',
+    route: ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER,
+    icon: <Basket size="12px" />,
+    noCollapse: true
+  },
+  {
+    type: 'collapse',
+    name: 'Product Detail',
     key: 'product-detail',
     route: '/product-detail/:id',
     icon: <Basket size="12px" />,

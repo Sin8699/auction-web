@@ -63,7 +63,7 @@ export default function ModalSubCategory({
 }) {
   const dispatch = useDispatch()
   const [formValue, setFormValue] = useState({name: '', category: ''})
-  console.log('formValue: ', formValue)
+
   const [errors, setErrors] = useState({name: false, category: false})
 
   useEffect(() => {

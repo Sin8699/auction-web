@@ -33,7 +33,6 @@ function ProductAdminManager() {
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-    console.log('productData: ', productData)
     setList(productData)
   }, [])
 

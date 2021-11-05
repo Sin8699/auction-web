@@ -1,8 +1,8 @@
-import { useMemo } from 'react'
+import {useMemo} from 'react'
 
 import PropTypes from 'prop-types'
 
-import { Table as MuiTable } from '@material-ui/core'
+import {Table as MuiTable} from '@material-ui/core'
 import TableBody from '@material-ui/core/TableBody'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableRow from '@material-ui/core/TableRow'
@@ -15,12 +15,12 @@ import colors from 'assets/theme/base/colors'
 import typography from 'assets/theme/base/typography'
 import borders from 'assets/theme/base/borders'
 
-function Table({ columns, rows }) {
-  const { light } = colors
-  const { size, fontWeightBold } = typography
-  const { borderWidth } = borders
+function Table({columns, rows}) {
+  const {light} = colors
+  const {size, fontWeightBold} = typography
+  const {borderWidth} = borders
 
-  const renderColumns = columns.map(({ name, align }, key) => {
+  const renderColumns = columns.map(({name, align}, key) => {
     let pl
     let pr
 
@@ -56,10 +56,9 @@ function Table({ columns, rows }) {
   })
 
   const renderRows = rows.map((row, key) => {
-    console.log('row', row)
     const rowKey = `row-${key}`
 
-    const tableRow = columns.map(({ key: keyCol, align }) => {
+    const tableRow = columns.map(({key: keyCol, align}) => {
       let template
 
       if (Array.isArray(row[keyCol])) {

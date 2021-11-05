@@ -15,7 +15,7 @@ import SoftUILogo from 'assets/images/logo-ct.png'
 
 import {useSoftUIController} from 'context'
 
-import {is_numeric} from '../../helpers/number'
+const isObjectId = new RegExp('^[0-9a-fA-F]{24}$')
 
 function Sidenav({routes, ...rest}) {
   const [controller, dispatch] = useSoftUIController()
@@ -31,7 +31,7 @@ function Sidenav({routes, ...rest}) {
     let str
     arr.forEach((s, i) => {
       if (i !== 0) {
-        if (s === 'edit' || s === 'new' || is_numeric(s)) return
+        if (s === 'edit' || s === 'new' || isObjectId.test(s)) return
         if (!str) str = s
         else str = str + '/' + s
       }

@@ -4,13 +4,15 @@ import {UserReducer} from './user'
 import {AlertReducer} from './alert'
 import {CategoryReducer} from './category'
 import {SubCategoryReducer} from './subcategory'
+import {ProductReducer} from './product'
 
 const rootReducer = combineReducers({
   exampleSate: ExampleReducer,
   userState: UserReducer,
   alertState: AlertReducer,
   categoryState: CategoryReducer,
-  subCategoryState: SubCategoryReducer
+  subCategoryState: SubCategoryReducer,
+  productState: ProductReducer
 })
 
 export default rootReducer

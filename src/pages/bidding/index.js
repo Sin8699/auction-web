@@ -11,8 +11,6 @@ import Card from '@material-ui/core/Card'
 import SuiButton from 'components/SuiButton'
 import Icon from '@material-ui/core/Icon'
 import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
-import '@szhsin/react-menu/dist/index.css'
-import '@szhsin/react-menu/dist/transitions/slide.css'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
 
