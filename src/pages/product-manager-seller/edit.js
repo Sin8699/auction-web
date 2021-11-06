@@ -24,6 +24,7 @@ import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
 import {openAlert} from 'redux/actions/alert'
 
 import ProductJsonApi from 'apis/products/productJson'
+import ProductImageApi from 'apis/products/productImage'
 
 const EditProduct = () => {
   const dispatch = useDispatch()
@@ -45,7 +46,9 @@ const EditProduct = () => {
   }, [id])
 
   const [formValue, setFormValue] = useState({})
+  console.log('formValue: ', formValue)
   const [errors, setErrors] = useState({})
+
   const [imagePreview, setImagePreview] = useState({
     primary: '',
     extra1: '',
@@ -57,10 +60,10 @@ const EditProduct = () => {
     if (product.name) {
       setFormValue(product)
       setImagePreview({
-        primary: product.imageUrl || '',
-        extra1: product.extraImages[0] || '',
-        extra2: product.extraImages[1] || '',
-        extra3: product.extraImages[2] || ''
+        primary: product.imageUrl ? `http://${product.imageUrl}` : '',
+        extra1: product.extraImages[0] ? `http://${product.extraImages[0]}` : '',
+        extra2: product.extraImages[1] ? `http://${product.extraImages[1]}` : '',
+        extra3: product.extraImages[2] ? `http://${product.extraImages[2]}` : ''
       })
     }
   }, [product])
@@ -93,7 +96,6 @@ const EditProduct = () => {
     setLoadingUpdateInfo(true)
     try {
       await validateData(TYPE_SCHEMA.PRODUCT, formValue, async dataForm => {
-        console.log('dataForm: ', dataForm)
         const {data, status, error} = await ProductJsonApi.updateDocument(
           {
             name: dataForm.name,
@@ -107,7 +109,6 @@ const EditProduct = () => {
         if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
         else {
           const isSuccess = {messageAlert: data.message, typeAlert: 'success'}
-
           const somethingError = {
             messageAlert: data.message || 'Something error',
             typeAlert: 'error'
@@ -122,14 +123,46 @@ const EditProduct = () => {
   }
 
   const [loadingUpdateImagePrimary, setLoadingUpdateImagePrimary] = useState(false)
-  const handleUpdateImagePrimary = () => {
+  const handleUpdateImagePrimary = async () => {
     setLoadingUpdateImagePrimary(true)
+    let formData = new FormData()
+    formData.append('productId', id)
+    formData.append('image', formValue.primary)
+
+    const {data, status, error} = await ProductImageApi.updateImagePrimary(formData)
+
+    if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+    else {
+      const isSuccess = {messageAlert: data.message, typeAlert: 'success'}
+      const somethingError = {
+        messageAlert: data.message || 'Something error',
+        typeAlert: 'error'
+      }
+      status === 200 ? dispatch(openAlert(isSuccess)) : dispatch(openAlert(somethingError))
+    }
     setLoadingUpdateImagePrimary(false)
   }
 
   const [loadingUpdateImageExtra, setLoadingUpdateImageExtra] = useState(false)
-  const handleUpdateImageExtra = () => {
+  const handleUpdateImageExtra = async () => {
     setLoadingUpdateImageExtra(true)
+    let formData = new FormData()
+    formData.append('productId', String(id))
+    formData.append('images', formValue.extra1)
+    formData.append('images', formValue.extra2)
+    formData.append('images', formValue.extra3)
+
+    const {data, status, error} = await ProductImageApi.updateImageExtra(formData)
+
+    if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+    else {
+      const isSuccess = {messageAlert: data.message, typeAlert: 'success'}
+      const somethingError = {
+        messageAlert: data.message || 'Something error',
+        typeAlert: 'error'
+      }
+      status === 200 ? dispatch(openAlert(isSuccess)) : dispatch(openAlert(somethingError))
+    }
     setLoadingUpdateImageExtra(false)
   }
 

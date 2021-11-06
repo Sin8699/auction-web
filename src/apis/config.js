@@ -3,7 +3,10 @@ import {loadFromStorage} from 'utils/storage'
 
 const BASE_URL = 'http://localhost:5001/v1'
 
-const baseHeaders = config => ({'Content-Type': 'application/json', ...config.headers})
+const baseHeaders = config => ({
+  'Content-Type': 'application/json, multipart/form-data',
+  ...config.headers
+})
 
 const appAPI = axios.create()
 appAPI.defaults.baseURL = BASE_URL
