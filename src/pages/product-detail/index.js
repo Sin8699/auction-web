@@ -48,12 +48,7 @@ function ProductDetail() {
             <SuiTypography variant="h6" fontWeight="medium">
               Products
             </SuiTypography>
-            <BidModal
-              biddingProduct={product['_id']}
-              productName={product.name}
-              buttonColor="error"
-              variant="gradient"
-            />
+            <BidModal biddingProduct={id} productName={product.name} />
           </SuiBox>
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
             <Grid container alignItems="center">
@@ -64,7 +59,7 @@ function ProductDetail() {
                 <Grid container>
                   {(product.name ? [product.imageUrl, ...product.extraImages] : []).map(img => {
                     return (
-                      <Grid item xs={3} onClick={handleChangePreview(img)}>
+                      <Grid item xs={3} onClick={handleChangePreview(img)} key={img}>
                         <ImageLayout src={`http://${img}`} alt="" />
                       </Grid>
                     )
@@ -96,10 +91,10 @@ function ProductDetail() {
             </Grid>
           </SuiBox>
 
-          <SuiBox textColor="danger" mt={5} pt={2} px={2}>
+          <SuiBox mt={5} pt={2} px={2}>
             <SuiTypography variant="h6">Description: </SuiTypography>
             <SuiTypography fontWeight="regular" textTransform="capitalize">
-              {product.description}
+              {product.description || ''}
             </SuiTypography>
           </SuiBox>
 

@@ -58,7 +58,6 @@ function BiddingBoard() {
   }, [debouncedValue])
 
   useEffect(() => {
-    console.log(results.length)
     results.length === 0 ? setList(listBiddingProducts) : setList(results)
   }, [results, listBiddingProducts])
 
