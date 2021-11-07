@@ -1,4 +1,4 @@
-import { all, takeEvery, put, call } from 'redux-saga/effects'
+import { all, takeLatest, put, call } from 'redux-saga/effects'
 import { actionTypesSearch, setSearch } from '../actions/search'
 import SearchApi from '../../apis/search'
 
@@ -11,7 +11,7 @@ function* requestSearchSaga({ query }) {
 }
 
 function* watchRequestDataDashboard() {
-  yield takeEvery(actionTypesSearch.SEARCHING, requestSearchSaga)
+  yield takeLatest(actionTypesSearch.SEARCHING, requestSearchSaga)
 }
 
 export function* searchSaga() {

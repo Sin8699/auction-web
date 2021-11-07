@@ -29,12 +29,19 @@ import { useGetBiddingProducts } from '../../apis/bidding-product/index'
 
 import { getListCategories } from 'helpers/category'
 import { searchingData } from 'redux/actions/search'
+import React from '../../components/MenuAction/index'
+import useDebounce from '../../hooks/useDebounce'
 
 const LIMIT_PAGINATION = 12
 
 function BiddingBoard() {
   const { dataCategory } = useSelector((state) => state.categoryState)
   const { dataSubCategory } = useSelector((state) => state.subCategoryState)
+  // const { results = {} } = useSelector((state) => state.searchState)
+
+  const [searchText, setSearchText] = useState('')
+
+  const debouncedValue = useDebounce(searchText, 300)
   const dispatch = useDispatch()
 
   const [{ data: products = [], loading: loadingProducts, error: errorProducts }] = useGetProducts()
@@ -46,8 +53,9 @@ function BiddingBoard() {
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-    dispatch(searchingData({ query: 'pho' }))
-  }, [])
+    if (!debouncedValue) return
+    dispatch(searchingData({ query: debouncedValue }))
+  }, [debouncedValue, dispatch])
 
   const chuckList = useMemo(() => {
     if (loadingProducts || loadingBiddingProducts || errorProducts || errorBiddingProducts) {
@@ -132,6 +140,7 @@ function BiddingBoard() {
                 <SuiInput
                   withIcon={{ icon: 'search', direction: 'right' }}
                   placeholder="Search name, category"
+                  onChange={(e) => setSearchText(e.target.value)}
                 />
               </SuiBox>
               <>

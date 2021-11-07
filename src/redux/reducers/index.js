@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   categoryState: CategoryReducer,
   subCategoryState: SubCategoryReducer,
   productState: ProductReducer,
-  searchReducer: SearchReducer
+  searchState: SearchReducer
 })
 
 export default rootReducer
