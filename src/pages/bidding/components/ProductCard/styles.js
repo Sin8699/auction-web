@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export default makeStyles(({palette, boxShadows, functions, borders}) => {
   const {transparent, white} = palette
-  const {regular, xl} = boxShadows
+  const {xl} = boxShadows
   const {pxToRem} = functions
   const {borderRadius, borderWidth} = borders
 
@@ -20,14 +20,16 @@ export default makeStyles(({palette, boxShadows, functions, borders}) => {
       boxShadow: xl,
       width: '100.25%',
       borderRadius: borderRadius.xl,
-      position: 'relative'
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
 
     projectCard_image: {
       maxWidth: '100%',
       margin: 0,
-      boxShadow: regular,
-      objectFit: 'cover',
+      objectFit: 'contain',
       objectPosition: 'center'
     },
 
@@ -36,7 +38,6 @@ export default makeStyles(({palette, boxShadows, functions, borders}) => {
       marginLeft: pxToRem(-12),
       cursor: 'pointer',
       position: 'relative',
-
       '&:hover, &:focus': {
         zIndex: '10'
       }

@@ -13,32 +13,35 @@ import SuiAvatar from 'components/SuiAvatar'
 import SuiTypography from 'components/SuiTypography'
 
 import NoAvatar from 'assets/images/no-avatar.png'
+import NoImage from 'assets/images/no-image.png'
 
 import {handleFavoredProduct, isFavoredProduct} from 'helpers/favoredProduct'
 
 import BiddingHistoryModal from './BiddingHistoryModal'
 
+import {ROUTER_DEFAULT} from 'constants/router'
+
 import styles from './styles'
+
 function ProductCard({
-  id,
-  image,
+  idProduct,
   category,
   subCategory,
   nameProduct,
-  link,
+  imageUrl,
   buttonBid,
   buttonBuyNow,
   authors,
   endTime
 }) {
   const classes = styles({})
-  const isFavored = isFavoredProduct(id)
+  const isFavored = isFavoredProduct(idProduct)
 
   const [isFavoredState, setIsFavoredState] = useState(isFavored)
 
   const handleFavored = () => {
     setIsFavoredState(prev => !prev)
-    handleFavoredProduct(`${id}`)
+    handleFavoredProduct(`${idProduct}`)
   }
 
   const renderAuthors = authors.map(({image: media, name}) => (
@@ -56,11 +59,11 @@ function ProductCard({
     <Card className={classes.projectCard}>
       <SuiBox customClass={classes.projectCard_imageContainer}>
         <CardMedia
-          src={image}
+          src={`http://${imageUrl}` || NoImage}
           component="img"
           title={nameProduct}
           className={classes.projectCard_image}
-          style={{minHeight: '235px'}}
+          style={{height: '235px'}}
         />
       </SuiBox>
       <SuiBox pt={3} px={0.5}>
@@ -73,10 +76,15 @@ function ProductCard({
           >
             {category + ', ' + subCategory}
           </SuiTypography>
-          <BiddingHistoryModal id={id} />
+          <BiddingHistoryModal id={idProduct} />
         </SuiBox>
         <SuiBox mb={1}>
-          <SuiTypography component={Link} to={link} variant="h5" textTransform="capitalize">
+          <SuiTypography
+            component={Link}
+            to={`${ROUTER_DEFAULT.PRODUCT_DETAIL}/${idProduct}`}
+            variant="h5"
+            textTransform="capitalize"
+          >
             {nameProduct}
           </SuiTypography>
         </SuiBox>
@@ -92,7 +100,7 @@ function ProductCard({
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {buttonBid}
           <SuiTypography variant="h5" textTransform="capitalize">
-            <Countdown date={endTime}>
+            <Countdown date={new Date(endTime)}>
               <div className={classes.projectCard_stock}>
                 <img className={classes.stock_img} src={'/images/sold-out.png'} alt="" />
               </div>
@@ -112,16 +120,15 @@ ProductCard.defaultProps = {
 }
 
 ProductCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  idProduct: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   subCategory: PropTypes.string.isRequired,
   nameProduct: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
   buttonBid: PropTypes.element.isRequired,
   buttonBuyNow: PropTypes.element.isRequired,
   authors: PropTypes.arrayOf(PropTypes.object),
-  endTime: PropTypes.number
+  endTime: PropTypes.string.isRequired
 }
 
 export default ProductCard

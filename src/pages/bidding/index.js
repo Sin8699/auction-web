@@ -1,17 +1,16 @@
-import {useMemo, useState, useEffect} from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import get from 'lodash/get'
 
 import {Grid, Card, Icon, CircularProgress} from '@material-ui/core'
 import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
 
-import keyBy from 'lodash/keyBy'
-import chunk from 'lodash/chunk'
-
-import SuiBox from '../../components/SuiBox'
-import SuiButton from '../../components/SuiButton'
-import SuiInput from '../../components/SuiInput'
-import SuiPagination from '../../components/SuiPagination'
-import TablePagination from '../../components/TablePagination'
+import SuiBox from 'components/SuiBox'
+import SuiButton from 'components/SuiButton'
+import SuiInput from 'components/SuiInput'
+import SuiPagination from 'components/SuiPagination'
+import TablePagination from 'components/TablePagination'
 
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
@@ -20,18 +19,16 @@ import Footer from 'component-pages/Footer'
 import BidModal from './components/BidModal'
 import BuyNowModal from './components/BuyNowModal'
 import ProductCard from './components/ProductCard'
-
 import ModalNewBidding from './components/CreateProductBiddingModal'
 
 import team1 from 'assets/images/team-1.jpg'
 
-import {useGetProducts} from '../../apis/products/index'
-import {useGetBiddingProducts} from '../../apis/bidding-product/index'
+import useDebounce from '../../hooks/useDebounce'
 
 import {getListCategories} from 'helpers/category'
+
 import {searchingData} from 'redux/actions/search'
-import React from '../../components/MenuAction/index'
-import useDebounce from '../../hooks/useDebounce'
+import {requestBiddingProductsData} from 'redux/actions/bidding-product'
 
 const LIMIT_PAGINATION = 12
 
@@ -43,70 +40,70 @@ function BiddingBoard() {
   const {listBiddingProducts, loadingListBiddingProduct} = useSelector(
     state => state.biddingProductState
   )
+  console.log('listBiddingProducts: ', listBiddingProducts)
+
   // const { results = {} } = useSelector((state) => state.searchState)
 
   const [searchText, setSearchText] = useState('')
 
   const debouncedValue = useDebounce(searchText, 300)
 
-  const [{data: products = [], loading: loadingProducts, error: errorProducts}] = useGetProducts()
-
-  const [
-    {data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts}
-  ] = useGetBiddingProducts()
-
   const [page, setPage] = useState(1)
 
   useEffect(() => {
     if (!debouncedValue) return
     dispatch(searchingData({query: debouncedValue}))
-  }, [debouncedValue, dispatch])
+  }, [debouncedValue])
 
-  const chuckList = useMemo(() => {
-    if (loadingProducts || loadingBiddingProducts || errorProducts || errorBiddingProducts) {
-      return []
-    }
-    return chunk(products || [], LIMIT_PAGINATION)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [errorBiddingProducts, errorProducts, loadingBiddingProducts, loadingProducts])
-
-  const listByPage = chuckList?.[page] || []
+  useEffect(() => {
+    dispatch(requestBiddingProductsData())
+  }, [debouncedValue])
 
   const _renderData = () => {
-    if (loadingProducts || loadingBiddingProducts) {
+    if (loadingListBiddingProduct) {
       return (
         <SuiBox display="flex" justifyContent="center">
           <CircularProgress />
         </SuiBox>
       )
     }
-
-    if (errorProducts || errorBiddingProducts) {
-      return <div>error</div>
-    }
-
-    const objectBiddingProduct = keyBy(biddingProducts, 'product')
-
     return (
       <Grid container spacing={3}>
-        {listByPage.map(({name, primaryImage, description, categories, _id}) => (
-          <Grid item xs={12} md={6} xl={3} key={_id}>
-            <ProductCard
-              id={_id}
-              image={primaryImage}
-              category="Laptop"
-              subCategory="Macbook"
-              nameProduct="Macbook pro 2020"
-              link="/"
-              buttonBid={
-                <BidModal biddingProduct={objectBiddingProduct?.[_id]} productName={name} />
-              }
-              buttonBuyNow={<BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />}
-              authors={[{image: team1, name: 'Elena Morison'}]}
-              countDown={60000} //seconds
-            />
-          </Grid>
-        ))}
+        {listBiddingProducts
+          .slice((page - 1) * LIMIT_PAGINATION, (page - 1) * LIMIT_PAGINATION + LIMIT_PAGINATION)
+          .map(
+            ({
+              _id,
+              product,
+              status,
+              allowBuyNow,
+              buyNowPrice,
+              stepPrice,
+              initPrice,
+              currentPrice,
+              publicTime,
+              endTime
+            }) => (
+              <Grid item xs={12} md={6} xl={3} key={_id}>
+                <ProductCard
+                  idProduct={get(product, '_id')}
+                  category={get(product, 'category.name')}
+                  subCategory={get(product, 'subCategory.name')}
+                  nameProduct={get(product, 'name')}
+                  imageUrl={get(product, 'imageUrl')}
+                  buttonBid={
+                    <BidModal
+                      biddingProduct={get(product, '_id')}
+                      productName={get(product, 'name')}
+                    />
+                  }
+                  buttonBuyNow={<BuyNowModal biddingProduct={get(product, '_id')} />}
+                  authors={[{image: team1, name: 'Elena Morison'}]}
+                  endTime={endTime}
+                />
+              </Grid>
+            )
+          )}
       </Grid>
     )
   }
@@ -198,7 +195,7 @@ function BiddingBoard() {
               <SuiPagination variant="contained">
                 <TablePagination
                   page={page}
-                  totalPage={Math.ceil(products.length / LIMIT_PAGINATION) - 1}
+                  totalPage={Math.ceil(listBiddingProducts.length / LIMIT_PAGINATION)}
                   onChangePage={setPage}
                 />
               </SuiPagination>
