@@ -1,10 +1,15 @@
-import Shop from 'component-pages/Icons/Shop'
-import Office from 'component-pages/Icons/Office'
-import Basket from 'component-pages/Icons/Basket'
 import Cube from 'component-pages/Icons/Cube'
-import CreditCard from 'component-pages/Icons/CreditCard'
+import Shop from 'component-pages/Icons/Shop'
+import Basket from 'component-pages/Icons/Basket'
+import Office from 'component-pages/Icons/Office'
 import Document from 'component-pages/Icons/Document'
-import SupervisorAccount from '@material-ui/icons/SupervisorAccount'
+import CreditCard from 'component-pages/Icons/CreditCard'
+// import CustomerSupport from 'component-pages/Icons/CustomerSupport'
+// import Settings from 'component-pages/Icons/Settings'
+// import SpaceShip from 'component-pages/Icons/SpaceShip'
+
+import {SupervisorAccount, Favorite, History} from '@material-ui/icons'
+
 import {ROUTER_DEFAULT} from 'constants/router'
 
 const ItemSideNav = [
@@ -12,7 +17,7 @@ const ItemSideNav = [
     type: 'collapse',
     name: 'Home',
     key: 'dashboard',
-    route: '/dashboard',
+    route: ROUTER_DEFAULT.DASHBOARD,
     icon: <Shop size="12px" />,
     noCollapse: true
   },
@@ -20,7 +25,7 @@ const ItemSideNav = [
     type: 'collapse',
     name: 'Bidding',
     key: 'bidding',
-    route: '/bidding',
+    route: ROUTER_DEFAULT.BIDDING,
     icon: <Basket size="12px" />,
     noCollapse: true
   },
@@ -29,7 +34,7 @@ const ItemSideNav = [
     name: 'Favorite Product',
     key: 'favorite',
     route: ROUTER_DEFAULT.FAVORITE,
-    icon: <Cube size="12px" />,
+    icon: <Favorite size="12px" />,
     noCollapse: true
   },
   {
@@ -37,7 +42,7 @@ const ItemSideNav = [
     name: 'History Product',
     key: 'history',
     route: ROUTER_DEFAULT.HISTORY,
-    icon: <Document size="12px" />,
+    icon: <History size="12px" />,
     noCollapse: true
   },
   {
@@ -45,15 +50,7 @@ const ItemSideNav = [
     name: 'My product',
     key: 'seller/manager/product',
     route: ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER,
-    icon: <Basket size="12px" />,
-    noCollapse: true
-  },
-  {
-    type: 'collapse',
-    name: 'Product Detail',
-    key: 'product-detail',
-    route: '/product-detail/:id',
-    icon: <Basket size="12px" />,
+    icon: <Cube size="12px" />,
     noCollapse: true
   },
   {
@@ -78,7 +75,7 @@ const ItemSideNav = [
     name: 'Sub category manager',
     key: 'admin/manager/subcategory',
     route: ROUTER_DEFAULT.SUB_CATEGORY_MANAGER,
-    icon: <Office size="12px" />,
+    icon: <Document size="12px" />,
     noCollapse: true
   },
   {
@@ -94,7 +91,7 @@ const ItemSideNav = [
     name: 'Product manager',
     key: 'admin/manager/product',
     route: ROUTER_DEFAULT.PRODUCT_MANAGER_ADMIN,
-    icon: <SupervisorAccount size="12px" />,
+    icon: <Cube size="12px" />,
     noCollapse: true
   }
 ]

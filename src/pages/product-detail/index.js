@@ -13,16 +13,13 @@ import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 
 import {ImageLayout} from 'assets/styled/ImageLayout'
-
-import RelatedProductsTable from './components/RelatedProductsTable'
+import NoImage from 'assets/images/no-image.png'
 
 import {getButtonByStatus} from '../../helpers/getButtonByStatus'
 
-import BidModal from '../bidding/components/BidModal/index'
+import BidModal from '../bidding/components/BidModal'
 
 import {requestProduct} from 'redux/actions/product'
-
-import NoImage from 'assets/images/no-image.png'
 
 function ProductDetail() {
   const dispatch = useDispatch()
@@ -40,9 +37,7 @@ function ProductDetail() {
     setCurrentImagePreview(product.imageUrl)
   }, [product])
 
-  const handleChangePreview = url => () => {
-    setCurrentImagePreview(url)
-  }
+  const handleChangePreview = url => () => setCurrentImagePreview(url)
 
   return (
     <DashboardLayout>
@@ -108,12 +103,9 @@ function ProductDetail() {
             </SuiTypography>
           </SuiBox>
 
-          <SuiBox mt={5}>
+          <SuiBox mt={7} ml={2}>
             <SuiTypography variant="h6">Related Products</SuiTypography>
           </SuiBox>
-
-          <SuiBox display="flex"></SuiBox>
-          {/* <RelatedProductsTable /> */}
         </Card>
       </SuiBox>
       <Footer />
