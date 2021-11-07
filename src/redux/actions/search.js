@@ -3,13 +3,12 @@ export const actionTypesSearch = {
   SET_SEARCH: 'SET_SEARCH'
 }
 
-export const searchingData = ({ query }) => ({
+export const searchingData = ({query}) => ({
   type: actionTypesSearch.SEARCHING,
   query: query
 })
 
-export const setSearch = ({ data, query }) => ({
+export const setSearch = ({data}) => ({
   type: actionTypesSearch.SET_SEARCH,
-  data,
-  query
+  data
 })

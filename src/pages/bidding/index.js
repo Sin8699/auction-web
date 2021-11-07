@@ -40,36 +40,40 @@ function BiddingBoard() {
   const {listBiddingProducts, loadingListBiddingProduct} = useSelector(
     state => state.biddingProductState
   )
-  console.log('listBiddingProducts: ', listBiddingProducts)
+  const {loading, results} = useSelector(state => state.searchState)
 
-  // const { results = {} } = useSelector((state) => state.searchState)
-
+  const [list, setList] = useState([])
+  const [page, setPage] = useState(1)
   const [searchText, setSearchText] = useState('')
 
   const debouncedValue = useDebounce(searchText, 300)
 
-  const [page, setPage] = useState(1)
+  useEffect(() => {
+    dispatch(requestBiddingProductsData())
+  }, [])
 
   useEffect(() => {
-    if (!debouncedValue) return
+    // if (!debouncedValue) return
     dispatch(searchingData({query: debouncedValue}))
   }, [debouncedValue])
 
   useEffect(() => {
-    dispatch(requestBiddingProductsData())
-  }, [debouncedValue])
+    console.log(results.length)
+    results.length === 0 ? setList(listBiddingProducts) : setList(results)
+  }, [results, listBiddingProducts])
 
   const _renderData = () => {
-    if (loadingListBiddingProduct) {
+    if (loadingListBiddingProduct || loading) {
       return (
         <SuiBox display="flex" justifyContent="center">
           <CircularProgress />
         </SuiBox>
       )
     }
+
     return (
       <Grid container spacing={3}>
-        {listBiddingProducts
+        {list
           .slice((page - 1) * LIMIT_PAGINATION, (page - 1) * LIMIT_PAGINATION + LIMIT_PAGINATION)
           .map(
             ({
