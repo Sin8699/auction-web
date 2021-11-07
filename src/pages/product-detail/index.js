@@ -2,6 +2,7 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
+import dayjs from 'dayjs'
 
 import {Card, Grid} from '@material-ui/core'
 
@@ -19,18 +20,28 @@ import {getButtonByStatus} from '../../helpers/getButtonByStatus'
 
 import BidModal from '../bidding/components/BidModal'
 
-import {requestProduct} from 'redux/actions/product'
+import {requestProduct, setProductsData} from 'redux/actions/product'
+import {requestBiddingProduct, setBiddingProduct} from 'redux/actions/bidding-product'
+
+const relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 function ProductDetail() {
   const dispatch = useDispatch()
   const {id} = useParams()
 
   const {product} = useSelector(state => state.productState)
+  const {biddingProduct, loadingBiddingProduct} = useSelector(state => state.biddingProductState)
 
   const [currentImagePreview, setCurrentImagePreview] = useState(NoImage)
 
   useEffect(() => {
     dispatch(requestProduct(id))
+    dispatch(requestBiddingProduct(id))
+    return () => {
+      dispatch(setProductsData({}))
+      dispatch(setBiddingProduct({}))
+    }
   }, [id])
 
   useEffect(() => {
@@ -70,22 +81,53 @@ function ProductDetail() {
               <Grid item lg={6} md={6} sm={12}>
                 <SuiBox ml={4}>
                   <h1>{product.name}</h1>
-                  <SuiTypography
-                    variant="button"
-                    fontWeight="regular"
-                    textTransform="capitalize"
-                    textGradient
-                  >
-                    Price: {product.currentPrice} $
-                  </SuiTypography>
-
-                  <SuiBox my={2}>
-                    <SuiTypography textGradient variant="h5" textColor="info">
-                      Price Buy Now: {product.buyNowPrice} $
+                  <SuiBox>
+                    <SuiTypography
+                      variant="button"
+                      fontWeight="regular"
+                      textTransform="capitalize"
+                      textGradient
+                    >
+                      Price: {!loadingBiddingProduct ? biddingProduct.currentPrice : 'loading...'} $
                     </SuiTypography>
                   </SuiBox>
 
-                  {getButtonByStatus(product.status)}
+                  <SuiBox my={2}>
+                    <SuiTypography
+                      variant="button"
+                      fontWeight="regular"
+                      textTransform="capitalize"
+                      textGradient
+                    >
+                      Price start:
+                      {!loadingBiddingProduct ? biddingProduct.initPrice : 'loading...'} $
+                    </SuiTypography>
+                  </SuiBox>
+
+                  {biddingProduct.allowBuyNow && (
+                    <SuiBox my={2}>
+                      <SuiTypography textGradient variant="h5" textColor="info">
+                        Price Buy Now:{' '}
+                        {!loadingBiddingProduct ? biddingProduct.buyNowPrice : 'loading...'} $
+                      </SuiTypography>
+                    </SuiBox>
+                  )}
+
+                  {getButtonByStatus(biddingProduct.status)}
+
+                  <SuiBox my={2}>
+                    <SuiTypography
+                      variant="button"
+                      fontWeight="regular"
+                      textTransform="capitalize"
+                      textGradient
+                    >
+                      End time:
+                      {!loadingBiddingProduct
+                        ? ` ${dayjs(biddingProduct.endTime).fromNow()}`
+                        : 'loading...'}
+                    </SuiTypography>
+                  </SuiBox>
                 </SuiBox>
               </Grid>
             </Grid>
