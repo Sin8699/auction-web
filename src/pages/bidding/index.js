@@ -1,8 +1,8 @@
-import {useMemo, useState} from 'react'
-import {useSelector} from 'react-redux'
+import { useMemo, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-import {Grid, Card, Icon, CircularProgress} from '@material-ui/core'
-import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
+import { Grid, Card, Icon, CircularProgress } from '@material-ui/core'
+import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu'
 
 import keyBy from 'lodash/keyBy'
 import chunk from 'lodash/chunk'
@@ -20,27 +20,34 @@ import Footer from 'component-pages/Footer'
 import BidModal from './components/BidModal'
 import BuyNowModal from './components/BuyNowModal'
 import ProductCard from './components/ProductCard'
+import { useDispatch } from 'react-redux'
 
 import team1 from 'assets/images/team-1.jpg'
 
-import {useGetProducts} from '../../apis/products/index'
-import {useGetBiddingProducts} from '../../apis/bidding-product/index'
+import { useGetProducts } from '../../apis/products/index'
+import { useGetBiddingProducts } from '../../apis/bidding-product/index'
 
-import {getListCategories} from 'helpers/category'
+import { getListCategories } from 'helpers/category'
+import { searchingData } from 'redux/actions/search'
 
 const LIMIT_PAGINATION = 12
 
 function BiddingBoard() {
-  const {dataCategory} = useSelector(state => state.categoryState)
-  const {dataSubCategory} = useSelector(state => state.subCategoryState)
+  const { dataCategory } = useSelector((state) => state.categoryState)
+  const { dataSubCategory } = useSelector((state) => state.subCategoryState)
+  const dispatch = useDispatch()
 
-  const [{data: products = [], loading: loadingProducts, error: errorProducts}] = useGetProducts()
+  const [{ data: products = [], loading: loadingProducts, error: errorProducts }] = useGetProducts()
 
   const [
-    {data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts}
+    { data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts }
   ] = useGetBiddingProducts()
 
   const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    dispatch(searchingData({ query: 'pho' }))
+  }, [])
 
   const chuckList = useMemo(() => {
     if (loadingProducts || loadingBiddingProducts || errorProducts || errorBiddingProducts) {
@@ -69,7 +76,7 @@ function BiddingBoard() {
 
     return (
       <Grid container spacing={3}>
-        {listByPage.map(({name, primaryImage, description, categories, _id}) => (
+        {listByPage.map(({ name, primaryImage, description, categories, _id }) => (
           <Grid item xs={12} md={6} xl={3} key={_id}>
             <ProductCard
               id={_id}
@@ -82,7 +89,7 @@ function BiddingBoard() {
                 comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />,
                 color: 'info'
               }}
-              authors={[{image: team1, name: 'Elena Morison'}]}
+              authors={[{ image: team1, name: 'Elena Morison' }]}
               info={<BidModal biddingProduct={objectBiddingProduct?.[_id]} productName={name} />}
               countDown={60000} //seconds
             />
@@ -107,11 +114,11 @@ function BiddingBoard() {
                   </SuiButton>
                 }
               >
-                {getListCategories(dataCategory, dataSubCategory).map(item => {
+                {getListCategories(dataCategory, dataSubCategory).map((item) => {
                   if (item.sub.length > 0)
                     return (
                       <SubMenu label={item.name} key={item.name}>
-                        {item.sub.map(itemSub => (
+                        {item.sub.map((itemSub) => (
                           <MenuItem key={itemSub.name}>{itemSub.name}</MenuItem>
                         ))}
                       </SubMenu>
@@ -123,7 +130,7 @@ function BiddingBoard() {
             <SuiBox display="flex" mb={1}>
               <SuiBox mr={1}>
                 <SuiInput
-                  withIcon={{icon: 'search', direction: 'right'}}
+                  withIcon={{ icon: 'search', direction: 'right' }}
                   placeholder="Search name, category"
                 />
               </SuiBox>
