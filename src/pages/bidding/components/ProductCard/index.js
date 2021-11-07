@@ -1,28 +1,36 @@
-// react-router-dom components
-import {Link} from 'react-router-dom'
-
-// prop-types is a library for typechecking of props
-import PropTypes from 'prop-types'
-
-// @material-ui core components
-import Card from '@material-ui/core/Card'
-import CardMedia from '@material-ui/core/CardMedia'
-import Tooltip from '@material-ui/core/Tooltip'
-
-// Soft UI Dashboard Material-UI components
-import SuiBox from 'components/SuiBox'
-import SuiTypography from 'components/SuiTypography'
-import SuiAvatar from 'components/SuiAvatar'
-
-// Custom styles for the DefaultProjectCard
-import styles from './styles'
-import Countdown from 'react-countdown'
-import cn from 'clsx'
-import {handleFavoredProduct, isFavoredProduct} from '../../../../helpers/favoredProduct'
 import {useState} from 'react'
+import cn from 'clsx'
+import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
+import Countdown from 'react-countdown'
+
+import {Card, CardMedia, Tooltip} from '@material-ui/core'
+
+import Heart from 'component-pages/Icons/Heart'
+
+import SuiBox from 'components/SuiBox'
+import SuiAvatar from 'components/SuiAvatar'
+import SuiTypography from 'components/SuiTypography'
+
+import NoAvatar from 'assets/images/no-avatar.png'
+
+import {handleFavoredProduct, isFavoredProduct} from 'helpers/favoredProduct'
+
 import BiddingHistoryModal from './BiddingHistoryModal'
 
-function ProductCard({id, image, label, title, description, action, authors, info, countDown}) {
+import styles from './styles'
+function ProductCard({
+  id,
+  image,
+  category,
+  subCategory,
+  nameProduct,
+  link,
+  buttonBid,
+  buttonBuyNow,
+  authors,
+  endTime
+}) {
   const classes = styles({})
   const isFavored = isFavoredProduct(id)
 
@@ -35,7 +43,12 @@ function ProductCard({id, image, label, title, description, action, authors, inf
 
   const renderAuthors = authors.map(({image: media, name}) => (
     <Tooltip key={name} title={name} placement="bottom">
-      <SuiAvatar src={media} alt={name} size="xs" customClass={classes.projectCard_avatar} />
+      <SuiAvatar
+        src={media || NoAvatar}
+        alt={name}
+        size="xs"
+        customClass={classes.projectCard_avatar}
+      />
     </Tooltip>
   ))
 
@@ -45,11 +58,9 @@ function ProductCard({id, image, label, title, description, action, authors, inf
         <CardMedia
           src={image}
           component="img"
-          title={title}
+          title={nameProduct}
           className={classes.projectCard_image}
-          style={{
-            minHeight: '235px'
-          }}
+          style={{minHeight: '235px'}}
         />
       </SuiBox>
       <SuiBox pt={3} px={0.5}>
@@ -60,36 +71,13 @@ function ProductCard({id, image, label, title, description, action, authors, inf
             textTransform="capitalize"
             textGradient
           >
-            {label}
+            {category + ', ' + subCategory}
           </SuiTypography>
           <BiddingHistoryModal id={id} />
         </SuiBox>
         <SuiBox mb={1}>
-          {action.type === 'comp' ? (
-            <SuiTypography
-              component={Link}
-              to={action.route}
-              variant="h5"
-              textTransform="capitalize"
-            >
-              {title}
-            </SuiTypography>
-          ) : (
-            <SuiTypography
-              component="a"
-              href={action.route}
-              target="_blank"
-              rel="noreferrer"
-              variant="h5"
-              textTransform="capitalize"
-            >
-              {title}
-            </SuiTypography>
-          )}
-        </SuiBox>
-        <SuiBox mb={3} lineHeight={0}>
-          <SuiTypography variant="button" fontWeight="regular" textColor="text">
-            {description}
+          <SuiTypography component={Link} to={link} variant="h5" textTransform="capitalize">
+            {nameProduct}
           </SuiTypography>
         </SuiBox>
         <SuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
@@ -97,19 +85,14 @@ function ProductCard({id, image, label, title, description, action, authors, inf
             className={cn(classes.icon_love, isFavoredState && classes.icon_love_active)}
             onClick={handleFavored}
           >
-            <svg className="heart" viewBox="0 0 32 29.6">
-              <path
-                d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-              />
-            </svg>
+            <Heart />
           </div>
           {renderAuthors}
         </SuiBox>
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
-          {info}
+          {buttonBid}
           <SuiTypography variant="h5" textTransform="capitalize">
-            <Countdown date={Date.now() + countDown}>
+            <Countdown date={endTime}>
               <div className={classes.projectCard_stock}>
                 <img className={classes.stock_img} src={'/images/sold-out.png'} alt="" />
               </div>
@@ -118,44 +101,27 @@ function ProductCard({id, image, label, title, description, action, authors, inf
         </SuiBox>
       </SuiBox>
       <SuiBox py={1} px={0.5}>
-        {action.comp}
+        {buttonBuyNow}
       </SuiBox>
     </Card>
   )
 }
 
-// Setting default values for the props of DefaultProjectCard
 ProductCard.defaultProps = {
   authors: []
 }
 
-// Typechecking props for the DefaultProjectCard
 ProductCard.propTypes = {
   id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  action: PropTypes.shape({
-    type: PropTypes.oneOf(['external', 'internal', 'comp']),
-    route: PropTypes.string,
-    color: PropTypes.oneOf([
-      'primary',
-      'secondary',
-      'info',
-      'success',
-      'warning',
-      'error',
-      'light',
-      'dark',
-      'white'
-    ]).isRequired,
-    label: PropTypes.string,
-    comp: PropTypes.element
-  }).isRequired,
+  category: PropTypes.string.isRequired,
+  subCategory: PropTypes.string.isRequired,
+  nameProduct: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  buttonBid: PropTypes.element.isRequired,
+  buttonBuyNow: PropTypes.element.isRequired,
   authors: PropTypes.arrayOf(PropTypes.object),
-  info: PropTypes.element,
-  countDown: PropTypes.number
+  endTime: PropTypes.number
 }
 
 export default ProductCard

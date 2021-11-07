@@ -114,9 +114,6 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
             endTime: formValue.endTime
           }
           const {status, data, error} = await BiddingProductApi.createDocument(payload)
-          console.log('error: ', error)
-          console.log('data: ', data)
-          console.log('status: ', status)
           handleResult(data, status, error)
         }
       )

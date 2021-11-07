@@ -1,11 +1,12 @@
-import { combineReducers } from 'redux'
-import { ExampleReducer } from './example'
-import { UserReducer } from './user'
-import { AlertReducer } from './alert'
-import { CategoryReducer } from './category'
-import { SubCategoryReducer } from './subcategory'
-import { ProductReducer } from './product'
-import { SearchReducer } from './search'
+import {combineReducers} from 'redux'
+import {ExampleReducer} from './example'
+import {UserReducer} from './user'
+import {AlertReducer} from './alert'
+import {CategoryReducer} from './category'
+import {SubCategoryReducer} from './subcategory'
+import {ProductReducer} from './product'
+import {SearchReducer} from './search'
+import {BiddingProductReducer} from './bidding-product'
 
 const rootReducer = combineReducers({
   exampleSate: ExampleReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   categoryState: CategoryReducer,
   subCategoryState: SubCategoryReducer,
   productState: ProductReducer,
-  searchState: SearchReducer
+  searchState: SearchReducer,
+  biddingProductState: BiddingProductReducer
 })
 
 export default rootReducer

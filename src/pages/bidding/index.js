@@ -36,14 +36,18 @@ import useDebounce from '../../hooks/useDebounce'
 const LIMIT_PAGINATION = 12
 
 function BiddingBoard() {
+  const dispatch = useDispatch()
+
   const {dataCategory} = useSelector(state => state.categoryState)
   const {dataSubCategory} = useSelector(state => state.subCategoryState)
+  const {listBiddingProducts, loadingListBiddingProduct} = useSelector(
+    state => state.biddingProductState
+  )
   // const { results = {} } = useSelector((state) => state.searchState)
 
   const [searchText, setSearchText] = useState('')
 
   const debouncedValue = useDebounce(searchText, 300)
-  const dispatch = useDispatch()
 
   const [{data: products = [], loading: loadingProducts, error: errorProducts}] = useGetProducts()
 
@@ -90,16 +94,15 @@ function BiddingBoard() {
             <ProductCard
               id={_id}
               image={primaryImage}
-              label="Phone"
-              title={name}
-              description={description}
-              action={{
-                type: 'comp',
-                comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />,
-                color: 'info'
-              }}
+              category="Laptop"
+              subCategory="Macbook"
+              nameProduct="Macbook pro 2020"
+              link="/"
+              buttonBid={
+                <BidModal biddingProduct={objectBiddingProduct?.[_id]} productName={name} />
+              }
+              buttonBuyNow={<BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />}
               authors={[{image: team1, name: 'Elena Morison'}]}
-              info={<BidModal biddingProduct={objectBiddingProduct?.[_id]} productName={name} />}
               countDown={60000} //seconds
             />
           </Grid>
@@ -109,6 +112,9 @@ function BiddingBoard() {
   }
 
   const [openModal, setOpenModal] = useState(false)
+  const handleSuccessCreate = () => {
+    setOpenModal(false)
+  }
 
   return (
     <DashboardLayout>
@@ -122,7 +128,13 @@ function BiddingBoard() {
         >
           You are a seller, create a new auction product here
         </SuiButton>
-        <ModalNewBidding show={openModal} onClose={() => setOpenModal(false)} />
+        {openModal && (
+          <ModalNewBidding
+            show={openModal}
+            onClose={() => setOpenModal(false)}
+            onSuccess={handleSuccessCreate}
+          />
+        )}
       </SuiBox>
       <SuiBox mb={3}>
         <Card>
