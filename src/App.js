@@ -6,6 +6,7 @@ import {ThemeProvider, StylesProvider, jssPreset} from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Sidenav from 'component-pages/Sidenav'
 import SuiAlert from 'components/SuiAlert'
+import LayoutContainerDispatcher from 'layouts/getDispatch'
 import theme from 'assets/theme'
 import routes from 'routes'
 import ItemSideNav from 'constants/sideNav'
@@ -77,13 +78,15 @@ export default function App() {
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>
           <SocketContainer>
-            <CssBaseline />
-            <SuiAlert />
-            <Sidenav routes={ItemSideNav} />
-            <Switch>
-              {getRoutes(routes)}
-              <Redirect from="*" to="/dashboard" />
-            </Switch>
+            <LayoutContainerDispatcher>
+              <CssBaseline />
+              <SuiAlert />
+              <Sidenav routes={ItemSideNav} />
+              <Switch>
+                {getRoutes(routes)}
+                <Redirect from="*" to="/dashboard" />
+              </Switch>
+            </LayoutContainerDispatcher>
           </SocketContainer>
         </ThemeProvider>
       </StylesProvider>

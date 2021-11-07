@@ -19,15 +19,14 @@ import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
 import TablePagination from '../../components/TablePagination/index'
 import ProductCard from './components/ProductCard/index'
 
-import {requestCategoryData} from 'redux/actions/category'
-import {requestSubCategoryData} from 'redux/actions/subcategory'
+import {requestProductsData} from 'redux/actions/product'
 
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 
 import {ROUTER_DEFAULT} from 'constants/router'
 
-import products from './fakeData'
+import {getListCategories} from 'helpers/category'
 
 const LIMIT_PAGINATION = 12
 
@@ -37,15 +36,15 @@ function ProductManagerSeller() {
 
   const {dataCategory} = useSelector(state => state.categoryState)
   const {dataSubCategory} = useSelector(state => state.subCategoryState)
+  const {listProducts} = useSelector(state => state.productState)
 
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    dataCategory.length === 0 && dispatch(requestCategoryData())
-    dataSubCategory.length === 0 && dispatch(requestSubCategoryData())
+    dispatch(requestProductsData())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataCategory, dataSubCategory])
+  }, [])
 
   const handleAddNew = () => {
     navigate.push(ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_NEW)
@@ -64,14 +63,16 @@ function ProductManagerSeller() {
   const _renderData = () => {
     return (
       <Grid container spacing={3}>
-        {filterProduct(products)
+        {filterProduct(listProducts)
           .slice((page - 1) * LIMIT_PAGINATION, (page - 1) * LIMIT_PAGINATION + LIMIT_PAGINATION)
-          .map(({_id, name, subCategory, image}) => (
+          .map(({_id, name, category, subCategory, imageUrl}) => (
             <Grid item xs={12} md={6} xl={3} key={_id}>
               <ProductCard
+                _id={_id}
                 name={name}
+                category={category}
                 subCategory={subCategory}
-                image={image}
+                image={`http://${imageUrl}`}
                 url={`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${_id}`}
               />
             </Grid>
@@ -94,16 +95,16 @@ function ProductManagerSeller() {
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
             <SuiBox mb={0.5} display="flex" alignItems="center">
               <Menu menuButton={MenuButtonCategory}>
-                {dataCategory.map(category => {
-                  if (dataSubCategory.find(subCategory => subCategory.category === category._id))
+                {getListCategories(dataCategory, dataSubCategory).map(item => {
+                  if (item.sub.length > 0)
                     return (
-                      <SubMenu label={category.name} key={category._id}>
-                        {dataSubCategory.map(item => (
-                          <MenuItem key={item._id}>{item.name}</MenuItem>
+                      <SubMenu label={item.name} key={item.name}>
+                        {item.sub.map(itemSub => (
+                          <MenuItem key={itemSub.name}>{itemSub.name}</MenuItem>
                         ))}
                       </SubMenu>
                     )
-                  return <MenuItem key={category._id}>{category.name}</MenuItem>
+                  return <MenuItem key={item.name}>{item.name}</MenuItem>
                 })}
               </Menu>
             </SuiBox>
@@ -135,7 +136,7 @@ function ProductManagerSeller() {
               <SuiPagination variant="contained">
                 <TablePagination
                   page={page}
-                  totalPage={Math.ceil(products.length / LIMIT_PAGINATION)}
+                  totalPage={Math.ceil(listProducts.length / LIMIT_PAGINATION)}
                   onChangePage={setPage}
                 />
               </SuiPagination>

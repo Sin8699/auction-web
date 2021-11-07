@@ -16,8 +16,6 @@ import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 
 import {ImageLayout} from 'assets/styled/ImageLayout'
 
-import {requestCategoryData} from 'redux/actions/category'
-import {requestSubCategoryData} from 'redux/actions/subcategory'
 import {requestProduct} from 'redux/actions/product'
 
 import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
@@ -34,19 +32,12 @@ const EditProduct = () => {
   const {dataSubCategory} = useSelector(state => state.subCategoryState)
 
   const {product} = useSelector(state => state.productState)
-  // console.log('product: ', product)
-
-  useEffect(() => {
-    dataCategory.length === 0 && dispatch(requestCategoryData())
-    dataSubCategory.length === 0 && dispatch(requestSubCategoryData())
-  }, [dataCategory, dataSubCategory])
 
   useEffect(() => {
     dispatch(requestProduct(id))
   }, [id])
 
   const [formValue, setFormValue] = useState({})
-  console.log('formValue: ', formValue)
   const [errors, setErrors] = useState({})
 
   const [imagePreview, setImagePreview] = useState({

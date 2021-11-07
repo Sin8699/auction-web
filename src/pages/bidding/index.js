@@ -1,35 +1,39 @@
-import Grid from '@material-ui/core/Grid'
+import {useMemo, useState} from 'react'
+import {useSelector} from 'react-redux'
 
-import SuiBox from 'components/SuiBox'
+import {Grid, Card, Icon, CircularProgress} from '@material-ui/core'
+import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
+
+import keyBy from 'lodash/keyBy'
+import chunk from 'lodash/chunk'
+
+import SuiBox from '../../components/SuiBox'
+import SuiButton from '../../components/SuiButton'
+import SuiInput from '../../components/SuiInput'
+import SuiPagination from '../../components/SuiPagination'
+import TablePagination from '../../components/TablePagination'
 
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 
+import BidModal from './components/BidModal'
+import BuyNowModal from './components/BuyNowModal'
+import ProductCard from './components/ProductCard'
+
 import team1 from 'assets/images/team-1.jpg'
-import Card from '@material-ui/core/Card'
-import SuiButton from 'components/SuiButton'
-import Icon from '@material-ui/core/Icon'
-import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
 
-import CircularProgress from '@material-ui/core/CircularProgress'
-
-import SuiPagination from '../../components/SuiPagination/index'
-import SuiInput from '../../components/SuiInput/index'
 import {useGetProducts} from '../../apis/products/index'
 import {useGetBiddingProducts} from '../../apis/bidding-product/index'
-import BuyNowModal from './components/BuyNowModal/index'
-import keyBy from 'lodash/keyBy'
-import BidModal from './components/BidModal/index'
-import {useState} from 'react'
-import chunk from 'lodash/chunk'
-import {useMemo} from 'react'
-import TablePagination from '../../components/TablePagination/index'
-import ProductCard from './components/ProductCard/index'
+
+import {getListCategories} from 'helpers/category'
 
 const LIMIT_PAGINATION = 12
 
 function BiddingBoard() {
+  const {dataCategory} = useSelector(state => state.categoryState)
+  const {dataSubCategory} = useSelector(state => state.subCategoryState)
+
   const [{data: products = [], loading: loadingProducts, error: errorProducts}] = useGetProducts()
 
   const [
@@ -103,17 +107,17 @@ function BiddingBoard() {
                   </SuiButton>
                 }
               >
-                <MenuItem>New File</MenuItem>
-                <SubMenu label="Open">
-                  <MenuItem>index.html</MenuItem>
-                  <MenuItem>example.js</MenuItem>
-                  <SubMenu label="Styles">
-                    <MenuItem>about.css</MenuItem>
-                    <MenuItem>home.css</MenuItem>
-                    <MenuItem>index.css</MenuItem>
-                  </SubMenu>
-                </SubMenu>
-                <MenuItem>Save</MenuItem>
+                {getListCategories(dataCategory, dataSubCategory).map(item => {
+                  if (item.sub.length > 0)
+                    return (
+                      <SubMenu label={item.name} key={item.name}>
+                        {item.sub.map(itemSub => (
+                          <MenuItem key={itemSub.name}>{itemSub.name}</MenuItem>
+                        ))}
+                      </SubMenu>
+                    )
+                  return <MenuItem key={item.name}>{item.name}</MenuItem>
+                })}
               </Menu>
             </SuiBox>
             <SuiBox display="flex" mb={1}>

@@ -1,5 +1,7 @@
-import {useState} from 'react'
-import dayjs from 'dayjs'
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useState, useEffect} from 'react'
+import {useParams} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
 
 import {Card, Grid} from '@material-ui/core'
 
@@ -18,58 +20,25 @@ import {getButtonByStatus} from '../../helpers/getButtonByStatus'
 
 import BidModal from '../bidding/components/BidModal/index'
 
-const relativeTime = require('dayjs/plugin/relativeTime')
+import {requestProduct} from 'redux/actions/product'
 
-dayjs.extend(relativeTime)
-
-const product_fake = {
-  createdAt: '2021-10-18T11:49:25.180Z',
-  name: 'Macbook pro',
-  primaryImage:
-    'https://cdn.tgdd.vn/Products/Images/44/236131/apple-macbook-pro-m1-2020-z11c000cj-600x600.jpg',
-  extraImages: [
-    'https://www.apple.com/v/macbook-pro-14-and-16/a/images/overview/camera/six_speaker__f8agb5mmn9qy_large.jpg',
-    'https://www.apple.com/v/macbook-pro-14-and-16/a/images/overview/ports/magsafe__wkeiwwe9e36i_large.jpg',
-    'https://www.apple.com/v/macbook-pro-14-and-16/a/images/overview/camera/spatial_audio__dipr8iji32uu_small.jpg'
-  ],
-  description: 'description 1',
-  categories: [],
-  _id: '1'
-}
-
-const bidding_product_fake = {
-  createdAt: '2021-10-18T10:18:50.343Z',
-  status: 'AVAILABLE',
-  stepPrice: 'stepPrice 1',
-  initPrice: 'initPrice 1',
-  buyNowPrice: '200',
-  currentPrice: '100',
-  publicTime: 'publicTime 1',
-  endTime: 'endTime 1',
-  winner: 'winner 1',
-  product: '1',
-  _id: '3'
-}
-
-const seller_fake = {
-  fullName: 'Antonio Kovacek',
-  rate: '10'
-}
-
-const bidder_fake = {
-  fullName: 'Julio Murphy',
-  rate: '10'
-}
+import NoImage from 'assets/images/no-image.png'
 
 function ProductDetail() {
-  const [currentImagePreview, setCurrentImagePreview] = useState(
-    'https://cdn.tgdd.vn/Products/Images/44/236131/apple-macbook-pro-m1-2020-z11c000cj-600x600.jpg'
-  )
+  const dispatch = useDispatch()
+  const {id} = useParams()
 
-  const product = product_fake
-  const bidding_product = bidding_product_fake
-  const seller = seller_fake
-  const bidder = bidder_fake
+  const {product} = useSelector(state => state.productState)
+
+  const [currentImagePreview, setCurrentImagePreview] = useState(NoImage)
+
+  useEffect(() => {
+    dispatch(requestProduct(id))
+  }, [id])
+
+  useEffect(() => {
+    setCurrentImagePreview(product.imageUrl)
+  }, [product])
 
   const handleChangePreview = url => () => {
     setCurrentImagePreview(url)
@@ -85,7 +54,7 @@ function ProductDetail() {
               Products
             </SuiTypography>
             <BidModal
-              biddingProduct={bidding_product['_id']}
+              biddingProduct={product['_id']}
               productName={product.name}
               buttonColor="error"
               variant="gradient"
@@ -95,13 +64,13 @@ function ProductDetail() {
             <Grid container alignItems="center">
               <Grid item lg={6} md={6} sm={12}>
                 <div>
-                  <ImageLayout src={currentImagePreview} alt="" />
+                  <ImageLayout src={`http://${currentImagePreview}`} alt="" />
                 </div>
                 <Grid container>
-                  {[product.primaryImage, ...product.extraImages].map(img => {
+                  {(product.name ? [product.imageUrl, ...product.extraImages] : []).map(img => {
                     return (
                       <Grid item xs={3} onClick={handleChangePreview(img)}>
-                        <ImageLayout src={img} alt="" />
+                        <ImageLayout src={`http://${img}`} alt="" />
                       </Grid>
                     )
                   })}
@@ -117,124 +86,16 @@ function ProductDetail() {
                     textTransform="capitalize"
                     textGradient
                   >
-                    Price: {bidding_product.currentPrice} $
+                    Price: {product.currentPrice} $
                   </SuiTypography>
 
                   <SuiBox my={2}>
                     <SuiTypography textGradient variant="h5" textColor="info">
-                      Price Buy Now: {bidding_product.buyNowPrice} $
+                      Price Buy Now: {product.buyNowPrice} $
                     </SuiTypography>
                   </SuiBox>
 
-                  {getButtonByStatus(bidding_product.status)}
-
-                  <SuiBox my={2} display="flex">
-                    <SuiTypography
-                      style={{lineHeight: '30px', marginRight: '20px'}}
-                      mt={2}
-                      variant="h6"
-                      color="info"
-                    >
-                      Seller: {seller.fullName}
-                    </SuiTypography>
-                    <h2>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star_half
-                      </span>
-                    </h2>
-                  </SuiBox>
-
-                  <SuiBox my={2} display="flex">
-                    <SuiTypography
-                      style={{lineHeight: '30px', marginRight: '20px'}}
-                      mt={2}
-                      variant="h6"
-                      color="info"
-                    >
-                      Highest bidder: {bidder.fullName}
-                    </SuiTypography>
-                    <h2>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star
-                      </span>
-                      <span
-                        class="material-icons-round notranslate MuiIcon-root MuiIcon-fontSizeInherit css-6m0tds"
-                        aria-hidden="true"
-                      >
-                        star_half
-                      </span>
-                    </h2>
-                  </SuiBox>
-
-                  <SuiBox mb={2}>
-                    <SuiTypography
-                      variant="button"
-                      fontWeight="regular"
-                      textTransform="capitalize"
-                      textColor={'error'}
-                      customClass="line-height-0"
-                    >
-                      {dayjs(product.createdAt).fromNow()}
-                    </SuiTypography>
-                  </SuiBox>
-
-                  <SuiTypography
-                    variant="button"
-                    fontWeight="medium"
-                    textTransform="capitalize"
-                    textColor={'secondary'}
-                    customClass="line-height-0"
-                  >
-                    Recommended price for you to bidding: 120$
-                  </SuiTypography>
+                  {getButtonByStatus(product.status)}
                 </SuiBox>
               </Grid>
             </Grid>
@@ -247,18 +108,12 @@ function ProductDetail() {
             </SuiTypography>
           </SuiBox>
 
-          <SuiBox
-            mt={5}
-            textColor="danger"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            pt={2}
-            px={2}
-          >
+          <SuiBox mt={5}>
             <SuiTypography variant="h6">Related Products</SuiTypography>
           </SuiBox>
-          <RelatedProductsTable />
+
+          <SuiBox display="flex"></SuiBox>
+          {/* <RelatedProductsTable /> */}
         </Card>
       </SuiBox>
       <Footer />

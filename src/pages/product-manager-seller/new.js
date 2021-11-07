@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 
@@ -13,9 +13,6 @@ import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 
-import {requestCategoryData} from 'redux/actions/category'
-import {requestSubCategoryData} from 'redux/actions/subcategory'
-
 import ProductJsonApi from 'apis/products/productJson'
 
 import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
@@ -28,12 +25,6 @@ const NewProduct = () => {
   const navigate = useHistory()
   const {dataCategory} = useSelector(state => state.categoryState)
   const {dataSubCategory} = useSelector(state => state.subCategoryState)
-
-  useEffect(() => {
-    dataCategory.length === 0 && dispatch(requestCategoryData())
-    dataSubCategory.length === 0 && dispatch(requestSubCategoryData())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataCategory, dataSubCategory])
 
   const [formValue, setFormValue] = useState({})
 
