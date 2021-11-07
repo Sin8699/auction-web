@@ -25,14 +25,28 @@ const productSchema = Yup.object().shape({
   description: Yup.string().required('Description is required')
 })
 
+const productBiddingSchema = Yup.object().shape({
+  product: Yup.string().required('Product is required'),
+  stepPrice: Yup.number().required('Field is required'),
+  initPrice: Yup.number().required('Field is required'),
+  endTime: Yup.date().required('End time is required')
+})
+
 export const TYPE_SCHEMA = {
   LOGIN: 'loginSchema',
   REGISTER: 'registerSchema',
   CHANGE_PASSWORD: 'changePasswordSchema',
-  PRODUCT: 'productSchema'
+  PRODUCT: 'productSchema',
+  BIDDING_PRODUCT: 'productBiddingSchema'
 }
 
-const schema = {loginSchema, registerSchema, changePasswordSchema, productSchema}
+const schema = {
+  loginSchema,
+  registerSchema,
+  changePasswordSchema,
+  productSchema,
+  productBiddingSchema
+}
 
 const validateData = (validateChoose, formValue, callback) => {
   return new Promise((resolve, reject) => {

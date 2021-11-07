@@ -1,8 +1,8 @@
-import { useMemo, useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import {useMemo, useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 
-import { Grid, Card, Icon, CircularProgress } from '@material-ui/core'
-import { Menu, MenuItem, SubMenu } from '@szhsin/react-menu'
+import {Grid, Card, Icon, CircularProgress} from '@material-ui/core'
+import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
 
 import keyBy from 'lodash/keyBy'
 import chunk from 'lodash/chunk'
@@ -20,23 +20,24 @@ import Footer from 'component-pages/Footer'
 import BidModal from './components/BidModal'
 import BuyNowModal from './components/BuyNowModal'
 import ProductCard from './components/ProductCard'
-import { useDispatch } from 'react-redux'
+
+import ModalNewBidding from './components/CreateProductBiddingModal'
 
 import team1 from 'assets/images/team-1.jpg'
 
-import { useGetProducts } from '../../apis/products/index'
-import { useGetBiddingProducts } from '../../apis/bidding-product/index'
+import {useGetProducts} from '../../apis/products/index'
+import {useGetBiddingProducts} from '../../apis/bidding-product/index'
 
-import { getListCategories } from 'helpers/category'
-import { searchingData } from 'redux/actions/search'
+import {getListCategories} from 'helpers/category'
+import {searchingData} from 'redux/actions/search'
 import React from '../../components/MenuAction/index'
 import useDebounce from '../../hooks/useDebounce'
 
 const LIMIT_PAGINATION = 12
 
 function BiddingBoard() {
-  const { dataCategory } = useSelector((state) => state.categoryState)
-  const { dataSubCategory } = useSelector((state) => state.subCategoryState)
+  const {dataCategory} = useSelector(state => state.categoryState)
+  const {dataSubCategory} = useSelector(state => state.subCategoryState)
   // const { results = {} } = useSelector((state) => state.searchState)
 
   const [searchText, setSearchText] = useState('')
@@ -44,17 +45,17 @@ function BiddingBoard() {
   const debouncedValue = useDebounce(searchText, 300)
   const dispatch = useDispatch()
 
-  const [{ data: products = [], loading: loadingProducts, error: errorProducts }] = useGetProducts()
+  const [{data: products = [], loading: loadingProducts, error: errorProducts}] = useGetProducts()
 
   const [
-    { data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts }
+    {data: biddingProducts = [], loading: loadingBiddingProducts, error: errorBiddingProducts}
   ] = useGetBiddingProducts()
 
   const [page, setPage] = useState(1)
 
   useEffect(() => {
     if (!debouncedValue) return
-    dispatch(searchingData({ query: debouncedValue }))
+    dispatch(searchingData({query: debouncedValue}))
   }, [debouncedValue, dispatch])
 
   const chuckList = useMemo(() => {
@@ -84,7 +85,7 @@ function BiddingBoard() {
 
     return (
       <Grid container spacing={3}>
-        {listByPage.map(({ name, primaryImage, description, categories, _id }) => (
+        {listByPage.map(({name, primaryImage, description, categories, _id}) => (
           <Grid item xs={12} md={6} xl={3} key={_id}>
             <ProductCard
               id={_id}
@@ -97,7 +98,7 @@ function BiddingBoard() {
                 comp: <BuyNowModal biddingProduct={objectBiddingProduct?.[_id]} />,
                 color: 'info'
               }}
-              authors={[{ image: team1, name: 'Elena Morison' }]}
+              authors={[{image: team1, name: 'Elena Morison'}]}
               info={<BidModal biddingProduct={objectBiddingProduct?.[_id]} productName={name} />}
               countDown={60000} //seconds
             />
@@ -107,9 +108,22 @@ function BiddingBoard() {
     )
   }
 
+  const [openModal, setOpenModal] = useState(false)
+
   return (
     <DashboardLayout>
       <Header />
+      <SuiBox mb={2} mt={2}>
+        <SuiButton
+          fullWidth
+          buttonColor="dark"
+          variant="gradient"
+          onClick={() => setOpenModal(true)}
+        >
+          You are a seller, create a new auction product here
+        </SuiButton>
+        <ModalNewBidding show={openModal} onClose={() => setOpenModal(false)} />
+      </SuiBox>
       <SuiBox mb={3}>
         <Card>
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
@@ -122,11 +136,11 @@ function BiddingBoard() {
                   </SuiButton>
                 }
               >
-                {getListCategories(dataCategory, dataSubCategory).map((item) => {
+                {getListCategories(dataCategory, dataSubCategory).map(item => {
                   if (item.sub.length > 0)
                     return (
                       <SubMenu label={item.name} key={item.name}>
-                        {item.sub.map((itemSub) => (
+                        {item.sub.map(itemSub => (
                           <MenuItem key={itemSub.name}>{itemSub.name}</MenuItem>
                         ))}
                       </SubMenu>
@@ -138,9 +152,9 @@ function BiddingBoard() {
             <SuiBox display="flex" mb={1}>
               <SuiBox mr={1}>
                 <SuiInput
-                  withIcon={{ icon: 'search', direction: 'right' }}
+                  withIcon={{icon: 'search', direction: 'right'}}
                   placeholder="Search name, category"
-                  onChange={(e) => setSearchText(e.target.value)}
+                  onChange={e => setSearchText(e.target.value)}
                 />
               </SuiBox>
               <>

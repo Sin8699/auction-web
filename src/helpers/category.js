@@ -1,7 +1,7 @@
 const compareCategoryAndSub = (categories, subCategories) => {
   const tempSub = subCategories.map(sub => {
     const category = categories.find(cate => cate._id === sub.category)
-    return {...sub, category: {name: category.name, id: category._id}}
+    return {...sub, category: {name: category?.name, id: category?._id}}
   })
 
   const categoriesMap = new Map()

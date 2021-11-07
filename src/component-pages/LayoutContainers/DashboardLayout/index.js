@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 import SuiBox from 'components/SuiBox'
 import styles from 'component-pages/LayoutContainers/DashboardLayout/styles'
 import {useSoftUIController} from 'context'
+import {requestCategoryData} from 'redux/actions/category'
+import {requestProductsData} from 'redux/actions/product'
+import {requestSubCategoryData} from 'redux/actions/subcategory'
 import {requestProfile} from 'redux/actions/user'
 
 function LayoutContainer({children}) {
@@ -19,8 +22,13 @@ function LayoutContainer({children}) {
     dispatch({type: 'LAYOUT', value: 'dashboard'})
   }, [dispatch, pathname])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatchRedux(requestProfile()), [])
+  useEffect(() => {
+    dispatchRedux(requestProfile())
+    dispatchRedux(requestCategoryData())
+    dispatchRedux(requestProductsData())
+    dispatchRedux(requestSubCategoryData())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return <SuiBox customClass={classes.layoutContainer}>{children}</SuiBox>
 }
