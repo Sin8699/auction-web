@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useState, useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import get from 'lodash/get'
 
-import {Grid, Card, Icon, CircularProgress} from '@material-ui/core'
-import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
+import { Grid, Card, Icon, CircularProgress } from '@material-ui/core'
+import { Menu, MenuItem, SubMenu, MenuRadioGroup } from '@szhsin/react-menu'
 
 import SuiBox from 'components/SuiBox'
 import SuiButton from 'components/SuiButton'
@@ -25,24 +25,32 @@ import team1 from 'assets/images/team-1.jpg'
 
 import useDebounce from '../../hooks/useDebounce'
 
-import {getListCategories} from 'helpers/category'
+import { getListCategories } from 'helpers/category'
 
-import {searchingData} from 'redux/actions/search'
-import {requestBiddingProductsData} from 'redux/actions/bidding-product'
-
+import { searchingData } from 'redux/actions/search'
+import { requestBiddingProductsData } from 'redux/actions/bidding-product'
+import { orderBy } from 'lodash-es'
 const LIMIT_PAGINATION = 12
+
+const SORT_KEYS = {
+  TIME_DESC: 'time_desc',
+  PRICE_ASC: 'price_asc'
+}
 
 function BiddingBoard() {
   const dispatch = useDispatch()
 
-  const {dataCategory} = useSelector(state => state.categoryState)
-  const {dataSubCategory} = useSelector(state => state.subCategoryState)
-  const {listBiddingProducts, loadingListBiddingProduct} = useSelector(
-    state => state.biddingProductState
+  const { dataCategory } = useSelector((state) => state.categoryState)
+  const { dataSubCategory } = useSelector((state) => state.subCategoryState)
+  const { listBiddingProducts, loadingListBiddingProduct } = useSelector(
+    (state) => state.biddingProductState
   )
-  const {loading, results} = useSelector(state => state.searchState)
+  const { loading, results } = useSelector((state) => state.searchState)
 
   const [list, setList] = useState([])
+  const [sortByState, setSortByState] = useState('')
+  const [filterByCategory, setFilterByCategory] = useState('all')
+
   const [page, setPage] = useState(1)
   const [searchText, setSearchText] = useState('')
 
@@ -54,7 +62,7 @@ function BiddingBoard() {
 
   useEffect(() => {
     // if (!debouncedValue) return
-    dispatch(searchingData({query: debouncedValue}))
+    dispatch(searchingData({ query: debouncedValue }))
   }, [debouncedValue])
 
   useEffect(() => {
@@ -70,9 +78,18 @@ function BiddingBoard() {
       )
     }
 
+    const listFiltered =
+      filterByCategory !== 'all'
+        ? list.filter(({ product }) =>
+            [get(product, 'category._id'), get(product, 'subCategory._id')].includes(
+              filterByCategory
+            )
+          )
+        : list
+
     return (
       <Grid container spacing={3}>
-        {list
+        {listFiltered
           .slice((page - 1) * LIMIT_PAGINATION, (page - 1) * LIMIT_PAGINATION + LIMIT_PAGINATION)
           .map(
             ({
@@ -101,7 +118,7 @@ function BiddingBoard() {
                     />
                   }
                   buttonBuyNow={<BuyNowModal biddingProduct={get(product, '_id')} />}
-                  authors={[{image: team1, name: 'Elena Morison'}]}
+                  authors={[{ image: team1, name: 'Elena Morison' }]}
                   endTime={endTime}
                 />
               </Grid>
@@ -114,6 +131,22 @@ function BiddingBoard() {
   const [openModal, setOpenModal] = useState(false)
   const handleSuccessCreate = () => {
     setOpenModal(false)
+  }
+
+  const handleSort = (sort) => {
+    if (sort === SORT_KEYS.TIME_DESC) {
+      const sorted = orderBy(list, ['publicTime'], ['desc'])
+      setSortByState(SORT_KEYS.TIME_DESC)
+      setList(sorted)
+    } else {
+      const sorted = orderBy(list, ['buyNowPrice'], ['asc'])
+      setSortByState(SORT_KEYS.PRICE_ASC)
+      setList(sorted)
+    }
+  }
+
+  const handleMenuCategory = (e) => {
+    setFilterByCategory(e?.value)
   }
 
   return (
@@ -147,26 +180,36 @@ function BiddingBoard() {
                     <Icon className="material-icons-round font-bold">keyboard_arrow_down</Icon>
                   </SuiButton>
                 }
+                onItemClick={handleMenuCategory}
               >
-                {getListCategories(dataCategory, dataSubCategory).map(item => {
+                {[
+                  { name: 'All', sub: [], _id: 'all' },
+                  ...getListCategories(dataCategory, dataSubCategory)
+                ].map((item) => {
                   if (item.sub.length > 0)
                     return (
                       <SubMenu label={item.name} key={item.name}>
-                        {item.sub.map(itemSub => (
-                          <MenuItem key={itemSub.name}>{itemSub.name}</MenuItem>
+                        {item.sub.map((itemSub) => (
+                          <MenuItem value={item._id} key={itemSub.name}>
+                            {itemSub.name}
+                          </MenuItem>
                         ))}
                       </SubMenu>
                     )
-                  return <MenuItem key={item.name}>{item.name}</MenuItem>
+                  return (
+                    <MenuItem value={item._id} key={item.name}>
+                      {item.name}
+                    </MenuItem>
+                  )
                 })}
               </Menu>
             </SuiBox>
             <SuiBox display="flex" mb={1}>
               <SuiBox mr={1}>
                 <SuiInput
-                  withIcon={{icon: 'search', direction: 'right'}}
+                  withIcon={{ icon: 'search', direction: 'right' }}
                   placeholder="Search name, category"
-                  onChange={e => setSearchText(e.target.value)}
+                  onChange={(e) => setSearchText(e.target.value)}
                 />
               </SuiBox>
               <>
@@ -179,13 +222,15 @@ function BiddingBoard() {
                       </SuiButton>
                     }
                   >
-                    <MenuItem>
-                      End Time (
-                      <Icon className="material-icons-round font-bold">arrow_downward</Icon>)
-                    </MenuItem>
-                    <MenuItem>
-                      Price (<Icon className="material-icons-round font-bold">arrow_upward</Icon>)
-                    </MenuItem>
+                    <MenuRadioGroup value={sortByState} onRadioChange={(e) => handleSort(e.value)}>
+                      <MenuItem value={SORT_KEYS.TIME_DESC}>
+                        End Time (
+                        <Icon className="material-icons-round font-bold">arrow_downward</Icon>)
+                      </MenuItem>
+                      <MenuItem value={SORT_KEYS.PRICE_ASC}>
+                        Price (<Icon className="material-icons-round font-bold">arrow_upward</Icon>)
+                      </MenuItem>
+                    </MenuRadioGroup>
                   </Menu>
                 </SuiBox>
               </>
