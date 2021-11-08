@@ -11,12 +11,15 @@ import logoXD from 'assets/images/small-logos/logo-xd.svg'
 import styles from './styles'
 import Card from '@material-ui/core/Card'
 import Table from 'component-pages/Table'
+import { useSelector } from 'react-redux'
+import dayjs from 'dayjs'
+import { getProductsFavored } from '../../../helpers/favoredProduct'
 
 const data = {
   columns: [
     { name: 'product', align: 'left', key: 'product' },
-    { name: 'budget', align: 'left', key: 'budget' },
-    { name: 'status', align: 'left', key: 'status' }
+    { name: 'Description', align: 'left', key: 'budget' },
+    { name: 'Public Date', align: 'left', key: 'status' }
   ],
   rows: [
     {
@@ -103,7 +106,31 @@ const data = {
 const FavoredProductTableData = () => {
   const classes = styles()
 
-  const { columns, rows } = data
+  const { listProducts, loadingListProduct } = useSelector((state) => state.productState)
+
+  const idFavoredList = getProductsFavored()
+
+  const rows = loadingListProduct
+    ? data.rows
+    : listProducts
+        .filter((p) => (idFavoredList || []).includes(p._id))
+        .map((product) => {
+          return {
+            product: [product.imageUrl, product.name],
+            budget: (
+              <SuiTypography variant="button" textColor="text" fontWeight="medium">
+                {product.description}
+              </SuiTypography>
+            ),
+            status: (
+              <SuiTypography variant="caption" textColor="text" fontWeight="medium">
+                {dayjs(product.createAt).format('DD/MM/YYYY')}
+              </SuiTypography>
+            )
+          }
+        })
+
+  const { columns } = data
 
   return (
     <Card>

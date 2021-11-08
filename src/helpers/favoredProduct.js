@@ -1,11 +1,11 @@
 const LOCAL_STORAGE_KEY_FAVORED = 'favored_products'
-export const handleFavoredProduct = productID => {
+export const handleFavoredProduct = (productID) => {
   try {
     const list = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_FAVORED)) || []
 
     let newList = []
     if (list.includes(productID)) {
-      newList = list.filter(id => id !== productID)
+      newList = list.filter((id) => id !== productID)
     } else {
       newList = [...list, productID]
     }
@@ -16,11 +16,20 @@ export const handleFavoredProduct = productID => {
   }
 }
 
-export const isFavoredProduct = productID => {
+export const isFavoredProduct = (productID) => {
   try {
     const list = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_FAVORED)) || []
     return list.includes(productID)
   } catch (error) {
     return false
+  }
+}
+
+export const getProductsFavored = () => {
+  try {
+    const list = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY_FAVORED)) || []
+    return list
+  } catch (error) {
+    return []
   }
 }
