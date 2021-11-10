@@ -7,6 +7,7 @@ import {SubCategoryReducer} from './subcategory'
 import {ProductReducer} from './product'
 import {SearchReducer} from './search'
 import {BiddingProductReducer} from './bidding-product'
+import {BiddingRecordReducer} from './bidding-record'
 
 const rootReducer = combineReducers({
   exampleSate: ExampleReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   subCategoryState: SubCategoryReducer,
   productState: ProductReducer,
   searchState: SearchReducer,
-  biddingProductState: BiddingProductReducer
+  biddingProductState: BiddingProductReducer,
+  biddingRecordState: BiddingRecordReducer
 })
 
 export default rootReducer

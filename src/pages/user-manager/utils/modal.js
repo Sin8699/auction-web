@@ -56,7 +56,6 @@ const DialogActions = withStyles(theme => ({
 export default function ModalUser({show, onClose, selectedItem, onSuccess}) {
   const dispatch = useDispatch()
   const [formValue, setFormValue] = useState({})
-  console.log('formValue: ', formValue)
 
   useEffect(() => {
     setFormValue(selectedItem)

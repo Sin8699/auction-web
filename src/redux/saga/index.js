@@ -6,6 +6,7 @@ import {subCategorySaga} from './subcategory'
 import {productSaga} from './product'
 import {searchSaga} from './search'
 import {biddingProductSaga} from './bidding-product'
+import {BiddingRecordSaga} from './bidding-record'
 
 function* rootSaga() {
   yield all([
@@ -15,7 +16,8 @@ function* rootSaga() {
     subCategorySaga(),
     productSaga(),
     searchSaga(),
-    biddingProductSaga()
+    biddingProductSaga(),
+    BiddingRecordSaga()
   ])
 }
 

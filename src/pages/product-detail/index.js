@@ -19,9 +19,11 @@ import NoImage from 'assets/images/no-image.png'
 import {getButtonByStatus} from '../../helpers/getButtonByStatus'
 
 import BidModal from '../bidding/components/BidModal'
+import BasicTable from './components/TableBiddingRecord'
 
 import {requestProduct, setProductsData} from 'redux/actions/product'
 import {requestBiddingProduct, setBiddingProduct} from 'redux/actions/bidding-product'
+import {requestBiddingRecordsData} from 'redux/actions/bidding-record'
 
 const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -32,12 +34,16 @@ function ProductDetail() {
 
   const {product} = useSelector(state => state.productState)
   const {biddingProduct, loadingBiddingProduct} = useSelector(state => state.biddingProductState)
+  const {listBiddingRecord, loadingListBiddingRecord} = useSelector(
+    state => state.biddingRecordState
+  )
 
   const [currentImagePreview, setCurrentImagePreview] = useState(NoImage)
 
   useEffect(() => {
     dispatch(requestProduct(id))
     dispatch(requestBiddingProduct(id))
+    dispatch(requestBiddingRecordsData(id))
     return () => {
       dispatch(setProductsData({}))
       dispatch(setBiddingProduct({}))
@@ -83,7 +89,7 @@ function ProductDetail() {
                   <h1>{product.name}</h1>
                   <SuiBox>
                     <SuiTypography
-                      variant="button"
+                      variant="h5"
                       fontWeight="regular"
                       textTransform="capitalize"
                       textGradient
@@ -94,12 +100,24 @@ function ProductDetail() {
 
                   <SuiBox my={2}>
                     <SuiTypography
-                      variant="button"
+                      variant="h5"
                       fontWeight="regular"
                       textTransform="capitalize"
                       textGradient
                     >
-                      Price start:
+                      {'Price step: '}
+                      {!loadingBiddingProduct ? biddingProduct.stepPrice : 'loading...'} $
+                    </SuiTypography>
+                  </SuiBox>
+
+                  <SuiBox my={2}>
+                    <SuiTypography
+                      variant="h5"
+                      fontWeight="regular"
+                      textTransform="capitalize"
+                      textGradient
+                    >
+                      {'Price init: '}
                       {!loadingBiddingProduct ? biddingProduct.initPrice : 'loading...'} $
                     </SuiTypography>
                   </SuiBox>
@@ -107,7 +125,7 @@ function ProductDetail() {
                   {biddingProduct.allowBuyNow && (
                     <SuiBox my={2}>
                       <SuiTypography textGradient variant="h5" textColor="info">
-                        Price Buy Now:{' '}
+                        Price Buy Now:
                         {!loadingBiddingProduct ? biddingProduct.buyNowPrice : 'loading...'} $
                       </SuiTypography>
                     </SuiBox>
@@ -116,12 +134,7 @@ function ProductDetail() {
                   {getButtonByStatus(biddingProduct.status)}
 
                   <SuiBox my={2}>
-                    <SuiTypography
-                      variant="button"
-                      fontWeight="regular"
-                      textTransform="capitalize"
-                      textGradient
-                    >
+                    <SuiTypography variant="h5" fontWeight="regular" textTransform="capitalize">
                       End time:
                       {!loadingBiddingProduct
                         ? ` ${dayjs(biddingProduct.endTime).fromNow()}`
@@ -138,6 +151,15 @@ function ProductDetail() {
             <SuiTypography fontWeight="regular" textTransform="capitalize">
               {product.description || ''}
             </SuiTypography>
+          </SuiBox>
+
+          <SuiBox mt={5} pt={2} px={2}>
+            <SuiTypography variant="h6">Bidding record: </SuiTypography>
+            {loadingListBiddingRecord ? (
+              'Loading...'
+            ) : (
+              <BasicTable value={listBiddingRecord.reverse()} />
+            )}
           </SuiBox>
 
           <SuiBox mt={7} ml={2}>
