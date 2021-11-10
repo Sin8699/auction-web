@@ -37,6 +37,7 @@ function ProductManagerSeller() {
   const {dataCategory} = useSelector(state => state.categoryState)
   const {dataSubCategory} = useSelector(state => state.subCategoryState)
   const {listProducts} = useSelector(state => state.productState)
+  const {profile} = useSelector(state => state.userState)
 
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
@@ -50,14 +51,18 @@ function ProductManagerSeller() {
     navigate.push(ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_NEW)
   }
 
+  const filterProductByOwner = products => {
+    return products.filter(product => product.createBy === profile._id)
+  }
+
   const filterProduct = products => {
     if (!!search) {
       const filteredData = filter(products, item =>
         includes(item.name.toString().toLowerCase(), search.toLowerCase())
       )
-      return filteredData
+      return filterProductByOwner(filteredData)
     }
-    return products
+    return filterProductByOwner(products)
   }
 
   const _renderData = () => {
@@ -70,8 +75,8 @@ function ProductManagerSeller() {
               <ProductCard
                 _id={_id}
                 name={name}
-                category={category}
-                subCategory={subCategory}
+                category={category.name}
+                subCategory={subCategory.name}
                 image={`http://${imageUrl}`}
                 url={`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${_id}`}
               />

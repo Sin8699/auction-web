@@ -30,9 +30,36 @@ const UserApi = {
       return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
     }
   },
+  getProfile: async () => {
+    try {
+      const {data, status} = await appAPI.get('auth')
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
+  },
   resetPassword: async email => {
     try {
       const {data, status} = await appAPI.post('auth/reset-password', {email})
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
+  },
+  getUsersByAdmin: async () => {
+    try {
+      const {data, status} = await appAPI.get('auth/admin/all')
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
+  },
+  updateUsersByAdmin: async (id, payload) => {
+    try {
+      const {data, status} = await appAPI.patch(`auth/admin/${id}`, payload)
       return {data, status}
     } catch (error) {
       const errorMessage = get(error, 'response.data.message')

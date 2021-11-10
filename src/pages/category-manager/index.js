@@ -21,7 +21,10 @@ import TableHeader from './utils/tableHead'
 import {TYPE_MODAL} from 'constants/modal'
 import ModalCategory from './components/modal'
 
-import {requestCategoryData} from '../../redux/actions/category'
+import {requestCategoryData} from 'redux/actions/category'
+import {openAlert} from 'redux/actions/alert'
+
+import CategoryApi from 'apis/categories'
 
 const LIMIT_PAGINATION = 10
 
@@ -43,9 +46,30 @@ function CategoryManager() {
 
   useEffect(() => dispatch(requestCategoryData()), [dispatch])
 
+  const handleResult = (data, status, error) => {
+    if (error) {
+      const infoNotify = {messageAlert: error, typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
+    if (status === 200) {
+      const infoNotify = {messageAlert: data.message || 'success', typeAlert: 'success'}
+      dispatch(openAlert(infoNotify))
+      onSuccessCategory()
+    }
+    if (status && status !== 200) {
+      const infoNotify = {messageAlert: data.message || 'Something wrong', typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
+  }
+
   const onAddNew = () => {
     setShowModal(true)
     setTypeModal(TYPE_MODAL.CREATE)
+  }
+
+  const onDeleteItem = async () => {
+    const {data, status, error} = await CategoryApi.deleteDocument(selectedItem._id)
+    handleResult(data, status, error)
   }
 
   useEffect(() => {
@@ -60,6 +84,7 @@ function CategoryManager() {
     },
     onDelete: () => {
       setAnchorEl(null)
+      onDeleteItem()
     }
   })
 

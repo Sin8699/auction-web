@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import get from 'lodash/get'
 import {
   Table,
   TableContainer as MUTableContainer,
@@ -35,9 +36,9 @@ const TableContainer = ({
 
   useEffect(() => {
     if (!!search) {
-      const filteredData = filter(data, item =>
-        includes(item[searchKey]?.toString()?.toLowerCase(), search.toLowerCase())
-      )
+      const filteredData = filter(data, item => {
+        return includes(get(item, `${searchKey}`)?.toString()?.toLowerCase(), search.toLowerCase())
+      })
       setLocalData(filteredData)
     } else setLocalData(data)
   }, [data, search, searchKey])

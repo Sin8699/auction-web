@@ -1,4 +1,3 @@
-import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import PropTypes from 'prop-types'
@@ -17,8 +16,6 @@ import NoImage from 'assets/images/no-image.png'
 
 function ProductCard({_id, name, category, subCategory, image}) {
   const classes = styles({})
-  const {dataCategory} = useSelector(state => state.categoryState)
-  const {dataSubCategory} = useSelector(state => state.subCategoryState)
 
   return (
     <Card className={classes.projectCard}>
@@ -27,7 +24,7 @@ function ProductCard({_id, name, category, subCategory, image}) {
           src={`${image}` || NoImage}
           component="img"
           className={classes.projectCard_image}
-          style={{minHeight: '200px'}}
+          style={{height: '300px'}}
         />
       </SuiBox>
       <SuiBox pt={3} px={0.5}>
@@ -38,9 +35,7 @@ function ProductCard({_id, name, category, subCategory, image}) {
             textTransform="capitalize"
             textGradient
           >
-            {dataCategory.find(item => item._id === category)?.name +
-              ', ' +
-              dataSubCategory.find(item => item._id === subCategory)?.name}
+            {`${category}. ${subCategory}`}
           </SuiTypography>
         </SuiBox>
 

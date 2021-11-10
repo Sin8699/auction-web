@@ -1,7 +1,7 @@
 import {TableHead, TableRow, TableCell} from '@material-ui/core'
 
 const userColumn = [
-  {label: 'Username', stateValue: 'username', align: 'left'},
+  {label: 'Full name', stateValue: 'fullName', align: 'left'},
   {label: 'Email', stateValue: 'email', align: 'left'},
   {label: 'Role', stateValue: 'role', align: 'center'},
   {label: 'Status', stateValue: 'status', align: 'center'},

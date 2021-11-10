@@ -22,6 +22,9 @@ import ModalSubCategory from './components/modal'
 
 import {requestCategoryData} from '../../redux/actions/category'
 import {requestSubCategoryData} from '../../redux/actions/subcategory'
+import {openAlert} from 'redux/actions/alert'
+
+import SubCategoryApi from 'apis/sub-categories'
 
 const LIMIT_PAGINATION = 10
 
@@ -50,14 +53,35 @@ export default function SubCategoryManager() {
     setSubCategories(dataSubCategory)
   }, [dataCategory, dataSubCategory])
 
-  const onSuccessCategory = () => {
+  const onSuccessSubCategory = () => {
     setShowModal(false)
     dispatch(requestSubCategoryData())
+  }
+
+  const handleResult = (data, status, error) => {
+    if (error) {
+      const infoNotify = {messageAlert: error, typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
+    if (status === 200) {
+      const infoNotify = {messageAlert: data.message || 'success', typeAlert: 'success'}
+      dispatch(openAlert(infoNotify))
+      onSuccessSubCategory()
+    }
+    if (status && status !== 200) {
+      const infoNotify = {messageAlert: data.message || 'Something wrong', typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
   }
 
   const onAddNew = () => {
     setShowModal(true)
     setTypeModal(TYPE_MODAL.CREATE)
+  }
+
+  const onDeleteItem = async () => {
+    const {data, status, error} = await SubCategoryApi.deleteDocument(selectedItem._id)
+    handleResult(data, status, error)
   }
 
   const listActions = renderAction({
@@ -68,6 +92,7 @@ export default function SubCategoryManager() {
     },
     onDelete: () => {
       setAnchorEl(null)
+      onDeleteItem()
     }
   })
 
@@ -120,7 +145,7 @@ export default function SubCategoryManager() {
           onClose={() => setShowModal(false)}
           selectedItem={selectedItem}
           categories={categories}
-          onSuccess={onSuccessCategory}
+          onSuccess={onSuccessSubCategory}
           typeModal={typeModal}
         />
       )}

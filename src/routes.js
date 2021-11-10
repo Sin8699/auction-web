@@ -18,7 +18,6 @@ import EditProduct from './pages/product-manager-seller/edit'
 
 import CategoryManager from './pages/category-manager'
 import SubCategoryManager from './pages/subcategory-manager'
-import EditUser from './pages/user-manager/edit'
 import UserManager from './pages/user-manager'
 import ProductAdminManager from './pages/product-manager-admin'
 
@@ -105,12 +104,6 @@ const routes = [
     type: TYPE_ROUTER.PRIVATE,
     route: ROUTER_DEFAULT.USER_MANAGER,
     component: UserManager
-  },
-  {
-    key: 'user-manager-edit',
-    type: TYPE_ROUTER.PRIVATE,
-    route: ROUTER_DEFAULT.USER_MANAGER_EDIT + '/:id',
-    component: EditUser
   },
   {
     key: 'product-manager-admin',

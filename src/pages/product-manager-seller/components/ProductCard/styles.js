@@ -27,7 +27,7 @@ export default makeStyles(({palette, boxShadows, functions, borders}) => {
       maxWidth: '100%',
       margin: 0,
       boxShadow: regular,
-      objectFit: 'cover',
+      objectFit: 'contain',
       objectPosition: 'center'
     },
 

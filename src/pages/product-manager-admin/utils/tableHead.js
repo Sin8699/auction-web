@@ -3,7 +3,6 @@ import {TableHead, TableRow, TableCell} from '@material-ui/core'
 const productColumn = [
   {label: 'Name', stateValue: 'name', align: 'left'},
   {label: 'Owner', stateValue: 'owner', align: 'left'},
-  {label: 'Status', stateValue: 'status', align: 'center'},
   {label: '', stateValue: 'action', align: 'right'}
 ]
 
