@@ -21,7 +21,7 @@ import {getButtonByStatus} from '../../helpers/getButtonByStatus'
 import BidModal from '../bidding/components/BidModal'
 import BasicTable from './components/TableBiddingRecord'
 
-import {requestProduct, setProductsData} from 'redux/actions/product'
+import {requestProduct, setProduct} from 'redux/actions/product'
 import {requestBiddingProduct, setBiddingProduct} from 'redux/actions/bidding-product'
 import {requestBiddingRecordsData} from 'redux/actions/bidding-record'
 
@@ -45,7 +45,7 @@ function ProductDetail() {
     dispatch(requestBiddingProduct(id))
     dispatch(requestBiddingRecordsData(id))
     return () => {
-      dispatch(setProductsData({}))
+      dispatch(setProduct({}))
       dispatch(setBiddingProduct({}))
     }
   }, [id])

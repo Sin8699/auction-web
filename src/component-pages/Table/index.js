@@ -58,12 +58,12 @@ function Table({columns, rows}) {
   const renderRows = rows.map((row, key) => {
     const rowKey = `row-${key}`
 
-    const tableRow = columns.map(({key: keyCol, align}) => {
+    const tableRow = columns.map(({key: keyCol, align}, index) => {
       let template
 
       if (Array.isArray(row[keyCol])) {
         template = (
-          <SuiBox key={row[keyCol][1]} component="td" p={1}>
+          <SuiBox key={index} component="td" p={1}>
             <SuiBox display="flex" alignItems="center" py={0.5} px={1}>
               <SuiBox mr={2}>
                 {typeof row[keyCol][0] === 'string' ? (
@@ -85,7 +85,7 @@ function Table({columns, rows}) {
         )
       } else {
         template = (
-          <SuiBox key={row[keyCol]} component="td" p={1} textAlign={align}>
+          <SuiBox key={index} component="td" p={1} textAlign={align}>
             <SuiTypography
               variant="button"
               fontWeight="regular"

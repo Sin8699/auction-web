@@ -1,145 +1,72 @@
+import {useHistory} from 'react-router-dom'
+import {useSelector} from 'react-redux'
+import dayjs from 'dayjs'
+
+import {Card, IconButton} from '@material-ui/core'
+import {Visibility} from '@material-ui/icons'
+
+import Table from 'component-pages/Table'
+
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 
-// Images
-import logoSpotify from 'assets/images/small-logos/logo-spotify.svg'
-import logoInvesion from 'assets/images/small-logos/logo-invision.svg'
-import logoJira from 'assets/images/small-logos/logo-jira.svg'
-import logoSlack from 'assets/images/small-logos/logo-slack.svg'
-import logoWebDev from 'assets/images/small-logos/logo-webdev.svg'
-import logoXD from 'assets/images/small-logos/logo-xd.svg'
 import styles from './styles'
-import Card from '@material-ui/core/Card'
-import Table from 'component-pages/Table'
-import { useSelector } from 'react-redux'
-import dayjs from 'dayjs'
-import { getProductsFavored } from '../../../helpers/favoredProduct'
+
+import {getProductsFavored} from '../../../helpers/favoredProduct'
+
+import {ROUTER_DEFAULT} from 'constants/router'
 
 const data = {
   columns: [
-    { name: 'product', align: 'left', key: 'product' },
-    { name: 'Description', align: 'left', key: 'budget' },
-    { name: 'Public Date', align: 'left', key: 'status' }
-  ],
-  rows: [
-    {
-      product: [logoSpotify, 'Spotift'],
-      budget: (
-        <SuiTypography variant="button" textColor="text" fontWeight="medium">
-          $2,500
-        </SuiTypography>
-      ),
-      status: (
-        <SuiTypography variant="caption" textColor="text" fontWeight="medium">
-          working
-        </SuiTypography>
-      )
-    },
-    {
-      product: [logoInvesion, 'Invesion'],
-      budget: (
-        <SuiTypography variant="button" textColor="text" fontWeight="medium">
-          $5,000
-        </SuiTypography>
-      ),
-      status: (
-        <SuiTypography variant="caption" textColor="text" fontWeight="medium">
-          done
-        </SuiTypography>
-      )
-    },
-    {
-      product: [logoJira, 'Jira'],
-      budget: (
-        <SuiTypography variant="button" textColor="text" fontWeight="medium">
-          $3,400
-        </SuiTypography>
-      ),
-      status: (
-        <SuiTypography variant="caption" textColor="text" fontWeight="medium">
-          canceled
-        </SuiTypography>
-      )
-    },
-    {
-      product: [logoSlack, 'Slack'],
-      budget: (
-        <SuiTypography variant="button" textColor="text" fontWeight="medium">
-          $1,400
-        </SuiTypography>
-      ),
-      status: (
-        <SuiTypography variant="caption" textColor="text" fontWeight="medium">
-          canceled
-        </SuiTypography>
-      )
-    },
-    {
-      product: [logoWebDev, 'Webdev'],
-      budget: (
-        <SuiTypography variant="button" textColor="text" fontWeight="medium">
-          $14,000
-        </SuiTypography>
-      ),
-      status: (
-        <SuiTypography variant="caption" textColor="text" fontWeight="medium">
-          working
-        </SuiTypography>
-      )
-    },
-    {
-      product: [logoXD, 'Adobe XD'],
-      budget: (
-        <SuiTypography variant="button" textColor="text" fontWeight="medium">
-          $2,300
-        </SuiTypography>
-      ),
-      status: (
-        <SuiTypography variant="caption" textColor="text" fontWeight="medium">
-          done
-        </SuiTypography>
-      )
-    }
+    {name: 'product', align: 'left', key: 'product'},
+    {name: 'Public Date', align: 'left', key: 'publicDay'},
+    {name: 'Detail', align: 'center', key: 'action'}
   ]
 }
 
 const FavoredProductTableData = () => {
   const classes = styles()
+  const navigate = useHistory()
 
-  const { listProducts, loadingListProduct } = useSelector((state) => state.productState)
+  const {listProducts, loadingListProduct} = useSelector(state => state.productState)
+  console.log('listProducts: ', listProducts)
 
   const idFavoredList = getProductsFavored()
 
-  const rows = loadingListProduct
-    ? data.rows
-    : listProducts
-        .filter((p) => (idFavoredList || []).includes(p._id))
-        .map((product) => {
-          return {
-            product: [product.imageUrl, product.name],
-            budget: (
-              <SuiTypography variant="button" textColor="text" fontWeight="medium">
-                {product.description}
-              </SuiTypography>
-            ),
-            status: (
-              <SuiTypography variant="caption" textColor="text" fontWeight="medium">
-                {dayjs(product.createAt).format('DD/MM/YYYY')}
-              </SuiTypography>
-            )
-          }
-        })
+  const rows = listProducts
+    .filter(p => (idFavoredList || []).includes(p._id))
+    .map(product => {
+      return {
+        product: [`http://${product.imageUrl}`, product.name],
+        publicDay: (
+          <SuiTypography variant="caption" textColor="text" fontWeight="medium">
+            {dayjs(product.createAt).format('DD/MM/YYYY')}
+          </SuiTypography>
+        ),
+        action: (
+          <IconButton
+            onClick={() => navigate.push(`${ROUTER_DEFAULT.PRODUCT_DETAIL}/${product._id}`)}
+          >
+            <Visibility />
+          </IconButton>
+        )
+      }
+    })
 
-  const { columns } = data
+  const {columns} = data
 
   return (
     <Card>
       <SuiBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <SuiTypography variant="h6">Favorite Products</SuiTypography>
       </SuiBox>
-      <SuiBox customClass={classes.tables_table}>
-        <Table columns={columns} rows={rows} />
-      </SuiBox>
+      {loadingListProduct ? (
+        'Loading...'
+      ) : (
+        <SuiBox customClass={classes.tables_table}>
+          <Table columns={columns} rows={rows} />
+        </SuiBox>
+      )}
     </Card>
   )
 }
