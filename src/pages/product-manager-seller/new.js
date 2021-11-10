@@ -31,6 +31,22 @@ const NewProduct = () => {
   const categoryHasSub =
     dataSubCategory.filter(item => item.category === formValue.category).length !== 0
 
+  const handleResult = (data, status, error) => {
+    if (error) {
+      const infoNotify = {messageAlert: error, typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
+    if (status === 200) {
+      const infoNotify = {messageAlert: data.message || 'success', typeAlert: 'success'}
+      dispatch(openAlert(infoNotify))
+      navigate.push(`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${data._id}`)
+    }
+    if (status && status !== 200) {
+      const infoNotify = {messageAlert: data.message || 'Something wrong', typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
+  }
+
   const handleChangeForm = key => e => {
     setErrors({...errors, [key]: ''})
     if (
@@ -49,21 +65,10 @@ const NewProduct = () => {
       await validateData(TYPE_SCHEMA.PRODUCT, formValue, async dataForm => {
         const {data, status, error} = await ProductJsonApi.createDocument({
           name: dataForm.name,
-          description: dataForm.description,
           category: dataForm.category,
           subCategory: dataForm.subCategory
         })
-
-        if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
-        else {
-          const somethingError = {
-            messageAlert: data.message || 'Something error',
-            typeAlert: 'error'
-          }
-          status === 200
-            ? navigate.push(`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${data._id}`)
-            : dispatch(openAlert(somethingError))
-        }
+        handleResult(data, status, error)
       })
     } catch (errs) {
       setErrors(errs)
@@ -122,18 +127,6 @@ const NewProduct = () => {
                   </Select>
                 </Grid>
               </Grid>
-            </SuiBox>
-            <SuiBox mb={4}>
-              <SuiTypography>Description</SuiTypography>
-              <SuiInput
-                placeholder="Description"
-                multiline
-                maxRows={5}
-                minRows={5}
-                value={formValue.description || ''}
-                onChange={handleChangeForm('description')}
-                error={Boolean(errors.description)}
-              />
             </SuiBox>
             <SuiBox>
               <SuiButton buttonColor="info" fullWidth onClick={handleSubmit} disabled={loading}>

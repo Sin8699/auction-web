@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
+import get from 'lodash/get'
 
 import {Grid, Card, Icon} from '@material-ui/core'
 
@@ -52,7 +53,7 @@ function ProductManagerSeller() {
   }
 
   const filterProductByOwner = products => {
-    return products.filter(product => product.createBy === profile._id)
+    return products.filter(product => get(product, 'createBy._id') === profile._id)
   }
 
   const filterProduct = products => {

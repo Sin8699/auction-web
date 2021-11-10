@@ -2,6 +2,7 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
+import get from 'lodash/get'
 
 import {Select, Card, MenuItem, Grid} from '@material-ui/core'
 
@@ -23,6 +24,7 @@ import {openAlert} from 'redux/actions/alert'
 
 import ProductJsonApi from 'apis/products/productJson'
 import ProductImageApi from 'apis/products/productImage'
+import ProductDescApi from 'apis/products/productDesc'
 
 const EditProduct = () => {
   const dispatch = useDispatch()
@@ -49,7 +51,11 @@ const EditProduct = () => {
 
   useEffect(() => {
     if (product.name) {
-      setFormValue(product)
+      setFormValue({
+        category: get(product, 'category._id'),
+        name: product.name,
+        subCategory: get(product, 'subCategory._id')
+      })
       setImagePreview({
         primary: product.imageUrl ? `http://${product.imageUrl}` : '',
         extra1: product.extraImages[0] ? `http://${product.extraImages[0]}` : '',
@@ -62,6 +68,21 @@ const EditProduct = () => {
   const categoryHasSub =
     dataSubCategory.filter(item => item.category === formValue.category).length !== 0
 
+  const handleResult = (data, status, error) => {
+    if (error) {
+      const infoNotify = {messageAlert: error, typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
+    if (status === 200) {
+      const infoNotify = {messageAlert: data.message || 'success', typeAlert: 'success'}
+      dispatch(openAlert(infoNotify))
+    }
+    if (status && status !== 200) {
+      const infoNotify = {messageAlert: data.message || 'Something wrong', typeAlert: 'error'}
+      dispatch(openAlert(infoNotify))
+    }
+  }
+
   const handleChangeForm = key => e => {
     if (
       key === 'category' &&
@@ -69,6 +90,20 @@ const EditProduct = () => {
     ) {
       setFormValue({...formValue, [key]: e.target.value, subCategory: ''})
     } else setFormValue({...formValue, [key]: e.target.value})
+  }
+
+  const [description, setDescription] = useState('')
+  const handleChangeDescription = e => setDescription(e.target.value)
+  const [loadingUpdateDescription, setLoadingUpdateDescription] = useState(false)
+  const handleSubmitDescription = async () => {
+    setLoadingUpdateDescription(true)
+    const {data, status, error} = await ProductDescApi.createDocument({
+      rawDescription: description,
+      product: product._id
+    })
+    handleResult(data, status, error)
+    if (status === 200) setDescription('')
+    setLoadingUpdateDescription(false)
   }
 
   const handleUpLoadImage = key => e => {
@@ -90,22 +125,12 @@ const EditProduct = () => {
         const {data, status, error} = await ProductJsonApi.updateDocument(
           {
             name: dataForm.name,
-            description: dataForm.description,
             category: dataForm.category,
             subCategory: dataForm.subCategory
           },
           id
         )
-
-        if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
-        else {
-          const isSuccess = {messageAlert: data.message, typeAlert: 'success'}
-          const somethingError = {
-            messageAlert: data.message || 'Something error',
-            typeAlert: 'error'
-          }
-          status === 200 ? dispatch(openAlert(isSuccess)) : dispatch(openAlert(somethingError))
-        }
+        handleResult(data, status, error)
       })
     } catch (errs) {
       setErrors(errs)
@@ -119,18 +144,8 @@ const EditProduct = () => {
     let formData = new FormData()
     formData.append('productId', id)
     formData.append('image', formValue.primary)
-
     const {data, status, error} = await ProductImageApi.updateImagePrimary(formData)
-
-    if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
-    else {
-      const isSuccess = {messageAlert: data.message, typeAlert: 'success'}
-      const somethingError = {
-        messageAlert: data.message || 'Something error',
-        typeAlert: 'error'
-      }
-      status === 200 ? dispatch(openAlert(isSuccess)) : dispatch(openAlert(somethingError))
-    }
+    handleResult(data, status, error)
     setLoadingUpdateImagePrimary(false)
   }
 
@@ -142,18 +157,8 @@ const EditProduct = () => {
     formData.append('images', formValue.extra1)
     formData.append('images', formValue.extra2)
     formData.append('images', formValue.extra3)
-
     const {data, status, error} = await ProductImageApi.updateImageExtra(formData)
-
-    if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
-    else {
-      const isSuccess = {messageAlert: data.message, typeAlert: 'success'}
-      const somethingError = {
-        messageAlert: data.message || 'Something error',
-        typeAlert: 'error'
-      }
-      status === 200 ? dispatch(openAlert(isSuccess)) : dispatch(openAlert(somethingError))
-    }
+    handleResult(data, status, error)
     setLoadingUpdateImageExtra(false)
   }
 
@@ -210,17 +215,6 @@ const EditProduct = () => {
                 )}
               </Grid>
             </SuiBox>
-            <SuiBox mb={4}>
-              <SuiTypography>Description</SuiTypography>
-              <SuiInput
-                placeholder="Description"
-                multiline
-                maxRows={5}
-                minRows={5}
-                value={formValue.description || ''}
-                onChange={handleChangeForm('description')}
-              />
-            </SuiBox>
             <SuiBox>
               <SuiButton
                 buttonColor="info"
@@ -229,6 +223,32 @@ const EditProduct = () => {
                 onClick={handleUpdateInfo}
               >
                 {loadingUpdateInfo ? 'loading' : 'Save'}
+              </SuiButton>
+            </SuiBox>
+          </SuiBox>
+        </Card>
+
+        <Card style={{marginTop: 20}}>
+          <SuiBox p={5}>
+            <SuiBox mb={4}>
+              <SuiTypography>Description</SuiTypography>
+              <SuiInput
+                placeholder="Description"
+                multiline
+                maxRows={5}
+                minRows={5}
+                value={description}
+                onChange={handleChangeDescription}
+              />
+            </SuiBox>
+            <SuiBox>
+              <SuiButton
+                buttonColor="info"
+                fullWidth
+                disabled={loadingUpdateDescription}
+                onClick={handleSubmitDescription}
+              >
+                {loadingUpdateDescription ? 'loading' : 'Save'}
               </SuiButton>
             </SuiBox>
           </SuiBox>
