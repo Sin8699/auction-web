@@ -4,8 +4,6 @@ import SignUpSuccess from './pages/sign-up-success'
 import ForgotPassword from './pages/forgot-password'
 import ResetPassword from './pages/reset-password'
 
-import Billing from 'layouts/billing'
-
 import Dashboard from './pages/dashboard'
 
 import Profile from './pages/profile'
@@ -15,6 +13,7 @@ import FavoriteProducts from './pages/favorite-products'
 import ProductManagerSeller from './pages/product-manager-seller'
 import NewProduct from './pages/product-manager-seller/new'
 import EditProduct from './pages/product-manager-seller/edit'
+import BiddingBoard from './pages/bidding'
 
 import CategoryManager from './pages/category-manager'
 import SubCategoryManager from './pages/subcategory-manager'
@@ -23,9 +22,6 @@ import ProductAdminManager from './pages/product-manager-admin'
 import RequestUpgradeManager from './pages/request-upgrade-manage'
 
 import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
-
-// import Tables from 'layouts/tables'
-import BiddingBoard from './pages/bidding/index'
 
 const routes = [
   {
@@ -58,12 +54,7 @@ const routes = [
     route: ROUTER_DEFAULT.HISTORY,
     component: HistoryProducts
   },
-  {
-    key: 'billing',
-    type: TYPE_ROUTER.PRIVATE,
-    route: '/billing',
-    component: Billing
-  },
+
   {
     key: 'product-manager-seller',
     type: TYPE_ROUTER.PRIVATE,

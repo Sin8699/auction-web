@@ -3,10 +3,10 @@ import Shop from 'component-pages/Icons/Shop'
 import Basket from 'component-pages/Icons/Basket'
 import Office from 'component-pages/Icons/Office'
 import Document from 'component-pages/Icons/Document'
-import CreditCard from 'component-pages/Icons/CreditCard'
-import CustomerSupport from 'component-pages/Icons/CustomerSupport'
 // import Settings from 'component-pages/Icons/Settings'
 // import SpaceShip from 'component-pages/Icons/SpaceShip'
+// import CreditCard from 'component-pages/Icons/CreditCard'
+import CustomerSupport from 'component-pages/Icons/CustomerSupport'
 
 import {SupervisorAccount, Favorite, History} from '@material-ui/icons'
 
@@ -53,14 +53,7 @@ const ItemSideNav = [
     icon: <Cube size="12px" />,
     noCollapse: true
   },
-  {
-    type: 'collapse',
-    name: 'Billing',
-    key: 'billing',
-    route: '/billing',
-    icon: <CreditCard size="12px" />,
-    noCollapse: true
-  },
+
   {type: 'title', title: 'Manager', key: 'account-pages'},
   {
     type: 'collapse',
