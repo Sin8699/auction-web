@@ -20,6 +20,7 @@ import CategoryManager from './pages/category-manager'
 import SubCategoryManager from './pages/subcategory-manager'
 import UserManager from './pages/user-manager'
 import ProductAdminManager from './pages/product-manager-admin'
+import RequestUpgradeManager from './pages/request-upgrade-manage'
 
 import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
 
@@ -110,6 +111,12 @@ const routes = [
     type: TYPE_ROUTER.PRIVATE,
     route: ROUTER_DEFAULT.PRODUCT_MANAGER_ADMIN,
     component: ProductAdminManager
+  },
+  {
+    key: 'request-upgrade-manager-admin',
+    type: TYPE_ROUTER.PRIVATE,
+    route: ROUTER_DEFAULT.REQUEST_UPGRADE_MANAGER_ADMIN,
+    component: RequestUpgradeManager
   },
   {
     key: 'sign-in',

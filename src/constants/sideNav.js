@@ -4,7 +4,7 @@ import Basket from 'component-pages/Icons/Basket'
 import Office from 'component-pages/Icons/Office'
 import Document from 'component-pages/Icons/Document'
 import CreditCard from 'component-pages/Icons/CreditCard'
-// import CustomerSupport from 'component-pages/Icons/CustomerSupport'
+import CustomerSupport from 'component-pages/Icons/CustomerSupport'
 // import Settings from 'component-pages/Icons/Settings'
 // import SpaceShip from 'component-pages/Icons/SpaceShip'
 
@@ -92,6 +92,14 @@ const ItemSideNav = [
     key: 'admin/manager/product',
     route: ROUTER_DEFAULT.PRODUCT_MANAGER_ADMIN,
     icon: <Cube size="12px" />,
+    noCollapse: true
+  },
+  {
+    type: 'collapse',
+    name: 'Request upgrade',
+    key: 'admin/manager/request-upgrade',
+    route: ROUTER_DEFAULT.REQUEST_UPGRADE_MANAGER_ADMIN,
+    icon: <CustomerSupport size="12px" />,
     noCollapse: true
   }
 ]

@@ -16,7 +16,8 @@ export const ROUTER_DEFAULT = {
   CATEGORY_MANAGER: '/admin/manager/category',
   SUB_CATEGORY_MANAGER: '/admin/manager/subcategory',
   USER_MANAGER: '/admin/manager/user',
-  PRODUCT_MANAGER_ADMIN: '/admin/manager/product'
+  PRODUCT_MANAGER_ADMIN: '/admin/manager/product',
+  REQUEST_UPGRADE_MANAGER_ADMIN: '/admin/manager/request-upgrade'
 }
 
 export const TYPE_ROUTER = {
