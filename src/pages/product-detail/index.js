@@ -3,11 +3,13 @@ import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import dayjs from 'dayjs'
+import get from 'lodash/get'
 
 import {Card, Grid} from '@material-ui/core'
 
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
+import SuiBadge from 'components/SuiBadge'
 
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
@@ -20,10 +22,13 @@ import {getButtonByStatus} from '../../helpers/getButtonByStatus'
 
 import BidModal from '../bidding/components/BidModal'
 import BasicTable from './components/TableBiddingRecord'
+import ProductCard from './components/ProductCard'
 
 import {requestProduct, setProduct} from 'redux/actions/product'
 import {requestBiddingProduct, setBiddingProduct} from 'redux/actions/bidding-product'
 import {requestBiddingRecordsData} from 'redux/actions/bidding-record'
+
+import ProductDescApi from 'apis/products/productDesc'
 
 const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -33,17 +38,27 @@ function ProductDetail() {
   const {id} = useParams()
 
   const {product} = useSelector(state => state.productState)
+  const {listProducts} = useSelector(state => state.productState)
   const {biddingProduct, loadingBiddingProduct} = useSelector(state => state.biddingProductState)
   const {listBiddingRecord, loadingListBiddingRecord} = useSelector(
     state => state.biddingRecordState
   )
 
   const [currentImagePreview, setCurrentImagePreview] = useState(NoImage)
+  const [listDescription, setListDescription] = useState([])
+
+  const requestProductDescription = async () => {
+    const {data, status, error} = await ProductDescApi.getDocuments(`?product=${id}`)
+    if (!error && status === 200) {
+      setListDescription(data)
+    }
+  }
 
   useEffect(() => {
     dispatch(requestProduct(id))
     dispatch(requestBiddingProduct(id))
     dispatch(requestBiddingRecordsData(id))
+    requestProductDescription()
     return () => {
       dispatch(setProduct({}))
       dispatch(setBiddingProduct({}))
@@ -147,10 +162,26 @@ function ProductDetail() {
           </SuiBox>
 
           <SuiBox mt={5} pt={2} px={2}>
-            <SuiTypography variant="h6">Description: </SuiTypography>
-            <SuiTypography fontWeight="regular" textTransform="capitalize">
-              {product.description || ''}
-            </SuiTypography>
+            <SuiBox mb={2}>
+              <SuiTypography variant="h5">Description: </SuiTypography>
+            </SuiBox>
+            {listDescription.map((item, index) => (
+              <div key={item._id}>
+                {index !== 0 && (
+                  <SuiBadge
+                    variant="gradient"
+                    badgeContent={`✏️ ${dayjs(item.createdAt).format('DD/MM/YYYY HH:m:ss')}`}
+                    color="success"
+                    size="small"
+                    circular={true}
+                    border={true}
+                  />
+                )}
+                <SuiBox mb={2}>
+                  <SuiTypography variant="subtitle2">{` - ${item.rawDescription}`}</SuiTypography>
+                </SuiBox>
+              </div>
+            ))}
           </SuiBox>
 
           <SuiBox mt={5} pt={2} px={2}>
@@ -164,6 +195,31 @@ function ProductDetail() {
 
           <SuiBox mt={7} ml={2}>
             <SuiTypography variant="h6">Related Products</SuiTypography>
+          </SuiBox>
+
+          <SuiBox ml={2}>
+            <Grid container spacing={2}>
+              {listProducts
+                .filter(
+                  item =>
+                    get(item, 'subCategory._id') === get(product, 'subCategory._id') &&
+                    item._id !== product._id
+                )
+                .slice(0, 6)
+                .map(product => (
+                  <Grid item xs={4} key={product._id}>
+                    <ProductCard
+                      idProduct={get(product, '_id')}
+                      category={get(product, 'category.name')}
+                      subCategory={get(product, 'subCategory.name')}
+                      nameProduct={get(product, 'name')}
+                      imageUrl={get(product, 'imageUrl')}
+                      authors={[{name: 'Elena Morison'}]}
+                      endTime={get(product, 'endTime')}
+                    />
+                  </Grid>
+                ))}
+            </Grid>
           </SuiBox>
         </Card>
       </SuiBox>

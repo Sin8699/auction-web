@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core'
 import dayjs from 'dayjs'
 import get from 'lodash/get'
+import {hide} from 'helpers/string'
 
 export default function BasicTable({value}) {
   return (
@@ -25,7 +26,7 @@ export default function BasicTable({value}) {
           {(value || []).map(row => (
             <TableRow key={row._id}>
               <TableCell align="left">{dayjs(row.createAt).format('DD/MM/YYYY')}</TableCell>
-              <TableCell align="left">{get(row, 'user.fullName')}</TableCell>
+              <TableCell align="left">{hide(get(row, 'user.fullName'))}</TableCell>
               <TableCell align="left">{row.biddingPrice}</TableCell>
             </TableRow>
           ))}

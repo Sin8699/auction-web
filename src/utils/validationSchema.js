@@ -21,8 +21,7 @@ const changePasswordSchema = Yup.object().shape({
 const productSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   category: Yup.string().required('Category is required'),
-  subCategory: Yup.string().required('Sub category is required'),
-  description: Yup.string().required('Description is required')
+  subCategory: Yup.string().required('Sub category is required')
 })
 
 const productBiddingSchema = Yup.object().shape({

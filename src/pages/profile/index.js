@@ -83,7 +83,8 @@ function Profile() {
                   info={{
                     fullName: userProfile?.fullName,
                     email: userProfile?.email,
-                    accountType: userProfile?.role
+                    address: userProfile?.address,
+                    account: userProfile?.role
                   }}
                   description=""
                   action={{onClick: handleSetEdit, tooltip: 'Edit Profile'}}

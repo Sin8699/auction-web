@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import { useLocation, Link, useHistory } from 'react-router-dom'
+import {useState, useEffect} from 'react'
+import {useLocation, Link, useHistory} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -20,20 +20,22 @@ import SuiBox from 'components/SuiBox'
 import Breadcrumbs from 'component-pages/Breadcrumbs'
 import styles from 'component-pages/Header/styles'
 
-import { useSoftUIController } from 'context'
-import { ROUTER_DEFAULT } from 'constants/router'
+import {useSoftUIController} from 'context'
+import {ROUTER_DEFAULT} from 'constants/router'
 
-const ItemIconList = withStyles((theme) => ({
-  root: { minWidth: 0, marginRight: 10 }
+import {removeFromStorage} from 'utils/storage'
+
+const ItemIconList = withStyles(theme => ({
+  root: {minWidth: 0, marginRight: 10}
 }))(ListItemIcon)
 
-const Header = ({ absolute, light }) => {
+const Header = ({absolute, light}) => {
   const history = useHistory()
   const [navbarType, setNavbarType] = useState()
   const [openMenu, setOpenMenu] = useState(false)
   const [controller, dispatch] = useSoftUIController()
-  const { miniSidenav, transparentNavbar, fixedNavbar } = controller
-  const classes = styles({ transparentNavbar, absolute, light })
+  const {miniSidenav, transparentNavbar, fixedNavbar} = controller
+  const classes = styles({transparentNavbar, absolute, light})
   const route = useLocation().pathname.split('/').slice(1)
   useEffect(() => {
     fixedNavbar ? setNavbarType('sticky') : setNavbarType('static')
@@ -48,11 +50,11 @@ const Header = ({ absolute, light }) => {
     handleTransparentNavbar()
     return () => window.removeEventListener('scroll', handleTransparentNavbar)
   }, [dispatch, fixedNavbar])
-  const handleMiniSidenav = () => dispatch({ type: 'MINI_SIDENAV', value: !miniSidenav })
-  const handleOpenMenu = (event) => setOpenMenu(event.currentTarget)
+  const handleMiniSidenav = () => dispatch({type: 'MINI_SIDENAV', value: !miniSidenav})
+  const handleOpenMenu = event => setOpenMenu(event.currentTarget)
   const handleCloseMenu = () => setOpenMenu(false)
   const handleSignOut = () => {
-    localStorage.clear()
+    removeFromStorage('user')
     history.replace(ROUTER_DEFAULT.SIGN_IN)
   }
 
@@ -60,10 +62,10 @@ const Header = ({ absolute, light }) => {
     <Menu
       anchorEl={openMenu}
       getContentAnchorEl={null}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
       open={Boolean(openMenu)}
       onClose={handleCloseMenu}
-      style={{ marginTop: '1rem' }}
+      style={{marginTop: '1rem'}}
     >
       <Link to="/profile">
         <MenuItem onClick={handleCloseMenu}>
@@ -89,7 +91,7 @@ const Header = ({ absolute, light }) => {
       className={classes.navbar}
     >
       <Toolbar className={classes.navbar_container}>
-        <SuiBox customClass={classes.navbar_row} color="inherit" mb={{ xs: 1, md: 0 }}>
+        <SuiBox customClass={classes.navbar_row} color="inherit" mb={{xs: 1, md: 0}}>
           <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
         </SuiBox>
         <SuiBox customClass={classes.navbar_row}>
@@ -116,8 +118,8 @@ const Header = ({ absolute, light }) => {
   )
 }
 
-Header.defaultProps = { absolute: false, light: false }
+Header.defaultProps = {absolute: false, light: false}
 
-Header.propTypes = { absolute: PropTypes.bool, light: PropTypes.bool }
+Header.propTypes = {absolute: PropTypes.bool, light: PropTypes.bool}
 
 export default Header

@@ -8,7 +8,11 @@ import Sidenav from 'component-pages/Sidenav'
 import SuiAlert from 'components/SuiAlert'
 import theme from 'assets/theme'
 import routes from 'routes'
-import ItemSideNav from 'constants/sideNav'
+import ItemSideNav, {
+  ItemSideNavForBidder,
+  ItemSideNavForSeller,
+  ItemSideNavForAdmin
+} from 'constants/sideNav'
 import { TYPE_ROUTER, ROUTER_DEFAULT } from 'constants/router'
 import { loadFromStorage } from 'utils/storage'
 import SocketContainer from './context/socket/SocketIOProvider'
@@ -73,6 +77,8 @@ export default function App() {
       return null
     })
 
+  const { role } = loadFromStorage('user') || ''
+
   return (
     <Provider store={appStore}>
       <StylesProvider jss={jss}>
@@ -82,6 +88,17 @@ export default function App() {
               <CssBaseline />
               <SuiAlert />
               <Sidenav routes={ItemSideNav} />
+              {/* <Sidenav
+              routes={
+                role === 'ADMIN'
+                  ? ItemSideNavForAdmin
+                  : role === 'SELLER'
+                  ? ItemSideNavForSeller
+                  : role === 'BIDDER'
+                  ? ItemSideNavForBidder
+                  : ItemSideNav
+              }
+            /> */}
               <Switch>
                 {getRoutes(routes)}
                 <Redirect from="*" to="/dashboard" />
