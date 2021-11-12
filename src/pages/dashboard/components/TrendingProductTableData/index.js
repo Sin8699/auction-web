@@ -47,7 +47,7 @@ function TrendingProductTableData() {
           icon={icon}
           name={item.product.name}
           description={dayjs(item.endTime).format('DD/MM/YYYY hh:mm:ss')}
-          value={item.currentPrice}
+          value={item.currentPrice || item.buyNowPrice}
         />
       </SuiBox>
     )
