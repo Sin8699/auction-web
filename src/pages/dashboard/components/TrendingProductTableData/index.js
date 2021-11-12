@@ -1,5 +1,6 @@
 import Card from '@material-ui/core/Card'
 import Divider from '@material-ui/core/Divider'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 // Soft UI Dashboard Material-UI components
 import SuiBox from 'components/SuiBox'
@@ -7,8 +8,53 @@ import SuiTypography from 'components/SuiTypography'
 
 // Billing page components
 import Transaction from 'layouts/billing/components/Transaction'
+import { useAxios } from '../../../../apis/useAxiosConfig'
+import { BASE_URL } from '../../../../constants/index'
+import dayjs from 'dayjs'
 
 function TrendingProductTableData() {
+  const [{ data, loading }] = useAxios(`${BASE_URL}/bidding-product/trending`)
+
+  if (loading)
+    return (
+      <SuiBox display="flex" justifyContent="center">
+        <CircularProgress />
+      </SuiBox>
+    )
+
+  const renderRecord = (item) => {
+    const status =
+      item.status === 'EXPIRED' ? 'error' : item.status === 'AVAILABLE' ? 'success' : 'dark'
+
+    const icon =
+      item.status === 'EXPIRED'
+        ? 'arrow_downward'
+        : item.status === 'AVAILABLE'
+        ? 'arrow_upward'
+        : 'priority_high'
+
+    return (
+      <SuiBox
+        component="ul"
+        display="flex"
+        flexDirection="column"
+        p={0}
+        m={0}
+        customClass="no-list-style"
+      >
+        <Transaction
+          color={status}
+          icon={icon}
+          name={item.product.name}
+          description={dayjs(item.endTime).format('DD/MM/YYYY hh:mm:ss')}
+          value={item.currentPrice}
+        />
+      </SuiBox>
+    )
+  }
+
+  const { trendingTimeEnd = [], trendingPrice = [], topBidding = [] } = data
+
   return (
     <Card className="h-100">
       <SuiBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={2}>
@@ -27,29 +73,8 @@ function TrendingProductTableData() {
             Products near the end of the auction
           </SuiTypography>
         </SuiBox>
-        <SuiBox
-          component="ul"
-          display="flex"
-          flexDirection="column"
-          p={0}
-          m={0}
-          customClass="no-list-style"
-        >
-          <Transaction
-            color="error"
-            icon="arrow_downward"
-            name="Netflix"
-            description="27 March 2020, at 12:30 PM"
-            value="- $ 2,500"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="Apple"
-            description="27 March 2020, at 04:30 AM"
-            value="+ $ 2,000"
-          />
-        </SuiBox>
+        {trendingTimeEnd.map(renderRecord)}
+
         <Divider />
         <SuiBox mt={1} mb={2} display="flex" justifyContent="center">
           <SuiTypography
@@ -61,43 +86,8 @@ function TrendingProductTableData() {
             Products with many auctions
           </SuiTypography>
         </SuiBox>
-        <SuiBox
-          component="ul"
-          display="flex"
-          flexDirection="column"
-          p={0}
-          m={0}
-          customClass="no-list-style"
-        >
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="Stripe"
-            description="26 March 2020, at 13:45 PM"
-            value="+ $ 750"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="HubSpot"
-            description="26 March 2020, at 12:30 PM"
-            value="+ $ 1,000"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="Creative Tim"
-            description="26 March 2020, at 08:30 AM"
-            value="+ $ 2,500"
-          />
-          <Transaction
-            color="dark"
-            icon="priority_high"
-            name="Webflow"
-            description="26 March 2020, at 05:00 AM"
-            value="Pending"
-          />
-        </SuiBox>
+        {topBidding.map(renderRecord)}
+
         <Divider />
         <SuiBox mt={1} mb={2} display="flex" justifyContent="center">
           <SuiTypography
@@ -109,36 +99,8 @@ function TrendingProductTableData() {
             The product with the highest price
           </SuiTypography>
         </SuiBox>
-        <SuiBox
-          component="ul"
-          display="flex"
-          flexDirection="column"
-          p={0}
-          m={0}
-          customClass="no-list-style"
-        >
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="Stripe"
-            description="26 March 2020, at 13:45 PM"
-            value="+ $ 750"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="HubSpot"
-            description="26 March 2020, at 12:30 PM"
-            value="+ $ 1,000"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="Creative Tim"
-            description="26 March 2020, at 08:30 AM"
-            value="+ $ 2,500"
-          />
-        </SuiBox>
+
+        {trendingPrice.map(renderRecord)}
       </SuiBox>
     </Card>
   )
