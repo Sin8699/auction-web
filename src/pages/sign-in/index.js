@@ -1,8 +1,8 @@
-import {useState} from 'react'
-import {Link, useHistory} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import { useState, useCallback } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 // @material-ui components
-import {CircularProgress} from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core'
 
 // components
 import SuiBox from 'components/SuiBox'
@@ -17,41 +17,61 @@ import Separator from 'layouts/authentication/components/Separator'
 
 import curved9 from 'assets/images/curved-images/curved-6.jpg'
 
-import {ROUTER_DEFAULT} from 'constants/router'
+import { ROUTER_DEFAULT } from 'constants/router'
 import UserApi from 'apis/user'
-import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
-import {saveToStorage} from 'utils/storage'
-import {openAlert} from 'redux/actions/alert'
+import validateData, { TYPE_SCHEMA } from 'utils/validationSchema'
+import { saveToStorage } from 'utils/storage'
+import { openAlert } from 'redux/actions/alert'
+import { GoogleReCaptcha, useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 function SignIn() {
   const history = useHistory()
   const dispatch = useDispatch()
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const [formValue, setFormValue] = useState({})
   const [errors, setErrors] = useState({})
 
-  const handleChangeForm = key => event => {
-    setErrors({...errors, [key]: ''})
-    setFormValue({...formValue, [key]: event.target.value})
+  const handleChangeForm = (key) => (event) => {
+    setErrors({ ...errors, [key]: '' })
+    setFormValue({ ...formValue, [key]: event.target.value })
   }
 
   const [loading, setLoading] = useState(false)
 
+  // Create an event handler so you can call the verification on button click event or form submit
+  const handleReCaptchaVerify = useCallback(async () => {
+    if (!executeRecaptcha) {
+      console.log('Execute recaptcha not yet available')
+      return
+    }
+
+    const token = await executeRecaptcha('auction')
+    // Do whatever you want with the token
+    return !!token
+  }, [executeRecaptcha])
+
   const handleSubmit = async () => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
+      const isSuccessRecaptcha = await handleReCaptchaVerify()
+
+      if (!isSuccessRecaptcha) return
+    }
+
     setLoading(true)
     try {
-      await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, async dataLogin => {
-        const {status, data, error} = await UserApi.login(dataLogin)
-        if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+      await validateData(TYPE_SCHEMA.LOGIN, { ...formValue }, async (dataLogin) => {
+        const { status, data, error } = await UserApi.login(dataLogin)
+        if (error) dispatch(openAlert({ messageAlert: error, typeAlert: 'error' }))
         else {
           const isLoginSuccess = () => {
-            saveToStorage('user', {accessToken: data.access_token, role: data.role})
+            saveToStorage('user', { accessToken: data.access_token, role: data.role })
             history.replace(ROUTER_DEFAULT.DASHBOARD)
           }
           status === 200
             ? isLoginSuccess()
             : dispatch(
-                openAlert({messageAlert: data.message || 'Something error', typeAlert: 'error'})
+                openAlert({ messageAlert: data.message || 'Something error', typeAlert: 'error' })
               )
         }
       })
@@ -67,6 +87,7 @@ function SignIn() {
 
   return (
     <CoverLayout title="Welcome back" description="Login with" image={curved9}>
+      <GoogleReCaptcha />
       <SuiBox mb={2} onClick={handleSignInGoogle}>
         <Socials />
       </SuiBox>
