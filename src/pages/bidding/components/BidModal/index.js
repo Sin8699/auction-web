@@ -4,7 +4,7 @@ import {Prompt, Alert} from 'react-st-modal'
 import {useContext} from 'react'
 import {SocketContext} from '../../../../context/socket/SocketIOProvider'
 
-export default function BidModal({biddingProduct, productName}) {
+export default function BidModal({biddingProductId, productName, stepPrice, currentPrice}) {
   const userProfile = useSelector(state => state.userState.profile)
 
   const {biddingProduct: biddingProductSocket} = useContext(SocketContext)
@@ -15,16 +15,18 @@ export default function BidModal({biddingProduct, productName}) {
       defaultValue: 100
     })
 
+    const canBid = price > stepPrice
+
     //TODO: check price cant bidding && current user
     biddingProductSocket({
-      biddingProductId: biddingProduct?.product || Math.random(), //no case
+      biddingProductId: biddingProductId || Math.random(),
       price,
       userId: userProfile._id
     })
 
-    if (price) {
-      Alert(`Bidding ${price} $`, `Product ${productName}`)
-    }
+    if (!canBid) Alert(`Price is invalid!!!`)
+    else if (price && canBid) Alert(`Bidding ${price} $`, `Product ${productName}`)
+    else Alert(`Something wrong, please try again`)
   }
 
   return (

@@ -103,10 +103,12 @@ function BiddingBoard() {
               initPrice,
               currentPrice,
               publicTime,
-              endTime
+              endTime,
+              winner
             }) => (
               <Grid item xs={12} md={6} xl={3} key={_id}>
                 <ProductCard
+                  publicTime={publicTime}
                   idProduct={get(product, '_id')}
                   category={get(product, 'category.name')}
                   subCategory={get(product, 'subCategory.name')}
@@ -114,13 +116,19 @@ function BiddingBoard() {
                   imageUrl={get(product, 'imageUrl')}
                   buttonBid={
                     <BidModal
-                      biddingProduct={get(product, '_id')}
+                      biddingProductId={get(product, '_id')}
                       productName={get(product, 'name')}
+                      stepPrice={stepPrice}
+                      currentPrice={currentPrice}
                     />
                   }
-                  buttonBuyNow={<BuyNowModal biddingProduct={get(product, '_id')} />}
+                  buttonBuyNow={
+                    <BuyNowModal biddingProduct={get(product, '_id')} priceBuyNow={buyNowPrice} />
+                  }
                   authors={[{image: team1, name: 'Elena Morison'}]}
+                  winner={winner}
                   endTime={endTime}
+                  buyNow={{allowBuyNow, buyNowPrice}}
                 />
               </Grid>
             )

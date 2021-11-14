@@ -8,12 +8,12 @@ import SuiTypography from 'components/SuiTypography'
 
 // Billing page components
 import Transaction from 'layouts/billing/components/Transaction'
-import { useAxios } from '../../../../apis/useAxiosConfig'
-import { BASE_URL } from '../../../../constants/index'
+import {useAxios} from '../../../../apis/useAxiosConfig'
+import {BASE_URL} from '../../../../constants/index'
 import dayjs from 'dayjs'
 
 function TrendingProductTableData() {
-  const [{ data, loading }] = useAxios(`${BASE_URL}/bidding-product/trending`)
+  const [{data, loading}] = useAxios(`${BASE_URL}/bidding-product/trending`)
 
   if (loading)
     return (
@@ -22,7 +22,7 @@ function TrendingProductTableData() {
       </SuiBox>
     )
 
-  const renderRecord = (item) => {
+  const renderRecord = item => {
     const status =
       item.status === 'EXPIRED' ? 'error' : item.status === 'AVAILABLE' ? 'success' : 'dark'
 
@@ -35,6 +35,7 @@ function TrendingProductTableData() {
 
     return (
       <SuiBox
+        key={item._id}
         component="ul"
         display="flex"
         flexDirection="column"
@@ -47,13 +48,13 @@ function TrendingProductTableData() {
           icon={icon}
           name={item.product.name}
           description={dayjs(item.endTime).format('DD/MM/YYYY hh:mm:ss')}
-          value={item.currentPrice || item.buyNowPrice}
+          value={item.currentPrice + '' || item.buyNowPrice + ''}
         />
       </SuiBox>
     )
   }
 
-  const { trendingTimeEnd = [], trendingPrice = [], topBidding = [] } = data
+  const {trendingTimeEnd = [], trendingPrice = [], topBidding = []} = data
 
   return (
     <Card className="h-100">

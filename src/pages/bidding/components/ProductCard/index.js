@@ -1,27 +1,21 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import cn from 'clsx'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import Countdown from 'react-countdown'
-
 import {Card, CardMedia, Tooltip} from '@material-ui/core'
-
 import Heart from 'component-pages/Icons/Heart'
-
 import SuiBox from 'components/SuiBox'
 import SuiAvatar from 'components/SuiAvatar'
 import SuiTypography from 'components/SuiTypography'
-
 import NoAvatar from 'assets/images/no-avatar.png'
 import NoImage from 'assets/images/no-image.png'
-
 import {handleFavoredProduct, isFavoredProduct} from 'helpers/favoredProduct'
-
 import BiddingHistoryModal from './BiddingHistoryModal'
-
 import {ROUTER_DEFAULT} from 'constants/router'
-
 import styles from './styles'
+
+const timeIsNew = 120000
 
 function ProductCard({
   idProduct,
@@ -32,17 +26,30 @@ function ProductCard({
   buttonBid,
   buttonBuyNow,
   authors,
-  endTime
+  publicTime,
+  endTime,
+  winner,
+  buyNow
 }) {
   const classes = styles({})
   const isFavored = isFavoredProduct(idProduct)
 
   const [isFavoredState, setIsFavoredState] = useState(isFavored)
+  const [isNewProduct, setIsNewProduct] = useState(new Date(publicTime) - new Date() > -timeIsNew)
 
   const handleFavored = () => {
     setIsFavoredState(prev => !prev)
     handleFavoredProduct(`${idProduct}`)
   }
+
+  useEffect(() => {
+    let myInterval =
+      isNewProduct &&
+      setInterval(() => {
+        setIsNewProduct(new Date(publicTime) - new Date() > -timeIsNew)
+      }, 10000)
+    return () => clearInterval(myInterval)
+  })
 
   const renderAuthors = authors.map(({image: media, name}) => (
     <Tooltip key={name} title={name} placement="bottom">
@@ -57,6 +64,16 @@ function ProductCard({
 
   return (
     <Card className={classes.projectCard}>
+      {isNewProduct && (
+        <div className={classes.projectCard_new}>
+          <img
+            className={classes.projectCard_new_img}
+            src={'/images/new-products-label.png'}
+            alt=""
+          />
+        </div>
+      )}
+
       <SuiBox customClass={classes.projectCard_imageContainer}>
         <CardMedia
           src={`http://${imageUrl}` || NoImage}
@@ -97,6 +114,9 @@ function ProductCard({
           </div>
           {renderAuthors}
         </SuiBox>
+
+        <SuiBox mb={1}>Highest bidder: {winner?.fullName || 'Not bid'}</SuiBox>
+
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {buttonBid}
           <SuiTypography variant="h5" textTransform="capitalize">
@@ -108,9 +128,11 @@ function ProductCard({
           </SuiTypography>
         </SuiBox>
       </SuiBox>
-      <SuiBox py={1} px={0.5}>
-        {buttonBuyNow}
-      </SuiBox>
+      {buyNow?.allowBuyNow && (
+        <SuiBox py={1} px={0.5}>
+          {buttonBuyNow}
+        </SuiBox>
+      )}
     </Card>
   )
 }
@@ -128,6 +150,7 @@ ProductCard.propTypes = {
   buttonBid: PropTypes.element.isRequired,
   buttonBuyNow: PropTypes.element.isRequired,
   authors: PropTypes.arrayOf(PropTypes.object),
+  publicTime: PropTypes.string.isRequired,
   endTime: PropTypes.string.isRequired
 }
 

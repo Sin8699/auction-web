@@ -109,7 +109,20 @@ function ProductDetail() {
                       textTransform="capitalize"
                       textGradient
                     >
-                      Price: {!loadingBiddingProduct ? biddingProduct.currentPrice : 'loading...'} $
+                      Price now:
+                      {!loadingBiddingProduct ? biddingProduct.currentPrice : 'loading...'} $
+                    </SuiTypography>
+                  </SuiBox>
+
+                  <SuiBox my={2}>
+                    <SuiTypography
+                      variant="h5"
+                      fontWeight="regular"
+                      textTransform="capitalize"
+                      textGradient
+                    >
+                      Highest bidder:
+                      {!loadingBiddingProduct ? biddingProduct.winner?.fullName : 'loading...'} $
                     </SuiTypography>
                   </SuiBox>
 
@@ -170,7 +183,7 @@ function ProductDetail() {
                 {index !== 0 && (
                   <SuiBadge
                     variant="gradient"
-                    badgeContent={`✏️ ${dayjs(item.createdAt).format('DD/MM/YYYY HH:m:ss')}`}
+                    badgeContent={`✏️ ${dayjs(item.createdAt).format('DD/MM/YYYY HH:mm:ss')}`}
                     color="success"
                     size="small"
                     circular={true}
@@ -206,8 +219,8 @@ function ProductDetail() {
                     item._id !== product._id
                 )
                 .slice(0, 6)
-                .map(product => (
-                  <Grid item xs={4} key={product._id}>
+                .map((product, i) => (
+                  <Grid item xs={4} key={get(product, '_id')}>
                     <ProductCard
                       idProduct={get(product, '_id')}
                       category={get(product, 'category.name')}

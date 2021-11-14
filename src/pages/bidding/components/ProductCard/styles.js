@@ -65,6 +65,24 @@ export default makeStyles(({palette, boxShadows, functions, borders}) => {
       width: '70%'
     },
 
+    projectCard_new: {
+      content: '',
+      position: 'absolute',
+      top: '0',
+      right: '0',
+
+      zIndex: '50',
+      color: 'white',
+
+      display: 'flex',
+      justifyContent: 'flex-end',
+      alignItems: 'flex-start'
+    },
+
+    projectCard_new_img: {
+      width: 100
+    },
+
     icon_love: {
       width: '20px',
       fill: '#ff000036'
