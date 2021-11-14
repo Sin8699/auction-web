@@ -121,6 +121,7 @@ function BiddingBoard() {
                       stepPrice={stepPrice}
                       currentPrice={currentPrice}
                       initPrice={initPrice}
+                      buyNowPrice={buyNowPrice}
                     />
                   }
                   buttonBuyNow={

@@ -199,7 +199,7 @@ function ProductDetail() {
             {loadingListBiddingRecord ? (
               'Loading...'
             ) : (
-              <BasicTable value={listBiddingRecord.reverse()} />
+              <BasicTable value={listBiddingRecord.reverse()} product={product} />
             )}
           </SuiBox>
 

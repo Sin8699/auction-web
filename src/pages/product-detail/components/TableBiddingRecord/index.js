@@ -1,3 +1,4 @@
+import {useSelector} from 'react-redux'
 import {
   Paper,
   Table,
@@ -11,7 +12,10 @@ import dayjs from 'dayjs'
 import get from 'lodash/get'
 import {hide} from 'helpers/string'
 
-export default function BasicTable({value}) {
+export default function BasicTable({value, product}) {
+  const {profile} = useSelector(state => state.userState)
+  const isOwner = get(profile, '_id', '') === get(product, 'createBy._id', '')
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
@@ -20,6 +24,7 @@ export default function BasicTable({value}) {
             <TableCell align="left">Time</TableCell>
             <TableCell align="left">User</TableCell>
             <TableCell align="left">Price&nbsp;($)</TableCell>
+            {isOwner && <TableCell align="right"></TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -30,6 +35,7 @@ export default function BasicTable({value}) {
               </TableCell>
               <TableCell align="left">{hide(get(row, 'user.fullName'))}</TableCell>
               <TableCell align="left">{row.biddingPrice}</TableCell>
+              {isOwner && <TableCell align="right">Lock</TableCell>}
             </TableRow>
           ))}
         </TableBody>

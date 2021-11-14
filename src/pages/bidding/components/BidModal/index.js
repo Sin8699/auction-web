@@ -10,7 +10,8 @@ export default function BidModal({
   productName,
   stepPrice,
   initPrice,
-  currentPrice
+  currentPrice,
+  buyNowPrice
 }) {
   const dispatch = useDispatch()
 
@@ -27,23 +28,27 @@ export default function BidModal({
     })
     const canBid = priceValid <= price
 
-    if (price && canBid) {
-      if (biddingProductId) {
-        biddingProductSocket({
-          biddingProductId: biddingProductId,
-          price,
-          userId: userProfile._id
-        })
-        Alert(`Bidding ${price} $`, `Product ${productName}`)
+    if (price > buyNowPrice) {
+      buyNowProductSocket({biddingProductId: biddingProductId, userId: userProfile._id})
+    } else {
+      if (price && canBid) {
+        if (biddingProductId) {
+          biddingProductSocket({
+            biddingProductId: biddingProductId,
+            price,
+            userId: userProfile._id
+          })
+          Alert(`Bidding ${price} $`, `Product ${productName}`)
+        } else {
+          const text = `Can't bid`
+          const infoAlert = {messageAlert: text, typeAlert: 'error'}
+          dispatch(openAlert(infoAlert))
+        }
       } else {
-        const text = `Can't bid`
-        const infoAlert = {messageAlert: text, typeAlert: 'error'}
+        const text = `Price is invalid`
+        const infoAlert = {messageAlert: text, typeAlert: 'warning'}
         dispatch(openAlert(infoAlert))
       }
-    } else {
-      const text = `Price is invalid`
-      const infoAlert = {messageAlert: text, typeAlert: 'warning'}
-      dispatch(openAlert(infoAlert))
     }
   }
 
