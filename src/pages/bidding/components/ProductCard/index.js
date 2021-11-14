@@ -14,6 +14,8 @@ import {handleFavoredProduct, isFavoredProduct} from 'helpers/favoredProduct'
 import BiddingHistoryModal from './BiddingHistoryModal'
 import {ROUTER_DEFAULT} from 'constants/router'
 import styles from './styles'
+import {hide} from 'helpers/string'
+import get from 'lodash/get'
 
 const timeIsNew = 120000
 
@@ -115,7 +117,7 @@ function ProductCard({
           {renderAuthors}
         </SuiBox>
 
-        <SuiBox mb={1}>Highest bidder: {winner?.fullName || 'Not bid'}</SuiBox>
+        <SuiBox mb={1}>Highest bidder: {hide(get(winner, 'fullName', '')) || 'Not bid'}</SuiBox>
 
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {buttonBid}

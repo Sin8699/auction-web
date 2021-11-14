@@ -1,20 +1,16 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-
+import get from 'lodash/get'
 import {withStyles} from '@material-ui/core/styles'
-
 import {Dialog, IconButton, Select, MenuItem, Checkbox} from '@material-ui/core'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import MuiDialogActions from '@material-ui/core/DialogActions'
-
 import {Close, AttachMoney} from '@material-ui/icons'
-
 import SuiBox from 'components/SuiBox'
 import SuiInput from 'components/SuiInput'
 import SuiButton from 'components/SuiButton'
 import SuiTypography from 'components/SuiTypography'
-
 import {openAlert} from 'redux/actions/alert'
 import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
 import BiddingProductApi from 'apis/bidding-product/apiObject'
@@ -57,6 +53,7 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
   const [errors, setErrors] = useState({})
 
   const {listProducts} = useSelector(state => state.productState)
+  const {profile} = useSelector(state => state.userState)
 
   const handleChangeValue = key => e => {
     setErrors({...errors, [key]: ''})
@@ -80,7 +77,7 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
     if (status === 200) {
       infoNotify = {messageAlert: data.message || 'Success', typeAlert: 'success'}
       dispatch(openAlert(infoNotify))
-      // onSuccess()
+      onSuccess()
     }
     if (status && status !== 200) {
       infoNotify = {messageAlert: data.message || 'Something wrong', typeAlert: 'error'}
@@ -106,12 +103,13 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
         },
         async dataCallback => {
           const payload = {
-            product: formValue.product,
+            product: dataCallback.product,
             allowBuyNow: formValue.allowBuyNow,
-            stepPrice: formValue.stepPrice,
-            initPrice: formValue.initPrice,
+            buyNowPrice: formValue.buyNowPrice,
+            stepPrice: dataCallback.stepPrice,
+            initPrice: dataCallback.initPrice,
             publicTime: formValue.publicTime || new Date(),
-            endTime: formValue.endTime
+            endTime: dataCallback.endTime
           }
           const {status, data, error} = await BiddingProductApi.createDocument(payload)
           handleResult(data, status, error)
@@ -139,11 +137,13 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
               onChange={handleChangeValue('product')}
               input={<SuiInput error={Boolean(errors.product)} />}
             >
-              {listProducts.map(product => (
-                <MenuItem key={product._id} value={product._id}>
-                  {product.name}
-                </MenuItem>
-              ))}
+              {listProducts
+                .filter(product => get(product, 'createBy._id') === profile._id)
+                .map(product => (
+                  <MenuItem key={product._id} value={product._id}>
+                    {product.name}
+                  </MenuItem>
+                ))}
             </Select>
           </SuiBox>
 

@@ -40,15 +40,16 @@ function SignUp() {
     }
     if (!confirmPassword) setConfirmPasswordError('Confirm password is required')
     try {
-      setLoading(true)
       await validateData(
         TYPE_SCHEMA.REGISTER,
         {
           fullName: formValue.fullName,
+          address: formValue.address,
           email: formValue.email,
           password: formValue.password
         },
         async dataRegister => {
+          setLoading(true)
           if (formValue.password !== confirmPassword)
             setConfirmPasswordError('Confirm password not match')
           else {
@@ -65,12 +66,12 @@ function SignUp() {
                   )
             }
           }
+          setLoading(false)
         }
       )
     } catch (errs) {
       setErrors(errs)
     }
-    setLoading(false)
   }
 
   return (
@@ -102,6 +103,25 @@ function SignUp() {
                 </SuiBox>
               )}
             </SuiBox>
+
+            <SuiBox mb={2}>
+              <SuiInput
+                placeholder="Address"
+                value={formValue.address || ''}
+                onChange={handleChangeValue('address')}
+                error={Boolean(errors.address)}
+                multiline
+                rows={3}
+              />
+              {Boolean(errors.address) && (
+                <SuiBox ml={0.5}>
+                  <SuiTypography component="label" variant="caption" textColor="error">
+                    {errors.address}
+                  </SuiTypography>
+                </SuiBox>
+              )}
+            </SuiBox>
+
             <SuiBox mb={2}>
               <SuiInput
                 type="email"
@@ -139,7 +159,10 @@ function SignUp() {
                 type="password"
                 placeholder="Confirm Password"
                 value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
+                onChange={e => {
+                  setConfirmPassword(e.target.value)
+                  setConfirmPasswordError('')
+                }}
                 error={Boolean(confirmPasswordError)}
               />
               {Boolean(confirmPasswordError) && (

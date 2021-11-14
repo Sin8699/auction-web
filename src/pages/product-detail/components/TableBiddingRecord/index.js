@@ -25,7 +25,9 @@ export default function BasicTable({value}) {
         <TableBody>
           {(value || []).map(row => (
             <TableRow key={row._id}>
-              <TableCell align="left">{dayjs(row.createAt).format('DD/MM/YYYY')}</TableCell>
+              <TableCell align="left">
+                {dayjs(row.createAt).format('DD/MM/YYYY HH:mm:ss')}
+              </TableCell>
               <TableCell align="left">{hide(get(row, 'user.fullName'))}</TableCell>
               <TableCell align="left">{row.biddingPrice}</TableCell>
             </TableRow>

@@ -116,10 +116,11 @@ function BiddingBoard() {
                   imageUrl={get(product, 'imageUrl')}
                   buttonBid={
                     <BidModal
-                      biddingProductId={get(product, '_id')}
+                      biddingProductId={_id}
                       productName={get(product, 'name')}
                       stepPrice={stepPrice}
                       currentPrice={currentPrice}
+                      initPrice={initPrice}
                     />
                   }
                   buttonBuyNow={
@@ -140,6 +141,7 @@ function BiddingBoard() {
   const [openModal, setOpenModal] = useState(false)
   const handleSuccessCreate = () => {
     setOpenModal(false)
+    dispatch(requestBiddingProductsData())
   }
 
   const handleSort = sort => {

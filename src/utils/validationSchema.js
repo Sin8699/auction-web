@@ -8,6 +8,7 @@ const loginSchema = Yup.object().shape({
 
 const registerSchema = Yup.object().shape({
   fullName: Yup.string().required('Full name is required'),
+  address: Yup.string().required('Address is required'),
   email: Yup.string().email('Email invalid').required('Email is required'),
   password: Yup.string().required('Password is required')
 })

@@ -4,30 +4,23 @@ import {useParams} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import dayjs from 'dayjs'
 import get from 'lodash/get'
-
 import {Card, Grid} from '@material-ui/core'
-
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 import SuiBadge from 'components/SuiBadge'
-
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
-
 import {ImageLayout} from 'assets/styled/ImageLayout'
 import NoImage from 'assets/images/no-image.png'
-
 import {getButtonByStatus} from '../../helpers/getButtonByStatus'
-
 import BidModal from '../bidding/components/BidModal'
 import BasicTable from './components/TableBiddingRecord'
 import ProductCard from './components/ProductCard'
-
 import {requestProduct, setProduct} from 'redux/actions/product'
 import {requestBiddingProduct, setBiddingProduct} from 'redux/actions/bidding-product'
 import {requestBiddingRecordsData} from 'redux/actions/bidding-record'
-
+import {hide} from 'helpers/string'
 import ProductDescApi from 'apis/products/productDesc'
 
 const relativeTime = require('dayjs/plugin/relativeTime')
@@ -109,7 +102,7 @@ function ProductDetail() {
                       textTransform="capitalize"
                       textGradient
                     >
-                      Price now:
+                      Price now:{' '}
                       {!loadingBiddingProduct ? biddingProduct.currentPrice : 'loading...'} $
                     </SuiTypography>
                   </SuiBox>
@@ -121,8 +114,12 @@ function ProductDetail() {
                       textTransform="capitalize"
                       textGradient
                     >
-                      Highest bidder:
-                      {!loadingBiddingProduct ? biddingProduct.winner?.fullName : 'loading...'} $
+                      {`Highest bidder: ${
+                        !loadingBiddingProduct
+                          ? hide(get(biddingProduct, 'winner.fullName', ''))
+                          : 'loading...'
+                      }`}
+                      {}
                     </SuiTypography>
                   </SuiBox>
 

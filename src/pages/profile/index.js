@@ -21,7 +21,7 @@ import {openAlert} from 'redux/actions/alert'
 
 function Profile() {
   const dispatch = useDispatch()
-  const userProfile = useSelector(state => state.userState.profile)
+  const {profile: userProfile} = useSelector(state => state.userState)
 
   const [tabValue, setTabValue] = useState(0)
   const [editing, setEditing] = useState(false)

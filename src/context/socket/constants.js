@@ -6,5 +6,6 @@ export const EMIT_KEYS = {
 }
 
 export const ON_KEYS = {
-  SOLD_OUT_PRODUCT: 'sold-out-product'
+  NEW_BIDDING: 'new-bidding',
+  NEW_BUY_NOW: 'new-buy-now'
 }

@@ -1,32 +1,50 @@
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import SuiButton from 'components/SuiButton'
 import {Prompt, Alert} from 'react-st-modal'
 import {useContext} from 'react'
 import {SocketContext} from '../../../../context/socket/SocketIOProvider'
+import {openAlert} from 'redux/actions/alert'
 
-export default function BidModal({biddingProductId, productName, stepPrice, currentPrice}) {
+export default function BidModal({
+  biddingProductId,
+  productName,
+  stepPrice,
+  initPrice,
+  currentPrice
+}) {
+  const dispatch = useDispatch()
+
   const userProfile = useSelector(state => state.userState.profile)
 
-  const {biddingProduct: biddingProductSocket} = useContext(SocketContext)
+  const {biddingProduct: biddingProductSocket, buyNowProduct: buyNowProductSocket} =
+    useContext(SocketContext)
 
   const handleBidding = async () => {
+    const priceValid = stepPrice + (currentPrice || initPrice)
     const price = await Prompt('How much do you want to bidding?', {
       isRequired: true,
-      defaultValue: 100
+      defaultValue: priceValid
     })
+    const canBid = priceValid <= price
 
-    const canBid = price > stepPrice
-
-    //TODO: check price cant bidding && current user
-    biddingProductSocket({
-      biddingProductId: biddingProductId || Math.random(),
-      price,
-      userId: userProfile._id
-    })
-
-    if (!canBid) Alert(`Price is invalid!!!`)
-    else if (price && canBid) Alert(`Bidding ${price} $`, `Product ${productName}`)
-    else Alert(`Something wrong, please try again`)
+    if (price && canBid) {
+      if (biddingProductId) {
+        biddingProductSocket({
+          biddingProductId: biddingProductId,
+          price,
+          userId: userProfile._id
+        })
+        Alert(`Bidding ${price} $`, `Product ${productName}`)
+      } else {
+        const text = `Can't bid`
+        const infoAlert = {messageAlert: text, typeAlert: 'error'}
+        dispatch(openAlert(infoAlert))
+      }
+    } else {
+      const text = `Price is invalid`
+      const infoAlert = {messageAlert: text, typeAlert: 'warning'}
+      dispatch(openAlert(infoAlert))
+    }
   }
 
   return (
