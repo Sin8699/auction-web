@@ -2,34 +2,27 @@
 import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import get from 'lodash/get'
-
 import {Grid, Card, Icon, CircularProgress} from '@material-ui/core'
 import {Menu, MenuItem, SubMenu, MenuRadioGroup} from '@szhsin/react-menu'
-
 import SuiBox from 'components/SuiBox'
 import SuiButton from 'components/SuiButton'
 import SuiInput from 'components/SuiInput'
 import SuiPagination from 'components/SuiPagination'
 import TablePagination from 'components/TablePagination'
-
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
-
 import BidModal from './components/BidModal'
 import BuyNowModal from './components/BuyNowModal'
 import ProductCard from './components/ProductCard'
 import ModalNewBidding from './components/CreateProductBiddingModal'
-
 import team1 from 'assets/images/team-1.jpg'
-
 import useDebounce from '../../hooks/useDebounce'
-
 import {getListCategories} from 'helpers/category'
-
 import {searchingData} from 'redux/actions/search'
 import {requestBiddingProductsData} from 'redux/actions/bidding-product'
 import {orderBy} from 'lodash-es'
+import {loadFromStorage} from 'utils/storage'
 
 const LIMIT_PAGINATION = 12
 
@@ -41,6 +34,7 @@ const SORT_KEYS = {
 function BiddingBoard() {
   const dispatch = useDispatch()
 
+  const role = loadFromStorage('user')?.role
   const {dataCategory} = useSelector(state => state.categoryState)
   const {dataSubCategory} = useSelector(state => state.subCategoryState)
   const {listBiddingProducts, loadingListBiddingProduct} = useSelector(
@@ -124,9 +118,7 @@ function BiddingBoard() {
                       buyNowPrice={buyNowPrice}
                     />
                   }
-                  buttonBuyNow={
-                    <BuyNowModal biddingProduct={get(product, '_id')} priceBuyNow={buyNowPrice} />
-                  }
+                  buttonBuyNow={<BuyNowModal biddingProduct={_id} priceBuyNow={buyNowPrice} />}
                   authors={[{image: team1, name: 'Elena Morison'}]}
                   winner={winner}
                   endTime={endTime}
@@ -165,14 +157,16 @@ function BiddingBoard() {
     <DashboardLayout>
       <Header />
       <SuiBox mb={2} mt={2}>
-        <SuiButton
-          fullWidth
-          buttonColor="dark"
-          variant="gradient"
-          onClick={() => setOpenModal(true)}
-        >
-          You are a seller, create a new auction product here
-        </SuiButton>
+        {role === 'SELLER' && (
+          <SuiButton
+            fullWidth
+            buttonColor="dark"
+            variant="gradient"
+            onClick={() => setOpenModal(true)}
+          >
+            You are a seller, create a new auction product here
+          </SuiButton>
+        )}
         {openModal && (
           <ModalNewBidding
             show={openModal}

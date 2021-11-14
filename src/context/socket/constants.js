@@ -7,5 +7,6 @@ export const EMIT_KEYS = {
 
 export const ON_KEYS = {
   NEW_BIDDING: 'new-bidding',
-  NEW_BUY_NOW: 'new-buy-now'
+  NEW_BUY_NOW: 'new-buy-now',
+  REJECT_BIDDING: 'reject-bidding'
 }

@@ -1,7 +1,9 @@
 import io from 'socket.io-client'
 import React, {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
+import get from 'lodash/get'
 import {setBiddingProductsData} from 'redux/actions/bidding-product'
+import {openAlert} from 'redux/actions/alert'
 import {EMIT_KEYS, ENDPOINT_SOCKET, ON_KEYS} from './constants'
 
 export const SocketContext = React.createContext('auction-socket')
@@ -15,9 +17,20 @@ const SocketContainer = ({children}) => {
 
     setSocket(newSocket)
 
-    newSocket.on(ON_KEYS.NEW_BIDDING, value => {
-      // console.log('value', value.payload)
-      dispatch(setBiddingProductsData(value.payload))
+    newSocket.on(ON_KEYS.NEW_BIDDING, valueAfterBidding => {
+      dispatch(setBiddingProductsData(valueAfterBidding.payload))
+    })
+
+    newSocket.on(ON_KEYS.NEW_BUY_NOW, valueBuyNow => {
+      dispatch(setBiddingProductsData(valueBuyNow.payload))
+    })
+
+    newSocket.on(ON_KEYS.REJECT_BIDDING, valueReject => {
+      const infoNotify = {
+        messageAlert: get(valueReject, 'payload.message', 'Something wrong'),
+        typeAlert: 'error'
+      }
+      dispatch(openAlert(infoNotify))
     })
 
     return () => newSocket.close()

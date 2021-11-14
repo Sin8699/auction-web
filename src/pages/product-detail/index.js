@@ -36,6 +36,8 @@ function ProductDetail() {
   const {listBiddingRecord, loadingListBiddingRecord} = useSelector(
     state => state.biddingRecordState
   )
+  const {profile} = useSelector(state => state.userState)
+  const isOwner = get(profile, '_id', '') === get(product, 'createBy._id', '')
 
   const [currentImagePreview, setCurrentImagePreview] = useState(NoImage)
   const [listDescription, setListDescription] = useState([])
@@ -114,12 +116,13 @@ function ProductDetail() {
                       textTransform="capitalize"
                       textGradient
                     >
-                      {`Highest bidder: ${
-                        !loadingBiddingProduct
-                          ? hide(get(biddingProduct, 'winner.fullName', ''))
-                          : 'loading...'
-                      }`}
-                      {}
+                      {!isOwner
+                        ? `Highest bidder: ${
+                            !loadingBiddingProduct
+                              ? hide(get(biddingProduct, 'winner.fullName', ''))
+                              : 'loading...'
+                          }`
+                        : `Highest bidder: ${get(biddingProduct, 'winner.fullName', '')}`}
                     </SuiTypography>
                   </SuiBox>
 
@@ -199,7 +202,11 @@ function ProductDetail() {
             {loadingListBiddingRecord ? (
               'Loading...'
             ) : (
-              <BasicTable value={listBiddingRecord.reverse()} product={product} />
+              <BasicTable
+                value={listBiddingRecord.reverse()}
+                product={product}
+                biddingProduct={biddingProduct}
+              />
             )}
           </SuiBox>
 
