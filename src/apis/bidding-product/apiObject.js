@@ -39,6 +39,15 @@ const BiddingProductApi = {
       return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
     }
   },
+  updateDocument: async (id, payload = {}) => {
+    try {
+      const {data, status} = await appAPI.patch(`bidding-product/${id}`, payload)
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
+  },
   blockUserBid: async (id, payload) => {
     try {
       const {data, status} = await appAPI.post(`bidding-product/${id}/ban-user`, payload)

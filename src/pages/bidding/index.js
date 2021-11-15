@@ -22,19 +22,15 @@ import {getListCategories} from 'helpers/category'
 import {searchingData} from 'redux/actions/search'
 import {requestBiddingProductsData} from 'redux/actions/bidding-product'
 import {orderBy} from 'lodash-es'
-import {loadFromStorage} from 'utils/storage'
 
 const LIMIT_PAGINATION = 12
 
-const SORT_KEYS = {
-  TIME_DESC: 'time_desc',
-  PRICE_ASC: 'price_asc'
-}
+const SORT_KEYS = {TIME_DESC: 'time_desc', PRICE_ASC: 'price_asc'}
 
 function BiddingBoard() {
   const dispatch = useDispatch()
 
-  const role = loadFromStorage('user')?.role
+  const {profile} = useSelector(state => state.userState)
   const {dataCategory} = useSelector(state => state.categoryState)
   const {dataSubCategory} = useSelector(state => state.subCategoryState)
   const {listBiddingProducts, loadingListBiddingProduct} = useSelector(
@@ -103,6 +99,7 @@ function BiddingBoard() {
               <Grid item xs={12} md={6} xl={3} key={_id}>
                 <ProductCard
                   publicTime={publicTime}
+                  biddingProductId={_id}
                   idProduct={get(product, '_id')}
                   category={get(product, 'category.name')}
                   subCategory={get(product, 'subCategory.name')}
@@ -157,7 +154,7 @@ function BiddingBoard() {
     <DashboardLayout>
       <Header />
       <SuiBox mb={2} mt={2}>
-        {role === 'SELLER' && (
+        {profile.role === 'SELLER' && (
           <SuiButton
             fullWidth
             buttonColor="dark"

@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {Provider} from 'react-redux'
-import {Route, Switch, Redirect, useLocation} from 'react-router-dom'
+import {Route, Switch, Redirect, useLocation, useHistory} from 'react-router-dom'
 import {create} from 'jss'
 import {ThemeProvider, StylesProvider, jssPreset} from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -15,6 +15,7 @@ import {loadFromStorage} from 'utils/storage'
 import SocketContainer from './context/socket/SocketIOProvider'
 import appStore from './redux/store'
 import {GoogleReCaptchaProvider} from 'react-google-recaptcha-v3'
+import {isExpiredToken} from 'apis/config'
 
 const PrivateRoute = ({component: Component, ...rest}) => {
   const {accessToken} = loadFromStorage('user') || {}
@@ -44,9 +45,23 @@ const AuthenticationRoute = ({component: Component, ...rest}) => {
 
 export default function App() {
   const {pathname} = useLocation()
+  const history = useHistory()
 
   // JSS presets
   const jss = create({plugins: [...jssPreset().plugins]})
+
+  async function checkToken() {
+    const isExpired = await isExpiredToken()
+    if (isExpired) {
+      localStorage.clear()
+      history.replace(ROUTER_DEFAULT.SIGN_IN)
+    }
+  }
+
+  useEffect(() => {
+    if (pathname.split('/')[1] !== 'authentication') checkToken()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
   useEffect(() => {
     document.documentElement.scrollTop = 0

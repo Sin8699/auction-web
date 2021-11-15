@@ -1,5 +1,7 @@
 import {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import cn from 'clsx'
+import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import Countdown from 'react-countdown'
@@ -7,6 +9,7 @@ import {Card, CardMedia, Tooltip} from '@material-ui/core'
 import Heart from 'component-pages/Icons/Heart'
 import SuiBox from 'components/SuiBox'
 import SuiAvatar from 'components/SuiAvatar'
+import SuiButton from 'components/SuiButton'
 import SuiTypography from 'components/SuiTypography'
 import NoAvatar from 'assets/images/no-avatar.png'
 import NoImage from 'assets/images/no-image.png'
@@ -15,12 +18,14 @@ import BiddingHistoryModal from './BiddingHistoryModal'
 import {ROUTER_DEFAULT} from 'constants/router'
 import styles from './styles'
 import {hide} from 'helpers/string'
-import get from 'lodash/get'
+import BiddingProductApi from 'apis/bidding-product/apiObject'
+import {openAlert} from 'redux/actions/alert'
 
 const timeIsNew = 120000
 
 function ProductCard({
   idProduct,
+  biddingProductId,
   category,
   subCategory,
   nameProduct,
@@ -35,6 +40,9 @@ function ProductCard({
 }) {
   const classes = styles({})
   const isFavored = isFavoredProduct(idProduct)
+  const dispatch = useDispatch()
+
+  const {profile} = useSelector(state => state.userState)
 
   const [isFavoredState, setIsFavoredState] = useState(isFavored)
   const [isNewProduct, setIsNewProduct] = useState(new Date(publicTime) - new Date() > -timeIsNew)
@@ -52,6 +60,21 @@ function ProductCard({
       }, 10000)
     return () => clearInterval(myInterval)
   })
+
+  const handleResult = (data, status, error) => {
+    if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+    if (status === 200)
+      dispatch(openAlert({messageAlert: data.message || 'success', typeAlert: 'success'}))
+    if (status && status !== 200)
+      dispatch(openAlert({messageAlert: data.message || 'Something wrong', typeAlert: 'error'}))
+  }
+
+  const handleAdminDelete = async () => {
+    const {data, status, error} = await BiddingProductApi.updateDocument(biddingProductId, {
+      status: 'EXPIRED'
+    })
+    handleResult(data, status, error)
+  }
 
   const renderAuthors = authors.map(({image: media, name}) => (
     <Tooltip key={name} title={name} placement="bottom">
@@ -120,7 +143,12 @@ function ProductCard({
         <SuiBox mb={1}>Highest bidder: {hide(get(winner, 'fullName', '')) || 'Not bid'}</SuiBox>
 
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
-          {buttonBid}
+          {profile.role !== 'ADMIN' && buttonBid}
+          {profile.role === 'ADMIN' && (
+            <SuiButton variant="outlined" buttonColor="error" onClick={handleAdminDelete}>
+              Delete
+            </SuiButton>
+          )}
           <SuiTypography variant="h5" textTransform="capitalize">
             <Countdown date={new Date(endTime)}>
               <div className={classes.projectCard_stock}>
@@ -130,7 +158,7 @@ function ProductCard({
           </SuiTypography>
         </SuiBox>
       </SuiBox>
-      {buyNow?.allowBuyNow && (
+      {buyNow?.allowBuyNow && profile.role !== 'ADMIN' && (
         <SuiBox py={1} px={0.5}>
           {buttonBuyNow}
         </SuiBox>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useLocation} from 'react-router-dom'
@@ -18,6 +19,8 @@ function LayoutContainer({children}) {
   const {pathname} = useLocation()
   const classes = styles({miniSidenav, direction})
 
+  useEffect(() => {}, [])
+
   useEffect(() => {
     dispatch({type: 'LAYOUT', value: 'dashboard'})
   }, [dispatch, pathname])
@@ -27,15 +30,11 @@ function LayoutContainer({children}) {
     dispatchRedux(requestCategoryData())
     dispatchRedux(requestProductsData())
     dispatchRedux(requestSubCategoryData())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <SuiBox customClass={classes.layoutContainer}>{children}</SuiBox>
 }
 
-// Typechecking props for the LayoutContainer
-LayoutContainer.propTypes = {
-  children: PropTypes.node.isRequired
-}
+LayoutContainer.propTypes = {children: PropTypes.node.isRequired}
 
 export default LayoutContainer
