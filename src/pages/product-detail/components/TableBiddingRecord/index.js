@@ -16,6 +16,12 @@ import {openAlert} from 'redux/actions/alert'
 import SuiButton from 'components/SuiButton'
 
 export default function BasicTable({value, product, biddingProduct}) {
+  // console.log('value: ', value)
+  // value.forEach(item => {
+  //   console.log(get(item, 'biddingProduct.bannedUsers'))
+  //   console.log(get(item, 'user._id'))
+  //   console.log()
+  // })
   const dispatch = useDispatch()
   const {profile} = useSelector(state => state.userState)
   const isOwner = get(profile, '_id', '') === get(product, 'createBy._id', '')
@@ -49,7 +55,7 @@ export default function BasicTable({value, product, biddingProduct}) {
                 {!isOwner ? hide(get(row, 'user.fullName', '')) : get(row, 'user.fullName', '')}
               </TableCell>
               <TableCell align="left">{row.biddingPrice}</TableCell>
-              {isOwner && (
+              {isOwner && !get(row, 'biddingProduct.bannedUsers').includes(get(row, 'user._id')) ? (
                 <TableCell align="right">
                   <SuiButton
                     variant="outlined"
@@ -59,6 +65,12 @@ export default function BasicTable({value, product, biddingProduct}) {
                     }}
                   >
                     Ban
+                  </SuiButton>
+                </TableCell>
+              ) : (
+                <TableCell align="right">
+                  <SuiButton variant="outlined" buttonColor="error" disabled>
+                    Banned
                   </SuiButton>
                 </TableCell>
               )}

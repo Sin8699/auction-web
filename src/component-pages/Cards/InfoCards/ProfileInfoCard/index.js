@@ -1,35 +1,57 @@
+import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
-
 import PropTypes from 'prop-types'
-
-import Card from '@material-ui/core/Card'
-import Divider from '@material-ui/core/Divider'
-import Tooltip from '@material-ui/core/Tooltip'
-import Icon from '@material-ui/core/Icon'
-
+import {useDispatch} from 'react-redux'
+import {Tooltip, Icon, Divider, Card, IconButton} from '@material-ui/core'
+import {openAlert} from 'redux/actions/alert'
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
-
 import colors from 'assets/theme/base/colors'
 import typography from 'assets/theme/base/typography'
 import SuiInput from 'components/SuiInput'
+import UserApi from 'apis/user'
 
-function ProfileInfoCard({title, description, info, social, action, editing = false}) {
+function ProfileInfoCard({title, description, info, social, action, editing = false, onUpdate}) {
+  const dispatch = useDispatch()
   const labels = []
+  const keyName = []
   const values = []
   const {socialMediaColors} = colors
   const {size} = typography
+  const [formValue, setFormValue] = useState({})
+
+  const handleChangeValue = key => e => {
+    setFormValue({...formValue, [key]: e.target.value})
+  }
+
+  const handleResult = (data, status, error) => {
+    if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+    if (status === 200) {
+      dispatch(openAlert({messageAlert: data.message || 'success', typeAlert: 'success'}))
+      onUpdate()
+    }
+    if (status && status !== 200)
+      dispatch(openAlert({messageAlert: data.message || 'Something wrong', typeAlert: 'error'}))
+  }
+
+  const handleUpdateProfile = async () => {
+    const {data, status, error} = await UserApi.updateProfile(formValue)
+    handleResult(data, status, error)
+  }
 
   // Convert this form `objectKey` of the object key in to this `object key`
   Object.keys(info).forEach(el => {
     if (el.match(/[A-Z\s]+/)) {
       const uppercaseLetter = Array.from(el).find(i => i.match(/[A-Z]+/))
       const newElement = el.replace(uppercaseLetter, ` ${uppercaseLetter.toLowerCase()}`)
-
       labels.push(newElement)
     } else {
       labels.push(el)
     }
+  })
+
+  Object.keys(info).forEach(el => {
+    keyName.push(el)
   })
 
   // Push the object values into the values array
@@ -43,7 +65,12 @@ function ProfileInfoCard({title, description, info, social, action, editing = fa
       </SuiTypography>
 
       {editing ? (
-        <SuiInput placeholder={label} label={label} defaultValue={values[key]} disabled />
+        <SuiInput
+          placeholder={label}
+          label={label}
+          value={formValue[keyName[key]] || values[key]}
+          onChange={handleChangeValue(keyName[key])}
+        />
       ) : (
         <SuiTypography variant="button" fontWeight="regular" textColor="text">
           &nbsp;{values[key]}
@@ -86,9 +113,13 @@ function ProfileInfoCard({title, description, info, social, action, editing = fa
           <SuiTypography onClick={action.onClick} variant="body2" textColor="secondary">
             <Tooltip title={action.tooltip} placement="top">
               {editing ? (
-                <Icon className="material-icons-round">save</Icon>
+                <IconButton onClick={handleUpdateProfile}>
+                  <Icon className="material-icons-round">save</Icon>
+                </IconButton>
               ) : (
-                <Icon className="material-icons-round">edit</Icon>
+                <IconButton>
+                  <Icon className="material-icons-round">edit</Icon>
+                </IconButton>
               )}
             </Tooltip>
           </SuiTypography>

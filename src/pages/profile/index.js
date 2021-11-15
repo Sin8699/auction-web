@@ -1,23 +1,18 @@
 import {useState} from 'react'
-
 import {useSelector, useDispatch} from 'react-redux'
-
 import Grid from '@material-ui/core/Grid'
-
 import SuiBox from 'components/SuiBox'
 import SuiInput from 'components/SuiInput'
 import SuiButton from 'components/SuiButton'
-
 import Footer from 'component-pages/Footer'
 import ProfileInfoCard from 'component-pages/Cards/InfoCards/ProfileInfoCard'
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
-
 import Header from './components/Header'
 import ModalRequestUpgrade from './components/ModalRequestUpgrade'
-
 import UserApi from 'apis/user'
 import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
 import {openAlert} from 'redux/actions/alert'
+import {requestProfile} from 'redux/actions/user'
 
 function Profile() {
   const dispatch = useDispatch()
@@ -89,6 +84,7 @@ function Profile() {
                   description=""
                   action={{onClick: handleSetEdit, tooltip: 'Edit Profile'}}
                   editing={editing}
+                  onUpdate={() => dispatch(requestProfile())}
                 />
               </Grid>
             )}
