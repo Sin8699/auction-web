@@ -1,52 +1,55 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
 import get from 'lodash/get'
-import {Card, Grid} from '@material-ui/core'
+import { Card, Grid } from '@material-ui/core'
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 import SuiBadge from 'components/SuiBadge'
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
-import {ImageLayout} from 'assets/styled/ImageLayout'
+import { ImageLayout } from 'assets/styled/ImageLayout'
 import NoImage from 'assets/images/no-image.png'
-import {getButtonByStatus} from '../../helpers/getButtonByStatus'
+import { getButtonByStatus } from '../../helpers/getButtonByStatus'
 import BidModal from '../bidding/components/BidModal'
 import BasicTable from './components/TableBiddingRecord'
 import ProductCard from './components/ProductCard'
-import {requestProduct, setProduct} from 'redux/actions/product'
-import {requestBiddingProduct, setBiddingProduct} from 'redux/actions/bidding-product'
-import {requestBiddingRecordsData} from 'redux/actions/bidding-record'
-import {hide} from 'helpers/string'
+import { requestProduct, setProduct } from 'redux/actions/product'
+import { requestBiddingProduct, setBiddingProduct } from 'redux/actions/bidding-product'
+import { requestBiddingRecordsData } from 'redux/actions/bidding-record'
+import { hide } from 'helpers/string'
 import ProductDescApi from 'apis/products/productDesc'
-import {requestBiddingProductsData} from 'redux/actions/bidding-product'
+import { requestBiddingProductsData } from 'redux/actions/bidding-product'
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView'
 
 const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
 function ProductDetail() {
   const dispatch = useDispatch()
-  const {id} = useParams()
+  const { id } = useParams()
 
-  const {product} = useSelector(state => state.productState)
-  const {biddingProduct, loadingBiddingProduct} = useSelector(state => state.biddingProductState)
-  const {listBiddingRecord, loadingListBiddingRecord} = useSelector(
-    state => state.biddingRecordState
+  const { product } = useSelector((state) => state.productState)
+  const { biddingProduct, loadingBiddingProduct } = useSelector(
+    (state) => state.biddingProductState
   )
-  const {listBiddingProducts} = useSelector(state => state.biddingProductState)
-  const {profile} = useSelector(state => state.userState)
+  const { listBiddingRecord, loadingListBiddingRecord } = useSelector(
+    (state) => state.biddingRecordState
+  )
+  const { listBiddingProducts } = useSelector((state) => state.biddingProductState)
+  const { profile } = useSelector((state) => state.userState)
   const isOwner = get(profile, '_id', '') === get(product, 'createBy._id', '')
 
   const [currentImagePreview, setCurrentImagePreview] = useState(NoImage)
   const [listDescription, setListDescription] = useState([])
 
   const requestProductDescription = async () => {
-    const {data, status, error} = await ProductDescApi.getDocuments(`?product=${id}`)
+    const { data, status, error } = await ProductDescApi.getDocuments(`?product=${id}`)
     if (!error && status === 200) {
-      setListDescription(data)
+      setListDescription(data?.[0]?.rawDescription)
     }
   }
 
@@ -66,7 +69,7 @@ function ProductDetail() {
     setCurrentImagePreview(product.imageUrl)
   }, [product])
 
-  const handleChangePreview = url => () => setCurrentImagePreview(url)
+  const handleChangePreview = (url) => () => setCurrentImagePreview(url)
 
   const onSuccessBid = () => {
     setTimeout(() => {
@@ -101,7 +104,7 @@ function ProductDetail() {
                   <ImageLayout src={`http://${currentImagePreview}`} alt="" />
                 </div>
                 <Grid container>
-                  {(product.name ? [product.imageUrl, ...product.extraImages] : []).map(img => {
+                  {(product.name ? [product.imageUrl, ...product.extraImages] : []).map((img) => {
                     return (
                       <Grid item xs={3} onClick={handleChangePreview(img)} key={img}>
                         <ImageLayout src={`http://${img}`} alt="" />
@@ -195,7 +198,8 @@ function ProductDetail() {
             <SuiBox mb={2}>
               <SuiTypography variant="h5">Description: </SuiTypography>
             </SuiBox>
-            {listDescription.map((item, index) => (
+            {<FroalaEditorView model={listDescription} />}
+            {/* {listDescription.map((item, index) => (
               <div key={item._id}>
                 {index !== 0 && (
                   <SuiBadge
@@ -211,7 +215,7 @@ function ProductDetail() {
                   <SuiTypography variant="subtitle2">{` - ${item.rawDescription}`}</SuiTypography>
                 </SuiBox>
               </div>
-            ))}
+            ))} */}
           </SuiBox>
 
           <SuiBox mt={5} pt={2} px={2}>
@@ -235,7 +239,7 @@ function ProductDetail() {
             <Grid container spacing={2}>
               {listBiddingProducts
                 .filter(
-                  item =>
+                  (item) =>
                     get(item, 'product.subCategory._id') ===
                       get(product, 'product.subCategory._id') && item?.product?._id !== product._id
                 )
@@ -248,7 +252,7 @@ function ProductDetail() {
                       subCategory={get(product, 'subCategory.name')}
                       nameProduct={get(product, 'name')}
                       imageUrl={get(product, 'imageUrl')}
-                      authors={[{name: 'Elena Morison'}]}
+                      authors={[{ name: 'Elena Morison' }]}
                       endTime={get(product, 'endTime')}
                     />
                   </Grid>

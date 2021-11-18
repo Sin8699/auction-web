@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import get from 'lodash/get'
 
-import {Select, Card, MenuItem, Grid} from '@material-ui/core'
+import { Select, Card, MenuItem, Grid } from '@material-ui/core'
 
 import SuiBox from 'components/SuiBox'
 import SuiInput from 'components/SuiInput'
@@ -15,25 +15,34 @@ import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 
-import {ImageLayout} from 'assets/styled/ImageLayout'
+import { ImageLayout } from 'assets/styled/ImageLayout'
 
-import {requestProduct} from 'redux/actions/product'
+import { requestProduct } from 'redux/actions/product'
 
-import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
-import {openAlert} from 'redux/actions/alert'
+import validateData, { TYPE_SCHEMA } from 'utils/validationSchema'
+import { openAlert } from 'redux/actions/alert'
 
 import ProductJsonApi from 'apis/products/productJson'
 import ProductImageApi from 'apis/products/productImage'
 import ProductDescApi from 'apis/products/productDesc'
+import React from 'react'
+// Require Editor JS files.
+import 'froala-editor/js/froala_editor.pkgd.min.js'
+import 'froala-editor/css/froala_style.min.css'
+import 'froala-editor/css/froala_editor.pkgd.min.css'
+
+import FroalaEditor from 'react-froala-wysiwyg'
 
 const EditProduct = () => {
   const dispatch = useDispatch()
-  const {id} = useParams()
+  const { id } = useParams()
 
-  const {dataCategory} = useSelector(state => state.categoryState)
-  const {dataSubCategory} = useSelector(state => state.subCategoryState)
+  const { dataCategory } = useSelector((state) => state.categoryState)
+  const { dataSubCategory } = useSelector((state) => state.subCategoryState)
 
-  const {product} = useSelector(state => state.productState)
+  const { product } = useSelector((state) => state.productState)
+
+  const [editorState, setEditorState] = useState()
 
   useEffect(() => {
     dispatch(requestProduct(id))
@@ -66,63 +75,61 @@ const EditProduct = () => {
   }, [product])
 
   const categoryHasSub =
-    dataSubCategory.filter(item => item.category === formValue.category).length !== 0
+    dataSubCategory.filter((item) => item.category === formValue.category).length !== 0
 
   const handleResult = (data, status, error) => {
     if (error) {
-      const infoNotify = {messageAlert: error, typeAlert: 'error'}
+      const infoNotify = { messageAlert: error, typeAlert: 'error' }
       dispatch(openAlert(infoNotify))
     }
     if (status === 200) {
-      const infoNotify = {messageAlert: data.message || 'success', typeAlert: 'success'}
+      const infoNotify = { messageAlert: data.message || 'success', typeAlert: 'success' }
       dispatch(openAlert(infoNotify))
     }
     if (status && status !== 200) {
-      const infoNotify = {messageAlert: data.message || 'Something wrong', typeAlert: 'error'}
+      const infoNotify = { messageAlert: data.message || 'Something wrong', typeAlert: 'error' }
       dispatch(openAlert(infoNotify))
     }
   }
 
-  const handleChangeForm = key => e => {
+  const handleChangeForm = (key) => (e) => {
     if (
       key === 'category' &&
-      dataSubCategory.filter(item => item.category === formValue.category).length !== 0
+      dataSubCategory.filter((item) => item.category === formValue.category).length !== 0
     ) {
-      setFormValue({...formValue, [key]: e.target.value, subCategory: ''})
-    } else setFormValue({...formValue, [key]: e.target.value})
+      setFormValue({ ...formValue, [key]: e.target.value, subCategory: '' })
+    } else setFormValue({ ...formValue, [key]: e.target.value })
   }
 
-  const [description, setDescription] = useState('')
-  const handleChangeDescription = e => setDescription(e.target.value)
   const [loadingUpdateDescription, setLoadingUpdateDescription] = useState(false)
   const handleSubmitDescription = async () => {
     setLoadingUpdateDescription(true)
-    const {data, status, error} = await ProductDescApi.createDocument({
-      rawDescription: description,
+    const { data, status, error } = await ProductDescApi.createDocument({
+      rawDescription: editorState,
       product: product._id
     })
     handleResult(data, status, error)
-    if (status === 200) setDescription('')
+    if (status === 200) setEditorState('')
     setLoadingUpdateDescription(false)
   }
 
-  const handleUpLoadImage = key => e => {
+  const handleUpLoadImage = (key) => (e) => {
     if (!e.target.files) return
     if (!e.target.files[0]) return
 
     const reader = new FileReader()
-    reader.onloadend = () => setImagePreview({...imagePreview, [key]: reader.result})
+    reader.onloadend = () => setImagePreview({ ...imagePreview, [key]: reader.result })
     reader.readAsDataURL(e.target.files[0])
 
-    setFormValue({...formValue, [key]: e.target.files[0]})
+    setFormValue({ ...formValue, [key]: e.target.files[0] })
   }
 
   const [loadingUpdateInfo, setLoadingUpdateInfo] = useState(false)
   const handleUpdateInfo = async () => {
     setLoadingUpdateInfo(true)
     try {
-      await validateData(TYPE_SCHEMA.PRODUCT, formValue, async dataForm => {
-        const {data, status, error} = await ProductJsonApi.updateDocument(
+      await validateData(TYPE_SCHEMA.PRODUCT, formValue, async (dataForm) => {
+        const { data, status, error } = await ProductJsonApi.updateDocument(
           {
             name: dataForm.name,
             category: dataForm.category,
@@ -144,7 +151,7 @@ const EditProduct = () => {
     let formData = new FormData()
     formData.append('productId', id)
     formData.append('image', formValue.primary)
-    const {data, status, error} = await ProductImageApi.updateImagePrimary(formData)
+    const { data, status, error } = await ProductImageApi.updateImagePrimary(formData)
     handleResult(data, status, error)
     setLoadingUpdateImagePrimary(false)
   }
@@ -157,7 +164,7 @@ const EditProduct = () => {
     formData.append('images', formValue.extra1)
     formData.append('images', formValue.extra2)
     formData.append('images', formValue.extra3)
-    const {data, status, error} = await ProductImageApi.updateImageExtra(formData)
+    const { data, status, error } = await ProductImageApi.updateImageExtra(formData)
     handleResult(data, status, error)
     setLoadingUpdateImageExtra(false)
   }
@@ -186,7 +193,7 @@ const EditProduct = () => {
                     onChange={handleChangeForm('category')}
                     input={<SuiInput error={Boolean(errors.category)} />}
                   >
-                    {dataCategory.map(category => (
+                    {dataCategory.map((category) => (
                       <MenuItem key={category._id} value={category._id}>
                         {category.name}
                       </MenuItem>
@@ -204,8 +211,8 @@ const EditProduct = () => {
                       }
                     >
                       {dataSubCategory
-                        .filter(item => item.category === formValue.category)
-                        .map(category => (
+                        .filter((item) => item.category === formValue.category)
+                        .map((category) => (
                           <MenuItem key={category._id} value={category._id}>
                             {category.name}
                           </MenuItem>
@@ -228,18 +235,11 @@ const EditProduct = () => {
           </SuiBox>
         </Card>
 
-        <Card style={{marginTop: 20}}>
+        <Card style={{ marginTop: 20 }}>
           <SuiBox p={5}>
             <SuiBox mb={4}>
               <SuiTypography>Description</SuiTypography>
-              <SuiInput
-                placeholder="Description"
-                multiline
-                maxRows={5}
-                minRows={5}
-                value={description}
-                onChange={handleChangeDescription}
-              />
+              <FroalaEditor model={editorState} onModelChange={setEditorState} />
             </SuiBox>
             <SuiBox>
               <SuiButton
@@ -254,7 +254,7 @@ const EditProduct = () => {
           </SuiBox>
         </Card>
 
-        <Card style={{marginTop: 20}}>
+        <Card style={{ marginTop: 20 }}>
           <SuiBox p={5}>
             <SuiBox mb={4}>
               <SuiTypography>Primary Image</SuiTypography>
@@ -277,7 +277,7 @@ const EditProduct = () => {
           </SuiBox>
         </Card>
 
-        <Card style={{marginTop: 20}}>
+        <Card style={{ marginTop: 20 }}>
           <SuiBox p={5}>
             <SuiBox mb={4}>
               <SuiTypography>Extra Image</SuiTypography>
