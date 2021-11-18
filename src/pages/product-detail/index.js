@@ -22,6 +22,7 @@ import {requestBiddingProduct, setBiddingProduct} from 'redux/actions/bidding-pr
 import {requestBiddingRecordsData} from 'redux/actions/bidding-record'
 import {hide} from 'helpers/string'
 import ProductDescApi from 'apis/products/productDesc'
+import {requestBiddingProductsData} from 'redux/actions/bidding-product'
 
 const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -31,11 +32,11 @@ function ProductDetail() {
   const {id} = useParams()
 
   const {product} = useSelector(state => state.productState)
-  const {listProducts} = useSelector(state => state.productState)
   const {biddingProduct, loadingBiddingProduct} = useSelector(state => state.biddingProductState)
   const {listBiddingRecord, loadingListBiddingRecord} = useSelector(
     state => state.biddingRecordState
   )
+  const {listBiddingProducts} = useSelector(state => state.biddingProductState)
   const {profile} = useSelector(state => state.userState)
   const isOwner = get(profile, '_id', '') === get(product, 'createBy._id', '')
 
@@ -53,6 +54,7 @@ function ProductDetail() {
     dispatch(requestProduct(id))
     dispatch(requestBiddingProduct(id))
     dispatch(requestBiddingRecordsData(id))
+    dispatch(requestBiddingProductsData())
     requestProductDescription()
     return () => {
       dispatch(setProduct({}))
@@ -66,6 +68,13 @@ function ProductDetail() {
 
   const handleChangePreview = url => () => setCurrentImagePreview(url)
 
+  const onSuccessBid = () => {
+    setTimeout(() => {
+      dispatch(requestBiddingProduct(id))
+      dispatch(requestBiddingRecordsData(id))
+    }, 4000)
+  }
+
   return (
     <DashboardLayout>
       <Header />
@@ -75,7 +84,15 @@ function ProductDetail() {
             <SuiTypography variant="h6" fontWeight="medium">
               Products
             </SuiTypography>
-            <BidModal biddingProduct={id} productName={product.name} />
+            <BidModal
+              biddingProductId={biddingProduct?._id}
+              productName={product?.name}
+              stepPrice={biddingProduct?.stepPrice}
+              initPrice={biddingProduct?.initPrice}
+              currentPrice={biddingProduct?.currentPrice}
+              buyNowPrice={biddingProduct?.buyNowPrice}
+              biddingFromDetail={onSuccessBid}
+            />
           </SuiBox>
           <SuiBox display="flex" justifyContent="space-between" pt={2} px={2}>
             <Grid container alignItems="center">
@@ -203,7 +220,7 @@ function ProductDetail() {
               'Loading...'
             ) : (
               <BasicTable
-                value={listBiddingRecord.reverse()}
+                value={(listBiddingRecord || []).reverse()}
                 product={product}
                 biddingProduct={biddingProduct}
               />
@@ -216,11 +233,11 @@ function ProductDetail() {
 
           <SuiBox ml={2}>
             <Grid container spacing={2}>
-              {listProducts
+              {listBiddingProducts
                 .filter(
                   item =>
-                    get(item, 'subCategory._id') === get(product, 'subCategory._id') &&
-                    item._id !== product._id
+                    get(item, 'product.subCategory._id') ===
+                      get(product, 'product.subCategory._id') && item?.product?._id !== product._id
                 )
                 .slice(0, 6)
                 .map((product, i) => (

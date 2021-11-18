@@ -11,7 +11,8 @@ export default function BidModal({
   stepPrice,
   initPrice,
   currentPrice,
-  buyNowPrice
+  buyNowPrice,
+  biddingFromDetail
 }) {
   const dispatch = useDispatch()
 
@@ -26,28 +27,27 @@ export default function BidModal({
       isRequired: true,
       defaultValue: priceValid
     })
-    const canBid = priceValid <= price
 
-    if (price > buyNowPrice) {
-      buyNowProductSocket({biddingProductId: biddingProductId, userId: userProfile._id})
-    } else {
-      if (price && canBid) {
-        if (biddingProductId) {
-          biddingProductSocket({
-            biddingProductId: biddingProductId,
-            price,
-            userId: userProfile._id
-          })
-          Alert(`Bidding ${price} $`, `Product ${productName}`)
-        } else {
-          const text = `Can't bid`
-          const infoAlert = {messageAlert: text, typeAlert: 'error'}
-          dispatch(openAlert(infoAlert))
-        }
+    if (price) {
+      const isConfirm = window.confirm(`Are you sure ?`)
+
+      const canBid = priceValid <= price
+
+      if (price > buyNowPrice && isConfirm) {
+        buyNowProductSocket({biddingProductId: biddingProductId, userId: userProfile._id})
       } else {
-        const text = `Price is invalid`
-        const infoAlert = {messageAlert: text, typeAlert: 'warning'}
-        dispatch(openAlert(infoAlert))
+        if (canBid && isConfirm) {
+          if (biddingProductId) {
+            biddingProductSocket({
+              biddingProductId: biddingProductId,
+              price,
+              userId: userProfile._id
+            })
+            Alert(`Bidding ${price} $`, `Product ${productName}`)
+            biddingFromDetail && biddingFromDetail()
+          } else dispatch(openAlert({messageAlert: `Can't bid`, typeAlert: 'error'}))
+        } else if (!canBid)
+          dispatch(openAlert({messageAlert: `Price is invalid`, typeAlert: 'warning'}))
       }
     }
   }
