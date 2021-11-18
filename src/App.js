@@ -1,41 +1,41 @@
-import { useEffect } from 'react'
-import { Provider } from 'react-redux'
-import { Route, Switch, Redirect, useLocation, useHistory } from 'react-router-dom'
-import { create } from 'jss'
-import { ThemeProvider, StylesProvider, jssPreset } from '@material-ui/styles'
+import {useEffect} from 'react'
+import {Provider} from 'react-redux'
+import {Route, Switch, Redirect, useLocation, useHistory} from 'react-router-dom'
+import {create} from 'jss'
+import {ThemeProvider, StylesProvider, jssPreset} from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Sidenav from 'component-pages/Sidenav'
 import SuiAlert from 'components/SuiAlert'
 import theme from 'assets/theme'
 import routes from 'routes'
 import ItemSideNav from 'constants/sideNav'
-import { TYPE_ROUTER, ROUTER_DEFAULT } from 'constants/router'
-import { loadFromStorage } from 'utils/storage'
+import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
+import {loadFromStorage} from 'utils/storage'
 import SocketContainer from './context/socket/SocketIOProvider'
 import appStore from './redux/store'
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
-import { isExpiredToken } from 'apis/config'
+import {GoogleReCaptchaProvider} from 'react-google-recaptcha-v3'
+import {isExpiredToken} from 'apis/config'
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { accessToken } = loadFromStorage('user') || {}
+const PrivateRoute = ({component: Component, ...rest}) => {
+  const {accessToken} = loadFromStorage('user') || {}
 
   return (
     <Route
       {...rest}
-      render={(props) =>
+      render={props =>
         accessToken ? <Component {...props} /> : <Redirect to={ROUTER_DEFAULT.SIGN_IN} />
       }
     />
   )
 }
 
-const AuthenticationRoute = ({ component: Component, ...rest }) => {
-  const { accessToken } = loadFromStorage('user') || {}
+const AuthenticationRoute = ({component: Component, ...rest}) => {
+  const {accessToken} = loadFromStorage('user') || {}
 
   return (
     <Route
       {...rest}
-      render={(props) =>
+      render={props =>
         !accessToken ? <Component {...props} /> : <Redirect to={ROUTER_DEFAULT.DASHBOARD} />
       }
     />
@@ -43,14 +43,15 @@ const AuthenticationRoute = ({ component: Component, ...rest }) => {
 }
 
 export default function App() {
-  const { pathname } = useLocation()
+  const {pathname} = useLocation()
   const history = useHistory()
 
   // JSS presets
-  const jss = create({ plugins: [...jssPreset().plugins] })
+  const jss = create({plugins: [...jssPreset().plugins]})
 
   async function checkToken() {
     const isExpired = await isExpiredToken()
+    console.log('isExpired: ', isExpired)
     if (isExpired) {
       localStorage.clear()
       history.replace(ROUTER_DEFAULT.SIGN_IN)
@@ -67,8 +68,8 @@ export default function App() {
     document.scrollingElement.scrollTop = 0
   }, [pathname])
 
-  const getRoutes = (allRoutes) =>
-    allRoutes.map((route) => {
+  const getRoutes = allRoutes =>
+    allRoutes.map(route => {
       if (route.route) {
         if (route.type === TYPE_ROUTER.PRIVATE)
           return (
