@@ -1,17 +1,18 @@
-import {useState} from 'react'
-import {Link, useHistory} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-import {Card, Checkbox, CircularProgress} from '@material-ui/core'
+import { useState, useCallback } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Card, Checkbox, CircularProgress } from '@material-ui/core'
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 import SuiInput from 'components/SuiInput'
 import SuiButton from 'components/SuiButton'
 import BasicLayout from 'layouts/authentication/components/BasicLayout'
-import {ROUTER_DEFAULT} from 'constants/router'
+import { ROUTER_DEFAULT } from 'constants/router'
 import curved6 from 'assets/images/curved-images/curved14.jpg'
 import UserApi from 'apis/user'
-import validateData, {TYPE_SCHEMA} from 'utils/validationSchema'
-import {openAlert} from 'redux/actions/alert'
+import validateData, { TYPE_SCHEMA } from 'utils/validationSchema'
+import { openAlert } from 'redux/actions/alert'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 function SignUp() {
   const dispatch = useDispatch()
@@ -24,17 +25,37 @@ function SignUp() {
   const [agreement, setAgreement] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
   const handleSetAgreement = () => setAgreement(!agreement)
 
-  const handleChangeValue = key => e => {
-    setErrors({...errors, [key]: ''})
-    setFormValue({...formValue, [key]: e.target.value})
+  const handleChangeValue = (key) => (e) => {
+    setErrors({ ...errors, [key]: '' })
+    setFormValue({ ...formValue, [key]: e.target.value })
   }
 
+  // Create an event handler so you can call the verification on button click event or form submit
+  const handleReCaptchaVerify = useCallback(async () => {
+    if (!executeRecaptcha) {
+      console.log('Execute recaptcha not yet available')
+      return
+    }
+
+    const token = await executeRecaptcha('auction')
+    // Do whatever you want with the token
+    return !!token
+  }, [executeRecaptcha])
+
   const handleSubmit = async () => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
+      const isSuccessRecaptcha = await handleReCaptchaVerify()
+
+      if (!isSuccessRecaptcha) return
+    }
+
     if (!agreement) {
       const text = 'You need to accept the Terms and Conditions'
-      const infoAlert = {messageAlert: text, typeAlert: 'warning'}
+      const infoAlert = { messageAlert: text, typeAlert: 'warning' }
       dispatch(openAlert(infoAlert))
       return
     }
@@ -48,13 +69,13 @@ function SignUp() {
           email: formValue.email,
           password: formValue.password
         },
-        async dataRegister => {
+        async (dataRegister) => {
           setLoading(true)
           if (formValue.password !== confirmPassword)
             setConfirmPasswordError('Confirm password not match')
           else {
-            const {status, data, error} = await UserApi.register(dataRegister)
-            if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
+            const { status, data, error } = await UserApi.register(dataRegister)
+            if (error) dispatch(openAlert({ messageAlert: error, typeAlert: 'error' }))
             else {
               status === 200
                 ? history.push(ROUTER_DEFAULT.SIGN_UP_SUCCESS)
@@ -159,7 +180,7 @@ function SignUp() {
                 type="password"
                 placeholder="Confirm Password"
                 value={confirmPassword}
-                onChange={e => {
+                onChange={(e) => {
                   setConfirmPassword(e.target.value)
                   setConfirmPasswordError('')
                 }}
