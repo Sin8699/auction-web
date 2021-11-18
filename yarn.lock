@@ -3857,6 +3857,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-class@^15.5.2:
+  version "15.7.0"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
+  integrity sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==
+  dependencies:
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 cross-env@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-6.0.3.tgz#4256b71e49b3a40637a0ce70768a6ef5c72ae941"
@@ -5459,6 +5467,11 @@ fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
   integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
+
+froala-editor@4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/froala-editor/-/froala-editor-4.0.6.tgz#d426071fe4a007381c984a4b9825406e566c6148"
+  integrity sha512-WbUPgm0BY2ZrTem/kLxn2YqL0ErTVyL+gijjWipSiCPmCggUBdSKSJFuU8aTLi/eXrd7HZEhC658R95aiMNTfg==
 
 from2@^2.1.0:
   version "2.3.0"
@@ -9605,6 +9618,14 @@ react-fast-compare@^2.0.1:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
+
+react-froala-wysiwyg@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/react-froala-wysiwyg/-/react-froala-wysiwyg-4.0.6.tgz#f86e7bcf9d7cbf03515d3b337f2f8327137118af"
+  integrity sha512-aIYOOPr403PlehVHX/qiFjfjMwI/MPo+AtLn++jy4sQRbJKK8Ko1bXygzXG/hITPEUeYFsEt3FtllMHMQ20diQ==
+  dependencies:
+    create-react-class "^15.5.2"
+    froala-editor "4.0.6"
 
 react-google-recaptcha-v3@^1.9.7:
   version "1.9.7"
