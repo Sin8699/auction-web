@@ -1,28 +1,27 @@
-import {useEffect} from 'react'
-import {useLocation, NavLink} from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import {Drawer, List, Divider, Icon, Link} from '@material-ui/core'
+import { Drawer, List, Divider, Icon, Link } from '@material-ui/core'
 
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 
 import SidenavCollapse from 'component-pages/Sidenav/SidenavCollapse'
-import SidenavCard from 'component-pages/Sidenav/SidenavCard'
 import styles from 'component-pages/Sidenav/styles/sidenav'
 
 import SoftUILogo from 'assets/images/logo-ct.png'
 
-import {useSoftUIController} from 'context'
+import { useSoftUIController } from 'context'
 
 const isObjectId = new RegExp('^[0-9a-fA-F]{24}$')
 
-function Sidenav({routes, ...rest}) {
+function Sidenav({ routes, ...rest }) {
   const [controller, dispatch] = useSoftUIController()
-  const {miniSidenav, transparentSidenav} = controller
-  const classes = styles({miniSidenav, transparentSidenav})
+  const { miniSidenav, transparentSidenav } = controller
+  const classes = styles({ miniSidenav, transparentSidenav })
   const location = useLocation()
-  const {pathname} = location
+  const { pathname } = location
   const collapseName = pathname.split('/').slice(1)[0]
   const isAuthentication = collapseName === 'authentication'
 
@@ -38,11 +37,11 @@ function Sidenav({routes, ...rest}) {
     })
     return str
   }
-  const closeSizenav = () => dispatch({type: 'MINI_SIDENAV', value: true})
+  const closeSizenav = () => dispatch({ type: 'MINI_SIDENAV', value: true })
 
   useEffect(() => {
     function handleMiniSidenav() {
-      dispatch({type: 'MINI_SIDENAV', value: window.innerWidth < 1200})
+      dispatch({ type: 'MINI_SIDENAV', value: window.innerWidth < 1200 })
     }
     // The event listener that's calling the handleMiniSidenav function when resizing the window.
     window.addEventListener('resize', handleMiniSidenav)
@@ -53,7 +52,7 @@ function Sidenav({routes, ...rest}) {
   }, [dispatch, location])
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({type, name, icon, title, noCollapse, key, route, href}) => {
+  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
     let returnValue
 
     if (type === 'collapse') {
@@ -115,7 +114,7 @@ function Sidenav({routes, ...rest}) {
     >
       <SuiBox customClass={classes.sidenav_header}>
         <SuiBox
-          display={{xs: 'block', xl: 'none'}}
+          display={{ xs: 'block', xl: 'none' }}
           position="absolute"
           top={0}
           right={0}
@@ -143,9 +142,6 @@ function Sidenav({routes, ...rest}) {
       </SuiBox>
       <Divider />
       <List>{renderRoutes}</List>
-      <SuiBox customClass={classes.sidenav_footer}>
-        <SidenavCard />
-      </SuiBox>
     </Drawer>
   )
 }
