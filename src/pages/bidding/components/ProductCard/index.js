@@ -140,7 +140,14 @@ function ProductCard({
           {renderAuthors}
         </SuiBox>
 
-        <SuiBox mb={1}>Highest bidder: {hide(get(winner, 'fullName', '')) || 'Not bid'}</SuiBox>
+        <SuiBox mb={1}>
+          Highest bidder:{' '}
+          {get(winner, 'fullName', '')
+            ? winner?._id === profile._id
+              ? 'You'
+              : hide(winner?.fullName || '')
+            : 'Not bid'}
+        </SuiBox>
 
         <SuiBox display="flex" justifyContent="space-between" alignItems="center">
           {profile.role !== 'ADMIN' && buttonBid}
