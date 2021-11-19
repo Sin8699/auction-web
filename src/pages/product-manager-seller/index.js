@@ -2,33 +2,22 @@ import {useState, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import get from 'lodash/get'
-
 import {Grid, Card, Icon} from '@material-ui/core'
-
 import SuiBox from 'components/SuiBox'
-
 import DashboardLayout from 'component-pages/LayoutContainers/DashboardLayout'
 import Header from 'component-pages/Header'
 import Footer from 'component-pages/Footer'
-
 import SuiButton from 'components/SuiButton'
 import SuiPagination from '../../components/SuiPagination/index'
 import SuiInput from '../../components/SuiInput/index'
-
 import {Menu, MenuItem, SubMenu} from '@szhsin/react-menu'
-
 import TablePagination from '../../components/TablePagination/index'
 import ProductCard from './components/ProductCard/index'
-
 import {requestProductsData} from 'redux/actions/product'
-
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-
 import {ROUTER_DEFAULT} from 'constants/router'
-
 import {getListCategories} from 'helpers/category'
-
 const LIMIT_PAGINATION = 12
 
 function ProductManagerSeller() {
@@ -142,7 +131,9 @@ function ProductManagerSeller() {
               <SuiPagination variant="contained">
                 <TablePagination
                   page={page}
-                  totalPage={Math.ceil(listProducts.length / LIMIT_PAGINATION)}
+                  totalPage={Math.ceil(
+                    listProducts.length === 0 ? 1 : listProducts.length / LIMIT_PAGINATION
+                  )}
                   onChangePage={setPage}
                 />
               </SuiPagination>

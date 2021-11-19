@@ -5,7 +5,7 @@ import Office from 'component-pages/Icons/Office'
 import Document from 'component-pages/Icons/Document'
 // import Settings from 'component-pages/Icons/Settings'
 // import SpaceShip from 'component-pages/Icons/SpaceShip'
-// import CreditCard from 'component-pages/Icons/CreditCard'
+import CreditCard from 'component-pages/Icons/CreditCard'
 import CustomerSupport from 'component-pages/Icons/CustomerSupport'
 
 import {SupervisorAccount, Favorite, History} from '@material-ui/icons'
@@ -52,10 +52,34 @@ export const ItemSideNavForSeller = [
   {type: 'title', title: 'Seller', key: 'account-pages'},
   {
     type: 'collapse',
+    name: 'Home',
+    key: 'dashboard',
+    route: ROUTER_DEFAULT.DASHBOARD,
+    icon: <Shop size="12px" />,
+    noCollapse: true
+  },
+  {
+    type: 'collapse',
+    name: 'Bidding',
+    key: 'bidding',
+    route: ROUTER_DEFAULT.BIDDING,
+    icon: <Basket size="12px" />,
+    noCollapse: true
+  },
+  {
+    type: 'collapse',
     name: 'My product',
     key: 'seller/manager/product',
     route: ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER,
     icon: <Cube size="12px" />,
+    noCollapse: true
+  },
+  {
+    type: 'collapse',
+    name: 'History sell',
+    key: 'history',
+    route: ROUTER_DEFAULT.HISTORY,
+    icon: <CreditCard size="12px" />,
     noCollapse: true
   }
 ]

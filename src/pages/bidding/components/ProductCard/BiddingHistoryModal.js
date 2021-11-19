@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -7,29 +7,49 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Document from '../../../../component-pages/Icons/Document'
 import SuiBox from 'components/SuiBox'
 import SuiButton from '../../../../components/SuiButton/index'
-import { historyProductData } from '../../../history-products/fakeData'
 import Table from 'component-pages/Table'
+
+const historyProductData = [
+  {
+    id: 1,
+    endTime: new Date().toDateString(),
+    name: 'bidding 1',
+    status: 'SOLD',
+    product: 11,
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
+  },
+  {
+    id: 2,
+    endTime: new Date().toDateString(),
+    name: 'bidding 2',
+    status: 'SOLD',
+    product: 34,
+    currentPrice: '10',
+    image: 'http://placeimg.com/640/480/city'
+  }
+]
 
 const data = {
   columns: [
-    { key: 'name', align: 'left', name: 'Name' },
-    { key: 'endTime', align: 'left', name: 'End Time' },
-    { key: 'status', align: 'left', name: 'Status' }
+    {key: 'name', align: 'left', name: 'Name'},
+    {key: 'endTime', align: 'left', name: 'End Time'},
+    {key: 'status', align: 'left', name: 'Status'}
   ]
 }
 
-export default function BiddingHistoryModal({ id }) {
-  const { columns } = data
+export default function BiddingHistoryModal({id}) {
+  const {columns} = data
 
   const [open, setOpen] = useState(false)
 
-  const handleOpenDialog = (v) => () => {
+  const handleOpenDialog = v => () => {
     if (v) {
       setOpen(v)
-    } else setOpen((prev) => !prev)
+    } else setOpen(prev => !prev)
   }
 
-  const rows = historyProductData.map((history) => {
+  const rows = historyProductData.map(history => {
     let statusComp = history.status
 
     switch (history.status) {
@@ -37,7 +57,7 @@ export default function BiddingHistoryModal({ id }) {
         statusComp = (
           <SuiButton
             size="small"
-            style={{ color: 'rgb(189, 0, 0)', backgroundColor: 'rgb(252, 151, 151)' }}
+            style={{color: 'rgb(189, 0, 0)', backgroundColor: 'rgb(252, 151, 151)'}}
           >
             SOLD
           </SuiButton>
@@ -47,7 +67,7 @@ export default function BiddingHistoryModal({ id }) {
         statusComp = (
           <SuiButton
             size="small"
-            style={{ background: 'rgb(205, 245, 155)', color: 'rgb(103, 177, 8)' }}
+            style={{background: 'rgb(205, 245, 155)', color: 'rgb(103, 177, 8)'}}
           >
             AVAILABLE
           </SuiButton>

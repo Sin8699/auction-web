@@ -53,6 +53,7 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
   const [errors, setErrors] = useState({})
 
   const {listProducts} = useSelector(state => state.productState)
+  const {listBiddingProducts} = useSelector(state => state.biddingProductState)
   const {profile} = useSelector(state => state.userState)
 
   const handleChangeValue = key => e => {
@@ -120,6 +121,20 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
     }
     setSubmitting(false)
   }
+
+  const hasBiddingProduct = idProduct => {
+    listBiddingProducts.forEach(item => {
+      if (get(item, 'product._id') === idProduct) return true
+    })
+    return false
+  }
+
+  const filterProductCanBid = products => {
+    return products.filter(
+      product =>
+        get(product, 'createBy._id') === profile._id && hasBiddingProduct(get(product, '_id'))
+    )
+  }
   return (
     <div>
       <Dialog onClose={onClose} aria-labelledby="category-dialog" open={show} fullWidth>
@@ -137,13 +152,11 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
               onChange={handleChangeValue('product')}
               input={<SuiInput error={Boolean(errors.product)} />}
             >
-              {listProducts
-                .filter(product => get(product, 'createBy._id') === profile._id)
-                .map(product => (
-                  <MenuItem key={product._id} value={product._id}>
-                    {product.name}
-                  </MenuItem>
-                ))}
+              {filterProductCanBid(listProducts).map(product => (
+                <MenuItem key={product._id} value={product._id}>
+                  {product.name}
+                </MenuItem>
+              ))}
             </Select>
           </SuiBox>
 
