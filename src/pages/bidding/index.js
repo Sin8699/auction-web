@@ -36,6 +36,7 @@ function BiddingBoard() {
   const {listBiddingProducts, loadingListBiddingProduct} = useSelector(
     state => state.biddingProductState
   )
+
   const {loading, results} = useSelector(state => state.searchState)
 
   const [list, setList] = useState([])

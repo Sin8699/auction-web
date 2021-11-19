@@ -68,7 +68,7 @@ function ProfileInfoCard({title, description, info, social, action, editing = fa
         <SuiInput
           placeholder={label}
           label={label}
-          value={formValue[keyName[key]] || values[key]}
+          value={formValue[keyName[key]] || values[key] || ''}
           onChange={handleChangeValue(keyName[key])}
         />
       ) : (

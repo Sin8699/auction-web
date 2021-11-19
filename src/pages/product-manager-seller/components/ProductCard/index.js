@@ -1,21 +1,31 @@
 import {Link} from 'react-router-dom'
-
+import {useSelector} from 'react-redux'
 import PropTypes from 'prop-types'
-
 import {Card, CardMedia} from '@material-ui/core'
-
 import SuiButton from 'components/SuiButton'
 import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
-
 import {ROUTER_DEFAULT} from 'constants/router'
-
 import styles from './styles'
-
 import NoImage from 'assets/images/no-image.png'
 
 function ProductCard({_id, name, category, subCategory, image}) {
   const classes = styles({})
+  const {listBiddingProductsHasSold} = useSelector(state => state.biddingProductState)
+  const {listBiddingProducts} = useSelector(state => state.biddingProductState)
+
+  const hasSold = () => {
+    listBiddingProductsHasSold.forEach(item => {
+      if (item?.product?._id === _id) return true
+    })
+    return false
+  }
+  const isBidding = () => {
+    listBiddingProducts.forEach(item => {
+      if (item?.product?._id === _id) return true
+    })
+    return false
+  }
 
   return (
     <Card className={classes.projectCard}>
@@ -46,8 +56,8 @@ function ProductCard({_id, name, category, subCategory, image}) {
 
       <SuiBox display="flex" justifyContent="flex-end" alignItems="center">
         <SuiBox component={Link} to={`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${_id}`}>
-          <SuiButton variant="contained" buttonColor="info">
-            Edit
+          <SuiButton variant="contained" buttonColor="info" disabled={hasSold || isBidding}>
+            {hasSold ? 'SOLD' : isBidding ? 'Bidding' : 'Edit'}
           </SuiButton>
         </SuiBox>
         <SuiBox component={Link} to={`${ROUTER_DEFAULT.PRODUCT_DETAIL}/${_id}`} ml={1}>

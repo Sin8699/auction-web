@@ -128,12 +128,7 @@ function ProductDetail() {
                   </SuiBox>
 
                   <SuiBox my={2}>
-                    <SuiTypography
-                      variant="h5"
-                      fontWeight="regular"
-                      textTransform="capitalize"
-                      textGradient
-                    >
+                    <SuiTypography variant="h5" fontWeight="regular" textGradient>
                       {!isOwner
                         ? `Highest bidder: ${
                             !loadingBiddingProduct

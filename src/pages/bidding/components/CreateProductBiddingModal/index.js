@@ -132,7 +132,7 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
   const filterProductCanBid = products => {
     return products.filter(
       product =>
-        get(product, 'createBy._id') === profile._id && hasBiddingProduct(get(product, '_id'))
+        get(product, 'createBy._id') === profile._id && !hasBiddingProduct(get(product, '_id'))
     )
   }
   return (

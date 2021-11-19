@@ -22,7 +22,7 @@ export default function BidModal({
     useContext(SocketContext)
 
   const handleBidding = async () => {
-    const priceValid = stepPrice + (currentPrice || initPrice)
+    const priceValid = currentPrice ? stepPrice + currentPrice : initPrice
     const price = await Prompt('How much do you want to bidding?', {
       isRequired: true,
       defaultValue: priceValid

@@ -1,5 +1,8 @@
 import {useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import SuiBox from 'components/SuiBox'
+import {IconButton} from '@material-ui/core'
+import {Visibility} from '@material-ui/icons'
 import SuiTypography from 'components/SuiTypography'
 import styles from './styles'
 import Table from 'component-pages/Table'
@@ -8,6 +11,7 @@ import Document from 'component-pages/Icons/Document'
 import TablePagination from '../../../components/TablePagination/index'
 import {useState, useMemo} from 'react'
 import {getButtonByStatus} from '../../../helpers/getButtonByStatus'
+import {ROUTER_DEFAULT} from 'constants/router'
 
 const LIMIT_PAGINATION = 10
 
@@ -15,21 +19,20 @@ const columns = [
   {key: 'name', align: 'left', name: 'Name'},
   {key: 'price', align: 'left', name: 'Price ($)'},
   {key: 'status', align: 'left', name: 'Status'},
-  {key: 'winner', align: 'left', name: 'Winner'}
+  {key: 'action', align: 'center', name: 'Detail'}
 ]
 
 const HistoryBidder = () => {
   const classes = styles()
+  const navigate = useHistory()
 
-  const {listBiddingProducts} = useSelector(state => state.biddingProductState)
+  const {listBiddingProductsHasSold} = useSelector(state => state.biddingProductState)
+
   const {profile} = useSelector(state => state.userState)
 
   const list = useMemo(
-    () =>
-      listBiddingProducts.filter(
-        element => element.status === 'SOLD' && get(element, 'product.createBy._id') === profile._id
-      ),
-    [listBiddingProducts, profile._id]
+    () => listBiddingProductsHasSold.filter(element => get(element, 'winner._id') === profile._id),
+    [listBiddingProductsHasSold, profile._id]
   )
 
   const [page, setPage] = useState(1)
@@ -41,7 +44,15 @@ const HistoryBidder = () => {
         name: [<Document size="12px" />, get(history, 'product.name')],
         status: getButtonByStatus(history.status),
         price: history.currentPrice,
-        winner: get(history, 'winner.name')
+        action: (
+          <IconButton
+            onClick={() =>
+              navigate.push(`${ROUTER_DEFAULT.PRODUCT_DETAIL}/${(get(history, 'product._id'), '')}`)
+            }
+          >
+            <Visibility />
+          </IconButton>
+        )
       }
     })
 

@@ -12,6 +12,15 @@ const BiddingProductApi = {
       return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
     }
   },
+  getDocumentsHasSold: async () => {
+    try {
+      const {data, status} = await appAPI.get('bidding-product/has-sold')
+      return {data, status}
+    } catch (error) {
+      const errorMessage = get(error, 'response.data.message')
+      return {error: errorMessage ? errorMessage : StatusApi.NETWORK_ERROR}
+    }
+  },
   getDocument: async id => {
     try {
       const {data, status} = await appAPI.get(`bidding-product/${id}`)
