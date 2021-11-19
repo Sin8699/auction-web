@@ -14,7 +14,6 @@ import SuiTypography from 'components/SuiTypography'
 import NoAvatar from 'assets/images/no-avatar.png'
 import NoImage from 'assets/images/no-image.png'
 import {handleFavoredProduct, isFavoredProduct} from 'helpers/favoredProduct'
-import BiddingHistoryModal from './BiddingHistoryModal'
 import {ROUTER_DEFAULT} from 'constants/router'
 import styles from './styles'
 import {hide} from 'helpers/string'
@@ -118,7 +117,6 @@ function ProductCard({
           >
             {category + ', ' + subCategory}
           </SuiTypography>
-          <BiddingHistoryModal id={idProduct} />
         </SuiBox>
         <SuiBox mb={1}>
           <SuiTypography

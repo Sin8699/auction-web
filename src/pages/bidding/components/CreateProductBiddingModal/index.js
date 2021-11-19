@@ -122,11 +122,19 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
     setSubmitting(false)
   }
 
-  // const filterProductCanBid = (products) => {
-  //   const myProduct = get(product, 'createBy._id') === profile._id
-  //   const productBidded =
-  //   return products.filter(product => myProduct && )
-  // }
+  const hasBiddingProduct = idProduct => {
+    listBiddingProducts.forEach(item => {
+      if (get(item, 'product._id') === idProduct) return true
+    })
+    return false
+  }
+
+  const filterProductCanBid = products => {
+    return products.filter(
+      product =>
+        get(product, 'createBy._id') === profile._id && hasBiddingProduct(get(product, '_id'))
+    )
+  }
   return (
     <div>
       <Dialog onClose={onClose} aria-labelledby="category-dialog" open={show} fullWidth>
@@ -144,13 +152,11 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
               onChange={handleChangeValue('product')}
               input={<SuiInput error={Boolean(errors.product)} />}
             >
-              {listProducts
-                .filter(product => get(product, 'createBy._id') === profile._id)
-                .map(product => (
-                  <MenuItem key={product._id} value={product._id}>
-                    {product.name}
-                  </MenuItem>
-                ))}
+              {filterProductCanBid(listProducts).map(product => (
+                <MenuItem key={product._id} value={product._id}>
+                  {product.name}
+                </MenuItem>
+              ))}
             </Select>
           </SuiBox>
 

@@ -10,6 +10,7 @@ import {requestCategoryData} from 'redux/actions/category'
 import {requestProductsData} from 'redux/actions/product'
 import {requestSubCategoryData} from 'redux/actions/subcategory'
 import {requestProfile} from 'redux/actions/user'
+import {requestBiddingProductsData} from 'redux/actions/bidding-product'
 
 function LayoutContainer({children}) {
   const dispatchRedux = useDispatch()
@@ -30,6 +31,7 @@ function LayoutContainer({children}) {
     dispatchRedux(requestCategoryData())
     dispatchRedux(requestProductsData())
     dispatchRedux(requestSubCategoryData())
+    dispatchRedux(requestBiddingProductsData())
   }, [])
 
   return <SuiBox customClass={classes.layoutContainer}>{children}</SuiBox>

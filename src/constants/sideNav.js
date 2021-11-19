@@ -77,8 +77,8 @@ export const ItemSideNavForSeller = [
   {
     type: 'collapse',
     name: 'History sell',
-    key: '',
-    route: '/',
+    key: 'history',
+    route: ROUTER_DEFAULT.HISTORY,
     icon: <CreditCard size="12px" />,
     noCollapse: true
   }

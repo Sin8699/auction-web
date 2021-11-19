@@ -48,10 +48,6 @@ function BiddingBoard() {
   const debouncedValue = useDebounce(searchText, 300)
 
   useEffect(() => {
-    dispatch(requestBiddingProductsData())
-  }, [])
-
-  useEffect(() => {
     // if (!debouncedValue) return
     dispatch(searchingData({query: debouncedValue}))
   }, [debouncedValue])
