@@ -53,6 +53,7 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
   const [errors, setErrors] = useState({})
 
   const {listProducts} = useSelector(state => state.productState)
+  const {listBiddingProducts} = useSelector(state => state.biddingProductState)
   const {profile} = useSelector(state => state.userState)
 
   const handleChangeValue = key => e => {
@@ -120,6 +121,12 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
     }
     setSubmitting(false)
   }
+
+  // const filterProductCanBid = (products) => {
+  //   const myProduct = get(product, 'createBy._id') === profile._id
+  //   const productBidded =
+  //   return products.filter(product => myProduct && )
+  // }
   return (
     <div>
       <Dialog onClose={onClose} aria-labelledby="category-dialog" open={show} fullWidth>

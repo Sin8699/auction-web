@@ -129,9 +129,12 @@ function BiddingBoard() {
   }
 
   const [openModal, setOpenModal] = useState(false)
+
   const handleSuccessCreate = () => {
     setOpenModal(false)
-    dispatch(requestBiddingProductsData())
+    setTimeout(() => {
+      dispatch(requestBiddingProductsData())
+    }, 2000)
   }
 
   const handleSort = sort => {
@@ -246,7 +249,11 @@ function BiddingBoard() {
               <SuiPagination variant="contained">
                 <TablePagination
                   page={page}
-                  totalPage={Math.ceil(listBiddingProducts.length / LIMIT_PAGINATION)}
+                  totalPage={Math.ceil(
+                    listBiddingProducts.length === 0
+                      ? 1
+                      : listBiddingProducts.length / LIMIT_PAGINATION
+                  )}
                   onChangePage={setPage}
                 />
               </SuiPagination>

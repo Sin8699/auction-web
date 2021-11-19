@@ -9,6 +9,7 @@ import SuiAlert from 'components/SuiAlert'
 import theme from 'assets/theme'
 import routes from 'routes'
 import ItemSideNav from 'constants/sideNav'
+import {ItemSideNavForBidder, ItemSideNavForSeller, ItemSideNavForAdmin} from 'constants/sideNav'
 import {TYPE_ROUTER, ROUTER_DEFAULT} from 'constants/router'
 import {loadFromStorage} from 'utils/storage'
 import SocketContainer from './context/socket/SocketIOProvider'
@@ -46,12 +47,10 @@ export default function App() {
   const {pathname} = useLocation()
   const history = useHistory()
 
-  // JSS presets
   const jss = create({plugins: [...jssPreset().plugins]})
 
   async function checkToken() {
     const isExpired = await isExpiredToken()
-    console.log('isExpired: ', isExpired)
     if (isExpired) {
       localStorage.clear()
       history.replace(ROUTER_DEFAULT.SIGN_IN)
@@ -89,7 +88,7 @@ export default function App() {
       return null
     })
 
-  // const { role } = loadFromStorage('user') || ''
+  const {role} = loadFromStorage('user') || ''
 
   return (
     <Provider store={appStore}>
@@ -99,18 +98,17 @@ export default function App() {
             <SocketContainer>
               <CssBaseline />
               <SuiAlert />
-              <Sidenav routes={ItemSideNav} />
-              {/* <Sidenav
-              routes={
-                role === 'ADMIN'
-                  ? ItemSideNavForAdmin
-                  : role === 'SELLER'
-                  ? ItemSideNavForSeller
-                  : role === 'BIDDER'
-                  ? ItemSideNavForBidder
-                  : ItemSideNav
-              }
-            /> */}
+              <Sidenav
+                routes={
+                  role === 'ADMIN'
+                    ? ItemSideNavForAdmin
+                    : role === 'SELLER'
+                    ? ItemSideNavForSeller
+                    : role === 'BIDDER'
+                    ? ItemSideNavForBidder
+                    : ItemSideNav
+                }
+              />
               <Switch>
                 {getRoutes(routes)}
                 <Redirect from="*" to="/dashboard" />

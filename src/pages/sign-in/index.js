@@ -62,7 +62,7 @@ function SignIn() {
     try {
       await validateData(TYPE_SCHEMA.LOGIN, {...formValue}, async dataLogin => {
         const {status, data, error} = await UserApi.login(dataLogin)
-        console.log('data: ', data)
+
         if (error) dispatch(openAlert({messageAlert: error, typeAlert: 'error'}))
         else {
           const isLoginSuccess = () => {
