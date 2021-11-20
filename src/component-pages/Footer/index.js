@@ -43,7 +43,7 @@ function Footer() {
         by
         <Link href="https://www.google.com/" target="_blank">
           <SuiTypography variant="button" fontWeight="medium">
-            &nbsp;Nhóm ??&nbsp;
+            &nbsp;Nhóm 31_61_69_87&nbsp;
           </SuiTypography>
         </Link>
         for a better web.
