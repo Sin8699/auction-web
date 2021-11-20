@@ -16,7 +16,6 @@ import {openAlert} from 'redux/actions/alert'
 import SuiButton from 'components/SuiButton'
 
 export default function BasicTable({value, product, biddingProduct}) {
-  console.log('value: ', value)
   const dispatch = useDispatch()
   const {profile} = useSelector(state => state.userState)
   const isOwner = get(profile, '_id', '') === get(product, 'createBy._id', '')

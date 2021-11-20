@@ -20,12 +20,15 @@ function ProductCard({_id, name, category, subCategory, image}) {
     })
     return false
   }
-  const isBidding = () => {
+  const hasBidding = () => {
     listBiddingProducts.forEach(item => {
       if (item?.product?._id === _id) return true
     })
     return false
   }
+
+  const isSold = hasSold()
+  const isBidding = hasBidding()
 
   return (
     <Card className={classes.projectCard}>
@@ -55,11 +58,20 @@ function ProductCard({_id, name, category, subCategory, image}) {
       </SuiBox>
 
       <SuiBox display="flex" justifyContent="flex-end" alignItems="center">
-        <SuiBox component={Link} to={`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${_id}`}>
-          <SuiButton variant="contained" buttonColor="info" disabled={hasSold || isBidding}>
-            {hasSold ? 'SOLD' : isBidding ? 'Bidding' : 'Edit'}
+        {!isSold && !isBidding && (
+          <SuiBox component={Link} to={`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${_id}`}>
+            <SuiButton variant="contained" buttonColor="info">
+              Edit
+            </SuiButton>
+          </SuiBox>
+        )}
+
+        {(isSold || isBidding) && (
+          <SuiButton variant="contained" buttonColor="info" disabled>
+            {isSold ? 'SOLD' : isBidding ? 'Bidding' : 'EXPIRED'}
           </SuiButton>
-        </SuiBox>
+        )}
+
         <SuiBox component={Link} to={`${ROUTER_DEFAULT.PRODUCT_DETAIL}/${_id}`} ml={1}>
           <SuiButton variant="gradient" buttonColor="warning">
             Detail
