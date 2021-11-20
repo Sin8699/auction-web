@@ -6,7 +6,7 @@ import SuiBox from 'components/SuiBox'
 import SuiTypography from 'components/SuiTypography'
 import SuiButton from 'components/SuiButton'
 
-function Transaction({color, icon, name, description, value}) {
+function Transaction({ color, icon, name, description, value }) {
   return (
     <SuiBox key={name} component="li" py={1} pr={2} mb={1}>
       <SuiBox display="flex" justifyContent="space-between" alignItems="center">
@@ -26,7 +26,7 @@ function Transaction({color, icon, name, description, value}) {
           </SuiBox>
         </SuiBox>
         <SuiTypography variant="button" textColor={color} fontWeight="medium" textGradient>
-          {value}
+          {value} $
         </SuiTypography>
       </SuiBox>
     </SuiBox>
