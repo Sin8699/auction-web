@@ -113,7 +113,7 @@ function BiddingBoard() {
                     />
                   }
                   buttonBuyNow={<BuyNowModal biddingProduct={_id} priceBuyNow={buyNowPrice} />}
-                  authors={[{image: team1, name: 'Elena Morison'}]}
+                  authors={[{image: team1, name: get(product, 'createBy.fullName', 'Owner')}]}
                   winner={winner}
                   endTime={endTime}
                   buyNow={{allowBuyNow, buyNowPrice}}

@@ -8,27 +8,27 @@ import SuiTypography from 'components/SuiTypography'
 import {ROUTER_DEFAULT} from 'constants/router'
 import styles from './styles'
 import NoImage from 'assets/images/no-image.png'
+import get from 'lodash/get'
 
 function ProductCard({_id, name, category, subCategory, image}) {
   const classes = styles({})
   const {listBiddingProductsHasSold} = useSelector(state => state.biddingProductState)
   const {listBiddingProducts} = useSelector(state => state.biddingProductState)
 
-  const hasSold = () => {
-    listBiddingProductsHasSold.forEach(item => {
-      if (item?.product?._id === _id) return true
+  const filterProductHasSold = () => {
+    return listBiddingProductsHasSold.filter(product => {
+      return get(product, 'product._id', '') === _id
     })
-    return false
-  }
-  const hasBidding = () => {
-    listBiddingProducts.forEach(item => {
-      if (item?.product?._id === _id) return true
-    })
-    return false
   }
 
-  const isSold = hasSold()
-  const isBidding = hasBidding()
+  const filterProductHasBid = () => {
+    return listBiddingProducts.filter(product => {
+      return get(product, 'product._id', '') === _id
+    })
+  }
+
+  const isSold = filterProductHasSold().length !== 0
+  const isBidding = filterProductHasBid().length !== 0
 
   return (
     <Card className={classes.projectCard}>

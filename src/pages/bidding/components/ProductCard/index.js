@@ -77,12 +77,7 @@ function ProductCard({
 
   const renderAuthors = authors.map(({image: media, name}) => (
     <Tooltip key={name} title={name} placement="bottom">
-      <SuiAvatar
-        src={media || NoAvatar}
-        alt={name}
-        size="xs"
-        customClass={classes.projectCard_avatar}
-      />
+      <SuiAvatar src={NoAvatar} alt={name} size="xs" customClass={classes.projectCard_avatar} />
     </Tooltip>
   ))
 

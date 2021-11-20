@@ -54,6 +54,7 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
 
   const {listProducts} = useSelector(state => state.productState)
   const {listBiddingProducts} = useSelector(state => state.biddingProductState)
+
   const {profile} = useSelector(state => state.userState)
 
   const handleChangeValue = key => e => {
@@ -122,18 +123,19 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
     setSubmitting(false)
   }
 
-  const hasBiddingProduct = idProduct => {
-    listBiddingProducts.forEach(item => {
-      if (get(item, 'product._id') === idProduct) return true
+  const filterProductCanBid = idProduct => {
+    return listBiddingProducts.filter(product => {
+      return get(product, 'product._id', '') === idProduct
     })
-    return false
   }
 
-  const filterProductCanBid = products => {
-    return products.filter(
-      product =>
-        get(product, 'createBy._id') === profile._id && !hasBiddingProduct(get(product, '_id'))
-    )
+  const filterProductByMy = products => {
+    return products.filter(product => {
+      return (
+        get(product, 'createBy._id') === profile._id &&
+        filterProductCanBid(product?._id).length === 0
+      )
+    })
   }
   return (
     <div>
@@ -152,7 +154,7 @@ export default function ModalNewBidding({show, onClose, onSuccess}) {
               onChange={handleChangeValue('product')}
               input={<SuiInput error={Boolean(errors.product)} />}
             >
-              {filterProductCanBid(listProducts).map(product => (
+              {filterProductByMy(listProducts).map(product => (
                 <MenuItem key={product._id} value={product._id}>
                   {product.name}
                 </MenuItem>
