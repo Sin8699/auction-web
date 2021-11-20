@@ -67,7 +67,7 @@ function ProductManagerSeller() {
                 name={name}
                 category={category.name}
                 subCategory={subCategory.name}
-                image={`http://${imageUrl}`}
+                image={`${imageUrl}`}
                 url={`${ROUTER_DEFAULT.PRODUCT_MANAGER_SELLER_EDIT}/${_id}`}
               />
             </Grid>

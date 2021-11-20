@@ -1,9 +1,9 @@
-import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import {useHistory} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 import dayjs from 'dayjs'
 
-import { Card, IconButton, CircularProgress } from '@material-ui/core'
-import { Visibility } from '@material-ui/icons'
+import {Card, IconButton, CircularProgress} from '@material-ui/core'
+import {Visibility} from '@material-ui/icons'
 
 import Table from 'component-pages/Table'
 
@@ -12,15 +12,15 @@ import SuiTypography from 'components/SuiTypography'
 
 import styles from './styles'
 
-import { getProductsFavored } from '../../../helpers/favoredProduct'
+import {getProductsFavored} from '../../../helpers/favoredProduct'
 
-import { ROUTER_DEFAULT } from 'constants/router'
+import {ROUTER_DEFAULT} from 'constants/router'
 
 const data = {
   columns: [
-    { name: 'product', align: 'left', key: 'product' },
-    { name: 'Public Date', align: 'left', key: 'publicDay' },
-    { name: 'Detail', align: 'center', key: 'action' }
+    {name: 'product', align: 'left', key: 'product'},
+    {name: 'Public Date', align: 'left', key: 'publicDay'},
+    {name: 'Detail', align: 'center', key: 'action'}
   ]
 }
 
@@ -28,15 +28,15 @@ const FavoredProductTableData = () => {
   const classes = styles()
   const navigate = useHistory()
 
-  const { listProducts, loadingListProduct } = useSelector((state) => state.productState)
+  const {listProducts, loadingListProduct} = useSelector(state => state.productState)
 
   const idFavoredList = getProductsFavored()
 
   const rows = listProducts
-    .filter((p) => (idFavoredList || []).includes(p._id))
-    .map((product) => {
+    .filter(p => (idFavoredList || []).includes(p._id))
+    .map(product => {
       return {
-        product: [`http://${product.imageUrl}`, product.name],
+        product: [`${product.imageUrl}`, product.name],
         publicDay: (
           <SuiTypography variant="caption" textColor="text" fontWeight="medium">
             {dayjs(product.createAt).format('DD/MM/YYYY')}
@@ -52,7 +52,7 @@ const FavoredProductTableData = () => {
       }
     })
 
-  const { columns } = data
+  const {columns} = data
 
   return (
     <Card>

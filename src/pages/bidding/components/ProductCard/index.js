@@ -100,7 +100,7 @@ function ProductCard({
 
       <SuiBox customClass={classes.projectCard_imageContainer}>
         <CardMedia
-          src={`http://${imageUrl}` || NoImage}
+          src={`${imageUrl}` || NoImage}
           component="img"
           title={nameProduct}
           className={classes.projectCard_image}

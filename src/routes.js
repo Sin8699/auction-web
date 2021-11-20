@@ -3,6 +3,7 @@ import SignUp from './pages/sign-up'
 import SignUpSuccess from './pages/sign-up-success'
 import ForgotPassword from './pages/forgot-password'
 import ResetPassword from './pages/reset-password'
+import VerifyError from './pages/verify-error'
 
 import Dashboard from './pages/dashboard'
 
@@ -114,6 +115,12 @@ const routes = [
     type: TYPE_ROUTER.AUTHENTICATION,
     route: ROUTER_DEFAULT.SIGN_IN,
     component: SignIn
+  },
+  {
+    key: 'verify-error',
+    type: TYPE_ROUTER.AUTHENTICATION,
+    route: ROUTER_DEFAULT.VERIFY_ERROR,
+    component: VerifyError
   },
   {
     key: 'sign-up',

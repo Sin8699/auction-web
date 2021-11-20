@@ -99,13 +99,13 @@ function ProductDetail() {
             <Grid container alignItems="center">
               <Grid item lg={6} md={6} sm={12}>
                 <div>
-                  <ImageLayout src={`http://${currentImagePreview}`} alt="" />
+                  <ImageLayout src={`${currentImagePreview}`} alt="" />
                 </div>
                 <Grid container>
                   {(product.name ? [product.imageUrl, ...product.extraImages] : []).map(img => {
                     return (
                       <Grid item xs={3} onClick={handleChangePreview(img)} key={img}>
-                        <ImageLayout src={`http://${img}`} alt="" />
+                        <ImageLayout src={`${img}`} alt="" />
                       </Grid>
                     )
                   })}
